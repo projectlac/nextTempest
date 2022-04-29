@@ -1,0 +1,25 @@
+.slick-custom {
+  .slick-dots li {
+    margin: 0 10px;
+    .slick-custom-dot {
+      width: 25px;
+      margin-top: 20px;
+      height: 25px;
+      position: relative;
+      &::before {
+        position: absolute;
+        background-image: url("./assets/images/newsDes/Dot.png");
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-size: 100%;
+        left: 0;
+      }
+    }
+    &.slick-active {
+      .slick-custom-dot::before {
+        background-image: url("./assets/images/newsDes/DotActive.png");
+      }
+    }
+  }
+}
