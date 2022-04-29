@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Typography } from "@mui/material";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import MenuBox from "../Menu/MenuBox";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -14,7 +16,6 @@ const HeaderWrapper = styled(Box)(
   z-index: 999;
   display:flex;
   width: 100%;
-  min-width: 1280px;
   height: 66px;
   background-color: rgba(17,17,17,0.75);
   box-shadow: 0 3px 7px 0 rgb(0 0 0 / 35%);
@@ -24,6 +25,7 @@ const HeaderWrapper = styled(Box)(
 );
 
 function HeaderHome() {
+  const [activeMenu, setActiveMenu] = useState<boolean>(false);
   const router = useRouter();
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
@@ -32,19 +34,19 @@ function HeaderHome() {
   return (
     <div>
       <HeaderWrapper>
-        <Box width={315} sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", width: { sm: 315, xs: "50%" } }}>
           <Image src={logo} alt="" width="150" height="60" />
         </Box>
-        <Box width="calc(100% - 315px)">
+        <Box sx={{ width: { sm: "calc(100% - 315px)", xs: "50%" } }}>
           <Box
             sx={{
-              display: "flex",
+              display: { md: "flex", sm: "none", xs: "none" },
               "& p.active a": {
                 borderBottom: "3px solid #48A6E2",
               },
               "& a": {
                 color: "#fff",
-                margin: " 0 45px",
+                margin: { lg: " 0 45px", md: "0 15px" },
                 textDecoration: "none",
                 paddingBottom: "6px",
 
@@ -72,8 +74,40 @@ function HeaderHome() {
               <Link href="/lien-he">Liên hệ</Link>
             </Typography>
           </Box>
+          <Box
+            sx={{
+              display: { md: "none", sm: "block" },
+              textAlign: "right",
+              paddingRight: { sm: "50px", xs: "15px" },
+            }}
+          >
+            {activeMenu ? (
+              <MenuOpenIcon
+                sx={{
+                  color: "#fff",
+                  transform: "scale(1.5)",
+                  marginTop: "10px",
+                }}
+                onClick={() => {
+                  setActiveMenu(false);
+                }}
+              />
+            ) : (
+              <MenuIcon
+                sx={{
+                  color: "#fff",
+                  transform: "scale(1.5)",
+                  marginTop: "10px",
+                }}
+                onClick={() => {
+                  setActiveMenu(true);
+                }}
+              />
+            )}
+          </Box>
         </Box>
       </HeaderWrapper>
+      <MenuBox activeMenu={activeMenu} />
     </div>
   );
 }

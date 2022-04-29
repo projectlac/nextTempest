@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import SliderImage from "../../styles/assets/images/newsDes/Group1.png";
-import BG from "../../styles/assets/images/newsDes/Layer22.png";
+import BG from "../../styles/assets/images/newsDes/Mask.png";
 import LeftArrow from "../../styles/assets/images/newsDes/LeftArrow.png";
 import NavLeftArrow from "../../styles/assets/images/newsDes/NavLeftArrow.png";
 import NavRightArrow from "../../styles/assets/images/newsDes/NavRightArrow.png";
@@ -20,6 +20,7 @@ const NewWrapper = styled(Box)(
   background-repeat: no-repeat; 
   background-position: top;
   background-color: #000;
+  overflow:hidden;
   @media (max-width: 768px) {
     overflow:hidden;
 }
@@ -32,8 +33,7 @@ const TitleHighlight = styled(Box)({
   textAlign: "center",
   color: " #fff",
   fontSize: "30px",
-  boxShadow:
-    "text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff",
+  textShadow: "0 0 5px #69e0ff, 0 0 10px #69e0ff, 0 0 15px #69e0ff",
   "&:before": {
     position: "absolute",
     content: '""',
@@ -44,6 +44,9 @@ const TitleHighlight = styled(Box)({
     top: 0,
     left: 0,
     backgroundRepeat: "no-repeat",
+    "@media (max-width: 425px)": {
+      display: "none",
+    },
   },
   "&:after": {
     position: "absolute",
@@ -56,6 +59,9 @@ const TitleHighlight = styled(Box)({
     right: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right",
+    "@media (max-width: 425px)": {
+      display: "none",
+    },
   },
 });
 
@@ -67,7 +73,7 @@ function SampleNextArrow(props) {
       onClick={onClick}
       sx={{
         "&:before": { display: "none" },
-        display: "flex !important",
+        display: { lg: "flex !important", md: "none !important" },
         alignItems: "center  !important",
         width: 87,
         height: 92,
@@ -87,7 +93,7 @@ function SamplePrevArrow(props) {
       onClick={onClick}
       sx={{
         "&:before": { display: "none" },
-        display: "flex !important",
+        display: { lg: "flex !important", md: "none !important" },
         alignItems: "center  !important",
         justifyContent: "flex-end",
         width: 87,

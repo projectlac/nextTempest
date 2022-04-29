@@ -8,10 +8,11 @@ import BGNewsTop from "../../styles/assets/images/newsDes/BGNewsTop.png";
 import BGNewsBottom from "../../styles/assets/images/newsDes/BGNewsBottom.png";
 import Paimon from "../../styles/assets/images/newsDes/Paimon.png";
 import HotNews from "../../styles/assets/images/newsDes/HotNews.png";
+import DownArrow from "../../styles/assets/images/newsDes/DownArrow.png";
 import Clip from "../../styles/assets/images/newsDes/Clip.png";
 import Image from "next/image";
 import Link from "next/link";
-
+import { Theme } from "@mui/system";
 const TitleHighlight = styled(Box)({
   position: "relative",
   width: "100%",
@@ -19,6 +20,7 @@ const TitleHighlight = styled(Box)({
   textAlign: "center",
   color: " #fff",
   fontSize: "30px",
+  textShadow: "0 0 5px #69e0ff, 0 0 10px #69e0ff, 0 0 15px #69e0ff",
   "&:before": {
     position: "absolute",
     content: '""',
@@ -29,6 +31,9 @@ const TitleHighlight = styled(Box)({
     top: 0,
     left: 0,
     backgroundRepeat: "no-repeat",
+    "@media (max-width: 425px)": {
+      display: "none",
+    },
   },
   "&:after": {
     position: "absolute",
@@ -41,15 +46,21 @@ const TitleHighlight = styled(Box)({
     right: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right",
+    "@media (max-width: 425px)": {
+      display: "none",
+    },
   },
 });
 
-const NewBox = styled(Box)({
+const NewBox = styled(Box)(() => ({
   position: "relative",
   background: `url(${BGNews.src})`,
   minHeight: "750px",
   backgroundSize: "100%",
   padding: "0 50px",
+  "@media (max-width: 425px)": {
+    padding: "0 25px",
+  },
   "&:before": {
     position: "absolute",
     content: '""',
@@ -60,6 +71,9 @@ const NewBox = styled(Box)({
     left: 0,
     backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
+    "@media (max-width: 425px)": {
+      top: "-35px",
+    },
   },
   "&:after": {
     position: "absolute",
@@ -72,8 +86,11 @@ const NewBox = styled(Box)({
     right: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right",
+    "@media (max-width: 425px)": {
+      bottom: "-20px",
+    },
   },
-});
+}));
 const PaimonImage = styled(Box)(
   ({ theme }) => `
     width: 541px;
@@ -85,22 +102,43 @@ const PaimonImage = styled(Box)(
     right: -66px;
     background-size: 100%;
     background-repeat: no-repeat;
+    @media (max-width: 1024px) {
+      width: 431px;
+      height: 588px;
     @media (max-width: 768px) {
       width: 336px;
       height: 466px;
-  }
+    } 
+    @media (max-width: 425px) {
+      display:none
+    }
+
       `
 );
 const HottestNews = styled(Box)(
   ({ theme }) => `
   width: 75%;
   height: auto;
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+      `
+);
+
+const ShowMore = styled(Box)(
+  ({ theme }) => `
+  width: 100%;
+  padding-top: 75px;
+  text-align: center;
+  @media (max-width: 425px){
+    padding-top: 25px;
+  },
       `
 );
 
 function MainNews() {
   return (
-    <Box pb={5}>
+    <Box pb={0}>
       <Box pt={5} pb={2}>
         <TitleHighlight mb={10}>Tin chính</TitleHighlight>
         <NewBox>
@@ -131,15 +169,26 @@ function MainNews() {
                 />
               </Box>
             </Box>
-            <Typography sx={{ fontSize: "27px", mt: 2, color: "#B68967" }}>
+            <Typography
+              sx={{
+                fontSize: { lg: "27px", md: "20px", sm: "15px" },
+                mt: 2,
+                color: "#B68967",
+              }}
+            >
               <Link href="/">[28.04.2022] Lịch livestream phiên bản 2.7</Link>
             </Typography>
           </HottestNews>
 
-          <Grid container md={12} mt={8}>
+          <Grid container>
             {[...Array(3)].map((d, i) => (
-              <Box sx={{ display: "flex", width: "100%" }} mb={2} key={i}>
-                <Grid item md={4} xs={4}>
+              <Box
+                sx={{ display: { md: "flex", sm: "block" }, width: "100%" }}
+                mb={2}
+                mt={2}
+                key={i}
+              >
+                <Grid item md={4} xs={12}>
                   <Box
                     sx={{
                       border: "2px solid #C9AD97",
@@ -157,25 +206,35 @@ function MainNews() {
                     />
                   </Box>
                 </Grid>
-                <Grid item md={8}>
-                  <Box px={3}>
+                <Grid item md={8} xs={12}>
+                  <Box sx={{ px: { md: 3, sm: 0 } }}>
                     <Typography
-                      sx={{ fontSize: "20px", mt: 2, color: "#B68967" }}
+                      sx={{
+                        fontSize: { lg: "20px", md: "17px", sm: "15px" },
+                        mt: 2,
+                        color: "#B68967",
+                      }}
                     >
                       <Link href="/">
                         [28.04.2022] Lịch livestream phiên bản 2.7
                       </Link>
                     </Typography>
 
-                    <p style={{ color: "#000" }}>
+                    <Typography style={{ color: "#000" }}>
                       <Link href="/">{`Xem thêm>>`}</Link>
-                    </p>
+                    </Typography>
                   </Box>
                 </Grid>
               </Box>
             ))}
           </Grid>
         </NewBox>
+        <ShowMore>
+          <Typography color="#E3DDD3" fontSize={18}>
+            Xem thêm tin tức
+          </Typography>
+          <Image src={DownArrow} alt="" width={65} height={65} />
+        </ShowMore>
       </Box>
     </Box>
   );
