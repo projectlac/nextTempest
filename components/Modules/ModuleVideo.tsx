@@ -123,7 +123,7 @@ const Title = styled(Typography)(
   text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
       `
 );
-const ButtonEven = styled(Button)({
+const ButtonEven = styled(Typography)({
   background: `url(${Even.src})`,
   color: "#fff",
   fontSize: "20px",
@@ -163,14 +163,13 @@ function ModuleVideo() {
   const playVideo = () => {
     setIsPlay(true);
     const myVideo = document.getElementById("video") as HTMLVideoElement | null;
+    myVideo.volume = 0.75;
     myVideo.play();
-    console.log("play");
   };
   const pauseVideo = () => {
     setIsPlay(false);
     const myVideo = document.getElementById("video") as HTMLVideoElement | null;
     myVideo.pause();
-    console.log("paus");
   };
   return (
     <BgWrap>
