@@ -23,6 +23,19 @@
     }
   }
 }
+
+#buttonAuth {
+  background-image: url("./assets/images/Authen/Layer43.png");
+  width: 318px;
+  height: 72px;
+  background-color: transparent;
+  border: navajowhite;
+
+  color: #fff;
+  font-size: 27px;
+  font-family: "michos";
+  text-transform: uppercase;
+}
 * {
   /* width */
   &::-webkit-scrollbar {

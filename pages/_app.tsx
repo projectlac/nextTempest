@@ -14,6 +14,7 @@ import lightThemeOptions from "../styles/theme/lightThemeOption";
 import "../styles/globals.css";
 import "../styles/globals.scss";
 import NextNProgress from "nextjs-progressbar";
+import { AppWrapper } from "../context/state";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -31,7 +32,9 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
         <NextNProgress />
-        <Component {...pageProps} />
+        <AppWrapper>
+          <Component {...pageProps} />
+        </AppWrapper>
       </ThemeProvider>
     </CacheProvider>
   );
