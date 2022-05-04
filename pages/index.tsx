@@ -1,11 +1,7 @@
+import Head from "next/head";
 import * as React from "react";
-import { InferGetStaticPropsType } from "next";
-import AddPost from "../components/AddPost";
-import Post from "../components/Post";
-import { IPost } from "../types";
 import Layout from "../components/Layout/BaseLayout";
 import ModuleVideo from "../components/Modules/ModuleVideo";
-import Head from "next/head";
 
 export default function IndexPage() {
   return (
