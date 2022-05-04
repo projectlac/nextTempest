@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const AppContext = createContext(null);
 
 export function AppWrapper({ children }) {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
   const [openDashboard, setOpenDashboard] = useState<boolean>(false);
 
   const handleLoginTrue = () => {

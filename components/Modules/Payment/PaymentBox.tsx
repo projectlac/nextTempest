@@ -8,6 +8,7 @@ import coin from "../../../styles/assets/images/payment/Layer-38.png";
 import nt from "../../../styles/assets/images/payment/Layer-39.png";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import Authentization from "../Authentization";
+import Dashboard from "./Dashboard";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -80,7 +81,9 @@ function PaymentBox() {
           {openAuth && <Authentization closeAuthBox={closeAuthBox} />}
         </Container>
       ) : (
-        <Container> hihi </Container>
+        <Container>
+          <Dashboard />
+        </Container>
       )}
     </BgWrap>
   );
