@@ -23,7 +23,7 @@ const DashboardWrapper = styled(Box)(
         background-size: contain;    
         background-repeat: no-repeat;
         background-position:center;
-        padding: 0 50px;
+        padding: 0 65px;
         position:relative;
         z-index:1;
       `
@@ -93,9 +93,22 @@ function Dashboard() {
           Nạp đá sáng thế
         </Box>
       </ListTab>
-      <Box width={"100%"}>
-        <One />
-      </Box>
+      {(() => {
+        switch (active) {
+          case 1:
+            return (
+              <Box width={"100%"}>
+                <One />
+              </Box>
+            );
+            break;
+          case 2:
+            return <Box textAlign={"left"}>Nguyên thạch</Box>;
+            break;
+          default:
+            return <Box>Lịch sử</Box>;
+        }
+      })()}
     </DashboardWrapper>
   );
 }

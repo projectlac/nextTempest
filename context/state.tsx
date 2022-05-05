@@ -1,14 +1,43 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import Toast from "../components/Common/Toast/Toast";
 
 const AppContext = createContext(null);
 
 export function AppWrapper({ children }) {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [openDashboard, setOpenDashboard] = useState<boolean>(false);
+  const [openToast, setOpenToast] = useState<boolean>(false);
+  const [messageToast, setMessageToast] = useState<string>("HHAHA");
 
   const handleLoginTrue = () => {
     setIsLogin(true);
   };
+
+  const handleCloseToast = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenToast(false);
+  };
+  const handleChangeStatusToast = () => {
+    setOpenToast(true);
+    setTimeout(() => {
+      setOpenToast(false);
+    }, 3000);
+  };
+  const handleChangeMessageToast = (msg: string) => {
+    setMessageToast(msg);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (Boolean(token)) {
+      setIsLogin(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isLogin) {
@@ -17,15 +46,28 @@ export function AppWrapper({ children }) {
       setOpenDashboard(false);
     }
   }, [isLogin]);
+
   let sharedState = {
     handleLoginTrue,
     isLogin,
     openDashboard,
+    handleChangeStatusToast,
+    handleChangeMessageToast,
+    openToast,
+    messageToast,
+    handleCloseToast,
     /* whatever you want */
   };
 
   return (
-    <AppContext.Provider value={sharedState}>{children}</AppContext.Provider>
+    <AppContext.Provider value={sharedState}>
+      <Toast
+        openToast={openToast}
+        messageToast={messageToast}
+        handleCloseToast={handleCloseToast}
+      />
+      {children}
+    </AppContext.Provider>
   );
 }
 

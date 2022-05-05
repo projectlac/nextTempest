@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import React, { useState } from "react";
 import * as Yup from "yup";
+import authApi from "../../../api/authApi";
+import { useAppContext } from "../../../context/state";
 import AuthDevider from "../../../styles/assets/images/Authen/AuthDevider.png";
 import AuthBG from "../../../styles/assets/images/Authen/Layer41.png";
 import Close from "../../../styles/assets/images/svg/close.svg";
@@ -37,6 +39,11 @@ interface PropsRegister {
   closeAuthBox: () => void;
 }
 function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
+  const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+
   const RegisterSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Too Short!")
@@ -54,7 +61,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
   return (
     <Auth position={"relative"}>
       <Typography variant="h4" color="#726550">
-        ĐĂNG NHẬP TÀI KHOẢN TEMPEST
+        {success ? "Đăng ký thành công" : "ĐĂNG KÝ TÀI KHOẢN TEMPEST"}
       </Typography>
       <Box
         width={36}
@@ -84,54 +91,96 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
       >
         <Image src={AuthDevider} layout="responsive" alt="devider" />
       </Box>
+      {success ? (
+        <>
+          <Box mt={10}>
+            <Typography variant="h5" color="#C69E72">
+              Bạn đã đăng ký tài khoản thành công <br /> vui lòng xác nhận email
+              để kích hoạt tài khoản!
+            </Typography>
+            <Typography
+              fontSize={15}
+              mt={15}
+              color="#C69E72"
+              sx={{
+                "& span": {
+                  color: "#94674B",
+                },
+              }}
+            >
+              <span>Lưu ý:</span> Email sẽ hết hạn trong vòng 5 phút!
+            </Typography>
+          </Box>
+        </>
+      ) : (
+        <Formik
+          initialValues={{
+            username: "",
+            password: "",
+            email: "",
+          }}
+          validationSchema={RegisterSchema}
+          onSubmit={(values) => {
+            const { username, password, email } = values;
+            setLoading(true);
+            authApi
+              .resgister({ username, password, email })
+              .then((res) => {
+                setLoading(false);
+                setSuccess(true);
+                console.log(res);
+              })
+              .catch((err) => {
+                setLoading(false);
+                handleChangeStatusToast();
+                handleChangeMessageToast(err.response.data.message);
+              });
+          }}
+        >
+          {({ errors, touched }) => (
+            <Form>
+              <Box width={"90%"} sx={{ margin: "0 auto 22px" }}>
+                <Box sx={{ position: "relative" }}>
+                  <CustomField name="username" placeholder="Tên đăng nhập" />
+                  {errors.username && touched.username ? (
+                    <Box position="absolute" bottom={10} color="#B56E4F">
+                      {errors.username}
+                    </Box>
+                  ) : null}
+                </Box>
+                <Box sx={{ position: "relative" }}>
+                  <CustomField
+                    name="password"
+                    placeholder="Mật khẩu"
+                    type="password"
+                  />
+                  {errors.password && touched.password ? (
+                    <Box position="absolute" bottom={10} color="#B56E4F">
+                      {errors.password}
+                    </Box>
+                  ) : null}
+                </Box>
+                <Box sx={{ position: "relative" }}>
+                  <CustomField name="email" placeholder="Email xác nhận" />
+                  {errors.email && touched.email ? (
+                    <Box position="absolute" bottom={10} color="#B56E4F">
+                      {errors.email}
+                    </Box>
+                  ) : null}
+                </Box>
+              </Box>
 
-      <Formik
-        initialValues={{
-          username: "",
-          password: "",
-          email: "",
-        }}
-        validationSchema={RegisterSchema}
-        onSubmit={(values) => {
-          // same shape as initial values
-          console.log(values);
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form>
-            <Box width={"90%"} sx={{ margin: "0 auto 22px" }}>
-              <Box sx={{ position: "relative" }}>
-                <CustomField name="username" placeholder="Tên đăng nhập" />
-                {errors.username && touched.username ? (
-                  <Box position="absolute" bottom={10} color="#B56E4F">
-                    {errors.username}
-                  </Box>
-                ) : null}
-              </Box>
-              <Box sx={{ position: "relative" }}>
-                <CustomField name="password" placeholder="Mật khẩu" />
-                {errors.password && touched.password ? (
-                  <Box position="absolute" bottom={10} color="#B56E4F">
-                    {errors.password}
-                  </Box>
-                ) : null}
-              </Box>
-              <Box sx={{ position: "relative" }}>
-                <CustomField name="email" placeholder="Email xác nhận" />
-                {errors.email && touched.email ? (
-                  <Box position="absolute" bottom={10} color="#B56E4F">
-                    {errors.email}
-                  </Box>
-                ) : null}
-              </Box>
-            </Box>
-
-            <button id="buttonAuth" type="submit">
-              Đăng ký
-            </button>
-          </Form>
-        )}
-      </Formik>
+              <button id="buttonAuth" type="submit">
+                {loading ? (
+                  <CircularProgress sx={{ color: "#fff", mt: 1 }} />
+                ) : (
+                  "Đăng ký"
+                )}
+              </button>
+            </Form>
+          )}
+        </Formik>
+      )}
     </Auth>
   );
 }

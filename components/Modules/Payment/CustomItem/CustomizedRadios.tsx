@@ -61,15 +61,17 @@ function BpRadio(props: RadioProps) {
     />
   );
 }
-
-export default function CustomizedRadios() {
+interface PropsRadio {
+  handleValue: (data: string) => void;
+}
+export default function CustomizedRadios({ handleValue }: PropsRadio) {
   return (
     <FormControl>
       <RadioGroup
         defaultValue="momo"
         aria-labelledby="demo-customized-radios"
         name="customized-radios"
-        onChange={(e) => console.log(e)}
+        onChange={(e) => handleValue(e.target.value)}
       >
         <FormControlLabel
           sx={{
