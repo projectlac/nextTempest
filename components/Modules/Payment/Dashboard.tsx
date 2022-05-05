@@ -5,6 +5,7 @@ import backgroundAT from "../../../styles/assets/images/payment/backgroundAT.png
 import backgroundBT from "../../../styles/assets/images/payment/buttonNormal.png";
 import background from "../../../styles/assets/images/payment/GroupPayment.png";
 import One from "./Tab/One";
+import Two from "./Tab/Two";
 
 const DashboardWrapper = styled(Box)(
   ({ theme }) => `
@@ -103,7 +104,11 @@ function Dashboard() {
             );
             break;
           case 2:
-            return <Box textAlign={"left"}>Nguyên thạch</Box>;
+            return (
+              <Box width={"100%"}>
+                <Two />
+              </Box>
+            );
             break;
           default:
             return <Box>Lịch sử</Box>;
