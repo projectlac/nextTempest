@@ -61,10 +61,13 @@ function VerifiedPage({ token }: PropsVerifiedPage) {
   const [count, setCount] = useState<number>(3);
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+
   const router = useRouter();
   useEffect(() => {
     const callToRegister = async () => {
       if (token) {
+        setLoading(true);
         await authApi
           .verified(token)
           .then((res) => {
@@ -76,7 +79,7 @@ function VerifiedPage({ token }: PropsVerifiedPage) {
             }, 1000);
           })
           .catch((err) => {
-            setSuccess(false);
+            setError(true);
           })
           .finally(() => {
             setLoading(false);
@@ -95,16 +98,19 @@ function VerifiedPage({ token }: PropsVerifiedPage) {
     <BgWrap>
       <Container>
         <VerifiedWrapper>
-          {loading ? (
+          {loading && (
             <CircularProgress sx={{ color: "#fff", mt: 1 }} size={60} />
-          ) : success ? (
+          )}
+          {success && (
             <Typography variant="h5" color="#726550">
               Tài khoản của bạn đã được kích hoạt <br />{" "}
               <span style={{ fontSize: "15px" }}>
                 Websize sẽ tự chuyển hướng trong ... {count}
               </span>
             </Typography>
-          ) : (
+          )}
+
+          {error && (
             <Typography variant="h5" color="#726550">
               Có lỗi xảy ra, vui lòng liên hệ admin
             </Typography>
