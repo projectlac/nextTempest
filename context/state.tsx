@@ -12,7 +12,9 @@ export function AppWrapper({ children }) {
   const handleLoginTrue = () => {
     setIsLogin(true);
   };
-
+  const refreshLogin = () => {
+    setIsLogin(false);
+  };
   const handleCloseToast = (
     event: React.SyntheticEvent | Event,
     reason?: string
@@ -56,6 +58,7 @@ export function AppWrapper({ children }) {
     openToast,
     messageToast,
     handleCloseToast,
+    refreshLogin,
     /* whatever you want */
   };
 

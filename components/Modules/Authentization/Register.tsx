@@ -128,7 +128,6 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
               .then((res) => {
                 setLoading(false);
                 setSuccess(true);
-                console.log(res);
               })
               .catch((err) => {
                 setLoading(false);

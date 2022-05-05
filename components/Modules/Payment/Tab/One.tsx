@@ -8,7 +8,7 @@ import Avatar from "../../../../styles/assets/images/payment/avatar-cute-12.jpg"
 import BGName from "../../../../styles/assets/images/payment/BGName.png";
 import coin from "../../../../styles/assets/images/payment/coin.png";
 import PaimonPayment from "../../../../styles/assets/images/payment/PaimonPayment.png";
-
+import jwt_decode from "jwt-decode";
 import CustomizedRadios from "../CustomItem/CustomizedRadios";
 const DashboardBox = styled(Box)(
   ({ theme }) => `
@@ -80,6 +80,13 @@ function One() {
   const handleValue = (data: string) => {
     setValue(data);
   };
+  const token = localStorage.getItem("access_token");
+
+  const decodeToken = () => {
+    if (Boolean(token)) return jwt_decode<any>(token).username;
+    return "";
+  };
+
   return (
     <Grid container columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
       <Grid item md={3}>
@@ -100,8 +107,12 @@ function One() {
             VIP 01
           </Typography>
           <NameBox>
-            <Typography color={"#94674B"} fontSize={18}>
-              Username
+            <Typography
+              color={"#94674B"}
+              fontSize={18}
+              textTransform="capitalize"
+            >
+              {decodeToken()}
             </Typography>
           </NameBox>
           <Box>

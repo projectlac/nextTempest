@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import MenuBox from "../Menu/MenuBox";
+import { useAppContext } from "../../../context/state";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -25,11 +26,19 @@ const HeaderWrapper = styled(Box)(
 );
 
 function HeaderHome() {
+  const { isLogin, refreshLogin } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
   const router = useRouter();
+
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
     return "";
+  };
+
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    refreshLogin();
+    router.push("/");
   };
   return (
     <div>
@@ -41,7 +50,17 @@ function HeaderHome() {
             </Box>
           </Link>
         </Box>
-        <Box sx={{ width: { sm: "calc(100% - 315px)", xs: "50%" } }}>
+        <Box
+          sx={{
+            width: {
+              sm: "calc(100% - 315px)",
+              xs: "50%",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            },
+          }}
+        >
           <Box
             sx={{
               display: { md: "flex", sm: "none", xs: "none" },
@@ -78,6 +97,20 @@ function HeaderHome() {
               <Link href="/lien-he">Liên hệ</Link>
             </Typography>
           </Box>
+          {isLogin && (
+            <Box
+              color="#fff"
+              sx={{
+                marginRight: "50px",
+                border: "1px solid #fff",
+                padding: "5px 25px",
+                borderRadius: "15px",
+              }}
+            >
+              <Typography onClick={logout}>Đăng xuất</Typography>
+            </Box>
+          )}
+
           <Box
             sx={{
               display: { md: "none", sm: "block" },

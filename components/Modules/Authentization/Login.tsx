@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
+import authApi from "../../../api/authApi";
+import { useAppContext } from "../../../context/state";
 import AuthDevider from "../../../styles/assets/images/Authen/AuthDevider.png";
 import AuthBG from "../../../styles/assets/images/Authen/Layer41.png";
 import Close from "../../../styles/assets/images/svg/close.svg";
@@ -41,6 +43,10 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
     username: Yup.string().required("*Tên đăng nhập không được để trống "),
     password: Yup.string().required("*Mật khẩu không được để trống "),
   });
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { handleChangeStatusToast, handleLoginTrue, handleChangeMessageToast } =
+    useAppContext();
 
   return (
     <Auth position={"relative"}>
@@ -82,8 +88,20 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
         }}
         validationSchema={LoginSchema}
         onSubmit={(values) => {
-          // same shape as initial values
-          console.log(values);
+          const { username, password } = values;
+          setLoading(true);
+          authApi
+            .login({ username, password })
+            .then((res) => {
+              setLoading(false);
+              localStorage.setItem("access_token", res.data);
+              handleLoginTrue();
+            })
+            .catch((err) => {
+              setLoading(false);
+              handleChangeStatusToast();
+              handleChangeMessageToast(err.response.data.message);
+            });
         }}
       >
         {({ errors, touched }) => (
@@ -98,7 +116,11 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
                 ) : null}
               </Box>
               <Box sx={{ position: "relative" }}>
-                <CustomField name="password" placeholder="Mật khẩu" />
+                <CustomField
+                  name="password"
+                  placeholder="Mật khẩu"
+                  type="password"
+                />
                 {errors.password && touched.password ? (
                   <Box position="absolute" bottom={20} color="#B56E4F">
                     {errors.password}
@@ -126,7 +148,11 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
               </Typography>
             </Box>
             <button id="buttonAuth" type="submit">
-              Đăng nhập
+              {loading ? (
+                <CircularProgress sx={{ color: "#fff", mt: 1 }} />
+              ) : (
+                "Đăng nhập"
+              )}
             </button>
           </Form>
         )}
