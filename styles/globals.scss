@@ -57,3 +57,34 @@
     background: #555;
   }
 }
+#tablePayment {
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 30px;
+  min-height: 180px;
+  overflow: hidden;
+  th {
+  }
+  td {
+    height: 45px;
+    background: #e4ddd2;
+    border-bottom: 1px solid #f4ece0;
+    border-left: 1px solid #f4ece0;
+    &:first-child {
+      border-left: none;
+    }
+  }
+}
+
+#buttonBuy {
+  background: url("./assets/images/payment/ButtonPayment.png");
+  width: 200px;
+  height: 45px;
+  border: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: "michos";
+  font-size: 17px;
+  margin-top: 15px;
+}
