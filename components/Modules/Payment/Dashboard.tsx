@@ -49,6 +49,7 @@ const ListTab = styled(Box)({
     fontSize: "20px",
     marginLeft: "5px",
     transition: "all 0.1s linear",
+    cursor: "pointer",
     "&.active": {
       background: `url(${backgroundAT.src})`,
       backgroundRepeat: "no-repeat",

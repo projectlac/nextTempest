@@ -10,6 +10,8 @@ import jwt_decode from "jwt-decode";
 import Crystal from "../../../../styles/assets/images/payment/Crystal.png";
 
 import SelectedMenuFirst from "./OneSelect/SelectedMenuFirst";
+import SelectedMenuThird from "./OneSelect/SelectedMenuThird";
+import SelectedMenuSecond from "./OneSelect/SelectedMenuSecond";
 const DashboardBox = styled(Box)(
   ({ theme }) => `
             height: 555px;
@@ -62,6 +64,7 @@ const TextBox = styled(Typography)({
   color: "#726550",
   borderBottom: "1px solid #DCD0BF",
   padding: "10px 0",
+  cursor: "pointer",
   "&.active": {
     color: "#D09B5F",
   },
@@ -141,7 +144,7 @@ function One() {
           </Box>
           <Box mt={2}>
             <TextBox
-              className="active"
+              className={`${selectionMenu === 0 ? "active" : ""}`}
               sx={{
                 borderTop: "1px solid #DCD0BF",
               }}
@@ -152,6 +155,7 @@ function One() {
               Nạp vào ví
             </TextBox>
             <TextBox
+              className={`${selectionMenu === 1 ? "active" : ""}`}
               onClick={() => {
                 setSelectionMenu(1);
               }}
@@ -159,6 +163,7 @@ function One() {
               Thông tin tài khoản
             </TextBox>
             <TextBox
+              className={`${selectionMenu === 2 ? "active" : ""}`}
               onClick={() => {
                 setSelectionMenu(2);
               }}
@@ -180,10 +185,10 @@ function One() {
               );
               break;
             case 1:
-              return <Box width={"100%"}>hihihi</Box>;
+              return <SelectedMenuSecond />;
               break;
             default:
-              return <Box>Lịch sử</Box>;
+              return <SelectedMenuThird />;
           }
         })()}
       </Grid>

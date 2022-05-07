@@ -460,6 +460,7 @@ function Two() {
                     background: `url(${BGPack.src})`,
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
+                    cursor: "pointer",
                     position: "relative",
                     filter: `${
                       d.quatily > 0 ? "brightness(1) " : "brightness(0.5) "
