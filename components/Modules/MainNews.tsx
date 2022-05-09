@@ -35,7 +35,7 @@ const NewBox = styled(Box)(() => ({
     backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
     "@media (max-width: 425px)": {
-      top: "-35px",
+      top: "-30px",
     },
   },
   "&:after": {
@@ -103,7 +103,18 @@ function MainNews() {
   return (
     <Box pb={0}>
       <Box pt={5} pb={2}>
-        <TitleHighlight mb={10}>Tin chính</TitleHighlight>
+        <TitleHighlight
+          sx={{
+            marginBottom: {
+              lg: "80px",
+              md: "70px",
+              sm: "70px",
+              xs: "50px",
+            },
+          }}
+        >
+          Tin chính
+        </TitleHighlight>
         <NewBox>
           <PaimonImage />
           <HottestNews>
@@ -146,12 +157,12 @@ function MainNews() {
           <Grid container>
             {[...Array(3)].map((d, i) => (
               <Box
-                sx={{ display: { md: "flex", sm: "block" }, width: "100%" }}
+                sx={{ display: { sm: "flex", xs: "block" }, width: "100%" }}
                 mb={2}
                 mt={2}
                 key={i}
               >
-                <Grid item md={4} xs={12}>
+                <Grid item md={4} sm={4} xs={12}>
                   <Box
                     sx={{
                       border: "2px solid #C9AD97",
@@ -169,11 +180,11 @@ function MainNews() {
                     />
                   </Box>
                 </Grid>
-                <Grid item md={8} xs={12}>
-                  <Box sx={{ px: { md: 3, sm: 0 } }}>
+                <Grid item md={8} sm={8} xs={12}>
+                  <Box sx={{ px: { sm: 3, xs: 0 } }}>
                     <Typography
                       sx={{
-                        fontSize: { lg: "20px", md: "17px", sm: "15px" },
+                        fontSize: { lg: "20px", md: "17px", sm: "13px" },
                         mt: 2,
                         color: "#B68967",
                       }}
@@ -183,7 +194,12 @@ function MainNews() {
                       </Link>
                     </Typography>
 
-                    <Typography style={{ color: "#000" }}>
+                    <Typography
+                      sx={{
+                        color: "#000",
+                        fontSize: { lg: "17px", md: "15px", sm: "11px" },
+                      }}
+                    >
                       <Link href="/">{`Xem thêm>>`}</Link>
                     </Typography>
                   </Box>
@@ -193,10 +209,15 @@ function MainNews() {
           </Grid>
         </NewBox>
         <ShowMore>
-          <Typography color="#E3DDD3" fontSize={18}>
+          <Typography
+            color="#E3DDD3"
+            sx={{ fontSize: { lg: "18px", md: "16px", sm: "13px" } }}
+          >
             Xem thêm tin tức
           </Typography>
-          <Image src={DownArrow} alt="" width={65} height={65} />
+          <Box>
+            <Image src={DownArrow} alt="" width={65} height={65} />
+          </Box>
         </ShowMore>
       </Box>
     </Box>

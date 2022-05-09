@@ -81,14 +81,14 @@ const PostBox = styled(Box)(
   background:url(${Frame3.src});
   background-repeat: no-repeat;
   background-size: cover;
-  @media (max-width: 600px) {
+  @media (max-width: 1024px) {
+   top: 40%;
+  } 
+  @media (max-width: 621px) {
     width: 365px;
     height: 216px; top: 20%;
   } 
-  @media (max-width: 425px) {
-    width: 365px;
-    height: 216px; top: 20%;
-  }
+ 
     `
 );
 
@@ -166,10 +166,15 @@ const ButtonEven = styled(Typography)(({ theme }) => ({
     backgroundPosition: "bottom right",
     backgroundSize: "cover",
   },
+  [theme.breakpoints.down("lg")]: {
+    margin: "35px auto 5px",
+    width: "33%",
+    justifyContent: "center",
+    paddingTop: "2px",
+  },
   [theme.breakpoints.down("sm")]: {
     width: "50%",
     height: "50px",
-    paddingTop: "2px",
     justifyContent: "center",
     margin: "25px auto 5px",
     fontSize: "15px",
@@ -259,30 +264,29 @@ function ModuleVideo() {
             <Box
               sx={{
                 position: {
-                  md: "absolute",
-                  sm: "relative",
+                  lg: "absolute",
                   xs: "relative",
                 },
-                display: { md: "inherit", xs: "flex" },
+                display: { lg: "inherit", xs: "flex" },
                 flexWrap: "wrap",
-                right: { md: "-211.5px" },
-                top: { md: "10%" },
+                right: { lg: "-211.5px" },
+                top: { lg: "10%" },
               }}
             >
               <ButtonEven>
-                <Hidden mdDown>
+                <Hidden lgDown>
                   <Image src={Icon} alt="" width={38} height={38} />{" "}
                 </Hidden>
                 Zalo
               </ButtonEven>
               <ButtonEven>
-                <Hidden mdDown>
+                <Hidden lgDown>
                   <Image src={Icon} alt="" width={38} height={38} />{" "}
                 </Hidden>{" "}
                 Facebook
               </ButtonEven>
               <ButtonEven>
-                <Hidden mdDown>
+                <Hidden lgDown>
                   <Image src={Icon} alt="" width={38} height={38} />{" "}
                 </Hidden>{" "}
                 Group
