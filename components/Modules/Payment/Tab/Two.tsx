@@ -197,12 +197,8 @@ function Two() {
 
     tempValue[index].quatily++;
     setDefaultValue(tempValue);
-    console.log(tempValue);
-
     const carTemp = [...cart];
-
     const indexCart = carTemp.findIndex((d) => d.id === id);
-
     indexCart > -1
       ? carTemp[indexCart].quatily + 1
       : carTemp.push(tempValue[index]);

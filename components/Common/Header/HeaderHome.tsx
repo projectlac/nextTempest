@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import MenuBox from "../Menu/MenuBox";
 import { useAppContext } from "../../../context/state";
+
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -35,6 +36,9 @@ function HeaderHome() {
     return "";
   };
 
+  const closeMenu = () => {
+    setActiveMenu(false);
+  };
   const logout = () => {
     localStorage.removeItem("access_token");
     refreshLogin();
@@ -55,10 +59,14 @@ function HeaderHome() {
             width: {
               sm: "calc(100% - 315px)",
               xs: "50%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
             },
+            display: "flex",
+            justifyContent: {
+              md: "space-between",
+              sm: "flex-end",
+              xs: "flex-end",
+            },
+            alignItems: "center",
           }}
         >
           <Box
@@ -105,6 +113,7 @@ function HeaderHome() {
                 border: "1px solid #fff",
                 padding: "5px 25px",
                 borderRadius: "15px",
+                display: { md: "block", sm: "none", xs: "none" },
               }}
             >
               <Typography onClick={logout}>Đăng xuất</Typography>
@@ -144,7 +153,7 @@ function HeaderHome() {
           </Box>
         </Box>
       </HeaderWrapper>
-      <MenuBox activeMenu={activeMenu} />
+      <MenuBox activeMenu={activeMenu} closeMenu={closeMenu} />
     </div>
   );
 }

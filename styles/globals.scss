@@ -1,3 +1,4 @@
+@import "responsive";
 .slick-custom {
   .slick-dots li {
     margin: 0 10px;
@@ -30,7 +31,6 @@
   height: 72px;
   background-color: transparent;
   border: navajowhite;
-
   color: #fff;
   font-size: 27px;
   font-family: "michos";
@@ -63,8 +63,7 @@
   border-radius: 30px;
   min-height: 180px;
   overflow: hidden;
-  th {
-  }
+
   td {
     height: 45px;
     background: #e4ddd2;
@@ -87,4 +86,32 @@
   font-family: "michos";
   font-size: 17px;
   margin-top: 15px;
+}
+#submitPassword {
+  height: 40px;
+  width: 119px;
+  border: 2px solid #dab88f;
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #94674b;
+  color: #fff;
+}
+#video {
+  @include Responsive(XS) {
+    width: 350px;
+    height: 198px;
+  }
+  @include Responsive(SM) {
+    width: 350px;
+    height: 198px;
+  }
+  @include Responsive(MD) {
+    width: 825px;
+    height: 465px;
+  }
 }

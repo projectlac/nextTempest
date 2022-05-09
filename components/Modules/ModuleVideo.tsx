@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Hidden, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -81,6 +81,14 @@ const PostBox = styled(Box)(
   background:url(${Frame3.src});
   background-repeat: no-repeat;
   background-size: cover;
+  @media (max-width: 768px) {
+    width: 365px;
+    height: 216px; top: 20%;
+  } 
+  @media (max-width: 425px) {
+    width: 365px;
+    height: 216px; top: 20%;
+  }
     `
 );
 
@@ -94,6 +102,14 @@ const VideoBox = styled(Box)(
   margin: 0 auto;
   top: 50%;
   transform: translateY(-50%);
+  @media (max-width: 768px) {
+     width: 350px;height: 198px;
+     
+  } 
+  @media (max-width: 425px) {
+    width: 350px;height: 198px;  
+   
+  }
       `
 );
 const PlayButton = styled(Box)(
@@ -121,9 +137,17 @@ const Title = styled(Typography)(
   font-size: 25px;
   color: #fff;
   text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
+  @media (max-width: 768px) {
+     font-size: 15px;
+    
+ } 
+ @media (max-width: 425px) {
+    font-size: 15px;  
+  
+ }
       `
 );
-const ButtonEven = styled(Typography)({
+const ButtonEven = styled(Typography)(({ theme }) => ({
   background: `url(${Even.src})`,
   color: "#fff",
   fontSize: "20px",
@@ -142,7 +166,24 @@ const ButtonEven = styled(Typography)({
     backgroundPosition: "bottom right",
     backgroundSize: "cover",
   },
-});
+  [theme.breakpoints.down("sm")]: {
+    width: "70%",
+    height: "69px",
+    paddingTop: "2px",
+    justifyContent: "center",
+    margin: "15px auto",
+    fontSize: "17px",
+  },
+  [theme.breakpoints.down("xs")]: {
+    width: "70%",
+    height: "69px",
+    paddingTop: "2px",
+    justifyContent: "center",
+    margin: "15px auto",
+    fontSize: "17px",
+  },
+}));
+
 const BoxEntry = styled(Box)(
   ({ theme }) => `
     width: 356px;
@@ -222,19 +263,32 @@ function ModuleVideo() {
 
             <Box
               sx={{
-                position: "absolute",
-                right: "-211.5px",
-                top: "10%",
+                position: {
+                  md: "absolute",
+                  sm: "relative",
+                  xs: "relative",
+                },
+                right: { md: "-211.5px" },
+                top: { md: "10%" },
               }}
             >
               <ButtonEven>
-                <Image src={Icon} alt="" width={38} height={38} /> Zalo
+                <Hidden mdDown>
+                  <Image src={Icon} alt="" width={38} height={38} />{" "}
+                </Hidden>
+                Zalo
               </ButtonEven>
               <ButtonEven>
-                <Image src={Icon} alt="" width={38} height={38} /> Facebook
+                <Hidden mdDown>
+                  <Image src={Icon} alt="" width={38} height={38} />{" "}
+                </Hidden>{" "}
+                Facebook
               </ButtonEven>
               <ButtonEven>
-                <Image src={Icon} alt="" width={38} height={38} /> Group
+                <Hidden mdDown>
+                  <Image src={Icon} alt="" width={38} height={38} />{" "}
+                </Hidden>{" "}
+                Group
               </ButtonEven>
             </Box>
             <Title>

@@ -21,14 +21,47 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
+const ScrollBox = styled(Box)({
+  height: "370px",
+  overflow: "hidden",
+  overflowY: "auto",
+});
 const ImageBox = styled(Box)({
   borderRadius: "50%",
   width: "150px",
   height: "150px",
-  margin: "25px auto 0",
+  border: "6px solid #BFAE9B",
+  margin: "-95px auto 5px",
   overflow: "hidden",
 });
+const ImageChooseBox = styled(Box)({
+  borderRadius: "50%",
+  width: "100px",
+  height: "100px",
+  border: "1px solid #BFAE9B",
+  overflow: "hidden",
+  margin: "0px 15px 15px",
+});
+
+const ButtonCustom = styled(Box)({
+  height: "40px",
+  width: "119px",
+  backgroundColor: "transparent",
+  border: "2px solid #DAB88F",
+  color: "#94674b",
+  margin: "0 16px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "15px",
+  cursor: "pointer",
+  fontSize: "14px",
+  "&.submit": {
+    backgroundColor: "#94674b",
+    color: "#fff",
+  },
+});
+
 interface PropsDialog {
   handleClose: () => void;
   open: boolean;
@@ -45,9 +78,16 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
           "& .MuiDialog-paper": {
             background: `url(${Background.src})`,
             height: "584px",
-
+            overflowY: "inherit",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
+            "& .MuiDialogContent-root": {
+              overflowY: "inherit",
+              height: "calc(100% - 130px)",
+            },
+            "& .MuiDialogActions-root": {
+              height: "130px",
+            },
           },
         }}
       >
@@ -55,16 +95,25 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
           <ImageBox>
             <Image src={Avatar} width={150} height={150} alt="crys" />
           </ImageBox>
-          <DialogContentText id="alert-dialog-slide-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi rem
-            dolorem sequi voluptatibus facere in! Illum, eligendi quia,
-            distinctio sint quis iusto perspiciatis ipsa accusamus cum alias
-            iste maiores totam!
-          </DialogContentText>
+          <ScrollBox>
+            <Box sx={{ padding: "30px", display: "flex", flexWrap: "wrap" }}>
+              {[...Array(20)].map((d, i) => (
+                <ImageChooseBox key={i}>
+                  <Image src={Avatar} width={100} height={100} alt="crys" />
+                </ImageChooseBox>
+              ))}
+            </Box>
+          </ScrollBox>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose}>Agree</Button>
+        <DialogActions
+          sx={{
+            justifyContent: "center",
+          }}
+        >
+          <ButtonCustom onClick={handleClose}>Hủy</ButtonCustom>
+          <ButtonCustom className="submit" onClick={handleClose}>
+            Xác nhận
+          </ButtonCustom>
         </DialogActions>
       </Dialog>
     </div>

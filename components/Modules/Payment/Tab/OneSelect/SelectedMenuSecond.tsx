@@ -6,6 +6,7 @@ import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.
 import Avatar from "../../../../../styles/assets/images/payment/avatar-cute-12.jpg";
 import jwt_decode from "jwt-decode";
 import DialogChangeAvatar from "../../../../Common/DialogChangeAvatar/DialogChangeAvatar";
+import DialogChangePassword from "../../../../Common/DialogChangePassword/DialogChangePassword";
 
 const ImageBox = styled(Box)({
   borderRadius: "50%",
@@ -54,15 +55,20 @@ function SelectedMenuSecond() {
   const token = localStorage.getItem("access_token");
 
   const [open, setOpen] = React.useState(false);
+  const [password, setPassword] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleClickOpenPassword = () => {
+    setPassword(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleClosePassword = () => {
+    setPassword(false);
+  };
   const decodeName = () => {
     if (Boolean(token)) return jwt_decode<any>(token).username;
     return "";
@@ -108,11 +114,21 @@ function SelectedMenuSecond() {
           <Text color="#726550">
             <span>Đổi mật khẩu</span>
           </Text>
+          <DialogChangePassword
+            handleClose={handleClosePassword}
+            open={password}
+          />
         </Box>
         <Box width={150}>
           <ButtonCustom>Đã liên kết</ButtonCustom>
           <ButtonCustom>Đã liên kết</ButtonCustom>
-          <ButtonCustom>Đổi</ButtonCustom>
+          <ButtonCustom
+            onClick={() => {
+              handleClickOpenPassword();
+            }}
+          >
+            Đổi
+          </ButtonCustom>
         </Box>
       </Box>
     </DashboardBox>
