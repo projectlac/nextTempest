@@ -71,6 +71,8 @@ function VerifiedPage({ token }: PropsVerifiedPage) {
         await authApi
           .verified(token)
           .then((res) => {
+            setLoading(false);
+
             localStorage.setItem("access_token", res.data);
             setSuccess(true);
             setInterval(() => {
@@ -111,7 +113,16 @@ function VerifiedPage({ token }: PropsVerifiedPage) {
           )}
 
           {error && (
-            <Typography variant="h5" color="#726550">
+            <Typography
+              variant="h5"
+              sx={{
+                fontSize: {
+                  md: "1.5rem",
+                  xs: "15px",
+                },
+              }}
+              color="#726550"
+            >
               Có lỗi xảy ra, vui lòng liên hệ admin
             </Typography>
           )}

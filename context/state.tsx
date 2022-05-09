@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Toast from "../components/Common/Toast/Toast";
+import jwt_decode from "jwt-decode";
 
 const AppContext = createContext(null);
 
@@ -7,7 +8,8 @@ export function AppWrapper({ children }) {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [openDashboard, setOpenDashboard] = useState<boolean>(false);
   const [openToast, setOpenToast] = useState<boolean>(false);
-  const [messageToast, setMessageToast] = useState<string>("HHAHA");
+  const [messageToast, setMessageToast] = useState<string>("");
+  const [role, setRole] = useState<string>("");
 
   const handleLoginTrue = () => {
     setIsLogin(true);
@@ -36,7 +38,9 @@ export function AppWrapper({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
+
     if (Boolean(token)) {
+      setRole(jwt_decode<any>(token).role);
       setIsLogin(true);
     }
   }, []);
@@ -59,6 +63,7 @@ export function AppWrapper({ children }) {
     messageToast,
     handleCloseToast,
     refreshLogin,
+    role,
     /* whatever you want */
   };
 

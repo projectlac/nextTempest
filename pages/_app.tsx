@@ -11,8 +11,6 @@ import { AppWrapper } from "../context/state";
 import "../styles/globals.css";
 import "../styles/globals.scss";
 import lightThemeOptions from "../styles/theme/lightThemeOption";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 import createEmotionCache from "../utility/createEmotionCache";
 
 interface MyAppProps extends AppProps {

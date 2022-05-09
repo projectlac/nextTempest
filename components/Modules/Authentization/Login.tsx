@@ -9,7 +9,8 @@ import { useAppContext } from "../../../context/state";
 import AuthDevider from "../../../styles/assets/images/Authen/AuthDevider.png";
 import AuthBG from "../../../styles/assets/images/Authen/Layer41.png";
 import Close from "../../../styles/assets/images/svg/close.svg";
-
+import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
 const Auth = styled(Box)(
   ({ theme }) => `
         width: 1094px;
@@ -18,6 +19,33 @@ const Auth = styled(Box)(
         display: block;
         padding: 100px 105px 50px;
         text-align:center;
+        @media (max-width: 425px) {
+          width: 100%;
+          height: 510px;
+          padding: 75px 40px;
+          background-size: 100% 100%;
+        }
+        
+        @media (min-width: 768px) {
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 681px;
+          height: 421px;
+          margin: 0 auto;
+          padding: 60px 105px 50px;
+      
+       } 
+      
+       @media (min-width: 1024px) {
+        width: 800px;
+          height: 499px;
+      
+      } 
+      @media (min-width: 1440px) {
+        padding: 100px 105px 50px;
+        width: 1094px;
+        height: 677px;
+      } 
         `
 );
 
@@ -32,6 +60,30 @@ const CustomField = styled(Field)(
     font-size: 18px;
     padding: 15px 25px;
     font-family: 'michos';
+    @media (max-width: 425px) {
+      height:50px;
+      margin-bottom:30px;
+      font-size: 15px;
+    }
+    @media (min-width: 768px) {
+      height:50px;
+      margin-bottom:27px;
+      font-size: 15px;
+  
+   } 
+  
+   @media (min-width: 1024px) {
+    height:60px;
+    margin-bottom:30px;
+    font-size: 15px;
+  
+  } 
+  @media (min-width: 1440px) {
+    height:80px;
+    font-size: 18px;
+    margin-bottom:50px;
+
+  } 
           `
 );
 interface PropsLogin {
@@ -44,38 +96,71 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
     password: Yup.string().required("*Mật khẩu không được để trống "),
   });
   const [loading, setLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   const { handleChangeStatusToast, handleLoginTrue, handleChangeMessageToast } =
     useAppContext();
 
   return (
     <Auth position={"relative"}>
-      <Typography variant="h4" color="#726550">
+      <Typography
+        sx={{
+          fontSize: {
+            lg: "34px",
+            md: "25px",
+
+            sm: "20px",
+            xs: "16px",
+          },
+        }}
+        color="#726550"
+      >
         ĐĂNG NHẬP TÀI KHOẢN TEMPEST
       </Typography>
       <Box
-        width={36}
-        height={36}
         sx={{
+          width: {
+            sm: 25,
+            md: 36,
+            xs: 25,
+          },
+          height: {
+            sm: 25,
+            md: 36,
+            xs: 25,
+          },
           position: "absolute",
-          right: "-45px",
-          top: "25px",
+          right: {
+            sm: "-15px",
+            xs: "-15px",
+            md: "-45px",
+          },
+          top: {
+            sm: "25px",
+            xs: "25px",
+          },
         }}
       >
         <Image
           src={Close}
           alt=""
-          width={36}
-          height={36}
+          layout="responsive"
           onClick={() => {
             closeAuthBox();
           }}
         />
       </Box>
       <Box
-        width={410}
         sx={{
-          margin: "25px auto 45px",
+          width: {
+            sm: 410,
+            xs: "100%",
+          },
+          margin: {
+            md: "25px auto 25px",
+            sm: "15px auto 25px",
+
+            xs: "15px auto",
+          },
         }}
       >
         <Image src={AuthDevider} layout="responsive" alt="devider" />
@@ -95,6 +180,9 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
             .then((res) => {
               setLoading(false);
               localStorage.setItem("access_token", res.data);
+              if (jwt_decode<any>(res.data).role === "ADMIN") {
+                router.push("/dashboard");
+              }
               handleLoginTrue();
             })
             .catch((err) => {
@@ -110,7 +198,24 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
               <Box sx={{ position: "relative" }}>
                 <CustomField name="username" placeholder="Tên đăng nhập" />
                 {errors.username && touched.username ? (
-                  <Box position="absolute" bottom={20} color="#B56E4F">
+                  <Box
+                    position="absolute"
+                    color="#B56E4F"
+                    sx={{
+                      bottom: {
+                        xs: 10,
+                        sm: 7,
+                        md: 5,
+                        lg: 20,
+                      },
+                      fontSize: {
+                        xs: "12px",
+                        sm: "12px",
+                        md: "13px",
+                        lg: "1rem",
+                      },
+                    }}
+                  >
                     {errors.username}
                   </Box>
                 ) : null}
@@ -122,7 +227,24 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
                   type="password"
                 />
                 {errors.password && touched.password ? (
-                  <Box position="absolute" bottom={20} color="#B56E4F">
+                  <Box
+                    position="absolute"
+                    color="#B56E4F"
+                    sx={{
+                      bottom: {
+                        xs: 10,
+                        sm: 7,
+                        md: 5,
+                        lg: 20,
+                      },
+                      fontSize: {
+                        xs: "12px",
+                        sm: "12px",
+                        md: "13px",
+                        lg: "1rem",
+                      },
+                    }}
+                  >
                     {errors.password}
                   </Box>
                 ) : null}
@@ -133,13 +255,34 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
                 display: "flex",
                 justifyContent: "space-between",
                 width: "90%",
-                margin: "0 auto 50px",
+                margin: {
+                  md: "0 auto 40px",
+                  sm: "0 auto 46px",
+                  lg: "0 auto 65px",
+                  xs: "25px auto 25px",
+                },
                 color: "#726550",
               }}
             >
-              <Typography fontSize={18}>Quên mật khẩu</Typography>
               <Typography
-                fontSize={18}
+                sx={{
+                  fontSize: {
+                    xs: "12px",
+                    sm: "13px",
+                    md: "18px",
+                  },
+                }}
+              >
+                Quên mật khẩu
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "12px",
+                    sm: "13px",
+                    md: "18px",
+                  },
+                }}
                 onClick={() => {
                   handleLoginMode(false);
                 }}

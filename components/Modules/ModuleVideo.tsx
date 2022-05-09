@@ -81,14 +81,28 @@ const PostBox = styled(Box)(
   background:url(${Frame3.src});
   background-repeat: no-repeat;
   background-size: cover;
-  @media (max-width: 1024px) {
-   top: 40%;
-  } 
-  @media (max-width: 621px) {
-    width: 365px;
-    height: 216px; top: 20%;
-  } 
+
+  
+  @media (min-width: 0px) {
+    width: 320px;
+    height: 189px; top: 20%;
  
+  } 
+  @media (min-width: 768px){
+    width: 570px;
+    height: 336px;
+    top: 40%;
+  }
+  @media (min-width: 1024px) {
+    top: 40%;
+    width:875px;
+    height:516px;
+ } 
+ @media (min-width: 1440px) {
+  top: 50%;
+  width:875px;
+  height:516px;
+} 
     `
 );
 
@@ -102,14 +116,21 @@ const VideoBox = styled(Box)(
   margin: 0 auto;
   top: 50%;
   transform: translateY(-50%);
-  @media (max-width: 768px) {
-     width: 350px;height: 198px;
+
+  @media (min-width: 0px) {
+    width: 320px;
+    height: 189px;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+     width: 540px;height: 316px;
      
   } 
-  @media (max-width: 425px) {
-    width: 350px;height: 198px;  
-   
-  }
+  @media (min-width: 1024px) {
+    width: 825px;
+    height: 465px;
+ } 
+  
       `
 );
 const PlayButton = styled(Box)(
@@ -126,7 +147,16 @@ const PlayButton = styled(Box)(
     cursor: pointer;
     outline: none;
     transition: background 0.2s linear;
-    
+    @media (min-width: 0px) {
+      margin: 11px auto 0;
+      width: 38px;
+      height: 38px;
+    }
+    @media (min-width: 768px) {
+      margin: 14px auto 0;
+      width: 48px;
+      height: 48px;
+    } 
     `
 );
 const Title = styled(Typography)(
@@ -137,14 +167,23 @@ const Title = styled(Typography)(
   font-size: 25px;
   color: #fff;
   text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
-  @media (max-width: 768px) {
-     font-size: 15px;
-    
- } 
- @media (max-width: 425px) {
-    font-size: 15px;  
+  @media (min-width: 0px) {
+    font-size: 14px;  
   
  }
+  @media (min-width: 768px) {
+     font-size: 15px;
+
+ } 
+
+ @media (min-width: 1024px) {
+  font-size: 25px;
+  padding-top: 20px;
+
+} 
+@media (min-width: 1440px) {
+  padding-top: 40px;
+} 
       `
 );
 const ButtonEven = styled(Typography)(({ theme }) => ({
@@ -172,6 +211,14 @@ const ButtonEven = styled(Typography)(({ theme }) => ({
     justifyContent: "center",
     paddingTop: "2px",
   },
+  [theme.breakpoints.down("md")]: {
+    margin: "35px auto 5px",
+    width: "33%",
+    justifyContent: "center",
+    paddingTop: "2px",
+    height: "50px",
+    fontSize: "18px",
+  },
   [theme.breakpoints.down("sm")]: {
     width: "50%",
     height: "50px",
@@ -196,6 +243,17 @@ const BoxEntry = styled(Box)(
     margin: 0 auto;
     transform: translateY(-50%);
     
+  @media (min-width: 0px) {
+    width: 282px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+  }
+  @media (min-width: 768px) {
+    width: 356px; 
+    height: 76px; 
+  } 
+ 
       `
 );
 function ModuleVideo() {

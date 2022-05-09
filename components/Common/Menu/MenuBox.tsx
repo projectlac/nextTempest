@@ -7,9 +7,12 @@ import Image from "next/image";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 
 import Close from "../../../styles/assets/images/svg/close.svg";
+import { useAppContext } from "../../../context/state";
 interface PropsMenu {
   activeMenu: boolean;
   closeMenu: () => void;
+  login: () => void;
+  logout: () => void;
 }
 const MenuSWrapper = styled(Box)(
   ({ theme }) => `
@@ -42,8 +45,10 @@ const MenuTextBox = styled(Box)(
         text-align:left;
       `
 );
-function MenuBox({ activeMenu, closeMenu }: PropsMenu) {
+function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
   const router = useRouter();
+  const { isLogin, refreshLogin } = useAppContext();
+
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
     return "";
@@ -91,6 +96,26 @@ function MenuBox({ activeMenu, closeMenu }: PropsMenu) {
           <Typography className={`${activeClass("/lien-he")}`}>
             <Link href="/lien-he">Liên hệ</Link>
           </Typography>
+
+          {isLogin ? (
+            <Typography
+              onClick={() => {
+                logout();
+                closeMenu();
+              }}
+            >
+              Đăng xuất
+            </Typography>
+          ) : (
+            <Typography
+              onClick={() => {
+                login();
+                closeMenu();
+              }}
+            >
+              Đăng nhập
+            </Typography>
+          )}
         </MenuTextBox>
       </MenuSWrapper>
       {activeMenu && <OverlayMenu />}

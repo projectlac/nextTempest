@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +9,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import MenuBox from "../Menu/MenuBox";
 import { useAppContext } from "../../../context/state";
+import Login from "../../Modules/Authentization/Login";
+import Authentization from "../../Modules/Authentization";
+import background from "../../../styles/assets/images/payment/BG.png";
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -25,15 +28,39 @@ const HeaderWrapper = styled(Box)(
   font-size: 14px;
   `
 );
+const BgWrap = styled(Box)(
+  ({ theme }) => `
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      position:fixed;
+      z-index:9;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
 
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      overflow:hidden;
+      background-size: cover;    
+    `
+);
 function HeaderHome() {
-  const { isLogin, refreshLogin } = useAppContext();
+  const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
   const router = useRouter();
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
     return "";
+  };
+
+  const [openAuth, setOpenAuth] = useState<boolean>(false);
+
+  const closeAuthBox = () => {
+    setOpenAuth(false);
   };
 
   const closeMenu = () => {
@@ -43,6 +70,9 @@ function HeaderHome() {
     localStorage.removeItem("access_token");
     refreshLogin();
     router.push("/");
+  };
+  const login = () => {
+    setOpenAuth(true);
   };
   return (
     <div>
@@ -80,7 +110,7 @@ function HeaderHome() {
                 margin: { lg: " 0 45px", md: "0 15px" },
                 textDecoration: "none",
                 paddingBottom: "6px",
-
+                transition: "0.2s all linear",
                 "&:hover": {
                   textShadow:
                     "0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff",
@@ -104,21 +134,35 @@ function HeaderHome() {
             <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">Liên hệ</Link>
             </Typography>
+            {role !== "ADMIN" && role !== "MOD" && role && (
+              <Typography>
+                <Link href="/dashboard">Quản lý</Link>
+              </Typography>
+            )}
           </Box>
-          {isLogin && (
-            <Box
-              color="#fff"
-              sx={{
-                marginRight: "50px",
-                border: "1px solid #fff",
-                padding: "5px 25px",
-                borderRadius: "15px",
-                display: { md: "block", sm: "none", xs: "none" },
-              }}
-            >
+
+          <Box
+            color="#fff"
+            sx={{
+              marginRight: "50px",
+              border: "1px solid #fff",
+              padding: "5px 25px",
+              borderRadius: "15px",
+              transition: "0.3s all linear",
+              display: { md: "block", sm: "none", xs: "none" },
+              "&:hover": {
+                background: "#fff",
+                color: "#000",
+                borderColor: "#000",
+              },
+            }}
+          >
+            {isLogin ? (
               <Typography onClick={logout}>Đăng xuất</Typography>
-            </Box>
-          )}
+            ) : (
+              <Typography onClick={login}>Đăng nhập</Typography>
+            )}
+          </Box>
 
           <Box
             sx={{
@@ -153,7 +197,19 @@ function HeaderHome() {
           </Box>
         </Box>
       </HeaderWrapper>
-      <MenuBox activeMenu={activeMenu} closeMenu={closeMenu} />
+      {openAuth && (
+        <BgWrap>
+          <Container>
+            <Authentization closeAuthBox={closeAuthBox} />
+          </Container>
+        </BgWrap>
+      )}
+      <MenuBox
+        activeMenu={activeMenu}
+        closeMenu={closeMenu}
+        login={login}
+        logout={logout}
+      />
     </div>
   );
 }

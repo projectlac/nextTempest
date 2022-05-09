@@ -3,6 +3,7 @@ import { Box, Container } from "@mui/material";
 import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
+
 const BgWrap = styled(Box)(
   ({ theme }) => `
         height: 100vh;
