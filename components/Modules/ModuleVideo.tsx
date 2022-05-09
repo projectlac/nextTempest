@@ -81,7 +81,7 @@ const PostBox = styled(Box)(
   background:url(${Frame3.src});
   background-repeat: no-repeat;
   background-size: cover;
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     width: 365px;
     height: 216px; top: 20%;
   } 
@@ -167,20 +167,15 @@ const ButtonEven = styled(Typography)(({ theme }) => ({
     backgroundSize: "cover",
   },
   [theme.breakpoints.down("sm")]: {
-    width: "70%",
-    height: "69px",
+    width: "50%",
+    height: "50px",
     paddingTop: "2px",
     justifyContent: "center",
-    margin: "15px auto",
-    fontSize: "17px",
-  },
-  [theme.breakpoints.down("xs")]: {
-    width: "70%",
-    height: "69px",
-    paddingTop: "2px",
-    justifyContent: "center",
-    margin: "15px auto",
-    fontSize: "17px",
+    margin: "25px auto 5px",
+    fontSize: "15px",
+    "&:last-child": {
+      margin: "5px auto 5px",
+    },
   },
 }));
 
@@ -268,6 +263,8 @@ function ModuleVideo() {
                   sm: "relative",
                   xs: "relative",
                 },
+                display: { md: "inherit", xs: "flex" },
+                flexWrap: "wrap",
                 right: { md: "-211.5px" },
                 top: { md: "10%" },
               }}

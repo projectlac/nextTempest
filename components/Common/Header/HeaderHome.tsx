@@ -47,7 +47,7 @@ function HeaderHome() {
   return (
     <div>
       <HeaderWrapper>
-        <Box sx={{ textAlign: "center", width: { sm: 315, xs: "50%" } }}>
+        <Box sx={{ textAlign: "center", width: { md: 260, xs: "50%" } }}>
           <Link href="/" passHref>
             <Box>
               <Image src={logo} alt="" width="150" height="60" />
@@ -57,7 +57,7 @@ function HeaderHome() {
         <Box
           sx={{
             width: {
-              sm: "calc(100% - 315px)",
+              sm: "calc(100% - 260px)",
               xs: "50%",
             },
             display: "flex",
