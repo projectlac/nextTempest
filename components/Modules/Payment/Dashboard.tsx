@@ -5,6 +5,7 @@ import backgroundAT from "../../../styles/assets/images/payment/backgroundAT.png
 import backgroundBT from "../../../styles/assets/images/payment/buttonNormal.png";
 import background from "../../../styles/assets/images/payment/GroupPayment.png";
 import One from "./Tab/One";
+import Three from "./Tab/Three";
 import Two from "./Tab/Two";
 
 const DashboardWrapper = styled(Box)(
@@ -27,6 +28,19 @@ const DashboardWrapper = styled(Box)(
         padding: 0 65px;
         position:relative;
         z-index:1;
+        @media (min-width: 0px) {
+          padding: 0 65px;
+        } 
+        @media (min-width: 768px){
+          padding: 0 65px;
+        }
+        @media (min-width: 1024px) {
+          padding: 0 65px;
+        } 
+        @media (min-width: 1440px) {
+          padding: 0 160px;
+        } 
+    
       `
 );
 
@@ -60,6 +74,18 @@ const ListTab = styled(Box)({
       paddingTop: "16px",
       fontSize: "22px",
     },
+  },
+
+  "@media (min-width: 768px)": {},
+  "@media (min-width: 1024px)": {
+    padding: "0 100px",
+    top: "9.5px",
+    marginRight: "-166px",
+  },
+  "@media (min-width: 1400px)": {
+    padding: "0 100px",
+    top: "-49.5px",
+    marginRight: "50px",
   },
 });
 function Dashboard() {
@@ -112,7 +138,11 @@ function Dashboard() {
             );
             break;
           default:
-            return <Box>Lịch sử</Box>;
+            return (
+              <Box width={"100%"}>
+                <Three />
+              </Box>
+            );
         }
       })()}
     </DashboardWrapper>

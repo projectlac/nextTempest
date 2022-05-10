@@ -45,7 +45,7 @@ const TitleHighlight = styled(Box)({
       display: "none",
     },
   },
-  "@media (max-width: 425px)": {
+  "@media (max-width: 435px)": {
     fontSize: "23px",
   },
 });

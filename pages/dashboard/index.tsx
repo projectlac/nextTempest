@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import Head from "next/head";
-import * as React from "react";
-import Layout from "../../components/Layout/BaseLayout";
 import jwt_decode from "jwt-decode";
+import Head from "next/head";
 import { useRouter } from "next/router";
-export default function IndexPage() {
+import * as React from "react";
+import DashboardLayout from "../../components/Layout/DashboardLayout";
+export default function Dashboard() {
   const router = useRouter();
   React.useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -18,17 +18,17 @@ export default function IndexPage() {
     }
   }, []);
   return (
-    <Layout>
+    <DashboardLayout>
       <Head>
-        <title>Nạp tiền</title>
+        <title>Quản lý</title>
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box>ádasdas</Box>
-    </Layout>
+    </DashboardLayout>
   );
 }
 
-IndexPage.getLayout = function getLayout(page) {
-  return <Layout>{page}</Layout>;
+Dashboard.getLayout = function getLayout(page) {
+  return <DashboardLayout>{page}</DashboardLayout>;
 };

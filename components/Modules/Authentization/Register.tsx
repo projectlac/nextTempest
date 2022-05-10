@@ -18,7 +18,7 @@ const Auth = styled(Box)(
         display: block;
         padding: 100px 105px 50px;
         text-align:center;
-        @media (max-width: 425px) {
+        @media (max-width: 435px) {
           width: 100%;
           height: 510px;
           padding: 75px 40px;
@@ -57,7 +57,7 @@ const CustomField = styled(Field)(
     font-size: 18px;
     padding: 15px 25px;
     font-family: 'michos';
-    @media (max-width: 425px) {
+    @media (max-width: 435px) {
       height:45px;
       margin-bottom:30px;
       font-size: 15px;

@@ -9,7 +9,7 @@ const lightThemeOptions: ThemeOptions = {
       xs: 0,
       sm: 640,
       md: 1024,
-      lg: 1200,
+      lg: 1400,
       xl: 1536,
     },
   },

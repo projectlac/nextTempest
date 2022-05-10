@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const ScrollBox = styled(Box)({
-  height: "370px",
+  height: "465px",
   overflow: "hidden",
   overflowY: "auto",
 });
@@ -77,7 +77,7 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
         sx={{
           "& .MuiDialog-paper": {
             background: `url(${Background.src})`,
-            height: "584px",
+            height: "666px",
             overflowY: "inherit",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",

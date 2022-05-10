@@ -16,6 +16,11 @@ export function AppWrapper({ children }) {
   };
   const refreshLogin = () => {
     setIsLogin(false);
+    const token = localStorage.getItem("access_token");
+
+    if (Boolean(token)) {
+      setRole(jwt_decode<any>(token).role);
+    }
   };
   const handleCloseToast = (
     event: React.SyntheticEvent | Event,
@@ -38,7 +43,6 @@ export function AppWrapper({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-
     if (Boolean(token)) {
       setRole(jwt_decode<any>(token).role);
       setIsLogin(true);

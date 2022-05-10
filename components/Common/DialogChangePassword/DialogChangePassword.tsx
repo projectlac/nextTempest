@@ -20,27 +20,6 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-const ScrollBox = styled(Box)({
-  height: "370px",
-  overflow: "hidden",
-  overflowY: "auto",
-});
-const ImageBox = styled(Box)({
-  borderRadius: "50%",
-  width: "150px",
-  height: "150px",
-  border: "6px solid #BFAE9B",
-  margin: "-95px auto 5px",
-  overflow: "hidden",
-});
-const ImageChooseBox = styled(Box)({
-  borderRadius: "50%",
-  width: "100px",
-  height: "100px",
-  border: "1px solid #BFAE9B",
-  overflow: "hidden",
-  margin: "0px 15px 15px",
-});
 
 const ButtonCustom = styled(Box)({
   height: "40px",
@@ -65,7 +44,6 @@ const CustomField = styled(Field)(
     width: 90%;
     height:60px;
     background: #F2EEE9;
-  
     border: none;
     outline:none;
     border-radius: 20px;

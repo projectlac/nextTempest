@@ -77,7 +77,9 @@ function HeaderHome() {
   return (
     <div>
       <HeaderWrapper>
-        <Box sx={{ textAlign: "center", width: { md: 260, xs: "50%" } }}>
+        <Box
+          sx={{ textAlign: "center", width: { lg: 260, md: 230, xs: "50%" } }}
+        >
           <Link href="/" passHref>
             <Box>
               <Image src={logo} alt="" width="150" height="60" />
@@ -87,7 +89,8 @@ function HeaderHome() {
         <Box
           sx={{
             width: {
-              sm: "calc(100% - 260px)",
+              lg: "calc(100% - 260px)",
+              sm: "calc(100% - 230px)",
               xs: "50%",
             },
             display: "flex",
@@ -107,7 +110,11 @@ function HeaderHome() {
               },
               "& a": {
                 color: "#fff",
-                margin: { lg: " 0 45px", md: "0 15px" },
+                margin: { lg: " 0 20px", md: "0 15px" },
+                fontSize: {
+                  lg: "1rem",
+                  md: "13px",
+                },
                 textDecoration: "none",
                 paddingBottom: "6px",
                 transition: "0.2s all linear",
@@ -134,7 +141,7 @@ function HeaderHome() {
             <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">Liên hệ</Link>
             </Typography>
-            {role !== "ADMIN" && role !== "MOD" && role && (
+            {["ADMIN", "MOD"].includes(role) && role && (
               <Typography>
                 <Link href="/dashboard">Quản lý</Link>
               </Typography>

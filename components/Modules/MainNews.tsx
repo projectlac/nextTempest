@@ -21,7 +21,7 @@ const NewBox = styled(Box)(() => ({
   minHeight: "750px",
   backgroundSize: "100%",
   padding: "0 50px",
-  "@media (max-width: 425px)": {
+  "@media (max-width: 435px)": {
     padding: "0 25px",
   },
   "&:before": {
@@ -34,7 +34,7 @@ const NewBox = styled(Box)(() => ({
     left: 0,
     backgroundSize: "100%",
     backgroundRepeat: "no-repeat",
-    "@media (max-width: 425px)": {
+    "@media (max-width: 435px)": {
       top: "-30px",
     },
   },
@@ -49,7 +49,7 @@ const NewBox = styled(Box)(() => ({
     right: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right",
-    "@media (max-width: 425px)": {
+    "@media (max-width: 435px)": {
       bottom: "-20px",
     },
   },
@@ -72,7 +72,7 @@ const PaimonImage = styled(Box)(
       width: 336px;
       height: 466px;
     } 
-    @media (max-width: 425px) {
+    @media (max-width: 435px) {
       display:none
     }
 
@@ -82,7 +82,7 @@ const HottestNews = styled(Box)(
   ({ theme }) => `
   width: 75%;
   height: auto;
-  @media (max-width: 425px) {
+  @media (max-width: 435px) {
     width: 100%;
   }
       `
@@ -93,7 +93,7 @@ const ShowMore = styled(Box)(
   width: 100%;
   padding-top: 75px;
   text-align: center;
-  @media (max-width: 425px){
+  @media (max-width: 435px){
     padding-top: 25px;
   },
       `
