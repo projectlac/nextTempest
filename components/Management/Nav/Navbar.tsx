@@ -33,6 +33,21 @@ export default function Navbar() {
       icon: <InboxIcon />,
       link: "/",
     },
+    {
+      name: "Quản lý banner",
+      icon: <InboxIcon />,
+      link: "/",
+    },
+    {
+      name: "Quản lý Genshin",
+      icon: <InboxIcon />,
+      link: "/",
+    },
+    {
+      name: "Phân quyền",
+      icon: <InboxIcon />,
+      link: "/dashboard/account",
+    },
   ]);
 
   const toggleDrawer =

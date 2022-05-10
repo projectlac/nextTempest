@@ -14,8 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAppContext } from "../../../context/state";
 import { useRouter } from "next/router";
-
-const pages = ["Accout", "User", "News"];
+import Link from "next/link";
 
 interface PropsMenu {
   activeMenu: () => void;
@@ -88,11 +87,18 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center"> Tài khoản</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Tin tức</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center"> Lịch sử</Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Nạp</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -115,15 +121,35 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            <Link href="/dashboard/account" passHref>
               <Button
-                key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
               >
-                {page}
+                Tài khoản
               </Button>
-            ))}
+            </Link>
+            <Link href="/dashboard/news" passHref>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+              >
+                Tin tức
+              </Button>
+            </Link>
+
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+            >
+              Lịch sử
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+            >
+              Yêu cầu nạp
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

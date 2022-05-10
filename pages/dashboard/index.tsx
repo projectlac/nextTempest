@@ -24,7 +24,7 @@ export default function Dashboard() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Box>ádasdas</Box>
+      Home
     </DashboardLayout>
   );
 }
