@@ -1,87 +1,44 @@
-import { FC, ChangeEvent, useState } from "react";
-
-import PropTypes from "prop-types";
 import {
-  Tooltip,
-  Divider,
   Box,
-  FormControl,
-  InputLabel,
   Card,
-  Checkbox,
+  CardHeader,
+  Divider,
   IconButton,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TablePagination,
   TableRow,
-  TableContainer,
-  Select,
-  MenuItem,
+  Tooltip,
   Typography,
   useTheme,
-  CardHeader,
 } from "@mui/material";
-
-import {
-  CryptoOrder,
-  CryptoOrderStatus,
-} from "../../../../types/DashboardTypes/crypto_order";
-import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
-import BulkActions from "./BulkActions";
+import PropTypes from "prop-types";
+import { ChangeEvent, FC, useState } from "react";
+import { NewsList } from "../../../../types/DashboardTypes/news";
+import AddNews from "../DialogCommon/AddNews";
+import EditRole from "../DialogCommon/EditRole";
+import WarningSubmit from "../DialogCommon/WarningSubmit";
 
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: CryptoOrder[];
+  cryptoOrders: NewsList[];
 }
 
-interface Filters {
-  status?: CryptoOrderStatus;
-}
-
-const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
-  const map = {
-    failed: {
-      text: "Failed",
-      color: "error",
-    },
-    completed: {
-      text: "Completed",
-      color: "success",
-    },
-    pending: {
-      text: "Pending",
-      color: "warning",
-    },
-  };
-
-  const { text, color }: any = map[cryptoOrderStatus];
-
-  return <Box color={color}>{text}</Box>;
-};
-
-const applyFilters = (
-  cryptoOrders: CryptoOrder[],
-  filters: Filters
-): CryptoOrder[] => {
+const applyFilters = (cryptoOrders: NewsList[]): NewsList[] => {
   return cryptoOrders.filter((cryptoOrder) => {
     let matches = true;
-
-    if (filters.status && cryptoOrder.status !== filters.status) {
-      matches = false;
-    }
-
     return matches;
   });
 };
 
 const applyPagination = (
-  cryptoOrders: CryptoOrder[],
+  cryptoOrders: NewsList[],
   page: number,
   limit: number
-): CryptoOrder[] => {
+): NewsList[] => {
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
@@ -89,31 +46,9 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
-  const [page, setPage] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(5);
-  const [filters, setFilters] = useState<Filters>({
-    status: null,
-  });
 
-  const statusOptions = [
-    {
-      id: "all",
-      name: "All",
-    },
-    {
-      id: "completed",
-      name: "Completed",
-    },
-    {
-      id: "pending",
-      name: "Pending",
-    },
-    {
-      id: "failed",
-      name: "Failed",
-    },
-  ];
+  const [page, setPage] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(10);
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
     let value = null;
@@ -121,11 +56,6 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     if (e.target.value !== "all") {
       value = e.target.value;
     }
-
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      status: value,
-    }));
   };
 
   const handleSelectAllCryptoOrders = (
@@ -162,7 +92,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     setLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
+  const filteredCryptoOrders = applyFilters(cryptoOrders);
   const paginatedCryptoOrders = applyPagination(
     filteredCryptoOrders,
     page,
@@ -175,37 +105,19 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     selectedCryptoOrders.length === cryptoOrders.length;
   const theme = useTheme();
 
+  const toMoney = (price: string) => {
+    return price
+      .split("")
+      .reverse()
+      .reduce((prev, next, index) => {
+        return (index % 3 ? next : next + ".") + prev;
+      });
+  };
+
   return (
     <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions />
-        </Box>
-      )}
-      {!selectedBulkActions && (
-        <CardHeader
-          action={
-            <Box width={150}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>Status</InputLabel>
-                <Select
-                  value={filters.status || "all"}
-                  onChange={handleStatusChange}
-                  label="Status"
-                  autoWidth
-                >
-                  {statusOptions.map((statusOption) => (
-                    <MenuItem key={statusOption.id} value={statusOption.id}>
-                      {statusOption.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-          }
-          title="Tin tức"
-        />
-      )}
+      <CardHeader title="Tài khoản" action={<AddNews />} />
+
       <Divider />
       <TableContainer>
         <Table>
@@ -213,37 +125,30 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             <TableRow
               sx={{
                 "& .MuiTableCell-root": {
-                  fontFamily: "Open Sans",
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
                 },
               }}
             >
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  checked={selectedAllCryptoOrders}
-                  indeterminate={selectedSomeCryptoOrders}
-                  onChange={handleSelectAllCryptoOrders}
-                />
-              </TableCell>
-              <TableCell>Order Details</TableCell>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell>STT</TableCell>
+              <TableCell>Tin tức</TableCell>
+              <TableCell>Mô tả</TableCell>
+              <TableCell>Ngày tạo</TableCell>
+
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody
             sx={{
               "& .MuiTableCell-root": {
-                fontFamily: "Open Sans",
+                fontFamily: "Montserrat",
                 "& p": {
-                  fontFamily: "Open Sans",
+                  fontFamily: "Montserrat",
                 },
               },
             }}
           >
-            {paginatedCryptoOrders.map((cryptoOrder) => {
+            {paginatedCryptoOrders.map((cryptoOrder, index) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
                 cryptoOrder.id
               );
@@ -253,25 +158,24 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   key={cryptoOrder.id}
                   selected={isCryptoOrderSelected}
                 >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      color="primary"
-                      checked={isCryptoOrderSelected}
-                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
-                      }
-                      value={isCryptoOrderSelected}
-                    />
-                  </TableCell>
                   <TableCell>
                     <Typography
                       variant="body1"
-                      fontWeight="bold"
                       color="text.primary"
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderDetails}
+                      {index + 1}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {cryptoOrder.name}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -282,73 +186,49 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   <TableCell>
                     <Typography
                       variant="body1"
-                      fontWeight="bold"
                       color="text.primary"
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.orderID}
+                      {cryptoOrder.description}
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography
                       variant="body1"
-                      fontWeight="bold"
                       color="text.primary"
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.sourceName}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" noWrap>
-                      {cryptoOrder.sourceDesc}
+                      {cryptoOrder.created}
                     </Typography>
                   </TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {cryptoOrder.amountCrypto}
-                      {cryptoOrder.cryptoCurrency}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      noWrap
-                    ></Typography>
-                  </TableCell>
-                  <TableCell align="right">
-                    {getStatusLabel(cryptoOrder.status)}
-                  </TableCell>
-                  <TableCell align="right">
-                    <Tooltip title="Edit Order" arrow>
+
+                  <TableCell align="center">
+                    <Tooltip title="Chỉnh sửa bài viết" arrow>
                       <IconButton
                         sx={{
                           "&:hover": {
-                            background: "#d33",
+                            background: "#b16c4d45",
                           },
                           color: "#333",
                         }}
                         color="inherit"
                         size="small"
                       >
-                        <EditTwoToneIcon fontSize="small" />
+                        <EditRole />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete Order" arrow>
+                    <Tooltip title="Xóa bài viết" arrow>
                       <IconButton
                         sx={{
-                          "&:hover": { background: "#d33" },
+                          "&:hover": { background: "#b16c4d45" },
                           color: theme.palette.error.main,
                         }}
                         color="inherit"
                         size="small"
                       >
-                        <DeleteTwoToneIcon fontSize="small" />
+                        <WarningSubmit status={3} id={"2312"} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

@@ -183,6 +183,7 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
               if (jwt_decode<any>(res.data).role === "ADMIN") {
                 router.push("/dashboard");
               }
+              closeAuthBox();
               handleLoginTrue();
             })
             .catch((err) => {
