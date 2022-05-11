@@ -137,19 +137,22 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
                 Tin tức
               </Button>
             </Link>
-
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-            >
-              Lịch sử
-            </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-            >
-              Yêu cầu nạp
-            </Button>
+            <Link href="/dashboard/history" passHref>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+              >
+                Lịch sử
+              </Button>
+            </Link>
+            <Link href="/dashboard/payment-require" passHref>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+              >
+                Yêu cầu nạp
+              </Button>
+            </Link>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
