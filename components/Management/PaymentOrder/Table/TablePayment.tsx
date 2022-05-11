@@ -192,7 +192,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
             <TableRow
               sx={{
                 "& .MuiTableCell-root": {
-                  fontFamily: "Open Sans",
+                  fontFamily: "Montserrat",
                 },
 
                 "& >th": {
@@ -218,9 +218,9 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
           <TableBody
             sx={{
               "& .MuiTableCell-root": {
-                fontFamily: "Open Sans",
+                fontFamily: "Montserrat",
                 "& p": {
-                  fontFamily: "Open Sans",
+                  fontFamily: "Montserrat",
                 },
               },
             }}
