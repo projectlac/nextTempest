@@ -141,7 +141,7 @@ function HeaderHome() {
             <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">Liên hệ</Link>
             </Typography>
-            {["ADMIN", "MOD"].includes(role) && role && (
+            {["ADMIN", "MOD"].includes(role) && isLogin && (
               <Typography>
                 <Link href="/dashboard">Quản lý</Link>
               </Typography>

@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, CircularProgress, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,6 +10,8 @@ import * as React from "react";
 import TinyEditor from "../../../Common/Editor/TinyEditor";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import newsApi from "../../../../api/newsApi";
+import { useAppContext } from "../../../../context/state";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -20,7 +22,12 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function AddNews() {
-  const [open, setOpen] = React.useState(false);
+  const { handleChangeStatusToast, updated, handleChangeMessageToast } =
+    useAppContext();
+
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [file, setFile] = React.useState(null);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,32 +37,59 @@ export default function AddNews() {
     setOpen(false);
   };
 
-  const validationSchema = yup.object({
-    title: yup
-      .string()
-      .min(8, "Title should be of minimum 8 characters length")
-      .required("Email is required"),
-    description: yup
-      .string()
-      .min(8, "Description should be of minimum 8 characters length")
-      .required("Password is required"),
-    file: yup.mixed().required(),
-  });
+  const validationSchema = yup
+    .object({
+      title: yup
+        .string()
+        .min(8, "Title should be of minimum 8 characters length")
+        .required("Email is required"),
+      description: yup
+        .string()
+        .min(8, "Description should be of minimum 8 characters length")
+        .required("Password is required"),
+    })
+    .shape({
+      file: yup.mixed().required(),
+    });
 
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       body: "",
-      file: "",
+      file: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log("sdasds");
+      const { title, description, body } = values;
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("content", body);
+      formData.append("file", file);
 
-      alert(JSON.stringify(values, null, 2));
+      setLoading(true);
+      newsApi
+        .add(formData)
+        .then((res) => {
+          handleChangeMessageToast("Tạo bài viết thành công");
+          handleChangeStatusToast();
+          handleClose();
+          updated();
+        })
+        .catch(() => {
+          handleChangeMessageToast("Có lỗi xảy ra");
+          handleChangeStatusToast();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
+
+  const onEditorChange = (data: string) => {
+    formik.handleChange({ target: { name: "body", value: data } });
+  };
   return (
     <div>
       <Button
@@ -122,10 +156,19 @@ export default function AddNews() {
                     fontFamily: "Montserrat",
                   },
                 }}
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
               />
             </Box>
 
-            <TinyEditor />
+            <TinyEditor changeBody={onEditorChange} defaultValue="" />
 
             <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
@@ -138,8 +181,9 @@ export default function AddNews() {
                   accept=".jpg, .png"
                   name="file"
                   required
-                  onChange={(event) => {
-                    formik.setFieldValue("file", event.currentTarget.files[0]);
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    setFile((e.target as HTMLInputElement).files[0]);
                   }}
                 />
               </Button>
@@ -154,7 +198,11 @@ export default function AddNews() {
             }}
           >
             <Button type="submit" variant="contained" color="primary">
-              Xác nhận
+              {loading ? (
+                <CircularProgress sx={{ color: "#fff" }} size={24} />
+              ) : (
+                "Xác nhận"
+              )}
             </Button>
             <Button onClick={handleClose} variant="contained" color="error">
               Đóng

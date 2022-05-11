@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-export default function TinyEditor() {
+interface TinyProps {
+  changeBody: (data: string) => void;
+  defaultValue: string;
+}
+export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -13,10 +17,10 @@ export default function TinyEditor() {
       <Editor
         apiKey="jvnq0huwvxzja1sev6byqabo1g6qc276no4top15pw2m6odd"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        // onEditorChange={(e) => {
-        //   handleChange({ target: { name: "description", value: e } });
-        // }}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        onEditorChange={(e) => {
+          changeBody(e);
+        }}
+        initialValue={defaultValue}
         init={{
           height: 500,
           menubar: false,

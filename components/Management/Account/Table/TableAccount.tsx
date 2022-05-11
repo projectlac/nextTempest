@@ -168,12 +168,6 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     page,
     limit
   );
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
-  const theme = useTheme();
 
   const toMoney = (price: string) => {
     return price
@@ -337,7 +331,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         <EditRole />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Xóa tài khoản" arrow>
+                    {/* <Tooltip title="Xóa tài khoản" arrow>
                       <IconButton
                         sx={{
                           "&:hover": { background: "#b16c4d45" },
@@ -348,7 +342,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       >
                         <WarningSubmit status={3} id={"2312"} />
                       </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
                   </TableCell>
                 </TableRow>
               );

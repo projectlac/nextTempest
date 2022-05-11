@@ -10,7 +10,11 @@ export function AppWrapper({ children }) {
   const [openToast, setOpenToast] = useState<boolean>(false);
   const [messageToast, setMessageToast] = useState<string>("");
   const [role, setRole] = useState<string>("");
+  const [update, setUpdate] = useState<boolean>(false);
 
+  const updated = () => {
+    setUpdate(!update);
+  };
   const handleLoginTrue = () => {
     setIsLogin(true);
   };
@@ -68,6 +72,7 @@ export function AppWrapper({ children }) {
     handleCloseToast,
     refreshLogin,
     role,
+    updated,
     /* whatever you want */
   };
 
