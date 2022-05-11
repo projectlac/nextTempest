@@ -16,6 +16,7 @@ const lightThemeOptions: ThemeOptions = {
   typography: {
     fontFamily: [
       "michos",
+      "Montserrat",
       "Arial",
       "-apple-system",
       "BlinkMacSystemFont",
