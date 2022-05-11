@@ -351,6 +351,48 @@ function Row(props: { row: CryptoOrder }) {
               >
                 Chi tiết
               </Typography>
+              <Box
+                mb={1}
+                sx={{
+                  display: "flex",
+                  "& > div": {
+                    width: "50%",
+                  },
+                }}
+              >
+                <Box>
+                  <Typography>
+                    <b>Username</b>: admin
+                  </Typography>
+                  <Typography>
+                    <b>Password</b>: admin
+                  </Typography>
+                  <Typography>
+                    <b>Server</b>: Asia
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography>
+                    <b>UID</b>: admin
+                  </Typography>
+                  <Typography>
+                    <b>Tên nhân vật</b>: Admin
+                  </Typography>
+                  <Typography>
+                    <b>Số điện thoại</b>: 0123456789
+                  </Typography>
+                </Box>
+              </Box>
+              <Divider></Divider>
+              <Typography
+                fontSize={16}
+                my={2}
+                gutterBottom
+                component="div"
+                sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
+              >
+                Thông tin nạp
+              </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow
