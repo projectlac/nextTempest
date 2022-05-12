@@ -87,7 +87,7 @@ const CustomField = styled(Field)(
           `
 );
 interface PropsLogin {
-  handleLoginMode: (mode: boolean) => void;
+  handleLoginMode: (mode: string) => void;
   closeAuthBox: () => void;
 }
 function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
@@ -273,6 +273,9 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
                     md: "18px",
                   },
                 }}
+                onClick={() => {
+                  handleLoginMode("forgot");
+                }}
               >
                 Quên mật khẩu
               </Typography>
@@ -285,7 +288,7 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
                   },
                 }}
                 onClick={() => {
-                  handleLoginMode(false);
+                  handleLoginMode("register");
                 }}
               >
                 Đăng ký tài khoản

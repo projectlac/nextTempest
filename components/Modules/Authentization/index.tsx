@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Box, Container } from "@mui/material";
 import React, { useState } from "react";
+import ForgotPassword from "./ForgotPassword";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -27,25 +28,36 @@ interface PropsAuth {
   closeAuthBox: () => void;
 }
 function Authentization({ closeAuthBox }: PropsAuth) {
-  const [loginMode, setLoginMode] = useState<boolean>(true);
+  const [loginMode, setLoginMode] = useState<string>("login");
 
-  const handleLoginMode = (mode: boolean) => {
+  const handleLoginMode = (mode: string) => {
     setLoginMode(mode);
   };
   return (
     <BgWrap>
       <Container>
-        {loginMode ? (
-          <Login
-            handleLoginMode={handleLoginMode}
-            closeAuthBox={closeAuthBox}
-          />
-        ) : (
-          <Register
-            handleLoginMode={handleLoginMode}
-            closeAuthBox={closeAuthBox}
-          />
-        )}
+        {(() => {
+          switch (loginMode) {
+            case "login":
+              return (
+                <Login
+                  handleLoginMode={handleLoginMode}
+                  closeAuthBox={closeAuthBox}
+                />
+              );
+              break;
+            case "register":
+              return (
+                <Register
+                  handleLoginMode={handleLoginMode}
+                  closeAuthBox={closeAuthBox}
+                />
+              );
+            default:
+              return <ForgotPassword closeAuthBox={closeAuthBox} />;
+              break;
+          }
+        })()}
       </Container>
     </BgWrap>
   );

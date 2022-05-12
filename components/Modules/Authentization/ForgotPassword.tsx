@@ -84,16 +84,15 @@ const CustomField = styled(Field)(
           `
 );
 interface PropsRegister {
-  handleLoginMode: (mode: string) => void;
   closeAuthBox: () => void;
 }
-function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
+function ForgotPassword({ closeAuthBox }: PropsRegister) {
   const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const RegisterSchema = Yup.object().shape({
+  const ForgotSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
@@ -102,9 +101,17 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("*Mật khẩu không được để trống "),
-    email: Yup.string()
-      .email("Email sai định dạng")
-      .required("*Email không được để trống"),
+    confirmNewPassword: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("*Mật khẩu không được để trống ")
+      .when("password", {
+        is: (val) => (val && val.length > 0 ? true : false),
+        then: Yup.string().oneOf(
+          [Yup.ref("password")],
+          "*Mật khẩu không trùng khớp"
+        ),
+      }),
   });
 
   return (
@@ -121,7 +128,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
         }}
         color="#726550"
       >
-        {success ? "Đăng ký thành công" : "ĐĂNG KÝ TÀI KHOẢN TEMPEST"}
+        {success ? "Xin mời xác nhận email!" : "Quên mật khẩu"}
       </Typography>
       <Box
         sx={{
@@ -183,17 +190,31 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
               },
             }}
           >
-            <Typography variant="h5" color="#C69E72">
-              Bạn đã đăng ký tài khoản thành công <br /> vui lòng xác nhận email
-              để kích hoạt tài khoản!
+            <Typography
+              sx={{
+                fontSize: {
+                  md: "1rem",
+                  xs: "15px",
+                },
+              }}
+              color="#C69E72"
+            >
+              Một email xác nhận đã được gửi tới email đăng ký của bạn <br />
+              vui lòng kiểm tra Email để xác thực hành động này!
             </Typography>
             <Typography
-              fontSize={15}
-              mt={15}
               color="#C69E72"
               sx={{
                 "& span": {
                   color: "#94674B",
+                },
+                mt: {
+                  md: 10,
+                  xs: 5,
+                },
+                fontSize: {
+                  md: "1rem",
+                  xs: "12px",
                 },
               }}
             >
@@ -206,14 +227,14 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
           initialValues={{
             username: "",
             password: "",
-            email: "",
+            confirmNewPassword: "",
           }}
-          validationSchema={RegisterSchema}
+          validationSchema={ForgotSchema}
           onSubmit={(values) => {
-            const { username, password, email } = values;
+            const { username, password, confirmNewPassword } = values;
             setLoading(true);
             authApi
-              .resgister({ username, password, email })
+              .forgot({ username, newPassword: password, confirmNewPassword })
               .then((res) => {
                 setLoading(false);
                 setSuccess(true);
@@ -268,7 +289,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
                 <Box sx={{ position: "relative" }}>
                   <CustomField
                     name="password"
-                    placeholder="Mật khẩu"
+                    placeholder="Mật khẩu mới"
                     type="password"
                   />
                   {errors.password && touched.password ? (
@@ -296,8 +317,12 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
                   ) : null}
                 </Box>
                 <Box sx={{ position: "relative" }}>
-                  <CustomField name="email" placeholder="Email xác nhận" />
-                  {errors.email && touched.email ? (
+                  <CustomField
+                    name="confirmNewPassword"
+                    type="password"
+                    placeholder="Xác nhận mật khẩu"
+                  />
+                  {errors.confirmNewPassword && touched.confirmNewPassword ? (
                     <Box
                       position="absolute"
                       bottom={20}
@@ -317,7 +342,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
                         },
                       }}
                     >
-                      {errors.email}
+                      {errors.confirmNewPassword}
                     </Box>
                   ) : null}
                 </Box>
@@ -327,7 +352,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
                 {loading ? (
                   <CircularProgress sx={{ color: "#fff", mt: 1 }} />
                 ) : (
-                  "Đăng ký"
+                  "Quên mật khẩu"
                 )}
               </button>
             </Form>
@@ -338,4 +363,4 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
   );
 }
 
-export default Register;
+export default ForgotPassword;

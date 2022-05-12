@@ -13,3 +13,8 @@ export interface RegisterForm {
   password: string;
   email: string;
 }
+export interface ForgotForm {
+  newPassword: string;
+  confirmNewPassword: string;
+  username: string;
+}

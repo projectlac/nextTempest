@@ -1,4 +1,4 @@
-import { LoginForm, PromiseApi, RegisterForm } from "../types";
+import { ForgotForm, LoginForm, PromiseApi, RegisterForm } from "../types";
 import { GetNews } from "../types/DashboardTypes/news";
 import axiosClient from "./axiosClient";
 
@@ -10,12 +10,19 @@ const authApi = {
   verified(params: string): Promise<PromiseApi> {
     return axiosClient.post(`/auth/sign-up/${params}`);
   },
+  verifiedPassword(params: string): Promise<PromiseApi> {
+    return axiosClient.patch(`/auth/forget-password/${params}`);
+  },
   login(params: LoginForm): Promise<PromiseApi> {
     const url = "/auth/login";
     return axiosClient.post(url, params);
   },
+  forgot(params: ForgotForm): Promise<PromiseApi> {
+    const url = "/auth/forget-password";
+    return axiosClient.post(url, params);
+  },
   getAll(params: GetNews): Promise<PromiseApi> {
-    const url = `hide-auth?limit=${params.limit}&offset=${params.offset}`;
+    const url = `hide-auth/list-user?limit=${params.limit}&offset=${params.offset}`;
     return axiosClient.get(url);
   },
 };
