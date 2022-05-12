@@ -1,7 +1,8 @@
 import { Card } from "@mui/material";
 import { NewsList } from "../../../../types/DashboardTypes/news";
 import TableNews from "./TableNews";
-
+import { useEffect, useState } from "react";
+import newsApi from "../../../../api/newsApi";
 function DataNews() {
   const cryptoOrders: NewsList[] = [
     {
@@ -85,7 +86,14 @@ function DataNews() {
       created: "10/5/2022",
     },
   ];
+  const [limitPage, setLimitPage] = useState<number>(10);
+  const [offsetPage, setOffsetPage] = useState<number>(0);
 
+  useEffect(() => {
+    newsApi.getAll({ limit: limitPage, offset: offsetPage }).then((res) => {
+      console.log(res.data);
+    });
+  }, []);
   return (
     <Card>
       <TableNews cryptoOrders={cryptoOrders} />

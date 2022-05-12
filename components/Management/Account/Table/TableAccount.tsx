@@ -181,6 +181,16 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   return (
     <Card>
       <CardHeader
+        sx={{
+          "& .MuiCardHeader-content": {
+            "& .MuiCardHeader-title": {
+              fontSize: {
+                md: "1.2rem",
+                xs: "15px",
+              },
+            },
+          },
+        }}
         action={
           <Box width={150}>
             <FormControl fullWidth variant="outlined">

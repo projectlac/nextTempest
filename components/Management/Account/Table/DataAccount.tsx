@@ -1,4 +1,6 @@
 import { Card } from "@mui/material";
+import { useEffect, useState } from "react";
+import authApi from "../../../../api/authApi";
 import { AccountData } from "../../../../types/DashboardTypes/account";
 import TableAccount from "./TableAccount";
 
@@ -75,6 +77,14 @@ function DataAccount() {
       smileCoin: "999",
     },
   ];
+  const [limitPage, setLimitPage] = useState<number>(10);
+  const [offsetPage, setOffsetPage] = useState<number>(0);
+
+  useEffect(() => {
+    authApi.getAll({ limit: limitPage, offset: offsetPage }).then((res) => {
+      console.log(res.data);
+    });
+  }, []);
 
   return (
     <Card>

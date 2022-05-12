@@ -151,6 +151,16 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   return (
     <Card>
       <CardHeader
+        sx={{
+          "& .MuiCardHeader-content": {
+            "& .MuiCardHeader-title": {
+              fontSize: {
+                md: "1.2rem",
+                xs: "15px",
+              },
+            },
+          },
+        }}
         action={
           <Box width={150}>
             <FormControl fullWidth variant="outlined">
@@ -382,6 +392,11 @@ function Row(props: { row: CryptoOrder }) {
                     <b>Số điện thoại</b>: 0123456789
                   </Typography>
                 </Box>
+              </Box>
+              <Box mb={1}>
+                <Typography>
+                  <b>Ghi chú</b>: <i>(None)</i>
+                </Typography>
               </Box>
               <Divider></Divider>
               <Typography

@@ -6,3 +6,7 @@ export interface NewsList {
   body: string;
   created: string;
 }
+export interface GetNews {
+  limit: number;
+  offset: number;
+}

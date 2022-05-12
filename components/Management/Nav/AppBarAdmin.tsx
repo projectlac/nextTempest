@@ -15,11 +15,31 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useAppContext } from "../../../context/state";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import AvatarImg from "../../../styles/assets/images/payment/avatar-cute-12.jpg";
 
 interface PropsMenu {
   activeMenu: () => void;
 }
 const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
+  const [listMenu, setMenu] = React.useState([
+    {
+      url: "/dashboard/account",
+      name: "Tài khoản",
+    },
+    {
+      url: "/dashboard/news",
+      name: "Tin tức",
+    },
+    {
+      url: "/dashboard/history",
+      name: "Lịch sử",
+    },
+    {
+      url: "/dashboard/payment-require",
+      name: "Đơn nạp",
+    },
+  ]);
+
   const { refreshLogin } = useAppContext();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -87,18 +107,13 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center"> Tài khoản</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Tin tức</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center"> Lịch sử</Typography>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Nạp</Typography>
-              </MenuItem>
+              {listMenu.map((d, i) => (
+                <MenuItem key={i} onClick={handleCloseNavMenu}>
+                  <Link href={d.url} passHref>
+                    <Typography textAlign="center"> {d.name}</Typography>
+                  </Link>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -121,44 +136,22 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link href="/dashboard/account" passHref>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-              >
-                Tài khoản
-              </Button>
-            </Link>
-            <Link href="/dashboard/news" passHref>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-              >
-                Tin tức
-              </Button>
-            </Link>
-            <Link href="/dashboard/history" passHref>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-              >
-                Lịch sử
-              </Button>
-            </Link>
-            <Link href="/dashboard/payment-require" passHref>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, mr: 2, color: "white", display: "block" }}
-              >
-                Yêu cầu nạp
-              </Button>
-            </Link>
+            {listMenu.map((d, i) => (
+              <Link href={d.url} passHref key={i + "link"}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, mr: 2, color: "white", display: "block" }}
+                >
+                  {d.name}
+                </Button>
+              </Link>
+            ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={AvatarImg.src} />
               </IconButton>
             </Tooltip>
             <Menu

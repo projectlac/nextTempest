@@ -56,10 +56,10 @@ export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
             var input = document.createElement("input");
             input.setAttribute("type", "file");
             input.setAttribute("accept", "image/*");
-            // let newThis = this;
+
             input.onchange = function () {
               console.log(this);
-              // console.log(newThis);
+
               var file = (this as HTMLInputElement).files[0];
 
               var reader = new FileReader();
@@ -79,7 +79,6 @@ export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
           },
         }}
       />
-      <button onClick={log}>sdsdss</button>
     </>
   );
 }

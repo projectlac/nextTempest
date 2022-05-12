@@ -1,3 +1,4 @@
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import { Box, CircularProgress, TextField, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -12,6 +13,7 @@ import * as yup from "yup";
 import newsApi from "../../../../api/newsApi";
 import { useAppContext } from "../../../../context/state";
 import TinyEditor from "../../../Common/Editor/TinyEditor";
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -21,7 +23,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddNews() {
+export default function EditNews() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
 
@@ -92,13 +94,7 @@ export default function AddNews() {
   };
   return (
     <div>
-      <Button
-        onClick={handleClickOpen}
-        variant="contained"
-        sx={{ fontFamily: "Montserrat" }}
-      >
-        Thêm tin tức
-      </Button>
+      <EditTwoToneIcon fontSize="small" onClick={handleClickOpen} />
 
       <Dialog
         open={open}
@@ -114,7 +110,7 @@ export default function AddNews() {
             fontFamily: "Montserrat",
           }}
         >
-          Thêm tin tức
+          Chỉnh sửa tin tức
         </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>

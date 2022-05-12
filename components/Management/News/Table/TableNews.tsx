@@ -19,6 +19,7 @@ import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
 import { NewsList } from "../../../../types/DashboardTypes/news";
 import AddNews from "../DialogCommon/AddNews";
+import EditNews from "../DialogCommon/EditNews";
 import EditRole from "../DialogCommon/EditRole";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 
@@ -116,7 +117,20 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   return (
     <Card>
-      <CardHeader title="Tài khoản" action={<AddNews />} />
+      <CardHeader
+        sx={{
+          "& .MuiCardHeader-content": {
+            "& .MuiCardHeader-title": {
+              fontSize: {
+                md: "1.2rem",
+                xs: "15px",
+              },
+            },
+          },
+        }}
+        title="Tin tức"
+        action={<AddNews />}
+      />
 
       <Divider />
       <TableContainer>
@@ -133,7 +147,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>STT</TableCell>
               <TableCell>Tin tức</TableCell>
               <TableCell>Mô tả</TableCell>
-              <TableCell>Ngày tạo</TableCell>
+              <TableCell>Ngày cập nhật</TableCell>
 
               <TableCell align="center">Actions</TableCell>
             </TableRow>
@@ -216,7 +230,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         color="inherit"
                         size="small"
                       >
-                        <EditRole />
+                        <EditNews />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Xóa bài viết" arrow>
