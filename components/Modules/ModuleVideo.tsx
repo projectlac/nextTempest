@@ -15,7 +15,6 @@ import play from "../../styles/assets/images/Videos/playbutton.png";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
-    height: 100vh;
     width: 100vw;
     display: flex;
     left: 0;
@@ -28,12 +27,22 @@ const BgWrap = styled(Box)(
     background: url(${background.src});
     overflow:hidden;
     background-size: cover;
-   
+    @media (min-width: 0px) {
+      height: 600px;
+    } 
+    @media (min-width: 768px){
+      height: 600px;
+    }
+    @media (min-width: 1024px) {
+      height: 100vh;
+   } 
+   @media (min-width: 1440px) {
+    height:100vh;
+  } 
 
   `
 );
 const FrameTop = styled(Box)({
-  height: "calc(100vh - 66px)",
   marginTop: "66px",
   position: "relative",
   width: "100%",
@@ -66,6 +75,12 @@ const FrameTop = styled(Box)({
     backgroundPosition: "bottom",
     filter: " drop-shadow(0 0 47px #69e0ff)",
   },
+  "@media (min-width: 0px)": {
+    height: "calc(600px - 66px)",
+  },
+  "@media (min-width:760px)": {
+    height: "calc(100vh - 66px)",
+  },
 });
 
 const PostBox = styled(Box)(
@@ -85,7 +100,7 @@ const PostBox = styled(Box)(
   
   @media (min-width: 0px) {
     width: 320px;
-    height: 189px; top: 20%;
+    height: 189px; top: 26%;
  
   } 
   @media (min-width: 768px){

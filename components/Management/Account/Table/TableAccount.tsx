@@ -35,6 +35,9 @@ import WarningSubmit from "../DialogCommon/WarningSubmit";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: AccountData[];
+  handleChangeRole: (data: AccountDataRole) => void;
+  handleChangeLimit: (data: number) => void;
+  handleChangePage: (data: number) => void;
 }
 
 interface Filters {
@@ -43,15 +46,15 @@ interface Filters {
 
 const getStatusLabel = (cryptoOrderStatus: AccountDataRole): JSX.Element => {
   const map = {
-    user: {
+    USER: {
       text: "User",
       color: "error",
     },
-    admin: {
+    ADMIN: {
       text: "Admin",
       color: "success",
     },
-    mod: {
+    MOD: {
       text: "CTV",
       color: "warning",
     },
@@ -85,7 +88,12 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const TableAccount: FC<RecentOrdersTableProps> = ({
+  cryptoOrders,
+  handleChangeRole,
+  handleChangeLimit,
+  handleChangePage,
+}) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -116,10 +124,12 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
   ];
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    let value = null;
-
+    let value;
     if (e.target.value !== "all") {
       value = e.target.value;
+      handleChangeRole(e.target.value.toUpperCase() as AccountDataRole);
+    } else {
+      handleChangeRole("" as AccountDataRole);
     }
 
     setFilters((prevFilters) => ({
@@ -128,49 +138,21 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     }));
   };
 
-  const handleSelectAllCryptoOrders = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedCryptoOrders(
-      event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
-        : []
-    );
-  };
-
-  const handleSelectOneCryptoOrder = (
-    event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
-  ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
-        ...prevSelected,
-        cryptoOrderId,
-      ]);
-    } else {
-      setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
-      );
-    }
-  };
-
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
+    handleChangePage(newPage);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
+    handleChangeLimit(parseInt(event.target.value));
   };
 
   const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
-    page,
-    limit
-  );
 
-  const toMoney = (price: string) => {
+  const toMoney = (price: number) => {
     return price
+      .toString()
       .split("")
       .reverse()
       .reduce((prev, next, index) => {
@@ -255,7 +237,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               },
             }}
           >
-            {paginatedCryptoOrders.map((cryptoOrder, index) => {
+            {cryptoOrders.map((cryptoOrder, index) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
                 cryptoOrder.id
               );
@@ -282,7 +264,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.name}
+                      {cryptoOrder.username}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -307,7 +289,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {toMoney(cryptoOrder.smileCoin)}
+                      {toMoney(cryptoOrder.money)}
                     </Typography>
                   </TableCell>
 

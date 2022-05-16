@@ -1,4 +1,5 @@
 import { ForgotForm, LoginForm, PromiseApi, RegisterForm } from "../types";
+import { AccountTable } from "../types/DashboardTypes/account";
 import { GetNews } from "../types/DashboardTypes/news";
 import axiosClient from "./axiosClient";
 
@@ -21,8 +22,8 @@ const authApi = {
     const url = "/auth/forget-password";
     return axiosClient.post(url, params);
   },
-  getAll(params: GetNews): Promise<PromiseApi> {
-    const url = `hide-auth/list-user?limit=${params.limit}&offset=${params.offset}`;
+  getAll(params: AccountTable): Promise<PromiseApi> {
+    const url = `hide-auth/list-user?role=${params.role}&limit=${params.limit}&offset=${params.offset}`;
     return axiosClient.get(url);
   },
 };

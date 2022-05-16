@@ -15,6 +15,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
 import { NewsList } from "../../../../types/DashboardTypes/news";
@@ -189,7 +190,8 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.name}
+                      {cryptoOrder.title.slice(0, 40)}
+                      {cryptoOrder.title.length > 40 && "..."}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -204,7 +206,8 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.description}
+                      {cryptoOrder.description.slice(0, 40)}
+                      {cryptoOrder.description.length > 40 && "..."}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -214,7 +217,10 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.created}
+                      {format(
+                        new Date(cryptoOrder.updatedAt),
+                        "yyyy-MM-dd / hh:ss:mm"
+                      )}
                     </Typography>
                   </TableCell>
 
@@ -230,7 +236,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         color="inherit"
                         size="small"
                       >
-                        <EditNews />
+                        <EditNews id={cryptoOrder.id} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Xóa bài viết" arrow>

@@ -13,7 +13,9 @@ export function AppWrapper({ children }) {
   const [update, setUpdate] = useState<boolean>(false);
 
   const updated = () => {
-    setUpdate(!update);
+    debugger;
+    const newState = !update;
+    setUpdate(newState);
   };
   const handleLoginTrue = () => {
     setIsLogin(true);
@@ -73,6 +75,7 @@ export function AppWrapper({ children }) {
     refreshLogin,
     role,
     updated,
+    update,
     /* whatever you want */
   };
 

@@ -1,10 +1,10 @@
 export interface NewsList {
   id: string;
-  name: string;
-  image: string;
+  title: string;
+  // image: string;
   description: string;
-  body: string;
-  created: string;
+  // body: string;
+  updatedAt: string;
 }
 export interface GetNews {
   limit: number;

@@ -1,9 +1,14 @@
-export type AccountDataRole = "admin" | "mod" | "user";
+import { GetNews } from "./news";
+
+export type AccountDataRole = "ADMIN" | "MOD" | "USER" | "";
 
 export interface AccountData {
   id: string;
-  name: string;
+  username: string;
   email: string;
   role: AccountDataRole;
-  smileCoin: string;
+  money: number;
+}
+export interface AccountTable extends GetNews {
+  role: AccountDataRole;
 }

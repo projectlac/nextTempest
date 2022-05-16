@@ -1,94 +1,47 @@
 import { Card } from "@mui/material";
 import { useEffect, useState } from "react";
 import authApi from "../../../../api/authApi";
-import { AccountData } from "../../../../types/DashboardTypes/account";
+import { useAppContext } from "../../../../context/state";
+import {
+  AccountData,
+  AccountDataRole,
+} from "../../../../types/DashboardTypes/account";
 import TableAccount from "./TableAccount";
 
 function DataAccount() {
-  const cryptoOrders: AccountData[] = [
-    {
-      id: "1",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "12",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "13",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "121",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "231",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "111",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "221",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "331",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "admin",
-      smileCoin: "9999999",
-    },
-    {
-      id: "136",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "mod",
-      smileCoin: "9999",
-    },
-    {
-      id: "94",
-      name: "Admin",
-      email: "Admin@gmail.com",
-      role: "user",
-      smileCoin: "999",
-    },
-  ];
+  const [data, setData] = useState<AccountData[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
-
+  const [roleTable, setRoleTable] = useState<AccountDataRole>("");
+  const { update } = useAppContext();
+  const handleChangeRole = (data: AccountDataRole) => {
+    setRoleTable(data);
+  };
+  const handleChangeLimit = (data: number) => {
+    setLimitPage(data);
+  };
+  const handleChangePage = (data: number) => {
+    setOffsetPage(data);
+  };
   useEffect(() => {
-    authApi.getAll({ limit: limitPage, offset: offsetPage }).then((res) => {
-      console.log(res.data);
-    });
-  }, []);
-
+    authApi
+      .getAll({ limit: limitPage, offset: offsetPage, role: roleTable })
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      });
+  }, [roleTable, limitPage, offsetPage, update]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <Card>
-      <TableAccount cryptoOrders={cryptoOrders} />
+      <TableAccount
+        cryptoOrders={data}
+        handleChangeRole={handleChangeRole}
+        handleChangeLimit={handleChangeLimit}
+        handleChangePage={handleChangePage}
+      />
     </Card>
   );
 }
