@@ -1,18 +1,15 @@
 import Head from "next/head";
-import * as React from "react";
-import Layout from "../components/Layout/BaseLayout";
-import ModuleShop from "../components/Modules/ModuleShop";
-import ModuleVideo from "../components/Modules/ModuleVideo";
+import React from "react";
+import Layout from "../../components/Layout/BaseLayout";
 
 export default function IndexPage() {
   return (
     <Layout>
       <Head>
-        <title>Trang chủ</title>
+        <title>Mua tài khoản</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <ModuleVideo />
-      <ModuleShop />
+      mua toai khoan
     </Layout>
   );
 }

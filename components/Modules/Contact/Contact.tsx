@@ -4,6 +4,8 @@ import { styled } from "@mui/material/styles";
 import BGW from "../../../styles/assets/images/Contact/BGwrap.png";
 import BGC from "../../../styles/assets/images/Contact/BGContact.png";
 import Devider from "../../../styles/assets/images/payment/PaymentDevider.png";
+import PaimonContact from "../../../styles/assets/images/Shop/PaimonContact.png";
+
 import FB from "../../../styles/assets/images/svg/facebook.svg";
 // import ZL from "../../../styles/assets/images/svg/zalo.svg";
 import INS from "../../../styles/assets/images/svg/instagram.svg";
@@ -35,6 +37,7 @@ const ContactBox = styled(Box)(
     top: 0;
     bottom: 0;
     right: 0;
+    position:relative;
     z-index: 0;
     justify-content: center;
     align-items: center;
@@ -101,6 +104,32 @@ const ButtonContact = styled(Box)(
     } 
   `
 );
+
+const Paimon = styled(Box)(
+  ({ theme }) => `
+    position:absolute;
+    bottom: 0;
+    left: -25px;
+    @media (min-width: 0px) {
+      height: 0px;
+    width: 0px;
+    } 
+    @media (min-width: 768px){
+      height: 175px;
+      width: 175px;
+    }
+    @media (min-width: 1024px) {
+      height: 250px;
+    width: 250px;
+    }
+    @media (min-width: 1440px) {
+      height: 250px;
+    width: 250px;
+    } 
+
+  `
+);
+
 function Contact() {
   return (
     <BgWrap>
@@ -162,6 +191,9 @@ function Contact() {
               </ButtonContact>
             </Box>
           </Box>
+          <Paimon>
+            <Image src={PaimonContact} alt="" layout="responsive"></Image>
+          </Paimon>
         </ContactBox>
       </Container>
     </BgWrap>
