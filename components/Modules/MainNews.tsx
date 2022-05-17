@@ -104,7 +104,6 @@ const ShowMore = styled(Box)(
 function MainNews() {
   const [newList, setNewList] = useState<NewsList[]>([]);
   const [total, setTotal] = useState<number>(0);
-
   const [newest, setNewest] = useState<NewsList[]>([
     {
       description: "",
