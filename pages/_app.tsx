@@ -12,7 +12,7 @@ import "../styles/globals.css";
 import "../styles/globals.scss";
 import lightThemeOptions from "../styles/theme/lightThemeOption";
 import createEmotionCache from "../utility/createEmotionCache";
-
+import { MessengerChat } from "react-messenger-chat-plugin";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -29,6 +29,35 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
         <NextNProgress />
+
+        <MessengerChat
+          pageId="1414878472106416"
+          language="sv_SE"
+          themeColor={"#000000"}
+          bottomSpacing={300}
+          loggedInGreeting="loggedInGreeting"
+          loggedOutGreeting="loggedOutGreeting"
+          greetingDialogDisplay={"show"}
+          debugMode={true}
+          onMessengerShow={() => {
+            console.log("onMessengerShow");
+          }}
+          onMessengerHide={() => {
+            console.log("onMessengerHide");
+          }}
+          onMessengerDialogShow={() => {
+            console.log("onMessengerDialogShow");
+          }}
+          onMessengerDialogHide={() => {
+            console.log("onMessengerDialogHide");
+          }}
+          onMessengerMounted={() => {
+            console.log("onMessengerMounted");
+          }}
+          onMessengerLoad={() => {
+            console.log("onMessengerLoad");
+          }}
+        />
         <AppWrapper>
           <Component {...pageProps} />
         </AppWrapper>

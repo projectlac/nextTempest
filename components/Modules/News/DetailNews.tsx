@@ -79,13 +79,15 @@ const Title = styled(Typography)(
     }
     @media (min-width: 768px) {
       width: 100%;
-    font-size:20px;
+      font-size:20px;
 
     }
     @media (min-width: 1024px) {
+      font-size: 25px;
       width: 70%;
     }
     @media (min-width: 1400px) {
+      font-size: 25px;
       width: 70%;
     }
 

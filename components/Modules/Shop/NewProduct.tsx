@@ -85,7 +85,7 @@ function NewProduct() {
           ))}
         </Grid>
         <ButtonShowMore>
-          <Link href={`mua-tai-khoan`} passHref>
+          <Link href={`/mua-tai-khoan`} passHref>
             Xem thêm
           </Link>
         </ButtonShowMore>
