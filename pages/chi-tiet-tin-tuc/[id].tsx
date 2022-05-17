@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import newsApi from "../../api/newsApi";
 import Layout from "../../components/Layout/BaseLayout";
 import DetailNews from "../../components/Modules/News/DetailNews";
-import newsApi from "../../api/newsApi";
-import { DetailNewsType } from "../../types/DashboardTypes/news";
 
 function DetailNewsPage({ post }) {
+  console.log(post.imageUrl);
+
   return (
     <Layout>
       <>
@@ -24,6 +24,10 @@ function DetailNewsPage({ post }) {
           <meta property="og:title" content={post.title} />
           <meta property="og:description" content={post.description} />
           <meta property="og:image" content={post.imageUrl} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:alt" content={post.title} />
+
+          <meta property="og:image:height" content="630" />
         </Head>
 
         <DetailNews detailNews={post} />
