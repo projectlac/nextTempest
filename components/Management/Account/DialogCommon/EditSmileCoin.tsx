@@ -10,6 +10,8 @@ import { TransitionProps } from "@mui/material/transitions";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import { Box, TextField } from "@mui/material";
 import WarningSubmit from "./WarningSubmit";
+import audit from "../../../../api/audit";
+import { useAppContext } from "../../../../context/state";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -20,7 +22,12 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditSmileCoin() {
+interface PropsEditSmileCoin {
+  username: string;
+}
+export default function EditSmileCoin({ username }: PropsEditSmileCoin) {
+  const { handleChangeStatusToast, updated, handleChangeMessageToast } =
+    useAppContext();
   const [open, setOpen] = React.useState(false);
   const [coin, setCoin] = React.useState<number>(10);
   const [mode, setMode] = React.useState<boolean>(true);
@@ -41,6 +48,36 @@ export default function EditSmileCoin() {
 
   const chageMode = (mode: boolean) => {
     setMode(mode);
+  };
+
+  const handleOnSubmit = async () => {
+    let typeTransfer: string;
+    let msg: string;
+    if (mode) {
+      typeTransfer = "PLUS";
+      msg = "Thêm coin thành công";
+    } else {
+      typeTransfer = "MINUS";
+      msg = "Giảm coin thành công";
+    }
+    try {
+      await audit
+        .updateCoin({
+          username,
+          typeTransfer,
+          amountTransferred: coinChange,
+          typeAudit: "COIN",
+        })
+        .then(() => {
+          handleChangeMessageToast(msg);
+          updated();
+          handleChangeStatusToast();
+          handleClose();
+        });
+    } catch (error) {
+      handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại sau!");
+      handleChangeStatusToast();
+    }
   };
   return (
     <div>
@@ -109,7 +146,12 @@ export default function EditSmileCoin() {
             padding: "15px",
           }}
         >
-          <WarningSubmit cancelDialog={handleClose} status={1} id={"2312"} />
+          <WarningSubmit
+            cancelDialog={handleClose}
+            handleOnSubmit={handleOnSubmit}
+            status={1}
+            id={"2312"}
+          />
           <Button
             onClick={handleClose}
             variant="contained"

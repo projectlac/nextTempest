@@ -13,7 +13,6 @@ export function AppWrapper({ children }) {
   const [update, setUpdate] = useState<boolean>(false);
 
   const updated = () => {
-    debugger;
     const newState = !update;
     setUpdate(newState);
   };

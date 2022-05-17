@@ -38,6 +38,7 @@ interface RecentOrdersTableProps {
   handleChangeRole: (data: AccountDataRole) => void;
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
+  total: number;
 }
 
 interface Filters {
@@ -93,11 +94,12 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
   handleChangeRole,
   handleChangeLimit,
   handleChangePage,
+  total,
 }) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
+
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
   const [filters, setFilters] = useState<Filters>({
@@ -306,7 +308,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
                         color="inherit"
                         size="small"
                       >
-                        <EditSmileCoin />
+                        <EditSmileCoin username={cryptoOrder.username} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Chỉnh sửa role" arrow>
@@ -345,7 +347,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredCryptoOrders.length}
+          count={total}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}

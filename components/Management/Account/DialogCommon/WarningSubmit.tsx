@@ -20,12 +20,14 @@ const Transition = React.forwardRef(function Transition(
 });
 interface PropsDialogWarning {
   cancelDialog?: () => void;
+  handleOnSubmit?: () => void;
   status: number;
   id: string;
 }
 export default function WarningSubmit({
   cancelDialog,
   status,
+  handleOnSubmit,
   id,
 }: PropsDialogWarning) {
   const [open, setOpen] = React.useState(false);
@@ -39,6 +41,7 @@ export default function WarningSubmit({
   };
   const handleCloseAll = () => {
     setOpen(false);
+    handleOnSubmit();
     status !== 3 && cancelDialog();
   };
   return (

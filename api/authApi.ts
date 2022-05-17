@@ -1,6 +1,5 @@
 import { ForgotForm, LoginForm, PromiseApi, RegisterForm } from "../types";
 import { AccountTable } from "../types/DashboardTypes/account";
-import { GetNews } from "../types/DashboardTypes/news";
 import axiosClient from "./axiosClient";
 
 const authApi = {
