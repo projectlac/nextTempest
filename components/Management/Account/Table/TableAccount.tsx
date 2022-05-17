@@ -142,7 +142,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
-    handleChangePage(newPage);
+    handleChangePage(newPage * 10);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -308,7 +308,10 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
                         color="inherit"
                         size="small"
                       >
-                        <EditSmileCoin username={cryptoOrder.username} />
+                        <EditSmileCoin
+                          username={cryptoOrder.username}
+                          money={+cryptoOrder.money}
+                        />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Chỉnh sửa role" arrow>
@@ -322,7 +325,10 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
                         color="inherit"
                         size="small"
                       >
-                        <EditRole />
+                        <EditRole
+                          username={cryptoOrder.username}
+                          roleCurrenly={cryptoOrder.role}
+                        />
                       </IconButton>
                     </Tooltip>
                     {/* <Tooltip title="Xóa tài khoản" arrow>

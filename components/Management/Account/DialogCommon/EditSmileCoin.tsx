@@ -24,12 +24,13 @@ const Transition = React.forwardRef(function Transition(
 
 interface PropsEditSmileCoin {
   username: string;
+  money: number;
 }
-export default function EditSmileCoin({ username }: PropsEditSmileCoin) {
+export default function EditSmileCoin({ username, money }: PropsEditSmileCoin) {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [open, setOpen] = React.useState(false);
-  const [coin, setCoin] = React.useState<number>(10);
+  const [coin, setCoin] = React.useState<number>(money);
   const [mode, setMode] = React.useState<boolean>(true);
 
   const [coinChange, setCoinChange] = React.useState<number>(0);
@@ -38,8 +39,13 @@ export default function EditSmileCoin({ username }: PropsEditSmileCoin) {
     setOpen(true);
   };
 
+  React.useEffect(() => {
+    setCoin(money);
+  }, [money]);
   const handleClose = () => {
     setOpen(false);
+    setCoinChange(0);
+    setMode(true);
   };
 
   const changeCoin = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,6 +140,8 @@ export default function EditSmileCoin({ username }: PropsEditSmileCoin) {
                 id="outlined-basic"
                 label="Số lượng"
                 type="number"
+                // defaultValue={0}
+                value={coinChange}
                 variant="outlined"
                 InputProps={{ inputProps: { min: 0, max: 99999999 } }}
                 onChange={changeCoin}

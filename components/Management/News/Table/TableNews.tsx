@@ -27,6 +27,9 @@ import WarningSubmit from "../DialogCommon/WarningSubmit";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: NewsList[];
+  total: number;
+  handleChangeLimit: (data: number) => void;
+  handleChangePage: (data: number) => void;
 }
 
 const applyFilters = (cryptoOrders: NewsList[]): NewsList[] => {
@@ -44,7 +47,12 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const TableNews: FC<RecentOrdersTableProps> = ({
+  cryptoOrders,
+  handleChangeLimit,
+  handleChangePage,
+  total,
+}) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -88,10 +96,12 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
+    handleChangePage(newPage * 10);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
+    handleChangeLimit(parseInt(event.target.value));
   };
 
   const filteredCryptoOrders = applyFilters(cryptoOrders);
@@ -100,11 +110,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     page,
     limit
   );
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
+
   const theme = useTheme();
 
   const toMoney = (price: string) => {
@@ -248,7 +254,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         color="inherit"
                         size="small"
                       >
-                        <WarningSubmit status={3} id={"2312"} />
+                        <WarningSubmit status={3} id={cryptoOrder.id} />
                       </IconButton>
                     </Tooltip>
                   </TableCell>
@@ -261,7 +267,7 @@ const TableNews: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredCryptoOrders.length}
+          count={total}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}

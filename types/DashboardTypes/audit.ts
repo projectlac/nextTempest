@@ -4,3 +4,7 @@ export interface AuditForm {
   amountTransferred: number;
   typeTransfer: string;
 }
+export interface EditRoleForm {
+  username: string;
+  role: string;
+}

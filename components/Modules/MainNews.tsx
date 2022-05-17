@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LeftArrow from "../../styles/assets/images/newsDes/LeftArrow.png";
 import RightArrow from "../../styles/assets/images/newsDes/RightArrow.png";
 import BGNews from "../../styles/assets/images/newsDes/BGNews.png";
@@ -14,6 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Theme } from "@mui/system";
 import TitleHighlight from "../Common/Title/TitleHighlight";
+import { NewsList } from "../../types/DashboardTypes/news";
+import newsApi from "../../api/newsApi";
 
 const NewBox = styled(Box)(() => ({
   position: "relative",
@@ -100,6 +102,34 @@ const ShowMore = styled(Box)(
 );
 
 function MainNews() {
+  const [newList, setNewList] = useState<NewsList[]>([]);
+  const [total, setTotal] = useState<number>(0);
+
+  const [newest, setNewest] = useState<NewsList[]>([
+    {
+      description: "",
+      id: "",
+      cloundinary: "",
+      title: "",
+      updatedAt: "",
+    },
+  ]);
+
+  const [offset, setOffset] = useState<number>(0);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        await newsApi.getAll({ limit: 4, offset }).then((res) => {
+          const data = res.data.data;
+          const newsestData = data.splice(0, 1);
+          setNewList(data);
+          setNewest(newsestData);
+          setTotal(res.data.total);
+        });
+      } catch (error) {}
+    };
+    getData();
+  }, []);
   return (
     <Box pb={0}>
       <Box pt={5} pb={2}>
@@ -135,12 +165,16 @@ function MainNews() {
                   overflow: "hidden",
                 }}
               >
-                <Image
-                  src={HotNews}
-                  alt=""
-                  layout="responsive"
-                  objectFit="contain"
-                />
+                {newest[0]?.cloundinary && (
+                  <Image
+                    src={newest[0].cloundinary}
+                    alt=""
+                    layout="responsive"
+                    objectFit="cover"
+                    width={670.75}
+                    height={363.56}
+                  />
+                )}
               </Box>
             </Box>
             <Typography
@@ -150,74 +184,93 @@ function MainNews() {
                 color: "#B68967",
               }}
             >
-              <Link href="/">[28.04.2022] Lịch livestream phiên bản 2.7</Link>
+              <Link href={`chi-tiet-tin-tuc/${newest[0]?.id}`}>
+                {newest[0]?.title}
+              </Link>
             </Typography>
           </HottestNews>
 
           <Grid container>
-            {[...Array(3)].map((d, i) => (
-              <Box
-                sx={{ display: { sm: "flex", xs: "block" }, width: "100%" }}
-                mb={2}
-                mt={2}
-                key={i}
-              >
-                <Grid item md={4} sm={4} xs={12}>
-                  <Box
-                    sx={{
-                      border: "2px solid #C9AD97",
-                      width: "100%",
-                      position: "relative",
-                      height: "auto",
-                      padding: "5px",
-                    }}
-                  >
-                    <Image
-                      src={Clip}
-                      alt=""
-                      layout="responsive"
-                      objectFit="contain"
-                    />
-                  </Box>
-                </Grid>
-                <Grid item md={8} sm={8} xs={12}>
-                  <Box sx={{ px: { sm: 3, xs: 0 } }}>
-                    <Typography
+            {newList.length > 0 &&
+              newList.map((d, i) => (
+                <Box
+                  sx={{ display: { sm: "flex", xs: "block" }, width: "100%" }}
+                  mb={2}
+                  mt={2}
+                  key={i}
+                >
+                  <Grid item md={4} sm={4} xs={12}>
+                    <Box
                       sx={{
-                        fontSize: { lg: "20px", md: "17px", sm: "13px" },
-                        mt: 2,
-                        color: "#B68967",
+                        border: "2px solid #C9AD97",
+                        width: "100%",
+                        position: "relative",
+                        height: "auto",
+                        padding: "5px",
                       }}
                     >
-                      <Link href="/">
-                        [28.04.2022] Lịch livestream phiên bản 2.7
-                      </Link>
-                    </Typography>
+                      <Image
+                        src={d.cloundinary}
+                        alt=""
+                        layout="responsive"
+                        objectFit="contain"
+                        width={288}
+                        height={180}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item md={8} sm={8} xs={12}>
+                    <Box sx={{ px: { sm: 3, xs: 0 } }}>
+                      <Typography
+                        sx={{
+                          fontSize: { lg: "20px", md: "17px", sm: "13px" },
+                          mt: 2,
+                          color: "#B68967",
+                        }}
+                      >
+                        <Link href={`chi-tiet-tin-tuc/${d.id}`}>{d.title}</Link>
+                      </Typography>
 
-                    <Typography
-                      sx={{
-                        color: "#000",
-                        fontSize: { lg: "17px", md: "15px", sm: "11px" },
-                      }}
-                    >
-                      <Link href="/">{`Xem thêm>>`}</Link>
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Box>
-            ))}
+                      <Typography
+                        sx={{
+                          color: "#8f8c8a",
+                          fontSize: { lg: "17px", md: "15px", sm: "11px" },
+                          my: 2,
+                        }}
+                      >
+                        {d.description}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "#8f8c8a",
+                          fontSize: { lg: "15px", md: "13px", sm: "11px" },
+                        }}
+                      >
+                        <Link
+                          href={`chi-tiet-tin-tuc/${d.id}`}
+                        >{`Xem thêm>>`}</Link>
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Box>
+              ))}
           </Grid>
         </NewBox>
+
         <ShowMore>
-          <Typography
-            color="#E3DDD3"
-            sx={{ fontSize: { lg: "18px", md: "16px", sm: "13px" } }}
-          >
-            Xem thêm tin tức
-          </Typography>
-          <Box>
-            <Image src={DownArrow} alt="" width={65} height={65} />
-          </Box>
+          {total !== newList.length + 1 && (
+            <>
+              <Typography
+                color="#E3DDD3"
+                sx={{ fontSize: { lg: "18px", md: "16px", sm: "13px" } }}
+              >
+                Xem thêm tin tức
+              </Typography>
+              <Box>
+                <Image src={DownArrow} alt="" width={65} height={65} />
+              </Box>
+            </>
+          )}
         </ShowMore>
       </Box>
     </Box>

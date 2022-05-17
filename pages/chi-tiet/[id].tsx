@@ -1,8 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../../components/Layout/BaseLayout";
 
-export default function DitailProduct() {
+export default function DetailProduct() {
   return (
     <Layout>
       <Head>
@@ -14,6 +15,6 @@ export default function DitailProduct() {
   );
 }
 
-DitailProduct.getLayout = function getLayout(page) {
+DetailProduct.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };

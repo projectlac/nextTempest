@@ -23,5 +23,9 @@ const newsApi = {
     const url = `post/update/${id}`;
     return axiosAuthClient.patch(url, params);
   },
+  delete(id: string): Promise<PromiseApi> {
+    const url = `post/delete/${id}`;
+    return axiosAuthClient.delete(url);
+  },
 };
 export default newsApi;

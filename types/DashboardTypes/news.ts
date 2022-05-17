@@ -1,11 +1,20 @@
 export interface NewsList {
   id: string;
   title: string;
-  // image: string;
   description: string;
-  // body: string;
   updatedAt: string;
+  cloundinary: string;
 }
+
+export interface DetailNewsType {
+  id: string;
+  title: string;
+  description: string;
+  updatedAt: string;
+  imageUrl: string;
+  content: string;
+}
+
 export interface GetNews {
   limit: number;
   offset: number;

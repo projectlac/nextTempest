@@ -7,12 +7,10 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import SliderImage from "../../styles/assets/images/newsDes/Group1.png";
 import BG from "../../styles/assets/images/newsDes/Mask.png";
-import LeftArrow from "../../styles/assets/images/newsDes/LeftArrow.png";
 import NavLeftArrow from "../../styles/assets/images/newsDes/NavLeftArrow.png";
 import NavRightArrow from "../../styles/assets/images/newsDes/NavRightArrow.png";
-import RightArrow from "../../styles/assets/images/newsDes/RightArrow.png";
-import MainNews from "./MainNews";
 import TitleHighlight from "../Common/Title/TitleHighlight";
+import MainNews from "./MainNews";
 
 const NewWrapper = styled(Box)(
   ({ theme }) => `

@@ -14,6 +14,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import audit from "../../../../api/audit";
+import { useAppContext } from "../../../../context/state";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -23,10 +25,15 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-export default function EditRole() {
+interface PropsEditRole {
+  username: string;
+  roleCurrenly: string;
+}
+export default function EditRole({ username, roleCurrenly }: PropsEditRole) {
+  const { handleChangeStatusToast, updated, handleChangeMessageToast } =
+    useAppContext();
   const [open, setOpen] = React.useState(false);
-  const [role, setRole] = React.useState<string>("User");
+  const [role, setRole] = React.useState<string>(roleCurrenly);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,6 +44,20 @@ export default function EditRole() {
 
   const handleChange = (event: SelectChangeEvent) => {
     setRole(event.target.value as string);
+  };
+
+  React.useEffect(() => {
+    setRole(roleCurrenly);
+  }, [roleCurrenly]);
+  const handleOnSubmit = async () => {
+    try {
+      audit.updateRole({ username, role }).then(() => {
+        handleChangeMessageToast("Thay đổi quyền thành công");
+        updated();
+        handleChangeStatusToast();
+        handleClose();
+      });
+    } catch (error) {}
   };
 
   return (
@@ -82,7 +103,7 @@ export default function EditRole() {
                 }}
               >
                 <MenuItem
-                  value={"User"}
+                  value={"USER"}
                   sx={{
                     fontFamily: "Montserrat",
                   }}
@@ -90,12 +111,20 @@ export default function EditRole() {
                   User
                 </MenuItem>
                 <MenuItem
-                  value={"Mod"}
+                  value={"MOD"}
                   sx={{
                     fontFamily: "Montserrat",
                   }}
                 >
                   Cộng tác viên
+                </MenuItem>
+                <MenuItem
+                  value={"ADMIN"}
+                  sx={{
+                    fontFamily: "Montserrat",
+                  }}
+                >
+                  Admin
                 </MenuItem>
               </Select>
             </FormControl>
@@ -106,7 +135,12 @@ export default function EditRole() {
             padding: "15px",
           }}
         >
-          <WarningSubmit cancelDialog={handleClose} status={2} id={"2312"} />
+          <WarningSubmit
+            cancelDialog={handleClose}
+            status={2}
+            id={"2312"}
+            handleOnSubmit={handleOnSubmit}
+          />
           <Button
             onClick={handleClose}
             variant="contained"

@@ -90,19 +90,42 @@ function DataNews() {
   const [cryptoOrders, setCryptoOrders] = useState<NewsList[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+
   const { update } = useAppContext();
+
+  const handleChangeLimit = (data: number) => {
+    setLimitPage(data);
+  };
+  const handleChangePage = (data: number) => {
+    setOffsetPage(data);
+  };
+
   useEffect(() => {
     newsApi.getAll({ limit: limitPage, offset: offsetPage }).then((res) => {
-      const data = res.data.map((d) => {
+      const data = res.data.data.map((d) => {
         const { content, ...result } = d;
         return result;
       });
+
       setCryptoOrders(data);
+      let total = res.data.total;
+      let temp = total % limitPage;
+      if (temp === 0) {
+        setTotal(total / limitPage);
+      } else {
+        setTotal(Math.floor(total / limitPage) + 1);
+      }
     });
   }, [update, limitPage, offsetPage]);
   return (
     <Card>
-      <TableNews cryptoOrders={cryptoOrders} />
+      <TableNews
+        cryptoOrders={cryptoOrders}
+        handleChangeLimit={handleChangeLimit}
+        handleChangePage={handleChangePage}
+        total={total}
+      />
     </Card>
   );
 }
