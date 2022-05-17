@@ -3,7 +3,7 @@ import * as React from "react";
 import Layout from "../components/Layout/BaseLayout";
 import ModuleShop from "../components/Modules/ModuleShop";
 import ModuleVideo from "../components/Modules/ModuleVideo";
-import Meta from "../../styles/assets/images/newsDes/HotNews.png";
+import Meta from "../styles/assets/images/newsDes/HotNews.png";
 
 export default function IndexPage() {
   return (
@@ -11,7 +11,6 @@ export default function IndexPage() {
       <Head>
         <title>Trang chủ</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
         <meta property="og:image" content={Meta.src} />
       </Head>
       <ModuleVideo />

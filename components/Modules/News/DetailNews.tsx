@@ -32,7 +32,7 @@ const NewBox = styled(Box)(() => ({
   backgroundSize: "100%",
   padding: "0 50px",
   "@media (max-width: 435px)": {
-    padding: "0 25px",
+    padding: "20px 25px",
   },
   "&:before": {
     position: "absolute",
@@ -72,6 +72,23 @@ const Title = styled(Typography)(
     width: 70%;
     margin: 0 auto;
     font-size: 25px;
+
+    @media (min-width: 0px) {
+      width: 100%;
+      font-size:15px;
+    }
+    @media (min-width: 768px) {
+      width: 100%;
+    font-size:20px;
+
+    }
+    @media (min-width: 1024px) {
+      width: 70%;
+    }
+    @media (min-width: 1400px) {
+      width: 70%;
+    }
+
             `
 );
 
@@ -100,6 +117,16 @@ function DetailNews({ detailNews }: PropsDetailNews) {
                   "& *": {
                     wordBreak: "break-word",
                     wordWrap: "break-word",
+                  },
+                  "& p img": {
+                    width: {
+                      md: "auto",
+                      xs: "100%",
+                    },
+                    height: {
+                      md: "auto",
+                      xs: "auto",
+                    },
                   },
                 }}
                 dangerouslySetInnerHTML={{ __html: detailNews.content }}
