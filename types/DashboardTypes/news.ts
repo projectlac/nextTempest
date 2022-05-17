@@ -4,6 +4,7 @@ export interface NewsList {
   description: string;
   updatedAt: string;
   cloundinary: string;
+  slug: string;
 }
 
 export interface DetailNewsType {
@@ -13,6 +14,7 @@ export interface DetailNewsType {
   updatedAt: string;
   imageUrl: string;
   content: string;
+  slug: string;
 }
 
 export interface GetNews {

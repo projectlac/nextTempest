@@ -19,6 +19,10 @@ const newsApi = {
     const url = `post-get/details/${params}`;
     return axiosClient.get(url);
   },
+  getNewsBySlug(params: string): Promise<PromiseApi> {
+    const url = `post-get/details/news/${params}`;
+    return axiosClient.get(url);
+  },
   editNews(params: FormData, id: string): Promise<PromiseApi> {
     const url = `post/update/${id}`;
     return axiosAuthClient.patch(url, params);

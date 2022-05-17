@@ -17,6 +17,7 @@ export default function DitailProduct() {
     updatedAt: "",
     imageUrl: "",
     content: "",
+    slug: "",
   });
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +26,7 @@ export default function DitailProduct() {
         try {
           if (router.query) {
             newsApi
-              .getNewsById(id as string)
+              .getNewsBySlug(id as string)
               .then((res) => setDetailNews(res.data));
           }
         } catch (error) {}
@@ -38,10 +39,9 @@ export default function DitailProduct() {
       <Head>
         <title>{detailNews.title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
         <meta
           property="og:url"
-          content={`https://www.tempest.nv/chi-tiet-tin-tuc/${id}`}
+          content={`https://www.tempest.nv/chi-tiet-tin-tuc/${detailNews.slug}`}
         />
         <meta property="og:type" content="article" />
         <meta property="og:title" content={detailNews.title} />

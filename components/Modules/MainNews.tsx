@@ -112,6 +112,7 @@ function MainNews() {
       cloundinary: "",
       title: "",
       updatedAt: "",
+      slug: "",
     },
   ]);
 
@@ -184,7 +185,7 @@ function MainNews() {
                 color: "#B68967",
               }}
             >
-              <Link href={`chi-tiet-tin-tuc/${newest[0]?.id}`}>
+              <Link href={`chi-tiet-tin-tuc/${newest[0]?.slug}`}>
                 {newest[0]?.title}
               </Link>
             </Typography>
@@ -228,7 +229,9 @@ function MainNews() {
                           color: "#B68967",
                         }}
                       >
-                        <Link href={`chi-tiet-tin-tuc/${d.id}`}>{d.title}</Link>
+                        <Link href={`chi-tiet-tin-tuc/${d.slug}`}>
+                          {d.title}
+                        </Link>
                       </Typography>
 
                       <Typography
@@ -247,7 +250,7 @@ function MainNews() {
                         }}
                       >
                         <Link
-                          href={`chi-tiet-tin-tuc/${d.id}`}
+                          href={`chi-tiet-tin-tuc/${d.slug}`}
                         >{`Xem thêm>>`}</Link>
                       </Typography>
                     </Box>
