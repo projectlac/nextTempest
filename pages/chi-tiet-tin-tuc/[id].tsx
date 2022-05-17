@@ -36,20 +36,27 @@ export default function DitailProduct() {
   }, [router.isReady]);
   return (
     <Layout>
-      <Head>
-        <title>{detailNews.title}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta
-          property="og:url"
-          content={`https://www.tempest.nv/chi-tiet-tin-tuc/${detailNews.slug}`}
-        />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={detailNews.title} />
-        <meta property="og:description" content={detailNews.description} />
-        <meta property="og:image" content={detailNews.imageUrl} />
-      </Head>
+      {router.isReady && detailNews.title !== "" && (
+        <>
+          <Head>
+            <title>{detailNews.title}</title>
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
+            <meta
+              property="og:url"
+              content={`https://www.tempest.nv/chi-tiet-tin-tuc/${detailNews.slug}`}
+            />
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content={detailNews.title} />
+            <meta property="og:description" content={detailNews.description} />
+            <meta property="og:image" content={detailNews.imageUrl} />
+          </Head>
 
-      <DetailNews detailNews={detailNews} />
+          <DetailNews detailNews={detailNews} />
+        </>
+      )}
     </Layout>
   );
 }
