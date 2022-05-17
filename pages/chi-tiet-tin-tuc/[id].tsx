@@ -5,8 +5,6 @@ import Layout from "../../components/Layout/BaseLayout";
 import DetailNews from "../../components/Modules/News/DetailNews";
 
 function DetailNewsPage({ post }) {
-  console.log(post.imageUrl);
-
   return (
     <Layout>
       <>

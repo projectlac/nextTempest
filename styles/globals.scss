@@ -164,3 +164,6 @@ body {
   opacity: 1;
   transition: opacity 0.5s ease-in;
 }
+.fb_dialog_content > [data-testid="bubble_iframe"] {
+  transform: translateY(-20px) !important;
+}
