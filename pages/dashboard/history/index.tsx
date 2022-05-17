@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import DashboardLayout from "../../../components/Layout/DashboardLayout";
+import InfiniteList from "./InfiniteList";
 
 function History() {
   return (
@@ -10,7 +11,7 @@ function History() {
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      History
+      <InfiniteList />
     </DashboardLayout>
   );
 }

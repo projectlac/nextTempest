@@ -1,4 +1,5 @@
 import { AuditForm, EditRoleForm, PromiseApi } from "../types";
+import { GetNews } from "../types/DashboardTypes/news";
 import axiosAudit from "./axiosAudit";
 
 const audit = {
@@ -9,6 +10,10 @@ const audit = {
   updateRole(params: EditRoleForm): Promise<PromiseApi> {
     const url = "/auth/update-role";
     return axiosAudit.patch(url, params);
+  },
+  getHistory(params: GetNews): Promise<PromiseApi> {
+    const url = `/history?limit=${params.limit}&offset=${params.offset}`;
+    return axiosAudit.get(url);
   },
 };
 export default audit;
