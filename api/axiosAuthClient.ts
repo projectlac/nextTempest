@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 // let token = localStorage.getItem('access_token');
 const axiosAuthClient = axios.create({
-  baseURL: "https://shopp-acc.herokuapp.com/",
+  baseURL: "http://159.223.74.89:8080//",
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*/*",

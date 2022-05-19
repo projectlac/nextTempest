@@ -1,15 +1,26 @@
 import styled from "@emotion/styled";
-import { Box, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
-import Image from "next/image";
-import Devider from "../../../../styles/assets/images/payment/PaymentDevider.png";
-import BGPack from "../../../../styles/assets/images/payment/BGPack.png";
-import dst300 from "../../../../styles/assets/images/payment/dst300.png";
-import Quati from "../../../../styles/assets/images/payment/Quati.png";
-import * as Yup from "yup";
-import { Field, Form, Formik } from "formik";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Pack } from "../../../../types";
+import { Box, Grid, Typography } from "@mui/material";
+import { Field, Form, Formik } from "formik";
+import Image from "next/image";
+import React, { useState } from "react";
+import * as Yup from "yup";
+import BGPack from "../../../../styles/assets/images/payment/BGPack.png";
+
+import Devider from "../../../../styles/assets/images/payment/PaymentDevider.png";
+import Quati from "../../../../styles/assets/images/payment/Quati.png";
+import { AuditInformation, Pack } from "../../../../types";
+
+import MoonPack from "../../../../styles/assets/images/PackList/MoonPack.png";
+import BP1 from "../../../../styles/assets/images/PackList/BP1.png";
+import BP2 from "../../../../styles/assets/images/PackList/BP2.png";
+import Layer62 from "../../../../styles/assets/images/PackList/Layer62.png";
+import Layer63 from "../../../../styles/assets/images/PackList/Layer63.png";
+import Layer64 from "../../../../styles/assets/images/PackList/Layer64.png";
+import Layer65 from "../../../../styles/assets/images/PackList/Layer65.png";
+import Layer66 from "../../../../styles/assets/images/PackList/Layer66.png";
+import audit from "../../../../api/audit";
+import { useAppContext } from "../../../../context/state";
 const CustomField = styled(Field)(
   ({ theme }) => `
     width: 90%;
@@ -80,6 +91,23 @@ const Quatily = styled(Box)(
   justify-content: center;
   background-size: contain;
   background-repeat: no-repeat;
+          `
+);
+
+const Minus = styled(Box)(
+  ({ theme }) => `
+  position: absolute;
+  top: 37px;
+  right: 0px;
+  z-index: 1;
+  background:#a30000;
+  border-radius:50%;
+  color: #fff;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
           `
 );
@@ -131,62 +159,63 @@ const BodyTable = styled(Box)({
   },
 });
 function Two() {
+  const { handleChangeMessageToast, handleChangeStatusToast } = useAppContext();
   const [defauValue, setDefaultValue] = useState<Pack[]>([
     {
-      name: "300ĐST",
+      name: "Thẻ tháng",
       id: "1",
       price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      image: `${MoonPack.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "Battle pass loại 1",
       id: "2",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "210000",
+      image: `${BP1.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "Battle pass loại 2",
       id: "3",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "430000",
+      image: `${BP2.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "6480 ĐST",
       id: "4",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "2000000",
+      image: `${Layer66.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "3280 ĐST",
       id: "5",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "1000000",
+      image: `${Layer65.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "1980 ĐST",
       id: "6",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "630000",
+      image: `${Layer64.src}`,
+      quantily: 0,
     },
     {
-      name: "300ĐST",
+      name: "980 ĐST",
       id: "7",
-      price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      price: "320000",
+      image: `${Layer63.src}`,
+      quantily: 0,
     },
     {
       name: "300ĐST",
       id: "8",
       price: "105000",
-      image: `dst300`,
-      quatily: 0,
+      image: `${Layer62.src}`,
+      quantily: 0,
     },
   ]);
 
@@ -195,15 +224,29 @@ function Two() {
     const tempValue = [...defauValue];
     const index = tempValue.findIndex((d) => d.id === id);
 
-    tempValue[index].quatily++;
+    tempValue[index].quantily++;
     setDefaultValue(tempValue);
+
     const carTemp = [...cart];
     const indexCart = carTemp.findIndex((d) => d.id === id);
     indexCart > -1
-      ? carTemp[indexCart].quatily + 1
+      ? carTemp[indexCart].quantily + 1
       : carTemp.push(tempValue[index]);
-    console.log(carTemp);
+
     setCard(carTemp);
+  };
+
+  const removeProduct = (id: string) => {
+    const tempValue = [...defauValue];
+    const index = tempValue.findIndex((d) => d.id === id);
+
+    tempValue[index].quantily--;
+    setDefaultValue(tempValue);
+
+    const carTemp = [...cart];
+    const indexCart = carTemp.filter((d) => d.quantily > 0);
+
+    setCard(indexCart);
   };
 
   const LoginSchema = Yup.object().shape({
@@ -258,8 +301,42 @@ function Two() {
                 note: "",
               }}
               validationSchema={LoginSchema}
-              onSubmit={(values) => {
-                console.log(values);
+              onSubmit={async (values, { resetForm }) => {
+                const { uid, server, account, password, ingame, phone, note } =
+                  values;
+                if (cart.length > 0) {
+                  const auditInformation: AuditInformation[] = [...cart].map(
+                    (d) => ({
+                      name: d.name,
+                      quantity: +d.quantily,
+                      unitPrice: +d.price,
+                    })
+                  );
+
+                  try {
+                    await audit
+                      .buyPack({
+                        UID: uid,
+                        accountName: ingame,
+                        auditInformation,
+                        note,
+                        phone,
+                        password,
+                        server,
+                        username: account,
+                      })
+                      .then((res) => {
+                        handleChangeMessageToast("Bạn đã mua thành công!");
+                        resetForm();
+                        setCard([]);
+                        handleChangeStatusToast();
+                      })
+                      .catch((err) => {
+                        handleChangeMessageToast(err.response.data.message);
+                        handleChangeStatusToast();
+                      });
+                  } catch (error) {}
+                }
               }}
             >
               {({ errors, touched }) => (
@@ -324,6 +401,7 @@ function Two() {
                       <Box sx={{ position: "relative" }}>
                         <CustomField
                           name="password"
+                          type="password"
                           placeholder="Password"
                           style={{
                             border: `1px solid ${
@@ -415,9 +493,9 @@ function Two() {
                           cart.map((d, index) => (
                             <BodyTable key={index + d.id}>
                               <Box width={"40%"}>{d.name}</Box>
-                              <Box width={"15%"}>{d.quatily}</Box>
+                              <Box width={"15%"}>{d.quantily}</Box>
                               <Box width={"45%"}>
-                                {totalMoney(d.price, d.quatily)}
+                                {totalMoney(d.price, d.quantily)}
                               </Box>
                             </BodyTable>
                           ))}
@@ -439,43 +517,58 @@ function Two() {
             Chọn gói cần nạp
           </Typography>
           <Image src={Devider} alt="devider" width={440} height={14} />
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              "& .MuiGrid-item": {
-                padding: "5px",
-              },
-            }}
-          >
+          <Grid container rowSpacing={2} columnSpacing={2}>
             {defauValue.map((d, i) => (
               <Grid item md={4} key={i}>
+                <Box sx={{ position: "relative" }}>
+                  {d.quantily > 0 && <Quatily>x{d.quantily}</Quatily>}
+                  {d.quantily > 0 && (
+                    <Minus
+                      onClick={() => {
+                        removeProduct(d.id);
+                      }}
+                    >
+                      -
+                    </Minus>
+                  )}
+                </Box>
                 <Box
-                  height={122}
+                  height={124}
                   sx={{
                     background: `url(${BGPack.src})`,
-                    backgroundSize: "contain",
+                    backgroundSize: "110%",
+                    backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     cursor: "pointer",
                     position: "relative",
+
                     filter: `${
-                      d.quatily > 0 ? "brightness(1) " : "brightness(0.5) "
+                      d.quantily > 0 ? "brightness(1) " : "brightness(0.5) "
                     }`,
+                    border: "4px solid #88543c",
+                    overflow: "hidden",
                   }}
                   onClick={() => {
                     addProduct(d.id);
                   }}
                 >
-                  <Value>{d.name}</Value>
-                  {d.quatily > 0 && <Quatily>x{d.quatily}</Quatily>}
-                  <Box pt={3}>
-                    <Image src={dst300} alt="" />
+                  {d.id !== "1" && <Value>{d.name}</Value>}
+
+                  <Box sx={{ paddingTop: "17px" }} overflow="hidden">
+                    <Image
+                      src={d.image}
+                      alt=""
+                      width={137}
+                      height={122}
+                      objectFit="contain"
+                      objectPosition="bottom center"
+                    />
                   </Box>
                 </Box>
                 <Price>{toMoney(d.price)}</Price>
               </Grid>
             ))}
-          </Box>
+          </Grid>
         </Box>
       </Grid>
     </Grid>

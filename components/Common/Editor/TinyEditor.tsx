@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { useAppContext } from "../../../context/state";
 
 interface TinyProps {
   changeBody: (data: string) => void;
@@ -7,11 +8,8 @@ interface TinyProps {
 }
 export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
   const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  const { update } = useAppContext();
+
   return (
     <>
       <Editor

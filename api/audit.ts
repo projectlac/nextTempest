@@ -1,4 +1,4 @@
-import { AuditForm, EditRoleForm, PromiseApi } from "../types";
+import { AuditForm, EditRoleForm, PackForm, PromiseApi } from "../types";
 import { GetNews } from "../types/DashboardTypes/news";
 import axiosAudit from "./axiosAudit";
 
@@ -14,6 +14,10 @@ const audit = {
   getHistory(params: GetNews): Promise<PromiseApi> {
     const url = `/history?limit=${params.limit}&offset=${params.offset}`;
     return axiosAudit.get(url);
+  },
+  buyPack(params: PackForm): Promise<PromiseApi> {
+    const url = `/audit`;
+    return axiosAudit.post(url, params);
   },
 };
 export default audit;

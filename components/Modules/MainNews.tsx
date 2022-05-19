@@ -122,9 +122,12 @@ function MainNews() {
         await newsApi.getAll({ limit: 4, offset }).then((res) => {
           const data = res.data.data;
           const newsestData = data.splice(0, 1);
-          setNewList(data);
-          setNewest(newsestData);
-          setTotal(res.data.total);
+
+          if (data.length > 0) {
+            setNewList(data);
+            setNewest(newsestData);
+            setTotal(res.data.total);
+          }
         });
       } catch (error) {}
     };
@@ -147,48 +150,50 @@ function MainNews() {
         </TitleHighlight>
         <NewBox>
           <PaimonImage />
-          <HottestNews>
-            <Box
-              sx={{
-                border: "2px solid #b68967",
-                borderRadius: "32px",
-                padding: "5px",
-                width: "100%",
-                overflow: "hidden",
-                position: "relative",
-                height: "100%",
-              }}
-            >
+          {newest.length > 0 && (
+            <HottestNews>
               <Box
                 sx={{
+                  border: "2px solid #b68967",
                   borderRadius: "32px",
+                  padding: "5px",
+                  width: "100%",
                   overflow: "hidden",
+                  position: "relative",
+                  height: "100%",
                 }}
               >
-                {newest[0]?.cloundinary && (
-                  <Image
-                    src={newest[0].cloundinary}
-                    alt=""
-                    layout="responsive"
-                    objectFit="cover"
-                    width={670.75}
-                    height={363.56}
-                  />
-                )}
+                <Box
+                  sx={{
+                    borderRadius: "32px",
+                    overflow: "hidden",
+                  }}
+                >
+                  {newest[0]?.cloundinary && (
+                    <Image
+                      src={newest[0].cloundinary}
+                      alt=""
+                      layout="responsive"
+                      objectFit="cover"
+                      width={670.75}
+                      height={363.56}
+                    />
+                  )}
+                </Box>
               </Box>
-            </Box>
-            <Typography
-              sx={{
-                fontSize: { lg: "27px", md: "20px", sm: "15px" },
-                mt: 2,
-                color: "#B68967",
-              }}
-            >
-              <Link href={`chi-tiet-tin-tuc/${newest[0]?.slug}`}>
-                {newest[0]?.title}
-              </Link>
-            </Typography>
-          </HottestNews>
+              <Typography
+                sx={{
+                  fontSize: { lg: "27px", md: "20px", sm: "15px" },
+                  mt: 2,
+                  color: "#B68967",
+                }}
+              >
+                <Link href={`/chi-tiet-tin-tuc/${newest[0]?.slug}`}>
+                  {newest[0]?.title}
+                </Link>
+              </Typography>
+            </HottestNews>
+          )}
 
           <Grid container>
             {newList.length > 0 &&
@@ -228,7 +233,7 @@ function MainNews() {
                           color: "#B68967",
                         }}
                       >
-                        <Link href={`chi-tiet-tin-tuc/${d.slug}`}>
+                        <Link href={`/chi-tiet-tin-tuc/${d.slug}`}>
                           {d.title}
                         </Link>
                       </Typography>
@@ -249,7 +254,7 @@ function MainNews() {
                         }}
                       >
                         <Link
-                          href={`chi-tiet-tin-tuc/${d.slug}`}
+                          href={`/chi-tiet-tin-tuc/${d.slug}`}
                         >{`Xem thêm>>`}</Link>
                       </Typography>
                     </Box>

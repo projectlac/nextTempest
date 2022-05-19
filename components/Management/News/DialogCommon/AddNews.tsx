@@ -60,7 +60,7 @@ export default function AddNews() {
       file: null,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const { title, description, body } = values;
       const formData = new FormData();
       formData.append("title", title);
@@ -76,6 +76,8 @@ export default function AddNews() {
           handleChangeStatusToast();
           handleClose();
           updated();
+          resetForm();
+          setFile(null);
         })
         .catch(() => {
           handleChangeMessageToast("Có lỗi xảy ra");
