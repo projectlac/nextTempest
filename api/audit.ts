@@ -1,5 +1,6 @@
 import { AuditForm, EditRoleForm, PackForm, PromiseApi } from "../types";
 import { GetNews } from "../types/DashboardTypes/news";
+import { PackFormManagement } from "../types/DashboardTypes/packManagement";
 import axiosAudit from "./axiosAudit";
 
 const audit = {
@@ -18,6 +19,10 @@ const audit = {
   buyPack(params: PackForm): Promise<PromiseApi> {
     const url = `/audit`;
     return axiosAudit.post(url, params);
+  },
+  showListPack(params: PackFormManagement): Promise<PromiseApi> {
+    const url = `/audit?limit=${params.limit}&offsett=${params.offset}&status=${params.status}`;
+    return axiosAudit.get(url);
   },
 };
 export default audit;

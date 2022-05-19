@@ -36,7 +36,7 @@ export default function Navbar() {
     {
       name: "Quản lý banner",
       icon: <InboxIcon />,
-      link: "/",
+      link: "/dashboard/banner",
     },
     {
       name: "Quản lý Genshin",

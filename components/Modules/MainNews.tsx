@@ -243,6 +243,7 @@ function MainNews() {
                           color: "#8f8c8a",
                           fontSize: { lg: "17px", md: "15px", sm: "11px" },
                           my: 2,
+                          display: { xs: "none", sm: "block" },
                         }}
                       >
                         {d.description}

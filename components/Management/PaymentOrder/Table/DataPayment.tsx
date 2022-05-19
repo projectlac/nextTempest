@@ -1,284 +1,55 @@
 import { Card } from "@mui/material";
+import { useEffect, useState } from "react";
+import audit from "../../../../api/audit";
+import banner from "../../../../api/banner";
+import { useAppContext } from "../../../../context/state";
 import { CryptoOrder } from "../../../../types/DashboardTypes/payment";
 import TablePayment from "./TablePayment";
 
 function DataPayment() {
-  const cryptoOrders: CryptoOrder[] = [
-    {
-      id: "1",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "VUVX709ET7BY",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 34.4565,
-      amount: 56787,
-      cryptoCurrency: "ETH",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "2",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "23M3UOG65G8K",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 6.58454334,
-      amount: 8734587,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "3",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "failed",
-      orderID: "F6JHK65MS818",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 6.58454334,
-      amount: 8734587,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "4",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "QJFAI7N84LGM",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 6.58454334,
-      amount: 8734587,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "5",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "pending",
-      orderID: "BO5KFSYGC0YW",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 6.58454334,
-      amount: 8734587,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "6",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "6RS606CBMKVQ",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 6.58454334,
-      amount: 8734587,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "7",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "pending",
-      orderID: "479KUYHOBMJS",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 1212",
-      amountCrypto: 2.346546,
-      amount: 234234,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "8",
-      orderDetails: "Paypal Withdraw",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "W67CFZNT71KR",
-      sourceName: "Paypal Account",
-      sourceDesc: "*** 1111",
-      amountCrypto: 3.345456,
-      amount: 34544,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "9",
-      orderDetails: "Fiat Deposit",
-      orderDate: new Date().getTime(),
-      status: "completed",
-      orderID: "63GJ5DJFKS4H",
-      sourceName: "Bank Account",
-      sourceDesc: "*** 2222",
-      amountCrypto: 1.4389567945,
-      amount: 123843,
-      cryptoCurrency: "BTC",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-    {
-      id: "10",
-      orderDetails: "Wallet Transfer",
-      orderDate: new Date().getTime(),
-      status: "failed",
-      orderID: "17KRZHY8T05M",
-      sourceName: "Wallet Transfer",
-      sourceDesc: "John's Cardano Wallet",
-      amountCrypto: 765.5695,
-      amount: 7567,
-      cryptoCurrency: "ADA",
-      currency: "$",
-      history: [
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-        {
-          name: "300DST",
-          quality: 1,
-          price: "105000",
-          total: "105000",
-        },
-      ],
-    },
-  ];
+  const cryptoOrders: CryptoOrder[] = [];
+  const [limitPage, setLimitPage] = useState<number>(10);
+  const [offsetPage, setOffsetPage] = useState<number>(0);
+  const [statusPage, setStatusPage] = useState<string>("");
 
+  const [total, setTotal] = useState<number>(0);
+
+  const { update } = useAppContext();
+
+  const handleChangeLimit = (data: number) => {
+    setLimitPage(data);
+  };
+  const handleChangePage = (data: number) => {
+    setOffsetPage(data);
+  };
+
+  useEffect(() => {
+    audit
+      .showListPack({
+        limit: limitPage,
+        offset: offsetPage,
+        status: statusPage,
+      })
+      .then((res) => {
+        console.log(res.data.data);
+
+        let total = res.data.total;
+        let temp = total % limitPage;
+        if (temp === 0) {
+          setTotal(total / limitPage);
+        } else {
+          setTotal(Math.floor(total / limitPage) + 1);
+        }
+      });
+  }, [update, limitPage, offsetPage, statusPage]);
   return (
-    <Card sx={{ mt: 3 }}>
-      <TablePayment cryptoOrders={cryptoOrders} />
+    <Card>
+      <TablePayment
+        cryptoOrders={cryptoOrders}
+        handleChangeLimit={handleChangeLimit}
+        handleChangePage={handleChangePage}
+        total={total}
+      />
     </Card>
   );
 }

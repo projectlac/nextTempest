@@ -1,10 +1,11 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import banner from "../../api/banner";
 import SliderImage from "../../styles/assets/images/newsDes/Group1.png";
 import BG from "../../styles/assets/images/newsDes/Mask.png";
 import NavLeftArrow from "../../styles/assets/images/newsDes/NavLeftArrow.png";
@@ -68,6 +69,20 @@ function SamplePrevArrow(props) {
 }
 
 function SliderBox() {
+  const [fileListCurreny, setFileListCurreny] = useState<string[]>();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        await banner.getBanner().then((res) => {
+          const data = res.data.map((d) => d.url);
+          setFileListCurreny(data);
+        });
+      } catch (error) {}
+    };
+    getData();
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -89,9 +104,9 @@ function SliderBox() {
             <TitleHighlight>Banner hiện tại</TitleHighlight>
           </Box>
           <Slider {...settings} className="slick-custom">
-            <Image src={SliderImage} alt="" />
-            <Image src={SliderImage} alt="" />
-            <Image src={SliderImage} alt="" />
+            {(fileListCurreny || []).map((d) => (
+              <Image src={d} alt="" key={d} width={1352} height={690} />
+            ))}
           </Slider>
         </Box>
         <MainNews />

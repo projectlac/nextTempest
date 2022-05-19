@@ -33,6 +33,9 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: CryptoOrder[];
+  handleChangeLimit: (data: number) => void;
+  handleChangePage: (data: number) => void;
+  total: number;
 }
 
 interface Filters {

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 // let token = localStorage.getItem('access_token');
 const axiosAuthClient = axios.create({
-  baseURL: "http://159.223.74.89:8080//",
+  baseURL: "http://159.223.74.89:8080/",
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*/*",

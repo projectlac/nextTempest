@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useRouter } from "next/router";
 
 const axiosAudit = axios.create({
-  baseURL: "http://159.223.74.89:8080//",
+  baseURL: "http://159.223.74.89:8080/",
   headers: {
     "Content-Type": "application/json",
     accept: "*/*",
