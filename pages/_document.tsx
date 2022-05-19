@@ -24,6 +24,10 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <link rel="shortcut icon" href="./static/32x32.ico" />
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+          ></meta>
         </Head>
         <body>
           <Main />
