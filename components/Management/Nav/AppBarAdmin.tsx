@@ -63,11 +63,15 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
 
   const handleCloseUserMenu = () => {
     //Logout
+
+    //Logout
+    setAnchorElUser(null);
+  };
+
+  const logOut = () => {
     localStorage.removeItem("access_token");
     refreshLogin();
     router.push("/");
-    //Logout
-    setAnchorElUser(null);
   };
 
   // const convertIDtoIndex = () => {
@@ -181,7 +185,7 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={logOut}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
