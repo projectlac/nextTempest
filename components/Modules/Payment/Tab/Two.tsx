@@ -553,9 +553,11 @@ function Two() {
                     addProduct(d.id);
                   }}
                 >
-                  {d.id !== "1" && <Value>{d.name}</Value>}
-
-                  <Box sx={{ paddingTop: "17px" }} overflow="hidden">
+                  <Box
+                    sx={{ paddingTop: "17px", pointerEvents: "none" }}
+                    overflow="hidden"
+                  >
+                    {d.id !== "1" && <Value>{d.name}</Value>}
                     <Image
                       src={d.image}
                       alt=""
