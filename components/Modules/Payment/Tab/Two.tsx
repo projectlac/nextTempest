@@ -546,9 +546,6 @@ function Two() {
                     cursor: "pointer",
                     position: "relative",
 
-                    filter: `${
-                      d.quantily > 0 ? "brightness(1) " : "brightness(0.5) "
-                    }`,
                     border: "4px solid #88543c",
                     overflow: "hidden",
                   }}
