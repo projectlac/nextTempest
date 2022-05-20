@@ -41,7 +41,6 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
     },
   ]);
 
-  const [avatarCurrency, setAvatarCurrency] = React.useState<string>("");
   const { refreshLogin } = useAppContext();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -81,13 +80,6 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
   //   } else return AvatarImg.src;
   // };
 
-  React.useEffect(() => {
-    const localAvatar = localStorage.getItem("avatar");
-    const index = avatar.indexOf(
-      avatar.filter((d) => d.id === +localAvatar)[0]
-    );
-    setAvatarCurrency(avatar[index].url);
-  }, []);
   return (
     <AppBar position="static" sx={{ background: "#b16c4d" }}>
       <Container maxWidth="xl">
@@ -170,7 +162,7 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={avatarCurrency} />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu
