@@ -1,3 +1,4 @@
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
@@ -23,18 +24,18 @@ import {
   useTheme,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
   CryptoOrder,
   CryptoOrderStatus,
 } from "../../../../types/DashboardTypes/payment";
-import EditStatus from "../DialogCommon/EditStatus";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import WarningSubmit from "../DialogCommon/WarningSubmit";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: CryptoOrder[];
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
+  handleChangeStatus: (data: string) => void;
   total: number;
 }
 
@@ -48,12 +49,12 @@ const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
       text: "Failed",
       color: "#f00",
     },
-    completed: {
-      text: "Completed",
+    COMPLETED: {
+      text: "Hoàn thành",
       color: "#00bd0f",
     },
-    pending: {
-      text: "Pending",
+    PENDING: {
+      text: "Đang xử lý",
       color: "#567aff",
     },
   };
@@ -90,7 +91,13 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const TablePayment: FC<RecentOrdersTableProps> = ({
+  cryptoOrders,
+  handleChangeLimit,
+  handleChangePage,
+  handleChangeStatus,
+  total,
+}) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -115,10 +122,6 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       id: "pending",
       name: "Pending",
     },
-    {
-      id: "failed",
-      name: "Failed",
-    },
   ];
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -126,6 +129,9 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
     if (e.target.value !== "all") {
       value = e.target.value;
+      handleChangeStatus(e.target.value.toUpperCase() as CryptoOrderStatus);
+    } else {
+      handleChangeStatus("" as CryptoOrderStatus);
     }
 
     setFilters((prevFilters) => ({
@@ -136,10 +142,12 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
+    handleChangePage(newPage);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
+    handleChangeLimit(parseInt(event.target.value));
   };
 
   const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
@@ -242,7 +250,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               
             })} */}
 
-            {paginatedCryptoOrders.map((row, index) => (
+            {cryptoOrders.map((row, index) => (
               <Row key={row.id} row={row} />
             ))}
           </TableBody>
@@ -251,7 +259,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
       <Box p={2}>
         <TablePagination
           component="div"
-          count={filteredCryptoOrders.length}
+          count={total}
           onPageChange={handlePageChange}
           onRowsPerPageChange={handleLimitChange}
           page={page}
@@ -299,7 +307,7 @@ function Row(props: { row: CryptoOrder }) {
         </TableCell>
         <TableCell>
           <Typography variant="body1" color="text.primary" gutterBottom noWrap>
-            {row.orderDetails}
+            {row.user}
           </Typography>
           <Typography
             variant="body2"
@@ -309,7 +317,7 @@ function Row(props: { row: CryptoOrder }) {
         </TableCell>
         <TableCell>
           <Typography variant="body1" color="text.primary" gutterBottom noWrap>
-            {row.orderID}
+            {row.UID}
           </Typography>
         </TableCell>
         <TableCell>
@@ -319,17 +327,17 @@ function Row(props: { row: CryptoOrder }) {
         </TableCell>
         <TableCell>
           <Typography variant="body1" color="text.primary" gutterBottom noWrap>
-            {row.sourceName}
+            {toMoney(row.total.toString())} VNĐ
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap>
-            {row.sourceDesc}
+            {row.note}
           </Typography>
         </TableCell>
 
         <TableCell align="right">{getStatusLabel(row.status)}</TableCell>
         <TableCell align="right">
-          {row.status !== "completed" ? (
-            <Tooltip title="Chỉnh sửa trạng thái" arrow>
+          {row.status !== "COMPLETED" ? (
+            <Tooltip title="Hoàn thành" arrow>
               <IconButton
                 sx={{
                   "&:hover": {
@@ -340,7 +348,7 @@ function Row(props: { row: CryptoOrder }) {
                 color="inherit"
                 size="small"
               >
-                <EditStatus />
+                <WarningSubmit id={row.id} />
               </IconButton>
             </Tooltip>
           ) : (
@@ -375,30 +383,30 @@ function Row(props: { row: CryptoOrder }) {
               >
                 <Box>
                   <Typography>
-                    <b>Username</b>: admin
+                    <b>Username</b>: {row.username}
                   </Typography>
                   <Typography>
-                    <b>Password</b>: admin
+                    <b>Password</b>: {row.password}
                   </Typography>
                   <Typography>
-                    <b>Server</b>: Asia
+                    <b>Server</b>: {row.server}
                   </Typography>
                 </Box>
                 <Box>
                   <Typography>
-                    <b>UID</b>: admin
+                    <b>UID</b>: {row.UID}
                   </Typography>
                   <Typography>
-                    <b>Tên nhân vật</b>: Admin
+                    <b>Tên nhân vật</b>: {row.accountName}
                   </Typography>
                   <Typography>
-                    <b>Số điện thoại</b>: 0123456789
+                    <b>Số điện thoại</b>: {row.phone}
                   </Typography>
                 </Box>
               </Box>
               <Box mb={1}>
                 <Typography>
-                  <b>Ghi chú</b>: <i>(None)</i>
+                  <b>Ghi chú</b>: <i>{row.note}</i>
                 </Typography>
               </Box>
               <Divider></Divider>
@@ -435,7 +443,7 @@ function Row(props: { row: CryptoOrder }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow, index) => (
+                  {row.auditInformations.map((historyRow, index) => (
                     <TableRow
                       key={index}
                       sx={{
@@ -453,11 +461,13 @@ function Row(props: { row: CryptoOrder }) {
                         {historyRow.name}
                       </TableCell>
 
-                      <TableCell>{historyRow.quality}</TableCell>
-                      <TableCell>{toMoney(historyRow.price)}</TableCell>
+                      <TableCell>{historyRow.quantity}</TableCell>
+                      <TableCell>
+                        {toMoney(historyRow.unitPrice.toString())}
+                      </TableCell>
 
                       <TableCell align="right">
-                        {toMoney(historyRow.total)}
+                        {toMoney(historyRow.total.toString())}
                       </TableCell>
                     </TableRow>
                   ))}

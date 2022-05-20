@@ -1,9 +1,11 @@
-import { Box, Card, Container } from "@mui/material";
+import { Box, Card, Container, Divider, Typography } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import audit from "../../../api/audit";
 import { HistoryList } from "../../../types/DashboardTypes/history";
 import { NewsList } from "../../../types/DashboardTypes/news";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import { format } from "date-fns";
 
 async function fetchIssues(offset) {
   const links = await audit.getHistory({ limit: 15, offset });
@@ -57,7 +59,18 @@ function InfiniteList() {
   return (
     <Box>
       <Container>
-        <Card>
+        <Card
+          sx={{
+            p: 3,
+            mt: 3,
+          }}
+        >
+          <Box>Lịch sử thao tác</Box>
+          <Divider
+            sx={{
+              margin: "24px 0",
+            }}
+          ></Divider>
           <Box>
             <InfiniteScroll
               loadMore={fetchItems}
@@ -66,8 +79,36 @@ function InfiniteList() {
             >
               <Box>
                 {items.map((item) => (
-                  <Box key={item.id} height={100}>
-                    {item.historyMessage}
+                  <Box
+                    key={item.id}
+                    height={70}
+                    sx={{
+                      display: "flex",
+                    }}
+                  >
+                    <Box width={`calc(100% - 250px)`}>
+                      <Typography
+                        fontFamily={"Montserrat,sans-serif"}
+                        sx={{
+                          display: "flex",
+                        }}
+                      >
+                        <DoubleArrowIcon sx={{ marginRight: "10px" }} />
+                        {item.historyMessage}
+                      </Typography>
+                    </Box>
+                    <Box
+                      width={250}
+                      sx={{
+                        fontFamily: "Montserrat,sans-serif",
+                        textAlign: "right",
+                      }}
+                    >
+                      {format(
+                        new Date(item.createdAt),
+                        "yyyy-MM-dd / hh:ss:mm"
+                      )}
+                    </Box>
                   </Box>
                 ))}
               </Box>

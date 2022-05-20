@@ -30,13 +30,18 @@ function DataAccount() {
       .getAll({ limit: limitPage, offset: offsetPage, role: roleTable })
       .then((res) => {
         setData(res.data.data);
-        let total = res.data.total;
-        let temp = total % limitPage;
-        if (temp === 0) {
-          setTotal(total / limitPage);
-        } else {
-          setTotal(Math.floor(total / limitPage) + 1);
-        }
+
+        setTotal(total);
+
+        // let total = res.data.total;
+
+        // let temp = total % limitPage;
+
+        // if (temp === 0) {
+        //   setTotal(total);
+        // } else {
+        //   setTotal(Math.floor(total) + 1);
+        // }
       });
   }, [roleTable, limitPage, offsetPage, update]);
 

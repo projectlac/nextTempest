@@ -1,5 +1,12 @@
-import { ForgotForm, LoginForm, PromiseApi, RegisterForm } from "../types";
+import {
+  ChangePassword,
+  ForgotForm,
+  LoginForm,
+  PromiseApi,
+  RegisterForm,
+} from "../types";
 import { AccountTable } from "../types/DashboardTypes/account";
+import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 
 const authApi = {

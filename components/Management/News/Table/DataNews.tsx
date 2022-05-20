@@ -110,12 +110,13 @@ function DataNews() {
 
       setCryptoOrders(data);
       let total = res.data.total;
-      let temp = total % limitPage;
-      if (temp === 0) {
-        setTotal(total / limitPage);
-      } else {
-        setTotal(Math.floor(total / limitPage) + 1);
-      }
+      setTotal(total);
+      // let temp = total % limitPage;
+      // if (temp === 0) {
+      //   setTotal(total / limitPage);
+      // } else {
+      //   setTotal(Math.floor(total / limitPage) + 1);
+      // }
     });
   }, [update, limitPage, offsetPage]);
   return (

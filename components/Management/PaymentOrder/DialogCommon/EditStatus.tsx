@@ -97,14 +97,6 @@ export default function EditStatus() {
                 >
                   Completed
                 </MenuItem>
-                <MenuItem
-                  value={"Failed"}
-                  sx={{
-                    fontFamily: "Montserrat",
-                  }}
-                >
-                  Failed
-                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -114,7 +106,6 @@ export default function EditStatus() {
             padding: "15px",
           }}
         >
-          <WarningSubmit cancelDialog={handleClose} status={2} id={"2312"} />
           <Button
             onClick={handleClose}
             variant="contained"

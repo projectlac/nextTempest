@@ -1,22 +1,23 @@
-export type CryptoOrderStatus = "completed" | "pending" | "failed";
+export type CryptoOrderStatus = "COMPLETED" | "PENDING" | "failed";
 
 export interface CryptoOrder {
-  id: string;
+  updatedAt: string;
+  UID: string;
+  server: string;
+  username: string;
+  password: number;
+  accountName: string;
+  phone: number;
+  note: string;
+  total: number;
   status: CryptoOrderStatus;
-  orderDetails: string;
-  orderDate: number;
-  orderID: string;
-  sourceName: string;
-  sourceDesc: string;
-  amountCrypto: number;
-  amount: number;
-  cryptoCurrency: string;
-  currency: string;
-  history: PackInfor[];
+  auditInformations: PackInfor[];
+  user: string;
+  id: string;
 }
 export interface PackInfor {
   name: string;
-  quality: number;
-  price: string;
-  total: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
 }

@@ -12,7 +12,9 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Avatar from "../../../styles/assets/images/payment/avatar-cute-12.jpg";
-
+import audit from "../../../api/audit";
+import avatar from "../../../data/avatar";
+import { useAppContext } from "../../../context/state";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -38,7 +40,7 @@ const ImageChooseBox = styled(Box)({
   borderRadius: "50%",
   width: "100px",
   height: "100px",
-  border: "1px solid #BFAE9B",
+  // border: "1px solid #BFAE9B",
   overflow: "hidden",
   margin: "0px 15px 15px",
 });
@@ -67,6 +69,26 @@ interface PropsDialog {
   open: boolean;
 }
 export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
+  const [avatarSelected, setAvatarSelected] = React.useState<number>(0);
+  const handleOnSubmit = () => {
+    setLoading(true);
+
+    audit
+      .changeAvatar(avatarSelected)
+      .then((res) => {
+        setLoading(false);
+        handleChangeStatusToast();
+        handleChangeMessageToast("Thay đổi Avatar thành công!");
+      })
+      .catch((err) => {
+        setLoading(false);
+        handleChangeStatusToast();
+        handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
+      });
+  };
   return (
     <div>
       <Dialog
@@ -97,9 +119,19 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
           </ImageBox>
           <ScrollBox>
             <Box sx={{ padding: "30px", display: "flex", flexWrap: "wrap" }}>
-              {[...Array(20)].map((d, i) => (
-                <ImageChooseBox key={i}>
-                  <Image src={Avatar} width={100} height={100} alt="crys" />
+              {(avatar || []).map((d, i) => (
+                <ImageChooseBox
+                  key={i}
+                  sx={{
+                    border: `1px solid ${
+                      avatarSelected === d.id ? "#000" : "#BFAE9B"
+                    }`,
+                  }}
+                  onClick={() => {
+                    setAvatarSelected(d.id);
+                  }}
+                >
+                  <Image src={d.url} width={100} height={100} alt="crys" />
                 </ImageChooseBox>
               ))}
             </Box>
@@ -111,8 +143,8 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
           }}
         >
           <ButtonCustom onClick={handleClose}>Hủy</ButtonCustom>
-          <ButtonCustom className="submit" onClick={handleClose}>
-            Xác nhận
+          <ButtonCustom className="submit" onClick={handleOnSubmit}>
+            {loading ? "Waiting..." : "Xác nhận"}
           </ButtonCustom>
         </DialogActions>
       </Dialog>

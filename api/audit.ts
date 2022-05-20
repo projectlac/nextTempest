@@ -1,4 +1,10 @@
-import { AuditForm, EditRoleForm, PackForm, PromiseApi } from "../types";
+import {
+  AuditForm,
+  ChangePassword,
+  EditRoleForm,
+  PackForm,
+  PromiseApi,
+} from "../types";
 import { GetNews } from "../types/DashboardTypes/news";
 import { PackFormManagement } from "../types/DashboardTypes/packManagement";
 import axiosAudit from "./axiosAudit";
@@ -23,6 +29,19 @@ const audit = {
   showListPack(params: PackFormManagement): Promise<PromiseApi> {
     const url = `/audit?limit=${params.limit}&offsett=${params.offset}&status=${params.status}`;
     return axiosAudit.get(url);
+  },
+  completedThisPack(id: string): Promise<PromiseApi> {
+    const url = `/audit/update/${id}`;
+    return axiosAudit.patch(url);
+  },
+  //Change profile
+  changePassword(params: ChangePassword): Promise<PromiseApi> {
+    const url = `auth/change-password`;
+    return axiosAudit.patch(url, params);
+  },
+  changeAvatar(params: number): Promise<PromiseApi> {
+    const url = `change-avatar/${params}`;
+    return axiosAudit.patch(url, params);
   },
 };
 export default audit;

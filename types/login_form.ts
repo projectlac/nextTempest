@@ -18,3 +18,9 @@ export interface ForgotForm {
   confirmNewPassword: string;
   username: string;
 }
+
+export interface ChangePassword {
+  newPassword: string;
+  confirmNewPassword: string;
+  oldPassword: string;
+}

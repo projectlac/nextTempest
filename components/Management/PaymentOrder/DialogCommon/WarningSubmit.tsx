@@ -1,15 +1,14 @@
-import * as React from "react";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import { Box, TextField } from "@mui/material";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import * as React from "react";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
+import audit from "../../../../api/audit";
+import { useAppContext } from "../../../../context/state";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -19,15 +18,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 interface PropsDialogWarning {
-  cancelDialog?: () => void;
-  status: number;
   id: string;
 }
-export default function WarningSubmit({
-  cancelDialog,
-  status,
-  id,
-}: PropsDialogWarning) {
+export default function WarningSubmit({ id }: PropsDialogWarning) {
+  const { handleChangeStatusToast, handleChangeMessageToast, updated } =
+    useAppContext();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,22 +33,22 @@ export default function WarningSubmit({
     setOpen(false);
   };
   const handleCloseAll = () => {
+    audit
+      .completedThisPack(id)
+      .then((res) => {
+        handleChangeMessageToast("Thay đổi thành công");
+        handleChangeStatusToast();
+        updated();
+      })
+      .catch((error) => {
+        handleChangeMessageToast("Có lỗi xảy ra");
+        handleChangeStatusToast();
+      });
     setOpen(false);
-    status !== 3 && cancelDialog();
   };
   return (
     <div>
-      {status === 3 ? (
-        <DeleteTwoToneIcon fontSize="small" onClick={handleClickOpen} />
-      ) : (
-        <Button
-          onClick={handleClickOpen}
-          variant="contained"
-          sx={{ fontFamily: "Montserrat" }}
-        >
-          Xác nhận
-        </Button>
-      )}
+      <KeyboardDoubleArrowUpIcon fontSize="medium" onClick={handleClickOpen} />
 
       <Dialog
         open={open}

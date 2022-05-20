@@ -12,6 +12,9 @@ import AuthDevider from "../../../styles/assets/images/Authen/AuthDevider.png";
 import Background from "../../../styles/assets/images/payment/Layer60.png";
 import { Field, Form, Formik } from "formik";
 
+import audit from "../../../api/audit";
+import { useAppContext } from "../../../context/state";
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -64,7 +67,9 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
     newPassword: Yup.string().required("*Không được để trống "),
     confirmPassword: Yup.string().required("*Không được để trống "),
   });
+  const [loading, setLoading] = React.useState<boolean>(false);
 
+  const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
   return (
     <div>
       <Dialog
@@ -110,8 +115,28 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
             confirmPassword: "",
           }}
           validationSchema={LoginSchema}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={async (values) => {
+            const { oldPassword, newPassword, confirmPassword } = values;
+            setLoading(true);
+            await audit
+              .changePassword({
+                confirmNewPassword: confirmPassword,
+                newPassword,
+                oldPassword,
+              })
+              .then((res) => {
+                setLoading(false);
+                localStorage.setItem("access_token", res.data);
+                handleChangeStatusToast();
+                handleChangeMessageToast("Đổi mật khẩu thành công");
+                handleClose();
+              })
+              .catch((err) => {
+                handleChangeStatusToast();
+                handleChangeMessageToast(
+                  "Có gì đó không đúng, vui lòng thử lại!"
+                );
+              });
           }}
         >
           {({ errors, touched }) => (
@@ -127,7 +152,12 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
                     type="password"
                   />
                   {errors.oldPassword && touched.oldPassword ? (
-                    <Box position="absolute" bottom={10} color="#B56E4F">
+                    <Box
+                      position="absolute"
+                      left={45}
+                      bottom={10}
+                      color="#B56E4F"
+                    >
                       {errors.oldPassword}
                     </Box>
                   ) : null}
@@ -139,7 +169,12 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
                     type="password"
                   />
                   {errors.newPassword && touched.newPassword ? (
-                    <Box position="absolute" bottom={10} color="#B56E4F">
+                    <Box
+                      position="absolute"
+                      left={45}
+                      bottom={10}
+                      color="#B56E4F"
+                    >
                       {errors.newPassword}
                     </Box>
                   ) : null}
@@ -151,7 +186,12 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
                     type="password"
                   />
                   {errors.confirmPassword && touched.confirmPassword ? (
-                    <Box position="absolute" bottom={10} color="#B56E4F">
+                    <Box
+                      position="absolute"
+                      left={45}
+                      bottom={10}
+                      color="#B56E4F"
+                    >
                       {errors.confirmPassword}
                     </Box>
                   ) : null}
@@ -165,7 +205,7 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
               >
                 <ButtonCustom onClick={handleClose}>Hủy</ButtonCustom>
                 <button id="submitPassword" type="submit">
-                  Xác nhận
+                  {loading ? "Waiting..." : "Xác nhận"}
                 </button>
               </Box>
             </Form>
