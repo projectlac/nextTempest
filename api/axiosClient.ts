@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://159.223.74.89/",
+  baseURL: "https://acpt-app.herokuapp.com/",
   headers: {
     "Content-Type": "application/json",
     accept: "*/*",
