@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.png";
 import Avatar from "../../../../../styles/assets/images/payment/avatar-cute-12.jpg";
 import jwt_decode from "jwt-decode";
 import DialogChangeAvatar from "../../../../Common/DialogChangeAvatar/DialogChangeAvatar";
 import DialogChangePassword from "../../../../Common/DialogChangePassword/DialogChangePassword";
+import audit from "../../../../../api/audit";
+import avatar from "../../../../../data/avatar";
 
 const ImageBox = styled(Box)({
   borderRadius: "50%",
@@ -56,6 +58,26 @@ function SelectedMenuSecond() {
 
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState(false);
+  const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
+
+  const avatarTemp = localStorage.getItem("avatar");
+
+  React.useEffect(() => {
+    if (Boolean(avatarTemp)) {
+      setAvatarCurrency(+avatarTemp);
+    } else {
+      audit.getProfile().then((res) => {
+        if (res.data.avatar) {
+          localStorage.setItem("avatar", res.data.avatar);
+          setAvatarCurrency(res.data.avatar);
+        }
+      });
+    }
+  }, [avatarCurrency, avatarTemp]);
+
+  const convertIDtoIndex = (id: number) => {
+    return avatar.indexOf(avatar.filter((d) => d.id === id)[0]);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,13 +107,25 @@ function SelectedMenuSecond() {
         Thông tin tài khoản
       </Typography>
       <Image src={Devider} alt="devider" width={440} height={14} />
-      <Box textAlign={"center"}>
-        <ImageBox>
-          <Image src={Avatar} width={150} height={150} alt="crys" />
-        </ImageBox>
-        <ButtonCustom onClick={handleClickOpen}>Đổi avatar</ButtonCustom>
-        <DialogChangeAvatar handleClose={handleClose} open={open} />
-      </Box>
+      {avatar[convertIDtoIndex(avatarCurrency)] &&
+        avatar[convertIDtoIndex(avatarCurrency)].url && (
+          <Box textAlign={"center"}>
+            <ImageBox>
+              <Image
+                src={avatar[convertIDtoIndex(avatarCurrency)].url}
+                width={150}
+                height={150}
+                alt="crys"
+              />
+            </ImageBox>
+            <ButtonCustom onClick={handleClickOpen}>Đổi avatar</ButtonCustom>
+            <DialogChangeAvatar
+              handleClose={handleClose}
+              open={open}
+              avatarCurrency={avatar[convertIDtoIndex(avatarCurrency)].url}
+            />
+          </Box>
+        )}
       <Box
         sx={{
           display: "flex",

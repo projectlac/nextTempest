@@ -35,15 +35,8 @@ function DataPayment() {
       })
       .then((res) => {
         setCryptoOrders(res.data.data);
-
         let total = res.data.total;
-        let temp = total % limitPage;
         setTotal(total);
-        // if (temp === 0) {
-        //   setTotal(total / limitPage);
-        // } else {
-        //   setTotal(Math.floor(total / limitPage) + 1);
-        // }
       });
   }, [update, limitPage, offsetPage, statusPage]);
   return (

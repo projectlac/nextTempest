@@ -1,36 +1,31 @@
-import { FC, ChangeEvent, useState } from "react";
-
-import PropTypes from "prop-types";
 import {
-  Tooltip,
-  Divider,
   Box,
-  FormControl,
-  InputLabel,
   Card,
-  Checkbox,
+  CardHeader,
+  Divider,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TablePagination,
   TableRow,
-  TableContainer,
-  Select,
-  MenuItem,
+  Tooltip,
   Typography,
-  useTheme,
-  CardHeader,
 } from "@mui/material";
+import PropTypes from "prop-types";
+import { ChangeEvent, FC, useState } from "react";
 import {
   AccountData,
   AccountDataRole,
 } from "../../../../types/DashboardTypes/account";
-
-import EditSmileCoin from "../DialogCommon/EditSmileCoin";
 import EditRole from "../DialogCommon/EditRole";
-import WarningSubmit from "../DialogCommon/WarningSubmit";
+import EditSmileCoin from "../DialogCommon/EditSmileCoin";
 
 interface RecentOrdersTableProps {
   className?: string;
@@ -149,8 +144,6 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
     setLimit(parseInt(event.target.value));
     handleChangeLimit(parseInt(event.target.value));
   };
-
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
 
   const toMoney = (price: number) => {
     return price

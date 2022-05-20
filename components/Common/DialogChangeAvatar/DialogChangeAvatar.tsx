@@ -67,12 +67,18 @@ const ButtonCustom = styled(Box)({
 interface PropsDialog {
   handleClose: () => void;
   open: boolean;
+  avatarCurrency: string;
 }
-export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
+export default function DialogChangeAvatar({
+  open,
+  handleClose,
+  avatarCurrency,
+}: PropsDialog) {
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
   const [avatarSelected, setAvatarSelected] = React.useState<number>(0);
+
   const handleOnSubmit = () => {
     setLoading(true);
 
@@ -82,6 +88,8 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
         setLoading(false);
         handleChangeStatusToast();
         handleChangeMessageToast("Thay đổi Avatar thành công!");
+        localStorage.setItem("avatar", res.data);
+        handleClose();
       })
       .catch((err) => {
         setLoading(false);
@@ -89,6 +97,7 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
         handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
       });
   };
+
   return (
     <div>
       <Dialog
@@ -114,8 +123,12 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
         }}
       >
         <DialogContent>
-          <ImageBox>
-            <Image src={Avatar} width={150} height={150} alt="crys" />
+          <ImageBox
+            sx={{
+              background: "#fff",
+            }}
+          >
+            <Image src={avatarCurrency} width={150} height={150} alt="crys" />
           </ImageBox>
           <ScrollBox>
             <Box sx={{ padding: "30px", display: "flex", flexWrap: "wrap" }}>
@@ -126,6 +139,7 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
                     border: `1px solid ${
                       avatarSelected === d.id ? "#000" : "#BFAE9B"
                     }`,
+                    background: "#fff",
                   }}
                   onClick={() => {
                     setAvatarSelected(d.id);

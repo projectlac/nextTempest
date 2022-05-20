@@ -1,11 +1,9 @@
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import { Box, Card, Container, Divider, Typography } from "@mui/material";
+import { format } from "date-fns";
 import React, { useCallback, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import audit from "../../../api/audit";
-import { HistoryList } from "../../../types/DashboardTypes/history";
-import { NewsList } from "../../../types/DashboardTypes/news";
-import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import { format } from "date-fns";
 
 async function fetchIssues(offset) {
   const links = await audit.getHistory({ limit: 15, offset });

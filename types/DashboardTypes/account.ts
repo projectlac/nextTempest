@@ -11,4 +11,5 @@ export interface AccountData {
 }
 export interface AccountTable extends GetNews {
   role: AccountDataRole;
+  username: string;
 }

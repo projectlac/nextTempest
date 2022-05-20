@@ -3,6 +3,10 @@ export interface PackFormManagement {
   offset: number;
   status: string;
 }
+export interface PackHistoryOfAccount {
+  limit: number;
+  offset: number;
+}
 export interface PackFormReturn {
   UID: string;
   server: string;

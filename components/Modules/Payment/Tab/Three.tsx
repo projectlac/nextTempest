@@ -1,15 +1,8 @@
 import styled from "@emotion/styled";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React, { useState } from "react";
-import Image from "next/image";
-import Devider from "../../../../styles/assets/images/payment/PaymentDevider.png";
-import BGPack from "../../../../styles/assets/images/payment/BGPack.png";
-import dst300 from "../../../../styles/assets/images/payment/dst300.png";
-import Quati from "../../../../styles/assets/images/payment/Quati.png";
-import * as Yup from "yup";
-import { Field, Form, Formik } from "formik";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Pack } from "../../../../types";
+import InfinityListHistory from "./OneSelect/InfinityListHistory/InfinityListHistory";
 
 const DashboardBox = styled(Box)(
   ({ theme }) => `
@@ -51,27 +44,7 @@ const BoxBody = styled(Box)({
   overflow: "hidden",
   overflowY: "auto",
 });
-const BodyTable = styled(Box)({
-  background: "#e4ddd2",
-  display: "flex",
-  overflow: "hidden",
-  overflowY: "auto",
-  color: "#6B5E4F",
-  "&::-webkit-scrollbar": {
-    display: "none",
-  },
-  "& > div ": {
-    height: "70px",
 
-    borderBottom: " 2px solid #DAB88F",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "&:first-of-type": {
-      borderLeft: "none",
-    },
-  },
-});
 function Three() {
   const [defauValue, setDefaultValue] = useState<Pack[]>([
     {
@@ -131,14 +104,9 @@ function Three() {
       quantily: 0,
     },
   ]);
-  const toMoney = (price: string) => {
-    return price
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
-  };
+
+  const [history, setHistory] = useState([]);
+
   return (
     <Grid container>
       <Grid item md={12}>
@@ -164,17 +132,7 @@ function Three() {
               <Box style={{ width: "22%" }}>Trạng thái</Box>
             </BodyHead>
             <BoxBody>
-              {defauValue.length > 0 &&
-                defauValue.map((d, index) => (
-                  <BodyTable key={index + d.id}>
-                    <Box width={"7%"}>{index}</Box>
-                    <Box width={"25%"}>{d.name}</Box>
-                    <Box width={"24%"}>{toMoney(d.price)} VNĐ</Box>
-
-                    <Box width={"22%"}>{`sdasdas`}</Box>
-                    <Box width={"22%"}>Pending...</Box>
-                  </BodyTable>
-                ))}
+              <InfinityListHistory />
             </BoxBody>
           </Box>
         </DashboardBox>

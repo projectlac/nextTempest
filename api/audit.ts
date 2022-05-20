@@ -6,7 +6,10 @@ import {
   PromiseApi,
 } from "../types";
 import { GetNews } from "../types/DashboardTypes/news";
-import { PackFormManagement } from "../types/DashboardTypes/packManagement";
+import {
+  PackFormManagement,
+  PackHistoryOfAccount,
+} from "../types/DashboardTypes/packManagement";
 import axiosAudit from "./axiosAudit";
 
 const audit = {
@@ -27,7 +30,12 @@ const audit = {
     return axiosAudit.post(url, params);
   },
   showListPack(params: PackFormManagement): Promise<PromiseApi> {
-    const url = `/audit?limit=${params.limit}&offsett=${params.offset}&status=${params.status}`;
+    const url = `/audit/all?limit=${params.limit}&offsett=${params.offset}&status=${params.status}`;
+    return axiosAudit.get(url);
+  },
+
+  showHistoryOfAccount(params: PackHistoryOfAccount): Promise<PromiseApi> {
+    const url = `/audit?limit=${params.limit}&offsett=${params.offset}`;
     return axiosAudit.get(url);
   },
   completedThisPack(id: string): Promise<PromiseApi> {
@@ -40,8 +48,12 @@ const audit = {
     return axiosAudit.patch(url, params);
   },
   changeAvatar(params: number): Promise<PromiseApi> {
-    const url = `change-avatar/${params}`;
-    return axiosAudit.patch(url, params);
+    const url = `auth/change-avatar/${params}`;
+    return axiosAudit.patch(url);
+  },
+  getProfile(): Promise<PromiseApi> {
+    const url = `/auth/profile`;
+    return axiosAudit.get(url);
   },
 };
 export default audit;

@@ -3,7 +3,8 @@ import { Box, Grid, Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import Image from "next/image";
 import React from "react";
-import Avatar from "../../../../styles/assets/images/payment/avatar-cute-12.jpg";
+import avatar from "../../../../data/avatar";
+import audit from "../../../../api/audit";
 import BGName from "../../../../styles/assets/images/payment/BGName.png";
 import coin from "../../../../styles/assets/images/payment/coin.png";
 import Crystal from "../../../../styles/assets/images/payment/Crystal.png";
@@ -39,6 +40,7 @@ const ImageBox = styled(Box)({
   border: "6px solid #BFAE9B",
   overflow: "hidden",
   marginTop: "-80px",
+  background: "#fff",
 });
 const CrystalBox = styled(Box)({
   width: "49px",
@@ -80,6 +82,8 @@ const Paimon = styled(Box)({
 function One() {
   const [value, setValue] = React.useState<string>("momo");
   const [selectionMenu, setSelectionMenu] = React.useState<number>(0);
+  const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
+  const [moneyCurrency, setMoneyCurrency] = React.useState<number>(0);
 
   const handleValue = (data: string) => {
     setValue(data);
@@ -89,6 +93,43 @@ function One() {
   const decodeToken = () => {
     if (Boolean(token)) return jwt_decode<any>(token).username;
     return "";
+  };
+
+  const avatarTemp = localStorage.getItem("avatar");
+
+  React.useEffect(() => {
+    audit.getProfile().then((res) => {
+      if (res.data) {
+        setMoneyCurrency(res.data.money);
+      }
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (Boolean(avatarTemp)) {
+      setAvatarCurrency(+avatarTemp);
+    } else {
+      audit.getProfile().then((res) => {
+        if (res.data.avatar) {
+          localStorage.setItem("avatar", res.data.avatar);
+          setAvatarCurrency(res.data.avatar);
+        }
+      });
+    }
+  }, [avatarCurrency, avatarTemp]);
+
+  const convertIDtoIndex = (id: number) => {
+    return avatar.indexOf(avatar.filter((d) => d.id === id)[0]);
+  };
+
+  const toMoney = (price: number) => {
+    return price
+      .toString()
+      .split("")
+      .reverse()
+      .reduce((prev, next, index) => {
+        return (index % 3 ? next : next + ".") + prev;
+      });
   };
 
   return (
@@ -101,7 +142,15 @@ function One() {
         >
           <AvatarBox>
             <ImageBox>
-              <Image src={Avatar} width={125} height={125} alt="crys" />
+              {avatar[convertIDtoIndex(avatarCurrency)] &&
+                avatar[convertIDtoIndex(avatarCurrency)].url && (
+                  <Image
+                    src={avatar[convertIDtoIndex(avatarCurrency)].url}
+                    width={125}
+                    height={125}
+                    alt="crys"
+                  />
+                )}
             </ImageBox>
             <CrystalBox>
               <Image src={Crystal} width={49} height={45} alt="crys" />
@@ -136,8 +185,8 @@ function One() {
                 <Image src={coin} alt="slime coin" width={55} height={55} />
               </Box>
               <Box width={"calc(100% - 55px)"}>
-                <Typography fontSize={20} color="#94674B">
-                  10.000.000
+                <Typography fontSize={19} color="#94674B">
+                  {toMoney(moneyCurrency)}
                 </Typography>
               </Box>
             </Box>

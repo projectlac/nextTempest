@@ -16,6 +16,7 @@ import { useAppContext } from "../../../context/state";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import AvatarImg from "../../../styles/assets/images/payment/avatar-cute-12.jpg";
+import avatar from "../../../data/avatar";
 
 interface PropsMenu {
   activeMenu: () => void;
@@ -40,6 +41,7 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
     },
   ]);
 
+  const [avatarCurrency, setAvatarCurrency] = React.useState<string>("");
   const { refreshLogin } = useAppContext();
   const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -69,6 +71,23 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
     setAnchorElUser(null);
   };
 
+  // const convertIDtoIndex = () => {
+  //   if (typeof window !== "undefined") {
+  //     const avatarCurrency = localStorage.getItem("avatar");
+  //     const index = avatar.indexOf(
+  //       avatar.filter((d) => d.id === +avatarCurrency)[0]
+  //     );
+  //     return avatar[index].url as string;
+  //   } else return AvatarImg.src;
+  // };
+
+  React.useEffect(() => {
+    const localAvatar = localStorage.getItem("avatar");
+    const index = avatar.indexOf(
+      avatar.filter((d) => d.id === +localAvatar)[0]
+    );
+    setAvatarCurrency(avatar[index].url);
+  }, []);
   return (
     <AppBar position="static" sx={{ background: "#b16c4d" }}>
       <Container maxWidth="xl">
@@ -151,7 +170,7 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={AvatarImg.src} />
+                <Avatar alt="Remy Sharp" src={avatarCurrency} />
               </IconButton>
             </Tooltip>
             <Menu

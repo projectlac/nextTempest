@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -160,6 +160,7 @@ const BodyTable = styled(Box)({
 });
 function Two() {
   const { handleChangeMessageToast, handleChangeStatusToast } = useAppContext();
+  const [loading, setLoading] = useState<boolean>(false);
   const [defauValue, setDefaultValue] = useState<Pack[]>([
     {
       name: "Thẻ tháng",
@@ -312,7 +313,7 @@ function Two() {
                       unitPrice: +d.price,
                     })
                   );
-
+                  setLoading(true);
                   try {
                     await audit
                       .buyPack({
@@ -334,6 +335,9 @@ function Two() {
                       .catch((err) => {
                         handleChangeMessageToast(err.response.data.message);
                         handleChangeStatusToast();
+                      })
+                      .finally(() => {
+                        setLoading(false);
                       });
                   } catch (error) {}
                 }
@@ -502,8 +506,8 @@ function Two() {
                       </BoxBody>
                     </Box>
                   </Box>
-                  <button id="buttonBuy" type="submit">
-                    Nạp tiền
+                  <button id="buttonBuy" type="submit" disabled={loading}>
+                    {loading ? <CircularProgress /> : " Nạp tiền"}
                   </button>
                 </Form>
               )}
