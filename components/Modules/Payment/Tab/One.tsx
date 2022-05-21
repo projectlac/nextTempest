@@ -124,12 +124,14 @@ function One() {
 
   const toMoney = (price: number) => {
     return price
-      .toString()
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
+      ? price
+          .toString()
+          .split("")
+          .reverse()
+          .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + ".") + prev;
+          })
+      : 0;
   };
 
   return (
