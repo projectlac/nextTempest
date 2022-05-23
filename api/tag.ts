@@ -1,5 +1,6 @@
 import { PromiseApi } from "../types";
 import { AccountForm } from "../types/account";
+import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 
 const tagApi = {
@@ -13,7 +14,7 @@ const tagApi = {
   },
   addAccount(params: FormData): Promise<PromiseApi> {
     const url = `/account/create`;
-    return axiosClient.post(url, params);
+    return axiosAuthClient.post(url, params);
   },
 };
 export default tagApi;

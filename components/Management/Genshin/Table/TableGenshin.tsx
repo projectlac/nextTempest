@@ -23,15 +23,23 @@ import AddGenshin from "../DialogCommon/AddGenshin";
 import EditNews from "../DialogCommon/EditGenshin";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 
+interface AccountTable {
+  name: string;
+  code: string;
+  newPrice: number;
+  id: string;
+  updatedAt: string;
+}
+
 interface RecentOrdersTableProps {
   className?: string;
-  cryptoOrders: NewsList[];
+  cryptoOrders: AccountTable[];
   total: number;
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
 }
 
-const applyFilters = (cryptoOrders: NewsList[]): NewsList[] => {
+const applyFilters = (cryptoOrders: AccountTable[]): AccountTable[] => {
   return cryptoOrders.filter((cryptoOrder) => {
     let matches = true;
     return matches;
@@ -39,10 +47,10 @@ const applyFilters = (cryptoOrders: NewsList[]): NewsList[] => {
 };
 
 const applyPagination = (
-  cryptoOrders: NewsList[],
+  cryptoOrders: AccountTable[],
   page: number,
   limit: number
-): NewsList[] => {
+): AccountTable[] => {
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
@@ -78,13 +86,16 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
 
   const theme = useTheme();
 
-  const toMoney = (price: string) => {
+  const toMoney = (price: number) => {
     return price
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
+      ? price
+          .toString()
+          .split("")
+          .reverse()
+          .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + ".") + prev;
+          })
+      : 0;
   };
 
   return (
@@ -117,8 +128,10 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
               }}
             >
               <TableCell>STT</TableCell>
-              <TableCell>Tin tức</TableCell>
-              <TableCell>Mô tả</TableCell>
+              <TableCell>Tên sản phẩm</TableCell>
+              <TableCell>Mã Account</TableCell>
+              <TableCell>Giá bán</TableCell>
+
               <TableCell>Ngày cập nhật</TableCell>
 
               <TableCell align="center">Actions</TableCell>
@@ -161,8 +174,8 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.title.slice(0, 40)}
-                      {cryptoOrder.title.length > 40 && "..."}
+                      {cryptoOrder.name.slice(0, 40)}
+                      {cryptoOrder.name.length > 40 && "..."}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -177,8 +190,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.description.slice(0, 40)}
-                      {cryptoOrder.description.length > 40 && "..."}
+                      {cryptoOrder.code}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -188,10 +200,17 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {format(
-                        new Date(cryptoOrder.updatedAt),
-                        "yyyy-MM-dd / hh:ss:mm"
-                      )}
+                      {toMoney(cryptoOrder.newPrice)} VNĐ
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {format(new Date(), "yyyy-MM-dd / hh:ss:mm")}
                     </Typography>
                   </TableCell>
 

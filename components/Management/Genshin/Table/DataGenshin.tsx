@@ -1,11 +1,18 @@
 import { Card } from "@mui/material";
+import { useEffect, useState } from "react";
+import tagApi from "../../../../api/tag";
+import { useAppContext } from "../../../../context/state";
 import { NewsList } from "../../../../types/DashboardTypes/news";
 import TableGenshin from "./TableGenshin";
-import { useEffect, useState } from "react";
-import newsApi from "../../../../api/newsApi";
-import { useAppContext } from "../../../../context/state";
+interface AccountTable {
+  name: string;
+  code: string;
+  newPrice: number;
+  updatedAt: string;
+  id: string;
+}
 function DataGenshin() {
-  const [cryptoOrders, setCryptoOrders] = useState<NewsList[]>([]);
+  const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -16,17 +23,26 @@ function DataGenshin() {
   const handleChangePage = (data: number) => {
     setOffsetPage(data);
   };
-  useEffect(() => {
-    newsApi.getAll({ limit: limitPage, offset: offsetPage }).then((res) => {
-      const data = res.data.data.map((d) => {
-        const { content, ...result } = d;
-        return result;
-      });
 
-      setCryptoOrders(data);
-      let total = res.data.total;
-      setTotal(total);
-    });
+  useEffect(() => {
+    tagApi
+      .getAccount({
+        limit: limitPage,
+        offset: offsetPage,
+        character: "",
+        server: "",
+        weapon: "",
+      })
+      .then((res) => {
+        const data = res.data.data.map((d) => {
+          const { newPrice, code, name, updatedAt, id } = d;
+          return { newPrice, code, name, updatedAt, id };
+        });
+
+        setCryptoOrders(data);
+        let total = res.data.total;
+        setTotal(total);
+      });
   }, [update, limitPage, offsetPage]);
   return (
     <Card>
