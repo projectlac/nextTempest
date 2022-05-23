@@ -11,5 +11,9 @@ const tagApi = {
     const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}`;
     return axiosClient.get(url);
   },
+  addAccount(params: FormData): Promise<PromiseApi> {
+    const url = `/account/create`;
+    return axiosClient.post(url, params);
+  },
 };
 export default tagApi;

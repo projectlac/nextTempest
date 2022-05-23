@@ -10,6 +10,8 @@ import * as React from "react";
 import { AppWrapper } from "../context/state";
 import "../styles/globals.css";
 import "../styles/globals.scss";
+import "../styles/customCarousel.scss";
+
 import lightThemeOptions from "../styles/theme/lightThemeOption";
 import createEmotionCache from "../utility/createEmotionCache";
 interface MyAppProps extends AppProps {

@@ -5,3 +5,9 @@ export interface AccountForm extends PackHistoryOfAccount {
   character: string;
   server: string;
 }
+
+export enum TAG_TYPE {
+  SERVER = "SERVER",
+  CHARACTER = "CHARACTER",
+  WEAPON = "WEAPON",
+}

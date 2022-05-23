@@ -39,6 +39,10 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
       url: "/dashboard/payment-require",
       name: "Đơn nạp",
     },
+    {
+      url: "/dashboard/payment-list",
+      name: "Đơn mua",
+    },
   ]);
 
   const { refreshLogin } = useAppContext();

@@ -16,9 +16,11 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as React from "react";
 import * as yup from "yup";
-import newsApi from "../../../../api/newsApi";
+import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
+import { TAG_TYPE } from "../../../../types/account";
 import TinyEditor from "../../../Common/Editor/TinyEditor";
+import CharacterList from "./Feature/CharacterList";
 import ServerList from "./Feature/ServerList";
 import WeaponList from "./Feature/WeaponList";
 const Transition = React.forwardRef(function Transition(
@@ -39,6 +41,12 @@ export default function AddGenshin() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [fileList, setFileList] = React.useState<FileList>();
   const [fileListCurreny, setFileListCurreny] = React.useState<string[]>();
+  const [listData, setListData] = React.useState([]); // Loading đầu game để lấy dữ liệu cho form
+
+  //
+  // const [characterList, setCharacterList] = React.useState<string[]>([]);
+
+  //
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -48,27 +56,36 @@ export default function AddGenshin() {
     setOpen(false);
   };
 
-  const validationSchema = yup
-    .object({
-      title: yup
-        .string()
-        .min(8, "Title should be of minimum 8 characters length")
-        .required("Thông tin này là bắt buộc"),
+  const validationSchema = yup.object({
+    title: yup
+      .string()
+      .min(8, "Title should be of minimum 8 characters length")
+      .required("Thông tin này là bắt buộc"),
 
-      ar: yup.number().required("Thông tin này là bắt buộc"),
-      primogems: yup.number().required("Thông tin này là bắt buộc"),
-      newPrice: yup.number().required("Thông tin này là bắt buộc"),
-      accountId: yup.string().required("Thông tin này là bắt buộc"),
-      tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
-    })
-    .shape({
-      file: yup.mixed().required(),
-    });
+    ar: yup.number().required("Thông tin này là bắt buộc"),
+    weapon: yup
+      .array()
+      .min(1, "Thông tin này là bắt buộc")
+      .nullable()
+      .required("Thông tin này là bắt buộc"),
+    character: yup
+      .array()
+      .min(1, "Thông tin này là bắt buộc")
+      .nullable()
+      .required("Thông tin này là bắt buộc"),
+    server: yup.string().required("Thông tin này là bắt buộc"),
+    primogems: yup.number().required("Thông tin này là bắt buộc"),
+    newPrice: yup.number().required("Thông tin này là bắt buộc"),
+    accountId: yup.string().required("Thông tin này là bắt buộc"),
+    tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
+  });
 
   const formik = useFormik({
     initialValues: {
       title: "",
-
+      weapon: [],
+      character: [],
+      server: "",
       body: "",
       ar: 0,
       primogems: 0,
@@ -77,42 +94,78 @@ export default function AddGenshin() {
       moonPack: 0,
       oldPrice: 0,
       newPrice: 0,
-      file: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title, body } = values;
+      const {
+        title,
+        weapon,
+        character,
+        server,
+
+        body,
+        ar,
+        primogems,
+        tinhhuy,
+        accountId,
+        moonPack,
+        oldPrice,
+        newPrice,
+      } = values;
       const formData = new FormData();
-      formData.append("title", title);
 
-      formData.append("content", body);
-      formData.append("file", file);
-      console.log(values);
+      formData.append("name", title);
+      formData.append("ar", ar.toString());
+      formData.append("weapon", weapon.toString());
+      formData.append("char", character.toString());
+      formData.append("code", accountId);
+      formData.append("tinhHuy", tinhhuy.toString());
+      formData.append("nguyenThach", primogems.toString());
+      formData.append("server", server);
+      formData.append("oldPrice", oldPrice.toString());
+      formData.append("description", body.toString());
+      formData.append("newPrice", newPrice.toString());
+      formData.append("moonPack", moonPack.toString());
 
-      // setLoading(true);
-      // newsApi
-      //   .add(formData)
-      //   .then((res) => {
-      //     handleChangeMessageToast("Tạo bài viết thành công");
-      //     handleChangeStatusToast();
-      //     handleClose();
-      //     updated();
-      //     resetForm();
-      //     setFile(null);
-      //     setFileListCurreny(null);
-      //   })
-      //   .catch(() => {
-      //     handleChangeMessageToast("Có lỗi xảy ra");
-      //     handleChangeStatusToast();
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      for (let i = 0; i < fileList.length; i++) {
+        formData.append("files", fileList[i]);
+      }
+
+      setLoading(true);
+      tagApi
+        .addAccount(formData)
+        .then((res) => {
+          handleChangeMessageToast("Tạo tài khoản thành thành công");
+          handleChangeStatusToast();
+          handleClose();
+          updated();
+          resetForm();
+          setFile(null);
+          setFileListCurreny(null);
+        })
+        .catch(() => {
+          handleChangeMessageToast("Có lỗi xảy ra");
+          handleChangeStatusToast();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
 
   const onEditorChange = (data: string) => {
     formik.handleChange({ target: { name: "body", value: data } });
+  };
+
+  const handleSelectedCharacter = (data: string[]) => {
+    formik.handleChange({ target: { name: "character", value: data } });
+  };
+
+  const handleSelectedWeapon = (data: string[]) => {
+    formik.handleChange({ target: { name: "weapon", value: data } });
+  };
+  const handleSelectedServer = (data: string) => {
+    formik.handleChange({ target: { name: "server", value: data } });
   };
 
   const uploadMultiFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,6 +181,17 @@ export default function AddGenshin() {
 
     setFileListCurreny(fileArray);
   };
+
+  React.useEffect(() => {
+    const getData = async () => {
+      try {
+        await tagApi.getTag("").then((res) => {
+          setListData(res.data);
+        });
+      } catch (error) {}
+    };
+    getData();
+  }, [open]);
 
   return (
     <div>
@@ -157,7 +221,7 @@ export default function AddGenshin() {
         </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
-            <Box>
+            <Box mb={3}>
               <TextField
                 fullWidth
                 id="title"
@@ -179,8 +243,23 @@ export default function AddGenshin() {
                 helperText={formik.touched.title && formik.errors.title}
               />
             </Box>
+            <CharacterList
+              data={[...listData].filter((d) => d.type === TAG_TYPE.CHARACTER)}
+              error={
+                formik.touched.character && Boolean(formik.errors.character)
+              }
+              helper={
+                formik.touched.character && (formik.errors.character as string)
+              }
+              handleSelectedCharacter={handleSelectedCharacter}
+            />
+            <WeaponList
+              data={[...listData].filter((d) => d.type === TAG_TYPE.WEAPON)}
+              error={formik.touched.weapon && Boolean(formik.errors.weapon)}
+              helper={formik.touched.weapon && (formik.errors.weapon as string)}
+              handleSelectedWeapon={handleSelectedWeapon}
+            />
 
-            <WeaponList />
             <Grid container columnSpacing={2} rowSpacing={2}>
               <Grid item md={6}>
                 <TextField
@@ -285,7 +364,13 @@ export default function AddGenshin() {
                 />
               </Grid>
               <Grid item md={6}>
-                <ServerList />
+                <ServerList
+                  error={formik.touched.weapon && Boolean(formik.errors.weapon)}
+                  helper={
+                    formik.touched.weapon && (formik.errors.weapon as string)
+                  }
+                  handleSelectedServer={handleSelectedServer}
+                />
               </Grid>
               <Grid item md={6}>
                 <TextField
@@ -368,7 +453,7 @@ export default function AddGenshin() {
             </Typography>
             <TinyEditor changeBody={onEditorChange} defaultValue="" />
 
-            <Box mt={3}>
+            {/* <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
                 Ảnh chính
               </Typography>
@@ -385,10 +470,10 @@ export default function AddGenshin() {
                   }}
                 />
               </Button>
-            </Box>
+            </Box> */}
             <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-                Ảnh slide (Tối đa 5 ảnh)
+                Ảnh slide (Tối đa 5 ảnh) 1000x500
               </Typography>
               <Button variant="contained" component="label">
                 Upload File

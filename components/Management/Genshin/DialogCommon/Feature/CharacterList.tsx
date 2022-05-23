@@ -20,19 +20,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
     fontWeight:
@@ -42,22 +29,21 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
   };
 }
 
-interface WeaponProps {
+interface CharacterProps {
   data: any;
-  error: boolean;
   helper: string;
-  handleSelectedWeapon: (data: string[]) => void;
+  error: boolean;
+  handleSelectedCharacter: (data: string[]) => void;
 }
-export default function WeaponList({
+export default function CharacterList({
   data,
   error,
   helper,
-  handleSelectedWeapon,
-}: WeaponProps) {
+  handleSelectedCharacter,
+}: CharacterProps) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
   const [names, setNames] = React.useState(data);
-
+  const [personName, setPersonName] = React.useState<string[]>([]);
   React.useEffect(() => {
     setNames(data);
   }, [data]);
@@ -69,7 +55,9 @@ export default function WeaponList({
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-    handleSelectedWeapon(typeof value === "string" ? value.split(",") : value);
+    handleSelectedCharacter(
+      typeof value === "string" ? value.split(",") : value
+    );
   };
 
   return (
@@ -77,7 +65,6 @@ export default function WeaponList({
       <FormControl
         fullWidth
         sx={{
-          my: 3,
           "& label": {
             fontFamily: "Montserrat",
             fontWeight: "bold",
@@ -91,18 +78,22 @@ export default function WeaponList({
           id="demo-multiple-chip-label"
           sx={{ color: `${error ? "#d32f2f" : ""}` }}
         >
-          Danh sách vũ khí
+          Danh sách nhân vật
         </InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
+          name="character"
           value={personName}
-          error={error}
-          name="weapon"
+          fullWidth
           onChange={handleChange}
+          error={error}
           input={
-            <OutlinedInput id="select-multiple-chip" label="Danh sách vũ khí" />
+            <OutlinedInput
+              id="select-multiple-chip"
+              label="Danh sách nhân vật"
+            />
           }
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
@@ -110,9 +101,7 @@ export default function WeaponList({
                 <Chip
                   key={value}
                   label={value}
-                  sx={{
-                    fontFamily: "Montserrat",
-                  }}
+                  sx={{ fontFamily: "Montserrat" }}
                 />
               ))}
             </Box>

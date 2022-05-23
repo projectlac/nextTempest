@@ -23,8 +23,8 @@ const ProductWrap = styled(Box)(
 function BuyAccountModule() {
   return (
     <ProductWrap>
-      <Box mb={10}>
-        <TitleHighlight>Danh sách tài khoản</TitleHighlight>
+      <Box mb={10} mt={20}>
+        <TitleHighlight mb={3}>Danh sách tài khoản</TitleHighlight>
         <Container sx={{ background: `url(${BGContainer.src})` }}>
           <Grid container>
             <Grid item md={3}>

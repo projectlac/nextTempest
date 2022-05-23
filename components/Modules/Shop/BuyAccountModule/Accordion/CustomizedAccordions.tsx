@@ -9,6 +9,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import tagApi from "../../../../../api/tag";
+import { TAG_TYPE } from "../../../../../types/account";
 
 interface AccordionProp {
   title: string;
@@ -94,11 +95,7 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
     </Box>
   );
 };
-enum TAG_TYPE {
-  SERVER = "SERVER",
-  CHARACTER = "CHARACTER",
-  WEAPON = "WEAPON",
-}
+
 export default function CustomizedAccordions() {
   const [listData, setListData] = React.useState([]);
   React.useEffect(() => {

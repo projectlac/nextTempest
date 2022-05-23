@@ -4,30 +4,93 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { FormHelperText } from "@mui/material";
 
-export default function ServerList() {
+interface ServerListProps {
+  error: boolean;
+  helper: string;
+  handleSelectedServer: (data: string) => void;
+}
+export default function ServerList({
+  error,
+  helper,
+  handleSelectedServer,
+}: ServerListProps) {
   const [age, setAge] = React.useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
+    handleSelectedServer(event.target.value as string);
   };
 
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Danh sách Server</InputLabel>
+      <FormControl
+        fullWidth
+        sx={{
+          "& label": {
+            fontFamily: "Montserrat",
+            fontWeight: "bold",
+          },
+          "& input": {
+            fontFamily: "Montserrat",
+          },
+        }}
+      >
+        <InputLabel
+          id="demo-simple-select-label"
+          sx={{ color: `${error ? "#d32f2f" : ""}` }}
+        >
+          Danh sách Server
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={age}
+          sx={{
+            fontFamily: "Montserrat",
+          }}
+          name="server"
           label="Danh sách Server"
           onChange={handleChange}
+          error={error}
         >
-          <MenuItem value={"Asean"}>Asean</MenuItem>
-          <MenuItem value={"America"}>America</MenuItem>
-          <MenuItem value={"Europe"}>Europe</MenuItem>
-          <MenuItem value={"TW, HK, MO"}>TW, HK, MO</MenuItem>
+          <MenuItem
+            sx={{
+              fontFamily: "Montserrat",
+            }}
+            value={"Asean"}
+          >
+            Asean
+          </MenuItem>
+          <MenuItem
+            sx={{
+              fontFamily: "Montserrat",
+            }}
+            value={"America"}
+          >
+            America
+          </MenuItem>
+          <MenuItem
+            sx={{
+              fontFamily: "Montserrat",
+            }}
+            value={"Europe"}
+          >
+            Europe
+          </MenuItem>
+          <MenuItem
+            sx={{
+              fontFamily: "Montserrat",
+            }}
+            value={"TW, HK, MO"}
+          >
+            TW, HK, MO
+          </MenuItem>
         </Select>
+        {error && (
+          <FormHelperText sx={{ color: "#d32f2f" }}>{helper}</FormHelperText>
+        )}
       </FormControl>
     </Box>
   );
