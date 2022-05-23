@@ -285,13 +285,16 @@ function Row(props: { row: CryptoOrder }) {
   const { row } = props;
   const [open, setOpen] = useState(false);
 
-  const toMoney = (price: string) => {
+  const toMoney = (price: number) => {
     return price
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
+      ? price
+          .toString()
+          .split("")
+          .reverse()
+          .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + ".") + prev;
+          })
+      : 0;
   };
   return (
     <>
@@ -327,7 +330,7 @@ function Row(props: { row: CryptoOrder }) {
         </TableCell>
         <TableCell>
           <Typography variant="body1" color="text.primary" gutterBottom noWrap>
-            {toMoney(row.total.toString())} VNĐ
+            {toMoney(row.total)} VNĐ
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap>
             {row.note}
@@ -462,12 +465,10 @@ function Row(props: { row: CryptoOrder }) {
                       </TableCell>
 
                       <TableCell>{historyRow.quantity}</TableCell>
-                      <TableCell>
-                        {toMoney(historyRow.unitPrice.toString())}
-                      </TableCell>
+                      <TableCell>{toMoney(historyRow?.unitPrice)}</TableCell>
 
                       <TableCell align="right">
-                        {toMoney(historyRow.total.toString())}
+                        {toMoney(historyRow?.total)}
                       </TableCell>
                     </TableRow>
                   ))}

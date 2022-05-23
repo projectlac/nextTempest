@@ -9,7 +9,7 @@ function DetailNewsPage({ post }) {
     <Layout>
       <>
         <Head>
-          <title>{post.title}</title>
+          <title>{post?.title || "Tempest"}</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
@@ -19,7 +19,7 @@ function DetailNewsPage({ post }) {
             content={`https://www.tempest.nv/chi-tiet-tin-tuc/${post.slug}`}
           />
           <meta property="og:type" content="article" />
-          <meta property="og:title" content={post.title} />
+          <meta property="og:title" content={post?.title || "Tempest"} />
           <meta property="og:description" content={post.description} />
           <meta property="og:image" content={post.imageUrl} />
           <meta property="og:image:width" content="1200" />
@@ -50,7 +50,7 @@ export async function getStaticPaths() {
   }));
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
@@ -62,5 +62,5 @@ export async function getStaticProps({ params }) {
   const post = await res.data;
 
   // Pass post data to the page via props
-  return { props: { post } };
+  return { props: { post }, revalidate: 1 };
 }
