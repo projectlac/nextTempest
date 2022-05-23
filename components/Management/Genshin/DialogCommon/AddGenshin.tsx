@@ -81,10 +81,10 @@ export default function AddGenshin() {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title, description, body } = values;
+      const { title, body } = values;
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("description", description);
+
       formData.append("content", body);
       formData.append("file", file);
       console.log(values);
