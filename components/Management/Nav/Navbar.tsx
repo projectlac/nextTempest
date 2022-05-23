@@ -41,7 +41,7 @@ export default function Navbar() {
     {
       name: "Quản lý Genshin",
       icon: <InboxIcon />,
-      link: "/",
+      link: "/dashboard/genshin",
     },
     {
       name: "Phân quyền",

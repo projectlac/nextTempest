@@ -77,7 +77,7 @@ function ShopItem({ item, id, oldPrice, newPrice, status }: PropShopItem) {
     <Box>
       <ImageBox>
         <Link href={`/chi-tiet/${id}`} passHref>
-          <Image src={ItemProduct} alt={item} />
+          <Image src={ItemProduct} alt={item} layout="responsive" />
         </Link>
       </ImageBox>
       <Box>
