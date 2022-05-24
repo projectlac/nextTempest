@@ -64,7 +64,7 @@ export default function WeaponList({
     setNames(data);
   }, [data]);
   React.useEffect(() => {
-    setPersonName(defaultValue);
+    if (defaultValue.length > 0) setPersonName(defaultValue);
   }, [data]);
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {

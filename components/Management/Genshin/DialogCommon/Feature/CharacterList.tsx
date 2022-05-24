@@ -48,7 +48,7 @@ export default function CharacterList({
   const [personName, setPersonName] = React.useState<string[]>([]);
   React.useEffect(() => {
     setNames(data);
-    setPersonName(defaultValue);
+    if (defaultValue.length > 0) setPersonName(defaultValue);
   }, [data]);
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
