@@ -10,7 +10,7 @@ function ListProduct() {
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    console.log(page);
+    setPageCurrently(page);
   };
 
   useEffect(() => {

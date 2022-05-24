@@ -193,6 +193,23 @@ export default function AddGenshin() {
     getData();
   }, [open]);
 
+  const getNameSortAtoB = (type: string) => {
+    return [...listData]
+      .filter((d) => d.type === type)
+      .sort((a, b) => {
+        const nameA = a.title.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.title.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+  };
   return (
     <div>
       <Button
@@ -244,7 +261,7 @@ export default function AddGenshin() {
               />
             </Box>
             <CharacterList
-              data={[...listData].filter((d) => d.type === TAG_TYPE.CHARACTER)}
+              data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
               error={
                 formik.touched.character && Boolean(formik.errors.character)
               }
@@ -254,7 +271,7 @@ export default function AddGenshin() {
               handleSelectedCharacter={handleSelectedCharacter}
             />
             <WeaponList
-              data={[...listData].filter((d) => d.type === TAG_TYPE.WEAPON)}
+              data={getNameSortAtoB(TAG_TYPE.WEAPON)}
               error={formik.touched.weapon && Boolean(formik.errors.weapon)}
               helper={formik.touched.weapon && (formik.errors.weapon as string)}
               handleSelectedWeapon={handleSelectedWeapon}

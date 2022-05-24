@@ -18,9 +18,8 @@ import {
 import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
-import { NewsList } from "../../../../types/DashboardTypes/news";
 import AddGenshin from "../DialogCommon/AddGenshin";
-import EditNews from "../DialogCommon/EditGenshin";
+import EditGenshin from "../DialogCommon/EditGenshin";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 
 interface AccountTable {
@@ -226,7 +225,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                         color="inherit"
                         size="small"
                       >
-                        <EditNews id={cryptoOrder.id} />
+                        <EditGenshin id={cryptoOrder.id} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Xóa bài viết" arrow>
