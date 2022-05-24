@@ -65,9 +65,9 @@ export default function ServerList({
             sx={{
               fontFamily: "Montserrat",
             }}
-            value={"Asean"}
+            value={"Asia"}
           >
-            Asean
+            Asia
           </MenuItem>
           <MenuItem
             sx={{
