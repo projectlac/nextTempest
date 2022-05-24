@@ -269,12 +269,14 @@ export default function AddGenshin() {
                 formik.touched.character && (formik.errors.character as string)
               }
               handleSelectedCharacter={handleSelectedCharacter}
+              defaultValue={[]}
             />
             <WeaponList
               data={getNameSortAtoB(TAG_TYPE.WEAPON)}
               error={formik.touched.weapon && Boolean(formik.errors.weapon)}
               helper={formik.touched.weapon && (formik.errors.weapon as string)}
               handleSelectedWeapon={handleSelectedWeapon}
+              defaultValue={[]}
             />
 
             <Grid container columnSpacing={2} rowSpacing={2}>
@@ -387,6 +389,7 @@ export default function AddGenshin() {
                     formik.touched.weapon && (formik.errors.weapon as string)
                   }
                   handleSelectedServer={handleSelectedServer}
+                  defaultValue={""}
                 />
               </Grid>
               <Grid item md={6}>

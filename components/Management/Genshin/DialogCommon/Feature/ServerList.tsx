@@ -10,11 +10,13 @@ interface ServerListProps {
   error: boolean;
   helper: string;
   handleSelectedServer: (data: string) => void;
+  defaultValue: string;
 }
 export default function ServerList({
   error,
   helper,
   handleSelectedServer,
+  defaultValue,
 }: ServerListProps) {
   const [age, setAge] = React.useState("");
 
@@ -23,6 +25,10 @@ export default function ServerList({
     handleSelectedServer(event.target.value as string);
   };
 
+  React.useEffect(() => {
+    setAge(defaultValue);
+    console.log(defaultValue);
+  }, [defaultValue]);
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl

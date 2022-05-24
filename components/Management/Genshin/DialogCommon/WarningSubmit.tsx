@@ -12,6 +12,7 @@ import { Box, TextField } from "@mui/material";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import newsApi from "../../../../api/newsApi";
 import { useAppContext } from "../../../../context/state";
+import tagApi from "../../../../api/tag";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -41,10 +42,10 @@ export default function WarningSubmit({
     setOpen(false);
   };
 
-  const deleteNewsById = async (id: string) => {
+  const deleteAccountById = async (id: string) => {
     try {
-      await newsApi.delete(id).then(() => {
-        handleChangeMessageToast("Xóa bài viết thành công");
+      await tagApi.deleteAccount(id).then(() => {
+        handleChangeMessageToast("Xóa tài khoản thành công");
         updated();
         handleChangeStatusToast();
       });
@@ -57,7 +58,7 @@ export default function WarningSubmit({
     setOpen(false);
     status !== 3 && cancelDialog();
     if (status === 3) {
-      deleteNewsById(id);
+      deleteAccountById(id);
     }
   };
   return (

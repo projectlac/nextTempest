@@ -34,11 +34,13 @@ interface CharacterProps {
   helper: string;
   error: boolean;
   handleSelectedCharacter: (data: string[]) => void;
+  defaultValue: string[];
 }
 export default function CharacterList({
   data,
   error,
   helper,
+  defaultValue,
   handleSelectedCharacter,
 }: CharacterProps) {
   const theme = useTheme();
@@ -46,6 +48,7 @@ export default function CharacterList({
   const [personName, setPersonName] = React.useState<string[]>([]);
   React.useEffect(() => {
     setNames(data);
+    setPersonName(defaultValue);
   }, [data]);
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {

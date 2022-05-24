@@ -3,6 +3,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import * as React from "react";
 import newsApi from "../../../../api/newsApi";
+import tagApi from "../../../../api/tag";
 import DialogEdit from "./DialogEdit/DialogEdit";
 
 interface PropsEditNews {
@@ -11,16 +12,27 @@ interface PropsEditNews {
 export default function EditGenshin({ id }: PropsEditNews) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [defaultData, setDefaultData] = React.useState({
-    id: "",
-    title: "",
+    ar: 0,
+    code: "",
+    tinhHuy: 0,
+    moonPack: 0,
+    nguyenThach: 0,
+    char: "",
+    weapon: "",
+    server: "",
+    name: "",
+    oldPrice: 0,
+    newPrice: 0,
     description: "",
-    content: "",
-    imageUrl: null,
+    id: "",
+    tags: [],
+    cloundinary: [],
   });
+  // Loading đầu game để lấy dữ liệu cho form
 
   const callApi = async () => {
     try {
-      await newsApi.getNewsById(id).then((res) => {
+      await tagApi.getAccountById(id).then((res) => {
         setDefaultData(res.data);
       });
     } catch (error) {}

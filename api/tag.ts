@@ -16,5 +16,17 @@ const tagApi = {
     const url = `/account/create`;
     return axiosAuthClient.post(url, params);
   },
+  deleteAccount(id: string): Promise<PromiseApi> {
+    const url = `/account/${id}`;
+    return axiosAuthClient.delete(url);
+  },
+  getAccountById(id: string): Promise<PromiseApi> {
+    const url = `/account-get/details?id=${id}`;
+    return axiosAuthClient.get(url);
+  },
+  updateAccount(id: string, params: FormData): Promise<PromiseApi> {
+    const url = `/account/${id}`;
+    return axiosAuthClient.patch(url, params);
+  },
 };
 export default tagApi;

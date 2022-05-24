@@ -113,9 +113,16 @@ function DetailNews({ detailNews }: PropsDetailNews) {
               >
                 <Image src={Devider} alt="devider" width={440} height={14} />
               </Box>
-
               <Box
                 sx={{
+                  fontFamily: "Montserrat !important",
+                }}
+              >
+                {detailNews.description}
+              </Box>
+              <Box
+                sx={{
+                  fontFamily: "Montserrat !important",
                   "& *": {
                     wordBreak: "break-word",
                     wordWrap: "break-word",

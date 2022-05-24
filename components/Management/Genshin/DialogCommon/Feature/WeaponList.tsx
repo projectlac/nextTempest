@@ -46,6 +46,7 @@ interface WeaponProps {
   data: any;
   error: boolean;
   helper: string;
+  defaultValue: string[];
   handleSelectedWeapon: (data: string[]) => void;
 }
 export default function WeaponList({
@@ -53,6 +54,7 @@ export default function WeaponList({
   error,
   helper,
   handleSelectedWeapon,
+  defaultValue,
 }: WeaponProps) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
@@ -60,6 +62,9 @@ export default function WeaponList({
 
   React.useEffect(() => {
     setNames(data);
+  }, [data]);
+  React.useEffect(() => {
+    setPersonName(defaultValue);
   }, [data]);
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {

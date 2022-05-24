@@ -209,7 +209,10 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {format(new Date(), "yyyy-MM-dd / hh:ss:mm")}
+                      {format(
+                        new Date(cryptoOrder.updatedAt),
+                        "yyyy-MM-dd / hh:ss:mm"
+                      )}
                     </Typography>
                   </TableCell>
 

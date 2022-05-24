@@ -39,28 +39,36 @@ DetailNewsPage.getLayout = function getLayout(page) {
 };
 export default DetailNewsPage;
 
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const res = await newsApi.getAll({ limit: 99, offset: 0 });
-  const posts = await res.data.data;
+// export async function getStaticPaths() {
+//   // Call an external API endpoint to get posts
+//   const res = await newsApi.getAll({ limit: 99, offset: 0 });
+//   const posts = await res.data.data;
 
-  // Get the paths we want to pre-render based on posts
-  const paths = posts.map((post) => ({
-    params: { id: post.slug },
-  }));
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: 'blocking' };
-}
+//   // Get the paths we want to pre-render based on posts
+//   const paths = posts.map((post) => ({
+//     params: { id: post.slug },
+//   }));
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: 'blocking' };
+// }
 
-export async function getStaticProps({ params }) {
-  // params contains the post `id`.
+// export async function getStaticProps({ params }) {
+//   // params contains the post `id`.
 
-  // If the route is like /posts/1, then params.id is 1
-  const res = await newsApi.getNewsBySlug(params.id as string);
+//   // If the route is like /posts/1, then params.id is 1
+//   const res = await newsApi.getNewsBySlug(params.id as string);
 
+//   const post = await res.data;
+
+//   // Pass post data to the page via props
+//   return { props: { post }, revalidate: 1 };
+// }
+
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const res = await newsApi.getNewsBySlug(id as string);
   const post = await res.data;
 
-  // Pass post data to the page via props
-  return { props: { post }, revalidate: 1 };
+  return { props: { post } };
 }
