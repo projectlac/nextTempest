@@ -109,7 +109,7 @@ function ShopItem({
     setListWishList(JSON.parse(localStorage.getItem("wishList")));
   }, [reRender]);
   const likeOrNone = (id: string) => {
-    const index = listWishList.indexOf(id);
+    const index = listWishList?.indexOf(id);
     if (index === -1) {
       return (
         <FavoriteBorderIcon

@@ -100,7 +100,7 @@ function InfinityListHistory() {
             <Box width={"25%"}>{item.user}</Box>
             <Box width={"24%"}>{toMoney(item.total)} VNĐ</Box>
 
-            <Box width={"22%"}>{item.note}</Box>
+            <Box width={"22%"}>{item?.note}</Box>
             <Box width={"22%"} textTransform="capitalize">
               {item.status.toLowerCase()}
             </Box>

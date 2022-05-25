@@ -78,8 +78,13 @@ function NewProduct() {
                 `}
                 oldPrice={"2.400.164 VND"}
                 newPrice={"1.611.277 VND"}
-                status={0}
-                id={"123456789"}
+                status={"AVAILABLE"}
+                id={"123123123"}
+                image={
+                  "http://res.cloudinary.com/shoppacc/image/upload/v1653388092/mkivq9ny7kobqizp8rsa.png"
+                }
+                slug="hihihihi"
+                key={i}
               />
             </Grid>
           ))}
