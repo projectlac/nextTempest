@@ -32,6 +32,7 @@ function DataGenshin() {
         character: "",
         server: "",
         weapon: "",
+        sort: null,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
