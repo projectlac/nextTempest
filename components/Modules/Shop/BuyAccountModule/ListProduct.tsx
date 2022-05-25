@@ -16,7 +16,7 @@ function ListProduct() {
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setPageCurrently(page);
+    setPageCurrently(page - 1);
   };
 
   const handleSortBy = (data: number) => {
