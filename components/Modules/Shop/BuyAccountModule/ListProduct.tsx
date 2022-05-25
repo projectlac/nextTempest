@@ -77,11 +77,13 @@ function ListProduct() {
                 }}
               >
                 <ShopItem
+                  image={d.imageUrl}
                   item={d.name}
                   oldPrice={`${toMoney(d.oldPrice)} VND`}
                   newPrice={`${toMoney(d.newPrice)} VND`}
                   status={d.status}
-                  id={d.slug}
+                  slug={d.slug}
+                  id={d.id}
                 />
               </Grid>
             ))

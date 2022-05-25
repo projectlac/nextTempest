@@ -32,5 +32,9 @@ const tagApi = {
     const url = `/account-get/details?slug=${slug}`;
     return axiosClient.get(url);
   },
+  getAccountByListID(listID: string): Promise<PromiseApi> {
+    const url = `/account-get/wish-list?ids=${listID}`;
+    return axiosClient.get(url);
+  },
 };
 export default tagApi;

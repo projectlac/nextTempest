@@ -9,7 +9,7 @@ export default function DetailProduct({ post }) {
   return (
     <Layout>
       <Head>
-        <title>Chi tiết</title>
+        <title>{post.name}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <DetailAccountModule data={post} />

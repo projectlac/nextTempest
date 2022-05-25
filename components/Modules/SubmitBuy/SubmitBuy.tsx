@@ -1,16 +1,19 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
-import background from "../../../styles/assets/images/Background.png";
-import NextBTN from "../../../styles/assets/images/Shop/NextButton.png";
-import BackBTN from "../../../styles/assets/images/Shop/BackButton.png";
-import Shenhe from "../../../styles/assets/images/Shop/Shenhe.png";
-import PaimonSubmitBuyAccount from "../../../styles/assets/images/Shop/PaimonSubmitBuyAccount.png";
-
-import BackgroundShop from "../../Common/BackgroundShop/BackgroundShop";
-
-import TitleHighlight from "../../Common/Title/TitleHighlight";
 import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import tagApi from "../../../api/tag";
+import background from "../../../styles/assets/images/Background.png";
+import BackBTN from "../../../styles/assets/images/Shop/BackButton.png";
+import FullRimumuBG from "../../../styles/assets/images/Shop/FullRimumu.png";
+import NextBTN from "../../../styles/assets/images/Shop/NextButton.png";
+import PaimonSubmitBuyAccount from "../../../styles/assets/images/Shop/PaimonSubmitBuyAccount.png";
+import RimumuBG from "../../../styles/assets/images/Shop/Rimumu.png";
+import BackgroundShop from "../../Common/BackgroundShop/BackgroundShop";
+import TitleHighlight from "../../Common/Title/TitleHighlight";
+import Finally from "./Finally";
+import Guarantee from "./Guarantee";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -103,7 +106,7 @@ const ButtonGroup = styled(Box)(
         display:flex;       justify-content: flex-end;  `
 );
 
-const NextButton = styled(Box)(
+const NextButton = styled(Button)(
   ({ theme }) => `
             background: url(${NextBTN.src});
           width: 250px;
@@ -115,7 +118,8 @@ const NextButton = styled(Box)(
           align-items: center;
           justify-content: center;
           color: #fff;
-          font-size: 20px; margin-left:15px `
+          font-size: 20px; margin-left:15px;
+          text-transform:capitalize; `
 );
 const BackButton = styled(Box)(
   ({ theme }) => `
@@ -144,11 +148,77 @@ const PaimonSubmitBuyAccountBox = styled(Box)(
    background-repeat: no-repeat;
  `
 );
-function SubmitBuy() {
+const Rimumu = styled(Box)(
+  ({ theme }) => `
+  background: url(${RimumuBG.src});
+  width: 566px;
+  height: 365px;
+   position: absolute;
+   z-index: 4;
+   bottom: 0;
+   background-size: contain;
+   background-position: bottom;
+   background-repeat: no-repeat;
+ `
+);
+const FullRimumu = styled(Box)(
+  ({ theme }) => `
+  background: url(${FullRimumuBG.src});
+  width: 566px;
+  height: 689px;
+   position: absolute;
+   z-index: 4;
+   bottom: 0;
+   background-size: contain;
+   background-position: bottom;
+   background-repeat: no-repeat;
+ `
+);
+interface SubmitBuy {
+  ids: string;
+}
+function SubmitBuy({ ids }: SubmitBuy) {
   const [step, setStep] = useState<number>(1);
+  const [listAccount, setListAccount] = useState([]);
+  const [hadSelected, setHadSelected] = useState<number>(0);
+
+  const handleSelect = (data: number) => {
+    setHadSelected(data);
+  };
+  useEffect(() => {
+    tagApi
+      .getAccountByListID(ids)
+      .then((res) => {
+        setListAccount(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [ids]);
+
+  const toMoney = (price: number) => {
+    return price
+      ? price
+          .toString()
+          .split("")
+          .reverse()
+          .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + ".") + prev;
+          })
+      : 0;
+  };
+
   return (
     <ProductWrap>
-      <PaimonSubmitBuyAccountBox></PaimonSubmitBuyAccountBox>
+      {(() => {
+        switch (step) {
+          case 1:
+            return <PaimonSubmitBuyAccountBox></PaimonSubmitBuyAccountBox>;
+          case 2:
+            return <Rimumu></Rimumu>;
+          default:
+            return <FullRimumu></FullRimumu>;
+        }
+      })()}
+
       <Box mb={10} mt={15}>
         <TitleHighlight mb={10}>Tiến hành thanh toán</TitleHighlight>
         <BackgroundShop>
@@ -165,66 +235,83 @@ function SubmitBuy() {
               </BorderStep>
             </BoxStep>
           </Stepper>
-          <Box
-            sx={{
-              position: "relative",
-              zIndex: "2",
-              padding: "0 50px",
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#4B66A2",
-                fontSize: 20,
-              }}
-            >
-              Account bạn đã chọn:
-            </Typography>
-            <BoxListAccount>
-              <Grid container>
-                {[...Array(3)].map((d, index) => (
-                  <Grid item md={12} key={index}>
-                    <BoxItemAccount>
-                      <Box
-                        width={`calc(100% - 300px)`}
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "space-between",
-                          minHeight: "181px",
-                        }}
-                      >
-                        <Box m={3}>
-                          <Typography fontSize={20} color={"#2D4E96"}>
-                            [Asia] AR49 - Itto, Zhongli, Jean, Diluc, Mona
-                          </Typography>
-                          <Typography color={"#D5D5D5"}>
-                            {"Xem thêm >>>"}
-                          </Typography>
-                        </Box>
-                        <Typography fontSize={30} m={3} color={"#D3A36E"}>
-                          1.611.277 VND
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Image
-                          src={Shenhe.src}
-                          alt=""
-                          width={300}
-                          height={182}
-                        ></Image>
-                      </Box>
-                    </BoxItemAccount>
-                  </Grid>
-                ))}
-              </Grid>
-            </BoxListAccount>
-          </Box>
+          {(() => {
+            switch (step) {
+              case 1:
+                return (
+                  <Box
+                    sx={{
+                      position: "relative",
+                      zIndex: "2",
+                      padding: "0 50px",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: "#4B66A2",
+                        fontSize: 20,
+                      }}
+                    >
+                      Account bạn đã chọn:
+                    </Typography>
+                    <BoxListAccount>
+                      <Grid container>
+                        {listAccount.map((d, index) => (
+                          <Grid item md={12} key={index}>
+                            <BoxItemAccount>
+                              <Box
+                                width={`calc(100% - 300px)`}
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "space-between",
+                                  minHeight: "181px",
+                                }}
+                              >
+                                <Box m={3}>
+                                  <Typography fontSize={20} color={"#2D4E96"}>
+                                    {d.name}
+                                  </Typography>
+                                  <Link href={`/chi-tiet/${d.slug}`} passHref>
+                                    <Typography color={"#D5D5D5"}>
+                                      {"Xem thêm >>>"}
+                                    </Typography>
+                                  </Link>
+                                </Box>
+                                <Typography
+                                  fontSize={30}
+                                  m={3}
+                                  color={"#D3A36E"}
+                                >
+                                  {toMoney(d.newPrice)} VND
+                                </Typography>
+                              </Box>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  src={JSON.parse(d.imageUrl).url}
+                                  alt=""
+                                  width={300}
+                                  height={182}
+                                ></Image>
+                              </Box>
+                            </BoxItemAccount>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </BoxListAccount>
+                  </Box>
+                );
+              case 2:
+                return <Guarantee handleSelect={handleSelect} />;
+              default:
+                return <Finally ids={ids} hadSelected={hadSelected} />;
+            }
+          })()}
           <ButtonGroup>
             <BackButton
               onClick={() => {
@@ -232,9 +319,15 @@ function SubmitBuy() {
               }}
             >{`< Quay lại `}</BackButton>
             <NextButton
+              sx={{
+                "&.Mui-disabled": {
+                  color: "#00000070",
+                },
+              }}
               onClick={() => {
                 step !== 3 && setStep((pr) => pr + 1);
               }}
+              disabled={step === 2 && hadSelected === 0}
             >{`Tiếp theo >`}</NextButton>
           </ButtonGroup>
         </BackgroundShop>

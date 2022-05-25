@@ -1,19 +1,15 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import * as React from "react";
 import Layout from "../../components/Layout/BaseLayout";
-import SubmitBuy from "../../components/Modules/SubmitBuy/SubmitBuy";
+import SliderBox from "../../components/Modules/SliderBox";
 
 export default function IndexPage() {
-  const router = useRouter();
-  const { id } = router.query;
   return (
     <Layout>
       <Head>
-        <title>Thanh toán</title>
+        <title>Hoàn thành</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <SubmitBuy ids={id as string} />
     </Layout>
   );
 }

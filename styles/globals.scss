@@ -199,3 +199,27 @@ body {
   width: 190px !important;
   margin-right: 10px !important;
 }
+
+.customRadio {
+  li {
+    list-style: none;
+  }
+  input[type="radio"] {
+    border: 2px solid #b1bedc;
+    padding: 0.5em;
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+  }
+
+  input[type="radio"]:checked {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAF3AQMAAABkDpm9AAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAZQTFRFAAAAsb7clNgwIQAAAAJ0Uk5TAP9bkSK1AAAAUElEQVR4nO3KsQ0AAAQAMP5/WcILBouknRsBcCZ7qXzf933f933f933f933f933f933f933f933f933f933f933f933f933f933f9399gBcGFsorIBmQ3RQAAAAASUVORK5CYII=)
+      no-repeat center center;
+
+    background-size: 14px 14px;
+  }
+
+  input[type="radio"]:focus {
+    outline-color: transparent;
+  }
+}
