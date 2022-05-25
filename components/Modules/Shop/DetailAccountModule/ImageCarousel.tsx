@@ -65,7 +65,6 @@ function ImageCarousel({ imageList }: ImageProps) {
           thumbnailPosition="left"
           showPlayButton={false}
           showNav={false}
-          showFullscreenButton={false}
         />
       </Box>
     </ImageWrap>
