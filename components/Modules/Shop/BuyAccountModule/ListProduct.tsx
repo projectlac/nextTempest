@@ -8,7 +8,7 @@ import SortOption from "./SortOption";
 
 function ListProduct() {
   const { selectedFilter, update } = useAppContext();
-  const [pageCurrently, setPageCurrently] = useState<number>(1);
+  const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
