@@ -1,48 +1,73 @@
 import { Box } from "@mui/material";
-import { styled } from "@mui/system";
-import React from "react";
+import { styled } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
 import background from "../../../../styles/assets/images/Shop/ImageCarouselBG.png";
-import ImageGallery from "react-image-gallery";
-const ImageWrap = styled(Box)(
-  ({ theme }) => `
-    
-      width: 100%;
-        min-height:600px;
-      display: flex;
-      background: url(${background.src});
-      overflow:hidden;
-      padding:50px 30px;
-      background-size: contain;
-      background-repeat:no-repeat;
-      justify-content:center;
-    `
-);
+import Top from "../../../../styles/assets/images/Shop/top.png";
+import Mid from "../../../../styles/assets/images/Shop/mid.png";
 
-function ImageCarousel() {
-  const images = [
+import Bot from "../../../../styles/assets/images/Shop/bot.png";
+
+import ImageGallery from "react-image-gallery";
+const ImageWrap = styled(Box)({
+  position: "relative",
+  background: `url(${Mid.src})`,
+  backgroundSize: "contain",
+  padding: "15px 45px",
+  "&:before": {
+    content: "''",
+    position: "absolute",
+    height: "116px",
+    background: `url(${Top.src})`,
+    backgroundSize: `contain`,
+    backgroundRepeat: `no-repeat`,
+    width: "100%",
+    top: "-45px",
+    left: 0,
+  },
+  "&:after": {
+    content: "''",
+    position: "absolute",
+    height: "116px",
+    background: `url(${Bot.src})`,
+    backgroundSize: `contain`,
+    backgroundRepeat: `no-repeat`,
+    width: "100%",
+    bottom: "-65px",
+    left: 0,
+  },
+});
+
+interface ImageProps {
+  imageList: string[];
+}
+interface ImageType {
+  original: string;
+  thumbnail: string;
+}
+function ImageCarousel({ imageList }: ImageProps) {
+  const [images, setImage] = useState<ImageType[]>([
     {
-      original: "https://picsum.photos/id/1018/1000/500/",
-      thumbnail: "https://picsum.photos/id/1018/1000/500/",
+      original: "",
+      thumbnail: "",
     },
-    {
-      original: "https://picsum.photos/id/1015/1000/500/",
-      thumbnail: "https://picsum.photos/id/1015/1000/500/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/500/",
-      thumbnail: "https://picsum.photos/id/1019/1000/500/",
-    },
-  ];
+  ]);
+
+  useEffect(() => {
+    const newImage = imageList.map((d) => ({ original: d, thumbnail: d }));
+    setImage(newImage);
+  }, [imageList]);
 
   return (
     <ImageWrap>
-      <ImageGallery
-        items={images}
-        thumbnailPosition="left"
-        showPlayButton={false}
-        showNav={false}
-        showFullscreenButton={false}
-      />
+      <Box sx={{ position: "relative", zIndex: 2 }}>
+        <ImageGallery
+          items={images}
+          thumbnailPosition="left"
+          showPlayButton={false}
+          showNav={false}
+          showFullscreenButton={false}
+        />
+      </Box>
     </ImageWrap>
   );
 }

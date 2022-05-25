@@ -10,7 +10,7 @@ interface PropShopItem {
   item: string;
   oldPrice?: string;
   newPrice: string;
-  status: number;
+  status: string;
   id: string;
 }
 
@@ -95,7 +95,10 @@ function ShopItem({ item, id, oldPrice, newPrice, status }: PropShopItem) {
           }}
         >
           <Link href={`/chi-tiet/${id}`} passHref>
-            {item}
+            <a>
+              {item.slice(0, 40)}
+              {item.length > 40 && "..."}
+            </a>
           </Link>
         </Typography>
       </Box>
@@ -131,7 +134,7 @@ function ShopItem({ item, id, oldPrice, newPrice, status }: PropShopItem) {
         </Typography>
       </BoxPrice>
       <Box mt={1}>
-        {status === 0 ? (
+        {status !== "AVAILABLE" ? (
           <StatusBox colorStatus={STATUS_OF_PRODUCT.OUT} status={status} />
         ) : (
           <StatusBox colorStatus={STATUS_OF_PRODUCT.STOCKING} status={status} />

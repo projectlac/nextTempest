@@ -10,6 +10,10 @@ export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
   const editorRef = useRef(null);
   const { update } = useAppContext();
 
+  React.useEffect(() => {
+    editorRef.current = "";
+  }, [update]);
+
   return (
     <>
       <Editor

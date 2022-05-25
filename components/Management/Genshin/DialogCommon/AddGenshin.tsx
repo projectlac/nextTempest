@@ -141,6 +141,7 @@ export default function AddGenshin() {
           updated();
           resetForm();
           setFile(null);
+          setFileList(null);
           setFileListCurreny(null);
         })
         .catch(() => {

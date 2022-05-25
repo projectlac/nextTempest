@@ -10,11 +10,12 @@ import Typography from "@mui/material/Typography";
 import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import tagApi from "../../../../../api/tag";
 import { TAG_TYPE } from "../../../../../types/account";
+import { useAppContext } from "../../../../../context/state";
 
 interface AccordionProp {
   title: string;
   data: any;
-  handleFilter: (data: string, active: boolean) => void;
+  handleFilter: (data: string, active: boolean, title: string) => void;
   open: boolean;
 }
 
@@ -68,7 +69,7 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
     };
 
   const handleChoose = (e: React.ChangeEvent<HTMLInputElement>, data) => {
-    handleFilter(data, e.target.checked);
+    handleFilter(data, e.target.checked, title);
   };
 
   return (
@@ -97,6 +98,7 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
 };
 
 export default function CustomizedAccordions() {
+  const { updated, handleSelectedFilter } = useAppContext();
   const [listData, setListData] = React.useState([]);
   React.useEffect(() => {
     const getData = async () => {
@@ -109,19 +111,26 @@ export default function CustomizedAccordions() {
     getData();
   }, []);
 
-  const [selectedFilter, setSelectedFilter] = React.useState([]);
-  const handleFilter = (data: string, active: boolean) => {
-    const tempSelected = [...selectedFilter];
+  const [selectedFilter, setSelectedFilter] = React.useState({
+    server: [],
+    character: [],
+    weapon: [],
+  });
+  const handleFilter = (data: string, active: boolean, title: string) => {
+    const tempSelected = { ...selectedFilter };
+    const key = title.toLowerCase();
     if (active) {
-      tempSelected.push(data);
+      tempSelected[key].push(data);
       setSelectedFilter(tempSelected);
     } else {
-      const index = tempSelected.indexOf(data);
+      const index = tempSelected[key].indexOf(data);
       if (index !== -1) {
-        tempSelected.splice(index, 1);
+        tempSelected[key].splice(index, 1);
         setSelectedFilter(tempSelected);
       }
     }
+    handleSelectedFilter(selectedFilter);
+    updated();
   };
   return (
     <Box

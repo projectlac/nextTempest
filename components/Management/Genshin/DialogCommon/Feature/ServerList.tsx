@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FormHelperText } from "@mui/material";
+import { useAppContext } from "../../../../../context/state";
 
 interface ServerListProps {
   error: boolean;
@@ -12,6 +13,7 @@ interface ServerListProps {
   handleSelectedServer: (data: string) => void;
   defaultValue: string;
 }
+
 export default function ServerList({
   error,
   helper,
@@ -19,11 +21,15 @@ export default function ServerList({
   defaultValue,
 }: ServerListProps) {
   const [age, setAge] = React.useState("");
+  const { update } = useAppContext();
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
     handleSelectedServer(event.target.value as string);
   };
+  React.useEffect(() => {
+    setAge("");
+  }, [update]);
 
   React.useEffect(() => {
     setAge(defaultValue);

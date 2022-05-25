@@ -3,7 +3,7 @@ import React from "react";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 interface PropsStatusBox {
   colorStatus: string;
-  status: number;
+  status: string;
 }
 function StatusBox({ colorStatus, status }: PropsStatusBox) {
   return (
@@ -28,7 +28,7 @@ function StatusBox({ colorStatus, status }: PropsStatusBox) {
           },
         }}
       />{" "}
-      {status === 0 ? "Hết hàng" : "Còn hàng"}
+      {status !== "AVAILABLE" ? "Hết hàng" : "Còn hàng"}
     </Box>
   );
 }

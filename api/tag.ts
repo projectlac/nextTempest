@@ -9,7 +9,7 @@ const tagApi = {
     return axiosClient.get(url);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
-    const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}`;
+    const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}&sort=${params.sort}`;
     return axiosClient.get(url);
   },
   addAccount(params: FormData): Promise<PromiseApi> {
@@ -27,6 +27,10 @@ const tagApi = {
   updateAccount(id: string, params: FormData): Promise<PromiseApi> {
     const url = `/account/${id}`;
     return axiosAuthClient.patch(url, params);
+  },
+  getAccountBySlug(slug: string): Promise<PromiseApi> {
+    const url = `/account-get/details?slug=${slug}`;
+    return axiosClient.get(url);
   },
 };
 export default tagApi;
