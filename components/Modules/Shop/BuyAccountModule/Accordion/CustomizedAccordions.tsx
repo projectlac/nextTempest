@@ -86,7 +86,7 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
                 control={<Checkbox />}
                 label={d.title}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  handleChoose(e, d.title);
+                  handleChoose(e, d.slug);
                 }}
               />
             ))}
