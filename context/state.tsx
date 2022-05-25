@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import Toast from "../components/Common/Toast/Toast";
 import jwt_decode from "jwt-decode";
 
-interface selectedFilterType {
-  server: string[];
+interface SelectedFilterType {
+  server: string;
   character: string[];
   weapon: string[];
 }
@@ -17,13 +17,13 @@ export function AppWrapper({ children }) {
   const [messageToast, setMessageToast] = useState<string>("");
   const [role, setRole] = useState<string>("");
   const [update, setUpdate] = useState<boolean>(false);
-  const [selectedFilter, setSelectedFilter] = useState<selectedFilterType>({
-    server: [],
+  const [selectedFilter, setSelectedFilter] = useState<SelectedFilterType>({
+    server: "",
     character: [],
     weapon: [],
   });
 
-  const handleSelectedFilter = (data: selectedFilterType) => {
+  const handleSelectedFilter = (data: SelectedFilterType) => {
     setSelectedFilter(data);
   };
   const updated = () => {

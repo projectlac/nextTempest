@@ -137,13 +137,9 @@ function ShopItem({
     <Box>
       <ImageBox>
         <Link href={`/chi-tiet/${slug}`} passHref>
-          <Image
-            src={image}
-            alt={item}
-            layout="responsive"
-            width={301}
-            height={181}
-          />
+          <a>
+            {image && <Image src={image} alt={item} width={301} height={181} />}
+          </a>
         </Link>
       </ImageBox>
       <Box>

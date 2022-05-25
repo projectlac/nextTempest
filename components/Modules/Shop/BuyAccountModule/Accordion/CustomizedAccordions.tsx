@@ -7,7 +7,15 @@ import MuiAccordionSummary, {
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { Box, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import tagApi from "../../../../../api/tag";
 import { TAG_TYPE } from "../../../../../types/account";
 import { useAppContext } from "../../../../../context/state";
@@ -16,6 +24,13 @@ interface AccordionProp {
   title: string;
   data: any;
   handleFilter: (data: string, active: boolean, title: string) => void;
+  open: boolean;
+}
+
+interface RadioProp {
+  title: string;
+  data: any;
+  handleChangeServer: (data: string) => void;
   open: boolean;
 }
 
@@ -97,6 +112,62 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
   );
 };
 
+const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
+  const [expanded, setExpanded] = React.useState<boolean | false>(open);
+
+  const handleChange =
+    () => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(!expanded);
+    };
+
+  const handleChoose = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChangeServer(e.target.value);
+  };
+
+  return (
+    <Box>
+      <Accordion expanded={expanded === true} onChange={handleChange()}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography>{title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormControl>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue=""
+              name="radio-buttons-group"
+              onChange={handleChoose}
+            >
+              <FormControlLabel
+                value=""
+                control={<Radio />}
+                sx={{
+                  "& span": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                label="Tất cả"
+              />
+              {(data || []).map((d) => (
+                <FormControlLabel
+                  key={d.id}
+                  value={d.title}
+                  control={<Radio />}
+                  sx={{
+                    "& span": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  label={d.title}
+                />
+              ))}
+            </RadioGroup>
+          </FormControl>
+        </AccordionDetails>
+      </Accordion>
+    </Box>
+  );
+};
 export default function CustomizedAccordions() {
   const { updated, handleSelectedFilter } = useAppContext();
   const [listData, setListData] = React.useState([]);
@@ -112,7 +183,7 @@ export default function CustomizedAccordions() {
   }, []);
 
   const [selectedFilter, setSelectedFilter] = React.useState({
-    server: [],
+    server: "",
     character: [],
     weapon: [],
   });
@@ -132,6 +203,14 @@ export default function CustomizedAccordions() {
     handleSelectedFilter(selectedFilter);
     updated();
   };
+
+  const handleChangeServer = (data: string) => {
+    const tempSelected = { ...selectedFilter };
+    tempSelected.server = data;
+    setSelectedFilter(tempSelected);
+    handleSelectedFilter(tempSelected);
+    updated();
+  };
   return (
     <Box
       sx={{
@@ -141,10 +220,10 @@ export default function CustomizedAccordions() {
         paddingRight: "20px",
       }}
     >
-      <RenderItem
+      <RadioItem
         title={"Server"}
         data={[...listData].filter((d) => d.type === TAG_TYPE.SERVER)}
-        handleFilter={handleFilter}
+        handleChangeServer={handleChangeServer}
         open={true}
       />
 
