@@ -60,8 +60,6 @@ export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
             input.setAttribute("accept", "image/*");
 
             input.onchange = function () {
-              console.log(this);
-
               var file = (this as HTMLInputElement).files[0];
 
               var reader = new FileReader();

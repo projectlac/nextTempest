@@ -1,11 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useState } from "react";
 import Bot from "../../../../styles/assets/images/Shop/bot.png";
 import Mid from "../../../../styles/assets/images/Shop/mid.png";
 import Top from "../../../../styles/assets/images/Shop/top.png";
 import ButtonBG from "../../../../styles/assets/images/Shop/Button.png";
 import Link from "next/link";
+import { useAppContext } from "../../../../context/state";
+import Authentization from "../../Authentization";
 
 const BGWrap = styled(Box)({
   position: "relative",
@@ -63,7 +65,25 @@ const ButtonBuy = styled(Box)(
     margin: 15px auto 0;
 `
 );
+const BgWrap = styled(Box)(
+  ({ theme }) => `
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      position:fixed;
+      z-index:9;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
 
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      overflow:hidden;
+      background-size: cover;    
+    `
+);
 interface DetailProps {
   accountId: string;
   price: number;
@@ -72,18 +92,36 @@ interface DetailProps {
   tinhHuy: number;
   moonPack: number;
   id: string;
+  slug: string;
 }
 function DetailPrice({
   price,
   accountId,
   ar,
   id,
+  slug,
   primogems,
   tinhHuy,
   moonPack,
 }: DetailProps) {
-  console.log(primogems);
+  const { isLogin } = useAppContext();
+  const toMoney = (price: number) => {
+    return price
+      .toString()
+      .split("")
+      .reverse()
+      .reduce((prev, next, index) => {
+        return (index % 3 ? next : next + ".") + prev;
+      });
+  };
+  const [openAuth, setOpenAuth] = useState<boolean>(false);
+  const closeAuthBox = () => {
+    setOpenAuth(false);
+  };
 
+  const login = () => {
+    setOpenAuth(true);
+  };
   return (
     <BGWrap>
       <Box
@@ -100,7 +138,7 @@ function DetailPrice({
         <Typography color={"#4B65A3"} fontSize={30}>
           Giá
         </Typography>
-        <BoxBorder>{price}</BoxBorder>
+        <BoxBorder>{toMoney(price)} VND</BoxBorder>
         <Box textAlign={"left"}>
           <TextSpecial>
             <b>Adventure Rank:</b> {ar}
@@ -118,9 +156,20 @@ function DetailPrice({
           )}
         </Box>
 
-        <Link href={`/thanh-toan/${id}`} passHref>
-          <ButtonBuy> </ButtonBuy>
-        </Link>
+        {isLogin ? (
+          <Link href={`/thanh-toan/${id}?redirect=${slug}`} passHref>
+            <ButtonBuy> </ButtonBuy>
+          </Link>
+        ) : (
+          <ButtonBuy onClick={login}> </ButtonBuy>
+        )}
+        {openAuth && (
+          <BgWrap>
+            <Container>
+              <Authentization closeAuthBox={closeAuthBox} />
+            </Container>
+          </BgWrap>
+        )}
       </Box>
     </BGWrap>
   );

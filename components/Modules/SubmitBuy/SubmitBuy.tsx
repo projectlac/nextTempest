@@ -2,6 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import tagApi from "../../../api/tag";
 import background from "../../../styles/assets/images/Background.png";
@@ -176,22 +177,26 @@ const FullRimumu = styled(Box)(
 );
 interface SubmitBuy {
   ids: string;
+  slug: string;
 }
-function SubmitBuy({ ids }: SubmitBuy) {
+function SubmitBuy({ ids, slug }: SubmitBuy) {
   const [step, setStep] = useState<number>(1);
   const [listAccount, setListAccount] = useState([]);
   const [hadSelected, setHadSelected] = useState<number>(0);
-
+  const router = useRouter();
   const handleSelect = (data: number) => {
     setHadSelected(data);
   };
   useEffect(() => {
-    tagApi
-      .getAccountByListID(ids)
-      .then((res) => {
-        setListAccount(res.data);
-      })
-      .catch((err) => console.log(err));
+    if (ids) {
+      tagApi
+        .getAccountByListID(ids)
+        .then((res) => {
+          setListAccount(res.data);
+          console.log(JSON.parse(res.data[0].imageUrl));
+        })
+        .catch((err) => console.log(err));
+    }
   }, [ids]);
 
   const toMoney = (price: number) => {
@@ -293,7 +298,7 @@ function SubmitBuy({ ids }: SubmitBuy) {
                                 }}
                               >
                                 <Image
-                                  src={JSON.parse(d.imageUrl).url}
+                                  src={d.imageUrl}
                                   alt=""
                                   width={300}
                                   height={182}
@@ -315,7 +320,10 @@ function SubmitBuy({ ids }: SubmitBuy) {
           <ButtonGroup>
             <BackButton
               onClick={() => {
-                step !== 1 && setStep((pr) => pr - 1);
+                step !== 1
+                  ? setStep((pr) => pr - 1)
+                  : listAccount.length === 1 &&
+                    router.push(`/chi-tiet/${slug}`);
               }}
             >{`< Quay lại `}</BackButton>
             <NextButton

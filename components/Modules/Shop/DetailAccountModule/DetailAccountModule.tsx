@@ -25,8 +25,6 @@ interface DataDetail {
   data: any;
 }
 function DetailAccountModule({ data }: DataDetail) {
-  console.log(data);
-
   return (
     <ProductWrap>
       <Box mb={10} mt={20} textAlign="center">
@@ -55,6 +53,7 @@ function DetailAccountModule({ data }: DataDetail) {
                 price={data.newPrice}
                 ar={data.ar}
                 id={data.id}
+                slug={data.slug}
                 primogems={data.nguyenThach}
                 tinhHuy={data.tinhHuy}
                 moonPack={data.moonPack}

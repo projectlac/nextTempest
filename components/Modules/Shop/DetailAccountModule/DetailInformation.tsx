@@ -44,8 +44,6 @@ interface DetailProps {
   weapon: string[];
 }
 function DetailInformation({ description, weapon }: DetailProps) {
-  console.log(weapon);
-
   return (
     <BGWrap>
       <Box
@@ -63,6 +61,7 @@ function DetailInformation({ description, weapon }: DetailProps) {
             textAlign: "initial",
             fontSize: "20px",
             fontWeight: 500,
+            color: "#4B65A3",
           }}
           dangerouslySetInnerHTML={{ __html: description }}
         ></Box>

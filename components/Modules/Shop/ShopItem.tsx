@@ -21,6 +21,8 @@ const ImageBox = styled(Box)(
   ({ theme }) => `
       height: 182px;
       width: 100%;
+
+      
       @media (min-width: 0px) {
         height: 189px; 
       } 
@@ -137,9 +139,18 @@ function ShopItem({
     <Box>
       <ImageBox>
         <Link href={`/chi-tiet/${slug}`} passHref>
-          <a>
-            {image && <Image src={image} alt={item} width={301} height={181} />}
-          </a>
+          <Box component={"a"}>
+            {image && (
+              <Image
+                src={image}
+                alt={item}
+                width={301}
+                height={182}
+                objectFit="cover"
+                className="custom-img"
+              />
+            )}
+          </Box>
         </Link>
       </ImageBox>
       <Box>

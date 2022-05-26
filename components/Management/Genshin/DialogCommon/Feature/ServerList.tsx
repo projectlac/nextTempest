@@ -33,7 +33,6 @@ export default function ServerList({
 
   React.useEffect(() => {
     setAge(defaultValue);
-    console.log(defaultValue);
   }, [defaultValue]);
   return (
     <Box sx={{ minWidth: 120 }}>

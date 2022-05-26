@@ -6,14 +6,15 @@ import SubmitBuy from "../../components/Modules/SubmitBuy/SubmitBuy";
 
 export default function IndexPage() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, redirect } = router.query;
+
   return (
     <Layout>
       <Head>
         <title>Thanh toán</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <SubmitBuy ids={id as string} />
+      <SubmitBuy ids={id as string} slug={redirect as string} />
     </Layout>
   );
 }
