@@ -22,17 +22,6 @@ function ListProduct() {
   const handleSortBy = (data: number) => {
     setSortBy(data);
   };
-  const toMoney = (price: number) => {
-    return price
-      ? price
-          .toString()
-          .split("")
-          .reverse()
-          .reduce((prev, next, index) => {
-            return (index % 3 ? next : next + ".") + prev;
-          })
-      : "0";
-  };
 
   useEffect(() => {
     const getData = async () => {
@@ -79,8 +68,9 @@ function ListProduct() {
                 <ShopItem
                   image={d.imageUrl}
                   item={d.name}
-                  oldPrice={`${toMoney(d.oldPrice)} VND`}
-                  newPrice={`${toMoney(d.newPrice)} VND`}
+                  idProduct={d.code}
+                  oldPrice={+d.oldPrice}
+                  newPrice={+d.newPrice}
                   status={d.status}
                   slug={d.slug}
                   id={d.id}

@@ -96,8 +96,9 @@ function NewProduct() {
               <ShopItem
                 item={`[Asia] AR49 - Itto, Zhongli, Jean, Diluc, Mona
                 `}
-                oldPrice={"2.400.164 VND"}
-                newPrice={"1.611.277 VND"}
+                idProduct={"TOP1"}
+                oldPrice={123123123}
+                newPrice={11111111}
                 status={"AVAILABLE"}
                 id={"123123123"}
                 image={

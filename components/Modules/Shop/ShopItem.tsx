@@ -9,9 +9,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 interface PropShopItem {
   item: string;
-  oldPrice?: string;
-  newPrice: string;
+  oldPrice?: number;
+  newPrice: number;
   status: string;
+  idProduct: string;
   id: string;
   image: string;
   slug: string;
@@ -21,8 +22,8 @@ const ImageBox = styled(Box)(
   ({ theme }) => `
       height: 182px;
       width: 100%;
+      position:relative;
 
-      
       @media (min-width: 0px) {
         height: 189px; 
       } 
@@ -74,7 +75,31 @@ const BoxPrice = styled(Box)(
       `
 );
 
+const Sale = styled(Box)(
+  ({ theme }) => `
+  position: absolute;
+  background: #BF0606;
+  color:#fff;
+  padding:2px 5px;
+    font-family: "Montserrat";
+    font-weight:bold;
+ bottom:0;
+      `
+);
+const IdProduct = styled(Box)(
+  ({ theme }) => `
+  position: absolute;
+  background: #0A2B6D;
+  color:#fff;
+  padding:2px 5px;
+    font-family: "Montserrat";
+    font-weight:bold;
+ top:0;
+ right:0;
+      `
+);
 function ShopItem({
+  idProduct,
   item,
   id,
   slug,
@@ -135,6 +160,24 @@ function ShopItem({
       ></FavoriteIcon>
     );
   };
+  const getSale = () => {
+    let old = +oldPrice;
+    let newP = +newPrice;
+
+    if (old > newP) return `-${Math.floor(((old - newP) / old) * 100)}%`;
+    return;
+  };
+  const toMoney = (price: number) => {
+    return price
+      ? price
+          .toString()
+          .split("")
+          .reverse()
+          .reduce((prev, next, index) => {
+            return (index % 3 ? next : next + ".") + prev;
+          })
+      : "0";
+  };
   return (
     <Box>
       <ImageBox>
@@ -152,6 +195,9 @@ function ShopItem({
             )}
           </Box>
         </Link>
+        {getSale() && <Sale>{getSale()}</Sale>}
+
+        <IdProduct>{idProduct}</IdProduct>
       </ImageBox>
       <Box>
         <Typography
@@ -180,7 +226,7 @@ function ShopItem({
         </Typography>
       </Box>
       <BoxPrice>
-        {oldPrice && (
+        {+oldPrice > +newPrice && (
           <Typography
             color={"#898989"}
             sx={{
@@ -192,7 +238,7 @@ function ShopItem({
               textDecoration: "line-through",
             }}
           >
-            {oldPrice}
+            {toMoney(+oldPrice)} VND
           </Typography>
         )}
 
@@ -207,7 +253,7 @@ function ShopItem({
             },
           }}
         >
-          {newPrice}
+          {toMoney(+newPrice)} VND
         </Typography>
       </BoxPrice>
       <Box
