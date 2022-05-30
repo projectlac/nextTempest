@@ -19,9 +19,10 @@ function Filter() {
     <Box
       sx={{
         position: "relative",
+        zIndex: 2,
       }}
     >
-      <Box sx={{ padding: "70px 30px 50px" }}>
+      <Box sx={{ padding: { lg: "70px 30px 50px", xs: "70px 10px 50px" } }}>
         <FilterBox>
           <Typography sx={{ fontSize: "25px", color: "#4B66A2" }}>
             Tìm theo:

@@ -175,6 +175,31 @@ const FullRimumu = styled(Box)(
    background-repeat: no-repeat;
  `
 );
+
+const Sale = styled(Box)(
+  ({ theme }) => `
+  position: absolute;
+  background: #BF0606;
+  color:#fff;
+  padding:2px 5px;
+    font-family: "Montserrat";
+    font-weight:bold;
+ bottom:0;
+      `
+);
+const IdProduct = styled(Box)(
+  ({ theme }) => `
+  position: absolute;
+  background: #0A2B6D;
+  color:#fff;
+  padding:2px 5px;
+    font-family: "Montserrat";
+    font-weight:bold;
+ top:0;
+ right:0;
+      `
+);
+
 interface SubmitBuy {
   ids: string;
   slug: string;
@@ -210,7 +235,10 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
           })
       : 0;
   };
-
+  const getSale = (oldP: number, newP: number) => {
+    if (oldP > newP) return `-${Math.floor(((oldP - newP) / oldP) * 100)}%`;
+    return;
+  };
   return (
     <ProductWrap>
       {(() => {
@@ -295,6 +323,7 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                                 sx={{
                                   display: "flex",
                                   alignItems: "center",
+                                  position: "relative",
                                 }}
                               >
                                 <Image
@@ -302,7 +331,14 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                                   alt=""
                                   width={300}
                                   height={182}
+                                  objectFit="cover"
+                                  className="custom-img"
                                 ></Image>
+                                {getSale(d.oldPrice, d.newPrice) && (
+                                  <Sale>{getSale(d.oldPrice, d.newPrice)}</Sale>
+                                )}
+
+                                <IdProduct>{d.code}</IdProduct>
                               </Box>
                             </BoxItemAccount>
                           </Grid>

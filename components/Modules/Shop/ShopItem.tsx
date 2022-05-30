@@ -20,25 +20,10 @@ interface PropShopItem {
 
 const ImageBox = styled(Box)(
   ({ theme }) => `
-      height: 182px;
+      height: auto;
       width: 100%;
       position:relative;
-
-      @media (min-width: 0px) {
-        height: 189px; 
-      } 
-      @media (min-width: 768px){
-        height: 182px;
-      }
-      @media (min-width: 1024px) {
-        height: 123px;
-      } 
-      @media (min-width: 1440px) {
-    
-        height: 182px;
-    
-      } 
-  
+ 
     `
 );
 const BoxPrice = styled(Box)(
@@ -187,7 +172,7 @@ function ShopItem({
               <Image
                 src={image}
                 alt={item}
-                width={301}
+                width={320}
                 height={182}
                 objectFit="cover"
                 className="custom-img"
@@ -226,7 +211,7 @@ function ShopItem({
         </Typography>
       </Box>
       <BoxPrice>
-        {+oldPrice > +newPrice && (
+        {
           <Typography
             color={"#898989"}
             sx={{
@@ -235,12 +220,12 @@ function ShopItem({
                 sm: 12,
                 xs: 10,
               },
-              textDecoration: "line-through",
+              textDecoration: ` ${+oldPrice > +newPrice && "line-through"}`,
             }}
           >
-            {toMoney(+oldPrice)} VND
+            {+oldPrice > +newPrice ? `${toMoney(+oldPrice)} VND` : `Giá:`}
           </Typography>
-        )}
+        }
 
         <Typography
           color={"#D3A36E"}

@@ -8,11 +8,11 @@ interface SortOption {
   handleSortBy: (data: number) => void;
 }
 export default function SortOption({ handleSortBy }: SortOption) {
-  const [age, setAge] = React.useState<string>("");
+  const [age, setAge] = React.useState<string>("-1");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
-    if (event.target.value === "") {
+    if (event.target.value === "-1") {
       handleSortBy(null);
     } else {
       handleSortBy(+event.target.value);
@@ -39,7 +39,7 @@ export default function SortOption({ handleSortBy }: SortOption) {
           fontFamily: "Montserrat",
         }}
       >
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={""}>
+        <MenuItem sx={{ fontFamily: "Montserrat" }} value={"-1"}>
           Mới nhất
         </MenuItem>
         <MenuItem sx={{ fontFamily: "Montserrat" }} value={0}>

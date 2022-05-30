@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Hidden } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
 import background from "../../../../styles/assets/images/Background.png";
@@ -38,6 +38,12 @@ const BackgroundShop = styled(Container)({
     top: "-50px",
     zIndex: "1",
     width: "100%",
+    "@media (min-width: 768px)": {
+      top: "-50px",
+    },
+    "@media (min-width:0)": {
+      top: "-20px",
+    },
   },
   "&:after": {
     position: "absolute",
@@ -50,6 +56,12 @@ const BackgroundShop = styled(Container)({
     bottom: "-70px",
     zIndex: "1",
     width: "100%",
+    "@media (min-width: 768px)": {
+      bottom: "-70px",
+    },
+    "@media (min-width:0)": {
+      bottom: "-100px",
+    },
   },
 });
 
@@ -60,10 +72,12 @@ function BuyAccountModule() {
         <TitleHighlight mb={10}>Danh sách tài khoản</TitleHighlight>
         <BackgroundShop>
           <Grid container>
-            <Grid item md={3}>
-              <Filter />
-            </Grid>
-            <Grid item md={9}>
+            <Hidden mdDown>
+              <Grid item md={3}>
+                <Filter />
+              </Grid>
+            </Hidden>
+            <Grid item md={9} sm={12}>
               <ListProduct />
             </Grid>
           </Grid>

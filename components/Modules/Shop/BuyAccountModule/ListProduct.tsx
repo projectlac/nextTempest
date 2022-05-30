@@ -47,10 +47,24 @@ function ListProduct() {
     <Box
       sx={{
         position: "relative",
-        minWidth: 1014,
+        width: {
+          lg: 1014,
+          md: "100%",
+          sm: 666,
+          xs: 350,
+        },
       }}
     >
-      <Box sx={{ padding: "0px 30px 50px", position: "relative", zIndex: 2 }}>
+      <Box
+        sx={{
+          padding: {
+            md: "0px 30px 50px",
+            xs: "0px 15px 50px",
+          },
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
           <SortOption handleSortBy={handleSortBy} />
         </Box>
@@ -60,6 +74,8 @@ function ListProduct() {
               <Grid
                 item
                 md={4}
+                sm={6}
+                xs={12}
                 key={i}
                 sx={{
                   mb: 5,
