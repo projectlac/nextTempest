@@ -5,18 +5,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 export default function Dashboard() {
-  const router = useRouter();
-  React.useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (
-      (token &&
-        jwt_decode<any>(token).role !== "ADMIN" &&
-        jwt_decode<any>(token).role !== "MOD") ||
-      !token
-    ) {
-      router.push("/");
-    }
-  }, []);
   return (
     <DashboardLayout>
       <Head>

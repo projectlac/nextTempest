@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { useRouter } from "next/router";
-
+import Router from "next/router";
+import history from "../utility/history";
 const axiosAudit = axios.create({
   baseURL: "https://acpt-app.herokuapp.com/",
   headers: {
@@ -29,9 +29,8 @@ axiosAudit.interceptors.response.use(
     return response;
   },
   function (error) {
-    const router = useRouter();
     if (error.response.status === 401) {
-      router.push(`/`);
+      Router.push(`/`);
       return Promise.reject(error);
     }
 

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { useRouter } from "next/router";
+import Router from "next/router";
 
 // let token = localStorage.getItem('access_token');
 const axiosAuthClient = axios.create({
@@ -32,9 +32,8 @@ axiosAuthClient.interceptors.response.use(
     return response;
   },
   function (error) {
-    const router = useRouter();
     if (error.response.status === 401) {
-      router.push(`/`);
+      Router.push(`/`);
       return Promise.reject(error);
     }
 

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import audit from "../../api/audit";
 import newsApi from "../../api/newsApi";
 import Layout from "../../components/Layout/BaseLayout";
 import DetailNews from "../../components/Modules/News/DetailNews";

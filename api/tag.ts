@@ -1,5 +1,5 @@
 import { PromiseApi } from "../types";
-import { AccountForm } from "../types/account";
+import { AccountForm, IBuy } from "../types/account";
 import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 
@@ -35,6 +35,10 @@ const tagApi = {
   getAccountByListID(listID: string): Promise<PromiseApi> {
     const url = `/account-get/wish-list?ids=${listID}`;
     return axiosClient.get(url);
+  },
+  buyAccount(params: IBuy): Promise<PromiseApi> {
+    const url = `/account/buy-multi`;
+    return axiosClient.patch(url, params);
   },
 };
 export default tagApi;

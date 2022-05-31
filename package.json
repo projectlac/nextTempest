@@ -36,7 +36,8 @@
     "react-slick": "^0.29.0",
     "sass": "^1.51.0",
     "slick-carousel": "^1.8.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "history": "5.0.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.30",

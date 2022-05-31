@@ -209,6 +209,9 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
   const [listAccount, setListAccount] = useState([]);
   const [hadSelected, setHadSelected] = useState<number>(0);
   const router = useRouter();
+  const handleStep = (s: number) => {
+    setStep(s);
+  };
   const handleSelect = (data: number) => {
     setHadSelected(data);
   };
@@ -218,7 +221,6 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
         .getAccountByListID(ids)
         .then((res) => {
           setListAccount(res.data);
-          console.log(JSON.parse(res.data[0].imageUrl));
         })
         .catch((err) => console.log(err));
     }
@@ -272,108 +274,122 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
             switch (step) {
               case 1:
                 return (
-                  <Box
-                    sx={{
-                      position: "relative",
-                      zIndex: "2",
-                      padding: "0 50px",
-                    }}
-                  >
-                    <Typography
+                  <>
+                    <Box
                       sx={{
-                        color: "#4B66A2",
-                        fontSize: 20,
+                        position: "relative",
+                        zIndex: "2",
+                        padding: "0 50px",
                       }}
                     >
-                      Account bạn đã chọn:
-                    </Typography>
-                    <BoxListAccount>
-                      <Grid container>
-                        {listAccount.map((d, index) => (
-                          <Grid item md={12} key={index}>
-                            <BoxItemAccount>
-                              <Box
-                                width={`calc(100% - 300px)`}
-                                sx={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                  justifyContent: "space-between",
-                                  minHeight: "181px",
-                                }}
-                              >
-                                <Box m={3}>
-                                  <Typography fontSize={20} color={"#2D4E96"}>
-                                    {d.name}
-                                  </Typography>
-                                  <Link href={`/chi-tiet/${d.slug}`} passHref>
-                                    <Typography color={"#D5D5D5"}>
-                                      {"Xem thêm >>>"}
-                                    </Typography>
-                                  </Link>
-                                </Box>
-                                <Typography
-                                  fontSize={30}
-                                  m={3}
-                                  color={"#D3A36E"}
+                      <Typography
+                        sx={{
+                          color: "#4B66A2",
+                          fontSize: 20,
+                        }}
+                      >
+                        Account bạn đã chọn:
+                      </Typography>
+                      <BoxListAccount>
+                        <Grid container>
+                          {listAccount.map((d, index) => (
+                            <Grid item md={12} key={index}>
+                              <BoxItemAccount>
+                                <Box
+                                  width={`calc(100% - 300px)`}
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                    minHeight: "181px",
+                                  }}
                                 >
-                                  {toMoney(d.newPrice)} VND
-                                </Typography>
-                              </Box>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  position: "relative",
-                                }}
-                              >
-                                <Image
-                                  src={d.imageUrl}
-                                  alt=""
-                                  width={300}
-                                  height={182}
-                                  objectFit="cover"
-                                  className="custom-img"
-                                ></Image>
-                                {getSale(d.oldPrice, d.newPrice) && (
-                                  <Sale>{getSale(d.oldPrice, d.newPrice)}</Sale>
-                                )}
+                                  <Box m={3}>
+                                    <Typography fontSize={20} color={"#2D4E96"}>
+                                      {d.name}
+                                    </Typography>
+                                    <Link href={`/chi-tiet/${d.slug}`} passHref>
+                                      <Typography color={"#D5D5D5"}>
+                                        {"Xem thêm >>>"}
+                                      </Typography>
+                                    </Link>
+                                  </Box>
+                                  <Typography
+                                    fontSize={30}
+                                    m={3}
+                                    color={"#D3A36E"}
+                                  >
+                                    {toMoney(d.newPrice)} VND
+                                  </Typography>
+                                </Box>
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    position: "relative",
+                                  }}
+                                >
+                                  <Image
+                                    src={d.imageUrl}
+                                    alt=""
+                                    width={300}
+                                    height={182}
+                                    objectFit="cover"
+                                    className="custom-img"
+                                  ></Image>
+                                  {getSale(d.oldPrice, d.newPrice) && (
+                                    <Sale>
+                                      {getSale(d.oldPrice, d.newPrice)}
+                                    </Sale>
+                                  )}
 
-                                <IdProduct>{d.code}</IdProduct>
-                              </Box>
-                            </BoxItemAccount>
-                          </Grid>
-                        ))}
-                      </Grid>
-                    </BoxListAccount>
-                  </Box>
+                                  <IdProduct>{d.code}</IdProduct>
+                                </Box>
+                              </BoxItemAccount>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </BoxListAccount>
+                    </Box>
+                    <ButtonGroup>
+                      <BackButton
+                        onClick={() => {
+                          step !== 1
+                            ? setStep((pr) => pr - 1)
+                            : listAccount.length === 1 &&
+                              router.push(`/chi-tiet/${slug}`);
+                        }}
+                      >{`< Quay lại `}</BackButton>
+                      <NextButton
+                        sx={{
+                          "&.Mui-disabled": {
+                            color: "#00000070",
+                          },
+                        }}
+                        onClick={() => {
+                          setStep((pr) => pr + 1);
+                        }}
+                      >{`Tiếp theo >`}</NextButton>
+                    </ButtonGroup>
+                  </>
                 );
               case 2:
-                return <Guarantee handleSelect={handleSelect} />;
+                return (
+                  <Guarantee
+                    handleStep={handleStep}
+                    handleSelect={handleSelect}
+                  />
+                );
               default:
-                return <Finally ids={ids} hadSelected={hadSelected} />;
+                return (
+                  <Finally
+                    ids={ids}
+                    hadSelected={hadSelected}
+                    handleStep={handleStep}
+                  />
+                );
             }
           })()}
-          <ButtonGroup>
-            <BackButton
-              onClick={() => {
-                step !== 1
-                  ? setStep((pr) => pr - 1)
-                  : listAccount.length === 1 &&
-                    router.push(`/chi-tiet/${slug}`);
-              }}
-            >{`< Quay lại `}</BackButton>
-            <NextButton
-              sx={{
-                "&.Mui-disabled": {
-                  color: "#00000070",
-                },
-              }}
-              onClick={() => {
-                step !== 3 && setStep((pr) => pr + 1);
-              }}
-              disabled={step === 2 && hadSelected === 0}
-            >{`Tiếp theo >`}</NextButton>
-          </ButtonGroup>
         </BackgroundShop>
       </Box>
     </ProductWrap>

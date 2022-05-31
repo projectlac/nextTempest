@@ -12,3 +12,11 @@ export enum TAG_TYPE {
   CHARACTER = "CHARACTER",
   WEAPON = "WEAPON",
 }
+
+export interface IBuy {
+  ids: string[];
+  phone: string;
+  gmail: string;
+  social: string;
+  others: string;
+}
