@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { Box, Container, Typography } from "@mui/material";
-import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
+import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MenuIcon from "@mui/icons-material/Menu";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import MenuBox from "../Menu/MenuBox";
+import React, { useState } from "react";
 import { useAppContext } from "../../../context/state";
-import Login from "../../Modules/Authentization/Login";
+import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Authentization from "../../Modules/Authentization";
-import background from "../../../styles/assets/images/payment/BG.png";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import tagApi from "../../../api/tag";
-import toMoney from "../../../utility/toMoney";
+import MenuBox from "../Menu/MenuBox";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -51,22 +45,22 @@ const BgWrap = styled(Box)(
     `
 );
 function HeaderHome() {
-  const { update } = useAppContext();
+  // const { update } = useAppContext();
   const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
 
-  const [ids, setIds] = useState([]);
-  const [data, setData] = useState([]);
+  // const [ids, setIds] = useState([]);
+  // const [data, setData] = useState([]);
   const router = useRouter();
-  useEffect(() => {
-    const wishList = JSON.parse(localStorage.getItem("wishList"));
-    setIds(wishList);
-    if (wishList && wishList.length > 0) {
-      tagApi
-        .getAccountByListID(wishList.toString())
-        .then((res) => setData(res.data));
-    }
-  }, [update]);
+  // useEffect(() => {
+  //   const wishList = JSON.parse(localStorage.getItem("wishList"));
+  //   setIds(wishList);
+  //   if (wishList && wishList.length > 0) {
+  //     tagApi
+  //       .getAccountByListID(wishList.toString())
+  //       .then((res) => setData(res.data));
+  //   }
+  // }, [update]);
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
@@ -164,7 +158,7 @@ function HeaderHome() {
               </Typography>
             )}
           </Box>
-          <Box
+          {/* <Box
             sx={{
               marginLeft: "auto",
               marginRight: "15px",
@@ -319,7 +313,7 @@ function HeaderHome() {
                 </Box>
               )}
             </Box>
-          </Box>
+          </Box> */}
           <Box
             color="#fff"
             sx={{
