@@ -173,7 +173,7 @@ function HeaderHome() {
               padding: "5px",
               display: "flex",
               position: "relative",
-              "&:hover .boxWishList": {
+              "&:hover .box-wishlist": {
                 display: "flex",
               },
             }}
@@ -203,7 +203,7 @@ function HeaderHome() {
             <Box
               width={300}
               height={300}
-              className="boxWishList"
+              className="box-wishlist"
               sx={{
                 background: "#fff",
                 position: "absolute",
