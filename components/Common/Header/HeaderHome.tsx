@@ -11,6 +11,9 @@ import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import toMoney from "../../../utility/toMoney";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -159,7 +162,7 @@ function HeaderHome() {
               </Typography>
             )}
           </Box>
-          {/* <Box
+          <Box
             sx={{
               marginLeft: "auto",
               marginRight: "15px",
@@ -174,7 +177,7 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            {ids.length > 0 && (
+            {/* {ids.length > 0 && (
               <Typography
                 sx={{
                   background: "#d33",
@@ -193,7 +196,7 @@ function HeaderHome() {
               >
                 {ids.length}
               </Typography>
-            )}
+            )} */}
 
             <Box
               width={300}
@@ -314,7 +317,7 @@ function HeaderHome() {
                 </Box>
               )}
             </Box>
-          </Box> */}
+          </Box>
           <Box
             color="#fff"
             sx={{
