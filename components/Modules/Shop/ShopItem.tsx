@@ -7,6 +7,7 @@ import ItemProduct from "../../../styles/assets/images/Shop/ImageProductItem.png
 import StatusBox from "./StatusBox";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useAppContext } from "../../../context/state";
 interface PropShopItem {
   item: string;
   oldPrice?: number;
@@ -97,6 +98,7 @@ function ShopItem({
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
   }
+  const { updated } = useAppContext();
   const [listWishList, setListWishList] = useState<string[]>([]);
   const [reRender, setReRender] = useState<boolean>(false);
   const addToWishList = (id: string) => {
@@ -115,6 +117,7 @@ function ShopItem({
       const temp = [id];
       localStorage.setItem("wishList", JSON.stringify(temp));
     }
+    updated();
     setReRender(!reRender);
   };
   useEffect(() => {
@@ -259,7 +262,7 @@ function ShopItem({
             />
           )}
         </Box>
-        {likeOrNone(id)}
+        {status === "AVAILABLE" && likeOrNone(id)}
       </Box>
     </Box>
   );

@@ -12,7 +12,10 @@ import { useAppContext } from "../../../context/state";
 import Login from "../../Modules/Authentization/Login";
 import Authentization from "../../Modules/Authentization";
 import background from "../../../styles/assets/images/payment/BG.png";
-
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import tagApi from "../../../api/tag";
+import toMoney from "../../../utility/toMoney";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -48,9 +51,22 @@ const BgWrap = styled(Box)(
     `
 );
 function HeaderHome() {
+  const { update } = useAppContext();
   const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
+
+  const [ids, setIds] = useState([]);
+  const [data, setData] = useState([]);
   const router = useRouter();
+  useEffect(() => {
+    const wishList = JSON.parse(localStorage.getItem("wishList"));
+    setIds(wishList);
+    if (wishList.length > 0) {
+      tagApi
+        .getAccountByListID(wishList.toString())
+        .then((res) => setData(res.data));
+    }
+  }, [update]);
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
@@ -74,6 +90,7 @@ function HeaderHome() {
   const login = () => {
     setOpenAuth(true);
   };
+
   return (
     <div>
       <HeaderWrapper>
@@ -147,7 +164,162 @@ function HeaderHome() {
               </Typography>
             )}
           </Box>
+          <Box
+            sx={{
+              marginLeft: "auto",
+              marginRight: "15px",
+              border: "1px solid #fff",
+              borderRadius: "999px",
+              padding: "5px",
+              display: "flex",
+              position: "relative",
+              "&:hover .Box-WishList": {
+                display: "flex",
+              },
+            }}
+          >
+            <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
+            {ids.length > 0 && (
+              <Typography
+                sx={{
+                  background: "#d33",
+                  width: " 16px",
+                  height: "16px",
+                  color: "#fff",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "11px",
+                  borderRadius: "50%",
+                  position: "absolute",
+                  top: "-2px",
+                  right: "-6px",
+                }}
+              >
+                {ids.length}
+              </Typography>
+            )}
 
+            <Box
+              width={300}
+              height={300}
+              className="Box-WishList"
+              sx={{
+                background: "#fff",
+                position: "absolute",
+                height: "300px",
+                right: 0,
+                top: "40px",
+                border: "4px solid #3b5898",
+                flexDirection: "column",
+                display: "none",
+              }}
+            >
+              <ArrowDropUpIcon
+                sx={{
+                  color: "#fff",
+                  position: "absolute",
+                  top: "-14px",
+                  right: "0px",
+                }}
+              />
+              <Box
+                height={250}
+                sx={{
+                  display: "flex",
+                  alignItem: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {ids.length === 0 ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItem: "center",
+                    }}
+                  >
+                    Giỏ hàng không có gì cả
+                  </Box>
+                ) : (
+                  <Box width={300}>
+                    {data.map((d) => (
+                      <Box key={d.id}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            padding: "5px 5px",
+                            justifyContent: "space-between",
+                            borderBottom: "1px solid #ddd",
+                          }}
+                        >
+                          <Box width={95} height={56}>
+                            <Image
+                              src={d.imageUrl}
+                              alt=""
+                              width={95}
+                              height={56}
+                              objectFit="cover"
+                            />
+                          </Box>
+                          <Box width={"calc(100% - 100px)"}>
+                            <Typography
+                              fontSize={15}
+                              fontFamily="Montserrat"
+                              fontWeight={600}
+                              sx={{
+                                display: "-webkit-box",
+                                "-webkit-box-orient": "vertical",
+                                "-webkit-line-clamp": "1",
+                                overflow: "hidden",
+                              }}
+                            >
+                              <Link href={`/chi-tiet/${d.slug}`}>{d.name}</Link>
+                            </Typography>
+                            <Typography
+                              fontSize={13}
+                              fontFamily="Montserrat"
+                              color="#999"
+                            >
+                              <i> {toMoney(d.newPrice)} VND</i>
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+              {isLogin && (
+                <Box
+                  height={50}
+                  sx={{
+                    background: "#bea579",
+                    display: "flex",
+                    alignItem: "center",
+                    justifyContent: "center",
+                    transition: "0.2s all ease",
+                    "&:hover": {
+                      background: "#ab8f5f",
+                    },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      margin: "auto",
+                      color: "#fff",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      fontSize: 17,
+                    }}
+                  >
+                    <Link href={`/thanh-toan/${ids.toString()}?redirect=/`}>
+                      Mua
+                    </Link>
+                  </Typography>
+                </Box>
+              )}
+            </Box>
+          </Box>
           <Box
             color="#fff"
             sx={{

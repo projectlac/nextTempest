@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
@@ -202,7 +202,7 @@ const IdProduct = styled(Box)(
 
 interface SubmitBuy {
   ids: string;
-  slug: string;
+  slug?: string;
 }
 function SubmitBuy({ ids, slug }: SubmitBuy) {
   const [step, setStep] = useState<number>(1);
@@ -254,144 +254,152 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
         }
       })()}
 
-      <Box mb={10} mt={15}>
-        <TitleHighlight mb={10}>Tiến hành thanh toán</TitleHighlight>
-        <BackgroundShop>
-          <Stepper>
-            <BoxStep>
-              <BorderStep>
-                <Step className={`${step === 1 ? "active" : ""}`}>1</Step>
-              </BorderStep>
-              <BorderStep>
-                <Step className={`${step === 2 ? "active" : ""}`}>2</Step>
-              </BorderStep>
-              <BorderStep>
-                <Step className={`${step === 3 ? "active" : ""}`}>3</Step>
-              </BorderStep>
-            </BoxStep>
-          </Stepper>
-          {(() => {
-            switch (step) {
-              case 1:
-                return (
-                  <>
-                    <Box
-                      sx={{
-                        position: "relative",
-                        zIndex: "2",
-                        padding: "0 50px",
-                      }}
-                    >
-                      <Typography
+      <Container>
+        <Box mb={10} mt={15}>
+          <TitleHighlight mb={10}>Tiến hành thanh toán</TitleHighlight>
+          <BackgroundShop>
+            <Stepper>
+              <BoxStep>
+                <BorderStep>
+                  <Step className={`${step === 1 ? "active" : ""}`}>1</Step>
+                </BorderStep>
+                <BorderStep>
+                  <Step className={`${step === 2 ? "active" : ""}`}>2</Step>
+                </BorderStep>
+                <BorderStep>
+                  <Step className={`${step === 3 ? "active" : ""}`}>3</Step>
+                </BorderStep>
+              </BoxStep>
+            </Stepper>
+            {(() => {
+              switch (step) {
+                case 1:
+                  return (
+                    <>
+                      <Box
                         sx={{
-                          color: "#4B66A2",
-                          fontSize: 20,
+                          position: "relative",
+                          zIndex: "2",
+                          padding: "0 50px",
                         }}
                       >
-                        Account bạn đã chọn:
-                      </Typography>
-                      <BoxListAccount>
-                        <Grid container>
-                          {listAccount.map((d, index) => (
-                            <Grid item md={12} key={index}>
-                              <BoxItemAccount>
-                                <Box
-                                  width={`calc(100% - 300px)`}
-                                  sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    justifyContent: "space-between",
-                                    minHeight: "181px",
-                                  }}
-                                >
-                                  <Box m={3}>
-                                    <Typography fontSize={20} color={"#2D4E96"}>
-                                      {d.name}
-                                    </Typography>
-                                    <Link href={`/chi-tiet/${d.slug}`} passHref>
-                                      <Typography color={"#D5D5D5"}>
-                                        {"Xem thêm >>>"}
-                                      </Typography>
-                                    </Link>
-                                  </Box>
-                                  <Typography
-                                    fontSize={30}
-                                    m={3}
-                                    color={"#D3A36E"}
+                        <Typography
+                          sx={{
+                            color: "#4B66A2",
+                            fontSize: 20,
+                          }}
+                        >
+                          Account bạn đã chọn:
+                        </Typography>
+                        <BoxListAccount>
+                          <Grid container>
+                            {listAccount.map((d, index) => (
+                              <Grid item md={12} key={index}>
+                                <BoxItemAccount>
+                                  <Box
+                                    width={`calc(100% - 300px)`}
+                                    sx={{
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      justifyContent: "space-between",
+                                      minHeight: "181px",
+                                    }}
                                   >
-                                    {toMoney(d.newPrice)} VND
-                                  </Typography>
-                                </Box>
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    position: "relative",
-                                  }}
-                                >
-                                  <Image
-                                    src={d.imageUrl}
-                                    alt=""
-                                    width={300}
-                                    height={182}
-                                    objectFit="cover"
-                                    className="custom-img"
-                                  ></Image>
-                                  {getSale(d.oldPrice, d.newPrice) && (
-                                    <Sale>
-                                      {getSale(d.oldPrice, d.newPrice)}
-                                    </Sale>
-                                  )}
+                                    <Box m={3}>
+                                      <Typography
+                                        fontSize={20}
+                                        color={"#2D4E96"}
+                                      >
+                                        {d.name}
+                                      </Typography>
+                                      <Link
+                                        href={`/chi-tiet/${d.slug}`}
+                                        passHref
+                                      >
+                                        <Typography color={"#D5D5D5"}>
+                                          {"Xem thêm >>>"}
+                                        </Typography>
+                                      </Link>
+                                    </Box>
+                                    <Typography
+                                      fontSize={30}
+                                      m={3}
+                                      color={"#D3A36E"}
+                                    >
+                                      {toMoney(d.newPrice)} VND
+                                    </Typography>
+                                  </Box>
+                                  <Box
+                                    sx={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      position: "relative",
+                                    }}
+                                  >
+                                    <Image
+                                      src={d.imageUrl}
+                                      alt=""
+                                      width={300}
+                                      height={182}
+                                      objectFit="cover"
+                                      className="custom-img"
+                                    ></Image>
+                                    {getSale(d.oldPrice, d.newPrice) && (
+                                      <Sale>
+                                        {getSale(d.oldPrice, d.newPrice)}
+                                      </Sale>
+                                    )}
 
-                                  <IdProduct>{d.code}</IdProduct>
-                                </Box>
-                              </BoxItemAccount>
-                            </Grid>
-                          ))}
-                        </Grid>
-                      </BoxListAccount>
-                    </Box>
-                    <ButtonGroup>
-                      <BackButton
-                        onClick={() => {
-                          step !== 1
-                            ? setStep((pr) => pr - 1)
-                            : listAccount.length === 1 &&
-                              router.push(`/chi-tiet/${slug}`);
-                        }}
-                      >{`< Quay lại `}</BackButton>
-                      <NextButton
-                        sx={{
-                          "&.Mui-disabled": {
-                            color: "#00000070",
-                          },
-                        }}
-                        onClick={() => {
-                          setStep((pr) => pr + 1);
-                        }}
-                      >{`Tiếp theo >`}</NextButton>
-                    </ButtonGroup>
-                  </>
-                );
-              case 2:
-                return (
-                  <Guarantee
-                    handleStep={handleStep}
-                    handleSelect={handleSelect}
-                  />
-                );
-              default:
-                return (
-                  <Finally
-                    ids={ids}
-                    hadSelected={hadSelected}
-                    handleStep={handleStep}
-                  />
-                );
-            }
-          })()}
-        </BackgroundShop>
-      </Box>
+                                    <IdProduct>{d.code}</IdProduct>
+                                  </Box>
+                                </BoxItemAccount>
+                              </Grid>
+                            ))}
+                          </Grid>
+                        </BoxListAccount>
+                      </Box>
+                      <ButtonGroup>
+                        <BackButton
+                          onClick={() => {
+                            step !== 1
+                              ? setStep((pr) => pr - 1)
+                              : listAccount.length === 1 &&
+                                router.push(`/chi-tiet/${slug}`);
+                          }}
+                        >{`< Quay lại `}</BackButton>
+                        <NextButton
+                          sx={{
+                            "&.Mui-disabled": {
+                              color: "#00000070",
+                            },
+                          }}
+                          onClick={() => {
+                            setStep((pr) => pr + 1);
+                          }}
+                        >{`Tiếp theo >`}</NextButton>
+                      </ButtonGroup>
+                    </>
+                  );
+                case 2:
+                  return (
+                    <Guarantee
+                      handleStep={handleStep}
+                      handleSelect={handleSelect}
+                    />
+                  );
+                default:
+                  return (
+                    <Finally
+                      ids={ids}
+                      hadSelected={hadSelected}
+                      handleStep={handleStep}
+                    />
+                  );
+              }
+            })()}
+          </BackgroundShop>
+        </Box>
+      </Container>
     </ProductWrap>
   );
 }

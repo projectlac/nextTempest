@@ -1,6 +1,6 @@
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import * as React from "react";
-import newsApi from "../../../../api/newsApi";
+import tagApi from "../../../../api/tag";
 import DialogEdit from "./DialogEdit/DialogEdit";
 
 interface PropsEditNews {
@@ -9,16 +9,14 @@ interface PropsEditNews {
 export default function EditTag({ id }: PropsEditNews) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [defaultData, setDefaultData] = React.useState({
-    id: "",
     title: "",
-    description: "",
-    content: "",
-    imageUrl: null,
+    type: "",
+    id: "",
   });
 
   const callApi = async () => {
     try {
-      await newsApi.getNewsById(id).then((res) => {
+      await tagApi.getTagById(id).then((res) => {
         setDefaultData(res.data);
       });
     } catch (error) {}

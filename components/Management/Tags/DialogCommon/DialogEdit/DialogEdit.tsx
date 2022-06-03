@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import {
   Box,
   CircularProgress,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
   Slide,
   TextField,
   Typography,
@@ -19,6 +23,7 @@ import { Formik, useFormik } from "formik";
 import newsApi from "../../../../../api/newsApi";
 import { TransitionProps } from "@mui/material/transitions";
 import Image from "next/image";
+import tagApi from "../../../../../api/tag";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -41,45 +46,27 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   const [file, setFile] = React.useState(null);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const validationSchema = yup
-    .object({
-      title: yup
-        .string()
-        .min(8, "Title should be of minimum 8 characters length")
-        .required("Email is required"),
-      description: yup
-        .string()
-        .min(8, "Description should be of minimum 8 characters length")
-        .required("Password is required"),
-    })
-    .shape({
-      imageUrl: yup.mixed(),
-    });
+  const validationSchema = yup.object({
+    title: yup.string().required("Vui lòng điền tên"),
+    tag: yup.string().required("Xin hãy chọn tag"),
+  });
+
   const formik = useFormik({
     initialValues: {
       id: defaultData.id,
       title: defaultData.title,
-      description: defaultData.description,
-      content: defaultData.content,
-      imageUrl: defaultData.imageUrl,
+      tag: defaultData.type,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const { title, description, content, id } = values;
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("content", content);
-      if (file) {
-        formData.append("file", file);
-      }
+      const { title, tag, id } = values;
 
       setLoading(true);
-      newsApi
-        .editNews(formData, id)
+      tagApi
+        .updateTag(id, { title, type: tag, content: {} })
         .then((res) => {
-          handleChangeMessageToast("Sửa bài viết thành công");
+          handleChangeMessageToast("Sửa tag thành công");
           updated();
 
           handleChangeStatusToast();
@@ -114,7 +101,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
           fontFamily: "Montserrat",
         }}
       >
-        Chỉnh sửa tin tức
+        Chỉnh sửa tag
       </DialogTitle>
 
       <form onSubmit={formik.handleSubmit}>
@@ -140,60 +127,50 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               error={formik.touched.title && Boolean(formik.errors.title)}
             />
           </Box>
-          <Box mt={3} mb={3}>
-            <TextField
-              fullWidth={true}
-              id="outlined-basic"
-              label="Mô tả"
-              name="description"
-              variant="outlined"
-              sx={{
-                "& label": {
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                },
-                "& input": {
-                  fontFamily: "Montserrat",
-                },
-              }}
-              value={formik.values.description}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.description && Boolean(formik.errors.description)
-              }
-            />
-          </Box>
-
-          <TinyEditor
-            changeBody={onEditorChange}
-            defaultValue={defaultData.content}
-          />
-          <Box mt={3}>
-            <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-              Ảnh chính
-            </Typography>
-            <Button variant="contained" component="label">
-              Upload File
-              <input
-                type="file"
-                accept=".jpg, .png"
-                name="imageUrl"
-                onChange={(e) => {
-                  formik.handleChange(e);
-                  setFile((e.target as HTMLInputElement).files[0]);
-                }}
-              />
-            </Button>
-            {defaultData.imageUrl && (
-              <Box width={200} height={200} position="relative" mt={2}>
-                <Image
-                  alt=""
-                  src={defaultData.imageUrl}
-                  layout="fill"
-                  objectFit="contain"
-                />
-              </Box>
-            )}
+          <Box>
+            <Box mt={1}>Loại tag</Box>
+            <Box>
+              <FormControl>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="tag"
+                  onChange={formik.handleChange}
+                  value={formik.values.tag}
+                  // onChange={handleChoose}
+                >
+                  <FormControlLabel
+                    value="SERVER"
+                    control={<Radio />}
+                    sx={{
+                      "& span": {
+                        fontFamily: "Montserrat",
+                      },
+                    }}
+                    label="Server"
+                  />
+                  <FormControlLabel
+                    value="CHARACTER"
+                    control={<Radio />}
+                    sx={{
+                      "& span": {
+                        fontFamily: "Montserrat",
+                      },
+                    }}
+                    label="Character"
+                  />
+                  <FormControlLabel
+                    value="WEAPON"
+                    control={<Radio />}
+                    sx={{
+                      "& span": {
+                        fontFamily: "Montserrat",
+                      },
+                    }}
+                    label="Weapon"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
           </Box>
         </DialogContent>
         <DialogActions

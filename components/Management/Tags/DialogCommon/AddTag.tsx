@@ -19,6 +19,7 @@ import { useFormik } from "formik";
 import * as React from "react";
 import * as yup from "yup";
 import newsApi from "../../../../api/newsApi";
+import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import TinyEditor from "../../../Common/Editor/TinyEditor";
 const Transition = React.forwardRef(function Transition(
@@ -46,17 +47,10 @@ export default function AddTag() {
     setOpen(false);
   };
 
-  const validationSchema = yup
-    .object({
-      title: yup
-        .string()
-        .min(8, "Title should be of minimum 8 characters length")
-        .required("Email is required"),
-      tag: yup.string().required("Xin hãy chọn tag"),
-    })
-    .shape({
-      file: yup.mixed().required(),
-    });
+  const validationSchema = yup.object({
+    title: yup.string().required("Vui lòng điền tên"),
+    tag: yup.string().required("Xin hãy chọn tag"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -65,28 +59,26 @@ export default function AddTag() {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title } = values;
-      const formData = new FormData();
-      formData.append("title", title);
+      const { title, tag } = values;
 
-      // setLoading(true);
-      // newsApi
-      //   .add(formData)
-      //   .then((res) => {
-      //     handleChangeMessageToast("Tạo tag mới thành công");
-      //     handleChangeStatusToast();
-      //     handleClose();
-      //     updated();
-      //     resetForm();
-      //     setFile(null);
-      //   })
-      //   .catch(() => {
-      //     handleChangeMessageToast("Có lỗi xảy ra");
-      //     handleChangeStatusToast();
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      setLoading(true);
+      tagApi
+        .addTag({ content: {}, title, type: tag })
+        .then((res) => {
+          handleChangeMessageToast("Tạo tag mới thành công");
+          handleChangeStatusToast();
+          handleClose();
+          updated();
+          resetForm();
+          setFile(null);
+        })
+        .catch(() => {
+          handleChangeMessageToast("Có lỗi xảy ra");
+          handleChangeStatusToast();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
 
@@ -150,7 +142,7 @@ export default function AddTag() {
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue=""
-                    name="radio-buttons-group"
+                    name="tag"
                     onChange={formik.handleChange}
 
                     // onChange={handleChoose}

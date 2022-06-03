@@ -99,12 +99,22 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       const { gmail, phone, social, others } = values;
+      let i = [];
+      if (ids.includes(",")) {
+        i = ids.split(",");
+      } else {
+        i.push(ids);
+      }
+
       await tagApi
-        .buyAccount({ gmail, others, phone, social, ids: [ids] })
+        .buyAccount({ gmail, others, phone, social, ids: i })
         .then((res) => {
           console.log(res);
           handleChangeStatusToast();
           handleChangeMessageToast("Bạn đã mua thành công");
+          if (i.length > 1) {
+            localStorage.removeItem("wishList");
+          }
         })
         .catch((err) => {
           handleChangeStatusToast();

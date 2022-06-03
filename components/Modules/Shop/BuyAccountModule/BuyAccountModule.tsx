@@ -68,7 +68,7 @@ const BackgroundShop = styled(Container)({
 function BuyAccountModule() {
   return (
     <ProductWrap>
-      <Box mb={10} mt={20}>
+      <Box mb={20} mt={20}>
         <TitleHighlight mb={10}>Danh sách tài khoản</TitleHighlight>
         <BackgroundShop>
           <Grid container>

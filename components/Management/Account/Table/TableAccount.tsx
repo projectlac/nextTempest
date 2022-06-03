@@ -24,6 +24,7 @@ import {
   AccountData,
   AccountDataRole,
 } from "../../../../types/DashboardTypes/account";
+import toMoney from "../../../../utility/toMoney";
 import EditRole from "../DialogCommon/EditRole";
 import EditSmileCoin from "../DialogCommon/EditSmileCoin";
 
@@ -143,16 +144,6 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
     handleChangeLimit(parseInt(event.target.value));
-  };
-
-  const toMoney = (price: number) => {
-    return price
-      .toString()
-      .split("")
-      .reverse()
-      .reduce((prev, next, index) => {
-        return (index % 3 ? next : next + ".") + prev;
-      });
   };
 
   return (
