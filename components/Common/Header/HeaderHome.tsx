@@ -14,6 +14,8 @@ import MenuBox from "../Menu/MenuBox";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import toMoney from "../../../utility/toMoney";
+import CloseIcon from "@mui/icons-material/Close";
+import { remove } from "lodash";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -49,7 +51,7 @@ const BgWrap = styled(Box)(
     `
 );
 function HeaderHome() {
-  const { update } = useAppContext();
+  const { update, updated } = useAppContext();
   const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
 
@@ -90,6 +92,18 @@ function HeaderHome() {
     setOpenAuth(true);
   };
 
+  const removeID = (id: string) => {
+    const wishList = JSON.parse(localStorage.getItem("wishList"));
+    if (wishList && wishList.indexOf(id) !== -1) {
+      const index = wishList.indexOf(id);
+      if (index > -1) {
+        wishList.splice(index, 1);
+        localStorage.setItem("wishList", JSON.stringify(wishList));
+        updated();
+        // 2nd parameter means remove one item only
+      }
+    }
+  };
   return (
     <div>
       <HeaderWrapper>
@@ -260,7 +274,7 @@ function HeaderHome() {
                               objectFit="cover"
                             />
                           </Box>
-                          <Box width={"calc(100% - 100px)"}>
+                          <Box width={"calc(100% - 130px)"}>
                             <Typography
                               fontSize={15}
                               fontFamily="Montserrat"
@@ -281,6 +295,24 @@ function HeaderHome() {
                             >
                               <i> {toMoney(d.newPrice)} VND</i>
                             </Typography>
+                          </Box>
+                          <Box
+                            width={30}
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              color: "#d33",
+                            }}
+                          >
+                            <CloseIcon
+                              sx={{
+                                pointerEvents: "pointer",
+                              }}
+                              onClick={() => {
+                                removeID(d.id);
+                              }}
+                            />
                           </Box>
                         </Box>
                       </Box>

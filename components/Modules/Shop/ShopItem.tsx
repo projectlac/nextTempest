@@ -98,7 +98,7 @@ function ShopItem({
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
   }
-  const { updated } = useAppContext();
+  const { updated, update } = useAppContext();
   const [listWishList, setListWishList] = useState<string[]>([]);
   const [reRender, setReRender] = useState<boolean>(false);
   const addToWishList = (id: string) => {
@@ -122,7 +122,7 @@ function ShopItem({
   };
   useEffect(() => {
     setListWishList(JSON.parse(localStorage.getItem("wishList")));
-  }, [reRender]);
+  }, [reRender, update]);
   const likeOrNone = (id: string) => {
     const index = listWishList?.indexOf(id);
     if (index === -1) {
