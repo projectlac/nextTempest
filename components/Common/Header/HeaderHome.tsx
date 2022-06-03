@@ -64,6 +64,7 @@ function HeaderHome() {
         .getAccountByListID(wishList.toString())
         .then((res) => setData(res.data));
     }
+    console.log(ids.length);
   }, [update]);
 
   const activeClass = (pathName: string) => {
@@ -177,7 +178,7 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            {ids.length > 0 && (
+            {ids && ids.length > 0 && (
               <Typography
                 sx={{
                   background: "#d33",
@@ -194,7 +195,7 @@ function HeaderHome() {
                   right: "-6px",
                 }}
               >
-                {ids.length}
+                {ids && ids.length}
               </Typography>
             )}
 
