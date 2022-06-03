@@ -177,7 +177,7 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            {/* {ids.length > 0 && (
+            {ids.length > 0 && (
               <Typography
                 sx={{
                   background: "#d33",
@@ -196,7 +196,7 @@ function HeaderHome() {
               >
                 {ids.length}
               </Typography>
-            )} */}
+            )}
 
             <Box
               width={300}
@@ -229,7 +229,7 @@ function HeaderHome() {
                   justifyContent: "center",
                 }}
               >
-                {ids.length === 0 ? (
+                {/* {ids.length === 0 ? (
                   <Box
                     sx={{
                       display: "flex",
@@ -285,7 +285,7 @@ function HeaderHome() {
                       </Box>
                     ))}
                   </Box>
-                )}
+                )} */}
               </Box>
               {isLogin && (
                 <Box
