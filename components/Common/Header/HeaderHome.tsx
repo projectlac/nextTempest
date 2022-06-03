@@ -178,7 +178,7 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            {ids && ids.length > 0 && (
+            {ids && ids?.length > 0 && (
               <Typography
                 sx={{
                   background: "#d33",
@@ -195,7 +195,7 @@ function HeaderHome() {
                   right: "-6px",
                 }}
               >
-                {ids && ids.length}
+                {ids && ids?.length}
               </Typography>
             )}
 
