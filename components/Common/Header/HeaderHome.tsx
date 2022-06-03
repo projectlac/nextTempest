@@ -179,7 +179,7 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            {ids && ids.length > 0 && (
+            {ids.length > 0 && (
               <Typography
                 sx={{
                   background: "#d33",
@@ -196,7 +196,7 @@ function HeaderHome() {
                   right: "-6px",
                 }}
               >
-                {ids && ids.length}
+                {ids.length}
               </Typography>
             )}
 
@@ -254,7 +254,7 @@ function HeaderHome() {
                         >
                           <Box width={95} height={56}>
                             <Image
-                              src={d.imageUrl}
+                              src={d?.imageUrl}
                               alt=""
                               width={95}
                               height={56}

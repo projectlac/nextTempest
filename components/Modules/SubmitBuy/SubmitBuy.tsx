@@ -364,7 +364,9 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                             step !== 1
                               ? setStep((pr) => pr - 1)
                               : listAccount.length === 1 &&
-                                router.push(`/chi-tiet/${slug}`);
+                                (slug === "/"
+                                  ? router.push(`${slug}`)
+                                  : router.push(`/chi-tiet/${slug}`));
                           }}
                         >{`< Quay lại `}</BackButton>
                         <NextButton
