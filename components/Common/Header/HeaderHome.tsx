@@ -5,11 +5,15 @@ import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import toMoney from "../../../utility/toMoney";
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -45,22 +49,22 @@ const BgWrap = styled(Box)(
     `
 );
 function HeaderHome() {
-  // const { update } = useAppContext();
+  const { update } = useAppContext();
   const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
 
-  // const [ids, setIds] = useState([]);
-  // const [data, setData] = useState([]);
+  const [ids, setIds] = useState([]);
+  const [data, setData] = useState([]);
   const router = useRouter();
-  // useEffect(() => {
-  //   const wishList = JSON.parse(localStorage.getItem("wishList"));
-  //   setIds(wishList);
-  //   if (wishList && wishList.length > 0) {
-  //     tagApi
-  //       .getAccountByListID(wishList.toString())
-  //       .then((res) => setData(res.data));
-  //   }
-  // }, [update]);
+  useEffect(() => {
+    const wishList = JSON.parse(localStorage.getItem("wishList"));
+    setIds(wishList);
+    if (wishList && wishList.length > 0) {
+      tagApi
+        .getAccountByListID(wishList.toString())
+        .then((res) => setData(res.data));
+    }
+  }, [update]);
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
@@ -158,7 +162,7 @@ function HeaderHome() {
               </Typography>
             )}
           </Box>
-          {/* <Box
+          <Box
             sx={{
               marginLeft: "auto",
               marginRight: "15px",
@@ -217,7 +221,7 @@ function HeaderHome() {
                   right: "0px",
                 }}
               />
-              <Box
+              {/* <Box
                 height={250}
                 sx={{
                   display: "flex",
@@ -282,7 +286,7 @@ function HeaderHome() {
                     ))}
                   </Box>
                 )}
-              </Box>
+              </Box> */}
               {isLogin && (
                 <Box
                   height={50}
@@ -313,7 +317,7 @@ function HeaderHome() {
                 </Box>
               )}
             </Box>
-          </Box> */}
+          </Box>
           <Box
             color="#fff"
             sx={{
