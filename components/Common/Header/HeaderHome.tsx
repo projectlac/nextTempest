@@ -222,7 +222,7 @@ function HeaderHome() {
                   right: "0px",
                 }}
               />
-              {/* <Box
+              <Box
                 height={250}
                 sx={{
                   display: "flex",
@@ -287,7 +287,7 @@ function HeaderHome() {
                     ))}
                   </Box>
                 )}
-              </Box> */}
+              </Box>
               {isLogin && (
                 <Box
                   height={50}
