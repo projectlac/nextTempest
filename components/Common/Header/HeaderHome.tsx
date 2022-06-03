@@ -61,7 +61,7 @@ function HeaderHome() {
   useEffect(() => {
     const wishList = JSON.parse(localStorage.getItem("wishList"));
     setIds(wishList);
-    if (wishList.length > 0) {
+    if (wishList && wishList.length > 0) {
       tagApi
         .getAccountByListID(wishList.toString())
         .then((res) => setData(res.data));
