@@ -345,7 +345,9 @@ function HeaderHome() {
                       fontSize: 17,
                     }}
                   >
-                    <Link href={`/thanh-toan/${ids.toString()}?redirect=/`}>
+                    <Link
+                      href={`/thanh-toan/${ids && ids.toString()}?redirect=/`}
+                    >
                       Mua
                     </Link>
                   </Typography>
