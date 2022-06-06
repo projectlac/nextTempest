@@ -64,9 +64,12 @@ function HeaderHome() {
     if (wishList && wishList.length > 0) {
       tagApi
         .getAccountByListID(wishList.toString())
-        .then((res) => setData(res.data));
+        .then((res) => setData(res.data))
+        .catch(() => {
+          localStorage.setItem("wishList", JSON.stringify([]));
+          router.push("/");
+        });
     }
-    console.log(ids.length);
   }, [update]);
 
   const activeClass = (pathName: string) => {
@@ -98,7 +101,6 @@ function HeaderHome() {
       const index = wishList.indexOf(id);
       if (index > -1) {
         wishList.splice(index, 1);
-        localStorage.setItem("wishList", JSON.stringify(wishList));
         updated();
         // 2nd parameter means remove one item only
       }
@@ -244,7 +246,7 @@ function HeaderHome() {
                   justifyContent: "center",
                 }}
               >
-                {ids.length === 0 ? (
+                {ids && ids.length === 0 ? (
                   <Box
                     sx={{
                       display: "flex",

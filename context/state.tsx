@@ -60,8 +60,25 @@ export function AppWrapper({ children }) {
     setMessageToast(msg);
   };
 
+  const isJsonString = (str: string) => {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("access_token");
+    const wishList = localStorage.getItem("wishList");
+
+    if (!Boolean(wishList))
+      localStorage.setItem("wishList", JSON.stringify([]));
+
+    if (!isJsonString(wishList))
+      localStorage.setItem("wishList", JSON.stringify([]));
+
     if (Boolean(token)) {
       setRole(jwt_decode<any>(token).role);
       setIsLogin(true);
