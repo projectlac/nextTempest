@@ -207,8 +207,8 @@ function ShopItem({
         >
           <Link href={`/chi-tiet/${slug}`} passHref>
             <a>
-              {item.slice(0, 40)}
-              {item.length > 40 && "..."}
+              {item.slice(0, 60)}
+              {item.length > 60 && "..."}
             </a>
           </Link>
         </Typography>
