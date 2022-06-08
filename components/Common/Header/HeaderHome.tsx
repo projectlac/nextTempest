@@ -101,6 +101,8 @@ function HeaderHome() {
       const index = wishList.indexOf(id);
       if (index > -1) {
         wishList.splice(index, 1);
+        localStorage.setItem("wishList", JSON.stringify(wishList));
+
         updated();
         // 2nd parameter means remove one item only
       }
