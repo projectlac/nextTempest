@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 import DashboardLayout from "../../../components/Layout/DashboardLayout";
-import DataPayment from "../../../components/Management/PaymentOrder/Table/DataPayment";
+import DataPaymentList from "../../../components/Management/PaymentList/Table/DataPaymentList";
 
 function PaymentRequire() {
   return (
@@ -13,7 +13,7 @@ function PaymentRequire() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Container>
-        <DataPayment />
+        <DataPaymentList />
       </Container>
     </DashboardLayout>
   );

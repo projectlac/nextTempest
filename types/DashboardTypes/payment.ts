@@ -21,3 +21,18 @@ export interface PackInfor {
   unitPrice: number;
   total: number;
 }
+export interface CryptoOrderPaymentItem extends CryptoOrder {
+  information: PaymentItem;
+}
+export interface PaymentItem {
+  accounts: AccountInfor[];
+  gmail: string;
+  others: string;
+  social: string;
+  phone: string;
+}
+export interface AccountInfor {
+  code: string;
+  newPrice: string;
+  server: string;
+}
