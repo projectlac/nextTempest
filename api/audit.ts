@@ -11,6 +11,7 @@ import {
   PackHistoryOfAccount,
 } from "../types/DashboardTypes/packManagement";
 import axiosAudit from "./axiosAudit";
+import axiosClient from "./axiosClient";
 
 const audit = {
   updateCoin(params: AuditForm): Promise<PromiseApi> {
@@ -53,6 +54,10 @@ const audit = {
   },
   getProfile(): Promise<PromiseApi> {
     const url = `/auth/profile`;
+    return axiosAudit.get(url);
+  },
+  getAuditById(id: string): Promise<PromiseApi> {
+    const url = `/audit/${id}`;
     return axiosAudit.get(url);
   },
 };

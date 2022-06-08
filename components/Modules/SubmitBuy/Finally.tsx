@@ -16,6 +16,7 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
+import { useRouter } from "next/router";
 
 interface GuaranteeProps {
   ids: string;
@@ -87,6 +88,7 @@ const validationSchema = yup.object({
 
 function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
   const { handleChangeMessageToast, handleChangeStatusToast } = useAppContext();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       hadSelected: hadSelected === 2,
@@ -115,6 +117,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
           if (i.length > 1) {
             localStorage.removeItem("wishList");
           }
+          router.push(`/bill/${res.data[2] && res.data[2].id}`);
         })
         .catch((err) => {
           handleChangeStatusToast();
