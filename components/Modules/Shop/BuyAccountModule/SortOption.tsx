@@ -42,7 +42,7 @@ export default function SortOption({ handleSortBy }: SortOption) {
         <MenuItem sx={{ fontFamily: "Montserrat" }} value={"-1"}>
           Mới nhất
         </MenuItem>
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={3}>
+        <MenuItem sx={{ fontFamily: "Montserrat" }} value={2}>
           Đang sale
         </MenuItem>
         <MenuItem sx={{ fontFamily: "Montserrat" }} value={0}>
