@@ -8,8 +8,9 @@ import {
   FaInstagram,
   FaTwitter,
   FaYoutube,
+  FaPhoneAlt,
 } from "react-icons/fa";
-import { IoIosChatbubbles } from "react-icons/io";
+
 import { showMessenger } from "react-messenger-chat-plugin";
 
 import Smile from "../../../styles/assets/images/Smile.png";
@@ -122,9 +123,9 @@ function Social() {
           </a>
         </Link>
 
-        <Link href="https://www.facebook.com/tranminhvu128/" passHref>
-          <a target="_blank" rel="noopener noreferrer">
-            <IoIosChatbubbles /> Chat với hỗ trợ
+        <Link href="tel:0344723594" passHref>
+          <a>
+            <FaPhoneAlt /> Liên hệ trực tiếp
           </a>
         </Link>
       </SocialList>
