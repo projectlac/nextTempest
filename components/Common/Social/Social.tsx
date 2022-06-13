@@ -122,15 +122,11 @@ function Social() {
           </a>
         </Link>
 
-        <Typography
-          onClick={() => {
-            showMessenger(true);
-          }}
-        >
-          <a>
+        <Link href="https://www.facebook.com/tranminhvu128/" passHref>
+          <a target="_blank" rel="noopener noreferrer">
             <IoIosChatbubbles /> Chat với hỗ trợ
           </a>
-        </Typography>
+        </Link>
       </SocialList>
     </SocialWrapper>
   );
