@@ -2,7 +2,7 @@ import Head from "next/head";
 import HeaderHome from "../Common/Header/HeaderHome";
 import { MessengerChat } from "react-messenger-chat-plugin";
 import Social from "../Common/Social/Social";
-
+import MessengerCustomerChat from "react-messenger-customer-chat";
 export default function Layout({ children }) {
   return (
     <>
@@ -15,6 +15,9 @@ export default function Layout({ children }) {
         loggedOutGreeting=""
         language="vi_VN"
       />
+
+      <MessengerCustomerChat pageId="103539711584646" />
+
       <Social />
     </>
   );

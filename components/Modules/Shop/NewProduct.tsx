@@ -1,10 +1,10 @@
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import BG from "../../../styles/assets/images/Shop/BGnewProduct.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/ButtonShowMore.png";
-
+import tagApi from "../../../api/tag";
 import ShopItem from "./ShopItem";
 import Link from "next/link";
 const BoxShop = styled(Box)(
@@ -56,6 +56,21 @@ const ButtonShowMore = styled(Box)(
 );
 
 function NewProduct() {
+  const [productList, setProductList] = useState<any>([]);
+
+  useEffect(() => {
+    tagApi
+      .getAccount({
+        character: "",
+        limit: 4,
+        offset: 0,
+        server: "",
+        weapon: "",
+        sort: null,
+      })
+      .then((res) => setProductList(res.data.data));
+  }, []);
+
   return (
     <Box
       sx={{
@@ -64,31 +79,28 @@ function NewProduct() {
     >
       <BoxShop mt={4}>
         <Grid container columnSpacing={3} mt={7}>
-          {[...Array(4)].map((d, i) => (
-            <Grid
-              item
-              md={3}
-              key={i}
-              sx={{
-                mt: { lg: 18, xs: 15 },
-              }}
-            >
-              <ShopItem
-                item={`[Asia] AR49 - Itto, Zhongli, Jean, Diluc, Mona
-                `}
-                idProduct={"TOP1"}
-                oldPrice={15555555}
-                newPrice={5555555}
-                status={"AVAILABLE"}
-                id={"123123123"}
-                image={
-                  "http://res.cloudinary.com/shoppacc/image/upload/v1653388092/mkivq9ny7kobqizp8rsa.png"
-                }
-                slug="hihihihi"
+          {productList &&
+            productList.map((d, i) => (
+              <Grid
+                item
+                md={3}
                 key={i}
-              />
-            </Grid>
-          ))}
+                sx={{
+                  mt: { lg: 18, xs: 15 },
+                }}
+              >
+                <ShopItem
+                  image={d.imageUrl}
+                  item={d.name}
+                  idProduct={d.code}
+                  oldPrice={+d.oldPrice}
+                  newPrice={+d.newPrice}
+                  status={d.status}
+                  slug={d.slug}
+                  id={d.id}
+                />
+              </Grid>
+            ))}
         </Grid>
         <ButtonShowMore>
           <Link href={`/mua-tai-khoan`} passHref>
