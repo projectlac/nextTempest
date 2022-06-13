@@ -8,13 +8,13 @@ export default function Layout({ children }) {
     <>
       <HeaderHome />
       <main>{children}</main>
-      <MessengerChat
+      {/* <MessengerChat
         pageId="103539711584646"
         themeColor={"#b68967"}
         loggedInGreeting=""
         loggedOutGreeting=""
         language="vi_VN"
-      />
+      /> */}
 
       <MessengerCustomerChat pageId="103539711584646" />
 
