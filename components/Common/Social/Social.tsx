@@ -10,7 +10,8 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { IoIosChatbubbles } from "react-icons/io";
-import { showMessenger } from "react-messenger-customer-chat";
+import { showMessenger } from "react-messenger-chat-plugin";
+
 import Smile from "../../../styles/assets/images/Smile.png";
 const SocialWrapper = styled(Box)(
   ({ theme }) => `

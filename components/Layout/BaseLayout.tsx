@@ -1,22 +1,22 @@
 import Head from "next/head";
 import HeaderHome from "../Common/Header/HeaderHome";
-import { MessengerChat } from "react-messenger-chat-plugin";
+import { MessengerChat, showMessenger } from "react-messenger-chat-plugin";
 import Social from "../Common/Social/Social";
-import MessengerCustomerChat from "react-messenger-customer-chat";
+// import MessengerChat from "react-messenger-customer-chat";
 export default function Layout({ children }) {
   return (
     <>
       <HeaderHome />
       <main>{children}</main>
-      {/* <MessengerChat
+      <MessengerChat
         pageId="103539711584646"
         themeColor={"#b68967"}
         loggedInGreeting=""
         loggedOutGreeting=""
         language="vi_VN"
-      /> */}
+      />
 
-      <MessengerCustomerChat pageId="103539711584646" />
+      {/* <MessengerChat pageId="103539711584646" language="vi_VN" /> */}
 
       <Social />
     </>
