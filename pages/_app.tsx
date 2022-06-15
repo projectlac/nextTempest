@@ -56,51 +56,25 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
-        <Script
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH`}
-        />
-
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-8SZQ8DYEBH', {
-              page_path: window.location.pathname,
-            });
-                `}
-        </Script>
         <CssBaseline />
         <NextNProgress />
 
         <AppWrapper>
-          <Component {...pageProps} />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'G-8SZQ8DYEBH', 'auto');
-          ga('send', 'pageview');
-        `}
-          </Script>
-
           <Script
-            src="https://www.googletagmanager.com/gtag/js?id=GTM-T6BB6MV"
-            strategy="afterInteractive"
+            strategy="lazyOnload"
+            src={`https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH`}
           />
-          <Script id="google-analytics" strategy="afterInteractive">
+
+          <Script strategy="lazyOnload" id="">
             {`
           window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
+          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'GTM-T6BB6MV');
+          gtag('config', 'G-8SZQ8DYEBH');
         `}
           </Script>
+          <Component {...pageProps} />
         </AppWrapper>
       </ThemeProvider>
     </CacheProvider>
