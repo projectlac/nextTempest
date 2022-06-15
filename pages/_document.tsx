@@ -1,9 +1,8 @@
-import * as React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import * as React from "react";
 
 import createEmotionCache from "../utility/createEmotionCache";
-import Script from "next/script";
 
 export default class MyDocument extends Document {
   render() {
@@ -29,23 +28,6 @@ export default class MyDocument extends Document {
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           ></meta>
-          <meta
-            name="google-site-verification"
-            content="GrqXOIR7p_CR7X-WvwJ3rzvui2HDqtoS6BJ5hx0BtUc"
-          />
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH"
-          ></Script>
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'G-8SZQ8DYEBH');
-        `}
-          </Script>
         </Head>
         <body>
           <Main />
