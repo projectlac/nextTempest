@@ -16,6 +16,7 @@ import lightThemeOptions from "../styles/theme/lightThemeOption";
 import createEmotionCache from "../utility/createEmotionCache";
 import TagManager from "react-gtm-module";
 import Script from "next/script";
+import { useRouter } from "next/router";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -26,6 +27,20 @@ const lightTheme = createTheme(lightThemeOptions);
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const router = useRouter();
+
+  const handleRouteChange = (url) => {
+    window.gtag("config", "G-8SZQ8DYEBH", {
+      page_path: url,
+    });
+  };
+
+  React.useEffect(() => {
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   React.useEffect(() => {
     if (typeof window !== "undefined") {
@@ -54,6 +69,21 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           ga('send', 'pageview');
         `}
           </Script>
+          <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH"
+          />
+
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-8SZQ8DYEBH', { page_path: window.location.pathname });
+            `,
+            }}
+          />
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=GTM-T6BB6MV"
             strategy="afterInteractive"
