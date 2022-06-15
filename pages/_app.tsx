@@ -17,6 +17,7 @@ import createEmotionCache from "../utility/createEmotionCache";
 import TagManager from "react-gtm-module";
 import Script from "next/script";
 import { useRouter } from "next/router";
+import * as ga from "../lib/ga";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -29,14 +30,16 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const router = useRouter();
 
-  const handleRouteChange = (url) => {
-    window.gtag("config", "G-8SZQ8DYEBH", {
-      page_path: url,
-    });
-  };
-
   React.useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url);
+    };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
     router.events.on("routeChangeComplete", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
     return () => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
@@ -69,21 +72,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           ga('send', 'pageview');
         `}
           </Script>
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH"
-          />
 
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-8SZQ8DYEBH', { page_path: window.location.pathname });
-            `,
-            }}
-          />
           <Script
             src="https://www.googletagmanager.com/gtag/js?id=GTM-T6BB6MV"
             strategy="afterInteractive"
