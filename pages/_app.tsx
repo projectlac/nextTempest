@@ -56,6 +56,21 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
+        <Script
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH`}
+        />
+
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8SZQ8DYEBH', {
+              page_path: window.location.pathname,
+            });
+                `}
+        </Script>
         <CssBaseline />
         <NextNProgress />
 
