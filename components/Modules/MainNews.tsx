@@ -103,6 +103,7 @@ const ShowMore = styled(Box)(
 
 function MainNews() {
   const [newList, setNewList] = useState<NewsList[]>([]);
+  const [index, setIndex] = useState<number>(4);
   const [total, setTotal] = useState<number>(0);
   const [newest, setNewest] = useState<NewsList[]>([
     {
@@ -116,23 +117,30 @@ function MainNews() {
   ]);
 
   const [offset, setOffset] = useState<number>(0);
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        await newsApi.getAll({ limit: 4, offset }).then((res) => {
-          const data = res.data.data;
-          const newsestData = data.splice(0, 1);
 
-          if (data.length > 0) {
-            setNewList(data);
-            setNewest(newsestData);
-            setTotal(res.data.total);
-          }
-        });
-      } catch (error) {}
-    };
-    getData();
+  const getData = async (limit: number) => {
+    try {
+      await newsApi.getAll({ limit, offset }).then((res) => {
+        const data = res.data.data;
+        const newsestData = data.splice(0, 1);
+
+        if (data.length > 0) {
+          setNewList(data);
+          setNewest(newsestData);
+          setTotal(res.data.total);
+        }
+      });
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getData(index);
   }, []);
+  const loadMore = () => {
+    let newIndex = index + 4;
+    getData(newIndex);
+    setIndex(newIndex);
+  };
   return (
     <Box pb={0}>
       <Box pt={5} pb={2}>
@@ -266,8 +274,8 @@ function MainNews() {
         </NewBox>
 
         <ShowMore>
-          {total !== newList.length + 1 && (
-            <>
+          {total > newList.length + 1 && (
+            <Box onClick={loadMore}>
               <Typography
                 color="#E3DDD3"
                 sx={{ fontSize: { lg: "18px", md: "16px", sm: "13px" } }}
@@ -277,7 +285,7 @@ function MainNews() {
               <Box>
                 <Image src={DownArrow} alt="" width={65} height={65} />
               </Box>
-            </>
+            </Box>
           )}
         </ShowMore>
       </Box>
