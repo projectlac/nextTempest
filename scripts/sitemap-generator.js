@@ -4,7 +4,7 @@ function addPage(page) {
   const path = page.replace('pages', '').replace('.js', '').replace('.mdx', '')
   const route = path === '/index' ? '' : path
   return `  <url>
-    <loc>${`http://localhost:3000${route}`}</loc>
+    <loc>${`https://www.tempest.vn/${route}`}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
