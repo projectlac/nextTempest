@@ -31,6 +31,7 @@
     "nextjs-progressbar": "^0.0.14",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-gtm-module": "^2.0.11",
     "react-icons": "^4.4.0",
     "react-image-gallery": "^1.2.8",
     "react-infinite-scroller": "^1.2.6",

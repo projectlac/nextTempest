@@ -39,7 +39,7 @@ const audit = {
     return axiosAudit.get(url);
   },
   showHistoryOfAccount(params: PackHistoryOfAccount): Promise<PromiseApi> {
-    const url = `/audit?limit=${params.limit}&offsett=${params.offset}`;
+    const url = `/audit?limit=${params.limit}&offsett=${params.offset}&type='STONE' `;
     return axiosAudit.get(url);
   },
   completedThisPack(id: string): Promise<PromiseApi> {

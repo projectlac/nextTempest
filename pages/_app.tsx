@@ -14,6 +14,7 @@ import "../styles/customCarousel.scss";
 
 import lightThemeOptions from "../styles/theme/lightThemeOption";
 import createEmotionCache from "../utility/createEmotionCache";
+import TagManager from "react-gtm-module";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -24,6 +25,14 @@ const lightTheme = createTheme(lightThemeOptions);
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      TagManager.initialize({ gtmId: "GTM-T6BB6MV" });
+    } else {
+      console.log("GTM server side - ignorning");
+    }
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>
