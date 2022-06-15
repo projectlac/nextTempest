@@ -29,6 +29,10 @@ export default class MyDocument extends Document {
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           ></meta>
+          <meta
+            name="google-site-verification"
+            content="GrqXOIR7p_CR7X-WvwJ3rzvui2HDqtoS6BJ5hx0BtUc"
+          />
           <Script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH"
