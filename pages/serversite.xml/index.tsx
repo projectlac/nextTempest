@@ -38,6 +38,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       lastmod: new Date().toISOString(),
     },
     {
+      loc: `${siteUrl}/404`,
+      lastmod: new Date().toISOString(),
+    },
+    {
       loc: `${siteUrl}/tin-tuc`,
       lastmod: new Date().toISOString(),
     },
