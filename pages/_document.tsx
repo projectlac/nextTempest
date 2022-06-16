@@ -44,6 +44,11 @@ export default class MyDocument extends Document {
           `,
             }}
           />
+          <link
+            rel="alternate"
+            hrefLang="vi_VN"
+            href="https://www.tempest.vn/"
+          />
         </Head>
         <body>
           <Main />
