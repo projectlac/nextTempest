@@ -28,6 +28,28 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const siteUrl = "https://www.tempest.vn";
   const data: any = await GetProduct();
   const news: any = await GetPost();
+  const fieldHome: ISitemapField[] = [
+    {
+      loc: `${siteUrl}/`,
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: `${siteUrl}/mua-tai-khoan`,
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: `${siteUrl}/tin-tuc`,
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: `${siteUrl}/lien-he`,
+      lastmod: new Date().toISOString(),
+    },
+    {
+      loc: `${siteUrl}/nap-tien`,
+      lastmod: new Date().toISOString(),
+    },
+  ];
   const fieldsProduct: ISitemapField[] = data?.map((data: any) => ({
     loc: `${siteUrl}/chi-tiet/${data.slug}`,
     lastmod: new Date().toISOString(),
@@ -37,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     lastmod: new Date().toISOString(),
   }));
 
-  const fields = fieldsNews.concat(fieldsProduct);
+  const fields = fieldsNews.concat(fieldsProduct, fieldHome);
 
   return getServerSideSitemap(ctx, fields);
 };
