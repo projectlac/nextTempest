@@ -12,6 +12,10 @@ export default function IndexPage() {
         <title>Trang chủ</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
+        <meta
+          property="og:description"
+          content="Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+        />
       </Head>
       <ModuleVideo />
       <ModuleShop />
