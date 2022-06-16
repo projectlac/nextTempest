@@ -111,7 +111,6 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
       await tagApi
         .buyAccount({ gmail, others, phone, social, ids: i })
         .then((res) => {
-          console.log(res);
           handleChangeStatusToast();
           handleChangeMessageToast("Bạn đã mua thành công");
           if (i.length > 1) {

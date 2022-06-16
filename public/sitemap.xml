@@ -2,79 +2,79 @@
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.tempest.vn/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.300Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/bill/[id].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.300Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/change-password/[token].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.300Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/chi-tiet/[id].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/chi-tiet-tin-tuc/[id].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/hoan-thanh/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/lien-he/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/mua-tai-khoan/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/nap-tien/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/serversite.xml/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/thanh-toan/[id].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/tin-tuc/index.tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.tempest.vn/verified/[token].tsx</loc>
-    <lastmod>2022-06-16T03:00:16.066Z</lastmod>
+    <lastmod>2022-06-16T03:05:03.301Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

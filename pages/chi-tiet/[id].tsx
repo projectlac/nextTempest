@@ -6,8 +6,6 @@ import Layout from "../../components/Layout/BaseLayout";
 import DetailAccountModule from "../../components/Modules/Shop/DetailAccountModule/DetailAccountModule";
 
 export default function DetailProduct({ post }) {
-  console.log(post);
-
   return (
     <Layout>
       <Head>

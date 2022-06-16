@@ -84,6 +84,7 @@ const IdProduct = styled(Box)(
  right:0;
       `
 );
+
 function ShopItem({
   idProduct,
   item,
@@ -206,9 +207,16 @@ function ShopItem({
           }}
         >
           <Link href={`/chi-tiet/${slug}`} passHref>
-            <a>
-              {item.slice(0, 60)}
-              {item.length > 60 && "..."}
+            <a
+              style={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: "2",
+                overflow: "hidden",
+              }}
+            >
+              {item.slice(0, 50)}
+              {item.length > 50 && "..."}
             </a>
           </Link>
         </Typography>

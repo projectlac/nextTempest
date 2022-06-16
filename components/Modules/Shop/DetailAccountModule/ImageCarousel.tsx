@@ -1,12 +1,9 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
-import background from "../../../../styles/assets/images/Shop/ImageCarouselBG.png";
-import Top from "../../../../styles/assets/images/Shop/top.png";
+import { useEffect, useState } from "react";
 import Mid from "../../../../styles/assets/images/Shop/mid.png";
-
+import Top from "../../../../styles/assets/images/Shop/top.png";
 import Bot from "../../../../styles/assets/images/Shop/bot.png";
-
 import ImageGallery from "react-image-gallery";
 const ImageWrap = styled(Box)({
   position: "relative",
@@ -32,7 +29,7 @@ const ImageWrap = styled(Box)({
     backgroundSize: `contain`,
     backgroundRepeat: `no-repeat`,
     width: "100%",
-    bottom: "-65px",
+    bottom: "-55px",
     left: 0,
   },
 });
@@ -62,9 +59,10 @@ function ImageCarousel({ imageList }: ImageProps) {
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <ImageGallery
           items={images}
-          thumbnailPosition="left"
+          thumbnailPosition="bottom"
           showPlayButton={false}
           showNav={false}
+          showThumbnails={images.length > 1 ? true : false}
         />
       </Box>
     </ImageWrap>
