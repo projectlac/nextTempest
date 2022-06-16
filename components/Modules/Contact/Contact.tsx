@@ -11,6 +11,7 @@ import FB from "../../../styles/assets/images/svg/facebook.svg";
 import INS from "../../../styles/assets/images/svg/instagram.svg";
 
 import Image from "next/image";
+import Link from "next/link";
 const BgWrap = styled(Box)(
   ({ theme }) => `
     height: 100vh;
@@ -102,6 +103,7 @@ const ButtonContact = styled(Box)(
       width: 350px;
       height: 55px;
     } 
+    
   `
 );
 
@@ -165,29 +167,73 @@ function Contact() {
               Vui lòng liên hệ theo các hình thức dưới đây để được trợ giúp
             </Typography>
             <Box mt={3}>
-              <ButtonContact>
-                <Box width={30} height={30} sx={{ mr: 2 }}>
-                  <Image src={FB} alt="facebook" layout="responsive" />
-                </Box>
-                Trần Minh Vũ
+              <ButtonContact
+                sx={{
+                  "& a": {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                }}
+              >
+                <Link href="https://www.facebook.com/tranminhvu128">
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Box width={30} height={30} sx={{ mr: 2 }}>
+                      <Image src={FB} alt="facebook" layout="responsive" />
+                    </Box>
+                    Trần Minh Vũ
+                  </a>
+                </Link>
               </ButtonContact>
-              <ButtonContact>
-                <Box width={30} height={30} sx={{ mr: 2 }}>
-                  <Image src={FB} alt="facebook" layout="responsive" />
-                </Box>
-                Tempest Shop
+              <ButtonContact
+                sx={{
+                  "& a": {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                }}
+              >
+                <Link href="https://www.facebook.com/Rimurushop128">
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Box width={30} height={30} sx={{ mr: 2 }}>
+                      <Image src={FB} alt="facebook" layout="responsive" />
+                    </Box>
+                    Tempest Shop{" "}
+                  </a>
+                </Link>
               </ButtonContact>
-              <ButtonContact>
-                <Box width={30} height={30} sx={{ mr: 2 }}>
-                  <Image src={INS} alt="facebook" layout="responsive" />
-                </Box>
-                Zalo
+              <ButtonContact
+                sx={{
+                  "& a": {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                }}
+              >
+                <Link href={`https://zalo.me/0344723594`} passHref>
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Box width={30} height={30} sx={{ mr: 2 }}>
+                      <Image src={INS} alt="facebook" layout="responsive" />
+                    </Box>
+                    Zalo
+                  </a>
+                </Link>
               </ButtonContact>
-              <ButtonContact>
-                <Box width={30} height={30} sx={{ mr: 2 }}>
-                  <Image src={INS} alt="facebook" layout="responsive" />
-                </Box>
-                tempest.vn
+              <ButtonContact
+                sx={{
+                  "& a": {
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                }}
+              >
+                <Link href="https://www.instagram.com/tempest.vn/">
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Box width={30} height={30} sx={{ mr: 2 }}>
+                      <Image src={INS} alt="facebook" layout="responsive" />
+                    </Box>
+                    tempest.vn
+                  </a>
+                </Link>
               </ButtonContact>
             </Box>
           </Box>

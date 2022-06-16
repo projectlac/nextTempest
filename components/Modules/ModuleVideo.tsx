@@ -1,6 +1,7 @@
 import { Box, Button, Hidden, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import background from "../../styles/assets/images/Background.png";
 
@@ -201,7 +202,7 @@ const Title = styled(Typography)(
 } 
       `
 );
-const ButtonEven = styled(Typography)(({ theme }) => ({
+const ButtonEven = styled(Box)(({ theme }) => ({
   background: `url(${Even.src})`,
   color: "#fff",
   fontSize: "20px",
@@ -215,6 +216,10 @@ const ButtonEven = styled(Typography)(({ theme }) => ({
   paddingTop: "15px",
   justifyContent: "flex-start",
   transition: "all 0.3s ease",
+  "& a": {
+    display: "flex",
+    alignItems: "center",
+  },
   "&:hover": {
     background: `url(${OnHover.src})`,
     backgroundPosition: "bottom right",
@@ -347,22 +352,38 @@ function ModuleVideo() {
               }}
             >
               <ButtonEven>
-                <Hidden lgDown>
-                  <Image src={Icon} alt="" width={38} height={38} />{" "}
-                </Hidden>
-                Zalo
+                <Link href={`https://zalo.me/0344723594`} passHref>
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Hidden lgDown>
+                      <Image src={Icon} alt="" width={38} height={38} />{" "}
+                    </Hidden>
+                    Zalo
+                  </a>
+                </Link>
               </ButtonEven>
               <ButtonEven>
-                <Hidden lgDown>
-                  <Image src={Icon} alt="" width={38} height={38} />{" "}
-                </Hidden>{" "}
-                Facebook
+                <Link href={`https://www.facebook.com/tranminhvu128`} passHref>
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Hidden lgDown>
+                      <Image src={Icon} alt="" width={38} height={38} />{" "}
+                    </Hidden>{" "}
+                    Facebook
+                  </a>
+                </Link>
               </ButtonEven>
+
               <ButtonEven>
-                <Hidden lgDown>
-                  <Image src={Icon} alt="" width={38} height={38} />{" "}
-                </Hidden>{" "}
-                Group
+                <Link
+                  href={`https://www.facebook.com/groups/congdong.genshinimpact.vietnam`}
+                  passHref
+                >
+                  <a target="_blank" rel="noopener noreferrer">
+                    <Hidden lgDown>
+                      <Image src={Icon} alt="" width={38} height={38} />{" "}
+                    </Hidden>{" "}
+                    Group
+                  </a>
+                </Link>
               </ButtonEven>
             </Box>
             <Title>

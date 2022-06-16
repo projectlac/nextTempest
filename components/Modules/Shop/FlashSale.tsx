@@ -73,7 +73,7 @@ function NewProduct() {
     tagApi
       .getAccount({
         character: "",
-        limit: 4,
+        limit: 8,
         offset: 0,
         server: "",
         weapon: "",
