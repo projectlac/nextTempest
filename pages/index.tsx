@@ -9,7 +9,7 @@ export default function IndexPage() {
   return (
     <Layout>
       <Head>
-        <title>Trang chủ</title>
+        <title>Tempest Genshin</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
         <meta
