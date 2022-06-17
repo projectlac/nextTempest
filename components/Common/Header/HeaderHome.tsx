@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { Box, Container, Typography } from "@mui/material";
@@ -5,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
@@ -50,14 +51,41 @@ const BgWrap = styled(Box)(
       background-size: cover;    
     `
 );
+
+function useOutsideAlerter(ref, closeCart) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        closeCart();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+}
+
 function HeaderHome() {
   const { update, updated } = useAppContext();
   const { isLogin, refreshLogin, role } = useAppContext();
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
-
+  const [openCart, setOpenCart] = useState<boolean>(false);
   const [ids, setIds] = useState([]);
   const [data, setData] = useState([]);
   const router = useRouter();
+  const wrapperRef = useRef(null);
+
+  const closeCart = () => {
+    setOpenCart(false);
+  };
+
+  useOutsideAlerter(wrapperRef, closeCart);
   useEffect(() => {
     const wishList = JSON.parse(localStorage.getItem("wishList"));
     setIds(wishList);
@@ -189,10 +217,11 @@ function HeaderHome() {
               borderRadius: "999px",
               padding: "5px",
               display: "flex",
+              cursor: "pointer",
               position: "relative",
-              "&:hover .box-wishlist": {
-                display: "flex",
-              },
+            }}
+            onClick={() => {
+              setOpenCart(!openCart);
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
@@ -229,8 +258,9 @@ function HeaderHome() {
                 top: "40px",
                 border: "4px solid #3b5898",
                 flexDirection: "column",
-                display: "none",
+                display: `${openCart ? "flex" : "none"}`,
               }}
+              ref={wrapperRef}
             >
               <ArrowDropUpIcon
                 sx={{
@@ -285,8 +315,8 @@ function HeaderHome() {
                               fontWeight={600}
                               sx={{
                                 display: "-webkit-box",
-                                "-webkit-box-orient": "vertical",
-                                "-webkit-line-clamp": "1",
+                                WebkitBoxOrient: "vertical",
+                                WebkitLineClamp: "1",
                                 overflow: "hidden",
                               }}
                             >
@@ -311,7 +341,7 @@ function HeaderHome() {
                           >
                             <CloseIcon
                               sx={{
-                                pointerEvents: "pointer",
+                                cursor: "pointer",
                               }}
                               onClick={() => {
                                 removeID(d.id);
@@ -324,13 +354,14 @@ function HeaderHome() {
                   </Box>
                 )}
               </Box>
-              {isLogin && (
+              {isLogin && ids && ids?.length > 0 && (
                 <Box
                   height={50}
                   sx={{
                     background: "#bea579",
                     display: "flex",
                     alignItem: "center",
+                    cursor: "pointer",
                     justifyContent: "center",
                     transition: "0.2s all ease",
                     "&:hover": {

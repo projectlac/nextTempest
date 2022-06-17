@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
@@ -16,20 +16,33 @@ function ListProduct() {
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setPageCurrently(page - 1);
+    setPageCurrently((page - 1) * 9);
+    executeScroll();
+  };
+
+  const executeScroll = () => {
+    const id = "scrollTo";
+    const yOffset = -95;
+    const element = document.getElementById(id);
+    const y =
+      element?.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
   };
 
   const handleSortBy = (data: number) => {
     setSortBy(data);
   };
-
+  enum CONST_INFORMATION {
+    LIMIT = 9,
+  }
   useEffect(() => {
     const getData = async () => {
       try {
         await tagApi
           .getAccount({
             character: selectedFilter.character.toString(),
-            limit: 9,
+            limit: CONST_INFORMATION.LIMIT,
             offset: pageCurrently,
             server: selectedFilter.server.toString(),
             weapon: selectedFilter.weapon.toString(),
@@ -64,6 +77,7 @@ function ListProduct() {
           position: "relative",
           zIndex: 2,
         }}
+        id="scrollTo"
       >
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
           <SortOption handleSortBy={handleSortBy} />
@@ -100,27 +114,29 @@ function ListProduct() {
               </Typography>
             </Box>
           )}
-          <Box sx={{ margin: "0 auto" }}>
-            <Stack spacing={2}>
-              {total > 10 && (
-                <Pagination
-                  sx={{
-                    "& .MuiPaginationItem-root": {
-                      color: "#818D9E",
-                    },
-                    "& .MuiPaginationItem-root.Mui-selected": {
-                      color: "#356495",
-                    },
-                  }}
-                  count={10}
-                  variant="outlined"
-                  shape="rounded"
-                  onChange={handleChangePagination}
-                />
-              )}
-            </Stack>
-          </Box>
         </Grid>
+        <Box
+          sx={{ margin: "0 auto", display: "flex", justifyContent: "center" }}
+        >
+          <Stack spacing={2}>
+            {total > 10 && (
+              <Pagination
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: "#818D9E",
+                  },
+                  "& .MuiPaginationItem-root.Mui-selected": {
+                    color: "#356495",
+                  },
+                }}
+                count={Math.ceil(total / CONST_INFORMATION.LIMIT)}
+                variant="outlined"
+                shape="rounded"
+                onChange={handleChangePagination}
+              />
+            )}
+          </Stack>
+        </Box>
       </Box>
     </Box>
   );
