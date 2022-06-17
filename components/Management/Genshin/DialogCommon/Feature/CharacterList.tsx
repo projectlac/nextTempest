@@ -53,9 +53,11 @@ export default function CharacterList({
   }, [data]);
   React.useEffect(() => {
     if (defaultValue.length > 0) setPersonName(defaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   React.useEffect(() => {
     if (personName.length > 0) setPersonName([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {

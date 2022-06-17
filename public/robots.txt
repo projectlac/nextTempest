@@ -1,7 +1,4 @@
-User-agent: Googlebot
-Disallow: /dashboard/
-
 User-agent: *
 Allow: /
-
+Disallow: /dashboard/
 Sitemap: https://www.tempest.vn/serversite.xml

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import { Box, Card, Container, Divider, Typography } from "@mui/material";
 import { format } from "date-fns";

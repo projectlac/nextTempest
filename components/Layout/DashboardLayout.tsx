@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from "@mui/material";
 import { useRouter } from "next/router";
 import Navbar from "../Management/Nav/Navbar";

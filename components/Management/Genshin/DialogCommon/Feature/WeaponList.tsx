@@ -68,6 +68,7 @@ export default function WeaponList({
   }, [data]);
   React.useEffect(() => {
     if (defaultValue.length > 0) setPersonName(defaultValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   React.useEffect(() => {

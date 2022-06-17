@@ -193,6 +193,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     if (open) {
       getData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   React.useEffect(() => {
