@@ -40,11 +40,11 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography fontSize={20} color="#9C6546" mt={1}>
                     Số điện thoại:
                   </Typography>
-                  <Typography fontSize={20} color="#D09B5F" mt={1}>
+                  <Typography fontSize={16} color="#D09B5F" mt={1}>
                     0344723594 - TRAN MINH VU
                   </Typography>
                   <Typography
-                    fontSize={20}
+                    fontSize={16}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
@@ -57,11 +57,15 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography fontSize={20} color="#9C6546" mt={1}>
                     Số tài khoản:
                   </Typography>
-                  <Typography fontSize={20} color="#D09B5F" mt={1}>
-                    123456789 - TRAN MINH VU
+                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                    TP bank - 04366222601 - TRAN MINH VU <br />
+                    Nickname Shop - Tempestgenshin
+                  </Typography>
+                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                    MB bank - 78989899992 - TRAN MINH V
                   </Typography>
                   <Typography
-                    fontSize={20}
+                    fontSize={16}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
@@ -72,13 +76,13 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
               return (
                 <Box textAlign={"left"}>
                   <Typography fontSize={20} color="#9C6546" mt={1}>
-                    Số ét o ét:
+                    Paypal:
                   </Typography>
-                  <Typography fontSize={20} color="#D09B5F" mt={1}>
-                    0344723594 - TRAN MINH VU
+                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                    hhuongtinlatao@gmail.com
                   </Typography>
                   <Typography
-                    fontSize={20}
+                    fontSize={16}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
