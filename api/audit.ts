@@ -35,7 +35,7 @@ const audit = {
     return axiosAudit.get(url);
   },
   paymentListData(params: PackFormManagement): Promise<PromiseApi> {
-    const url = `/audit?limit=${params.limit}&offsett=${params.offset}&status=${params.status}&type=ACCOUNT`;
+    const url = `/audit/all/?limit=${params.limit}&offsett=${params.offset}&status=${params.status}&type=ACCOUNT`;
     return axiosAudit.get(url);
   },
   showHistoryOfAccount(params: PackHistoryOfAccount): Promise<PromiseApi> {
