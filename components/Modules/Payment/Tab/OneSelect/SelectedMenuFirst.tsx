@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
-import { Box, Typography } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.png";
 import CustomizedRadios from "../../CustomItem/CustomizedRadios";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import clickToCopy from "../../../../../utility/clickToCopy";
 interface PropsSelectedMenu {
   handleValue: (value: string) => void;
   value: string;
@@ -22,6 +24,18 @@ const DashboardBox = styled(Box)(
             `
 );
 function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
+  const [notification, setNotification] = useState<string>("Copy");
+  const copySuccess = () => {
+    setNotification("Copied!");
+  };
+  const resetCopy = () => {
+    setNotification("Copy");
+  };
+
+  const copy = (text: string) => {
+    copySuccess();
+    clickToCopy(text);
+  };
   return (
     <DashboardBox>
       <Typography color="#726550" fontSize={32}>
@@ -40,9 +54,28 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography fontSize={20} color="#9C6546" mt={1}>
                     Số điện thoại:
                   </Typography>
-                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                  <Typography
+                    fontSize={16}
+                    color="#D09B5F"
+                    mt={1}
+                    sx={{ display: "flex" }}
+                  >
                     0344723594 - TRAN MINH VU
+                    <Tooltip
+                      title={notification}
+                      arrow
+                      placement="right"
+                      sx={{ ml: 1 }}
+                    >
+                      <ContentCopyIcon
+                        onMouseLeave={resetCopy}
+                        onClick={() => {
+                          copy("0344723594");
+                        }}
+                      />
+                    </Tooltip>
                   </Typography>
+
                   <Typography
                     fontSize={16}
                     color="#9C6546"
@@ -58,11 +91,44 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     Số tài khoản:
                   </Typography>
                   <Typography fontSize={16} color="#D09B5F" mt={1}>
-                    TP bank - 04366222601 - TRAN MINH VU <br />
+                    <span style={{ display: "flex" }}>
+                      TP bank - 04366222601 - TRAN MINH VU
+                      <Tooltip
+                        title={notification}
+                        arrow
+                        placement="right"
+                        sx={{ ml: 1 }}
+                      >
+                        <ContentCopyIcon
+                          onMouseLeave={resetCopy}
+                          onClick={() => {
+                            copy("04366222601");
+                          }}
+                        />
+                      </Tooltip>
+                    </span>
                     Nickname Shop - Tempestgenshin
                   </Typography>
-                  <Typography fontSize={16} color="#D09B5F" mt={1}>
-                    MB bank - 78989899992 - TRAN MINH V
+                  <Typography
+                    fontSize={16}
+                    color="#D09B5F"
+                    mt={1}
+                    sx={{ display: "flex" }}
+                  >
+                    MB bank - 78989899992 - TRAN MINH VU{" "}
+                    <Tooltip
+                      title={notification}
+                      arrow
+                      placement="right"
+                      sx={{ ml: 1 }}
+                    >
+                      <ContentCopyIcon
+                        onMouseLeave={resetCopy}
+                        onClick={() => {
+                          copy("78989899992");
+                        }}
+                      />
+                    </Tooltip>
                   </Typography>
                   <Typography
                     fontSize={16}
@@ -78,8 +144,26 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography fontSize={20} color="#9C6546" mt={1}>
                     Paypal:
                   </Typography>
-                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                  <Typography
+                    fontSize={16}
+                    color="#D09B5F"
+                    mt={1}
+                    sx={{ display: "flex" }}
+                  >
                     hhuongtinlatao@gmail.com
+                    <Tooltip
+                      title={notification}
+                      arrow
+                      placement="right"
+                      sx={{ ml: 1 }}
+                    >
+                      <ContentCopyIcon
+                        onMouseLeave={resetCopy}
+                        onClick={() => {
+                          copy("hhuongtinlatao@gmail.com");
+                        }}
+                      />
+                    </Tooltip>
                   </Typography>
                   <Typography
                     fontSize={16}
