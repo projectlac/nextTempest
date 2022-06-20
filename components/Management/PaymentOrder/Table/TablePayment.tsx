@@ -142,7 +142,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
-    handleChangePage(newPage);
+    handleChangePage(newPage * 10);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {

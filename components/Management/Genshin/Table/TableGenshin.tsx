@@ -76,12 +76,12 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
     handleChangeLimit(parseInt(event.target.value));
   };
 
-  const filteredCryptoOrders = applyFilters(cryptoOrders);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
-    page,
-    limit
-  );
+  // const filteredCryptoOrders = applyFilters(cryptoOrders);
+  // const paginatedCryptoOrders = applyPagination(
+  //   filteredCryptoOrders,
+  //   page,
+  //   limit
+  // );
 
   const theme = useTheme();
 
@@ -146,7 +146,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
               },
             }}
           >
-            {paginatedCryptoOrders.map((cryptoOrder, index) => {
+            {cryptoOrders.map((cryptoOrder, index) => {
               const isCryptoOrderSelected = selectedCryptoOrders.includes(
                 cryptoOrder.id
               );

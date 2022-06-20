@@ -2,6 +2,7 @@ export interface PackFormManagement {
   limit: number;
   offset: number;
   status: string;
+  queryString: string;
 }
 export interface PackHistoryOfAccount {
   limit: number;

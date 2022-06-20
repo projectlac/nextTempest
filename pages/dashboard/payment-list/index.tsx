@@ -8,7 +8,7 @@ function PaymentRequire() {
   return (
     <DashboardLayout>
       <Head>
-        <title>Yêu cầu nạp</title>
+        <title>Yêu cầu mua</title>
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

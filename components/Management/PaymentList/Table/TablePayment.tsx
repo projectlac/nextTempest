@@ -143,7 +143,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
 
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
-    handleChangePage(newPage);
+    handleChangePage(newPage * 10);
   };
 
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -204,7 +204,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
             </FormControl>
           </Box>
         }
-        title="Thông tin đơn nạp"
+        title="Thông tin mua"
       />
 
       <Divider />
