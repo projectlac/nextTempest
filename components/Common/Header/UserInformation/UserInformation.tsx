@@ -182,7 +182,7 @@ function UserInfo({ openCart, wrapperRef }: ICart) {
             justifyContent: "center",
           }}
         >
-          <Link href="/nap-tien">
+          <Link href="/nap-tien?tab=user">
             <a>
               Chi tiết tài khoản <CgChevronDoubleRight />
             </a>

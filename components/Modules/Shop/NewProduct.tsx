@@ -67,6 +67,7 @@ function NewProduct() {
         server: "",
         weapon: "",
         sort: null,
+        queryString: "",
       })
       .then((res) => setProductList(res.data.data));
   }, []);

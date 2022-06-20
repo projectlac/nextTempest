@@ -12,6 +12,7 @@ import PaimonPayment from "../../../../styles/assets/images/payment/PaimonPaymen
 import SelectedMenuFirst from "./OneSelect/SelectedMenuFirst";
 import SelectedMenuSecond from "./OneSelect/SelectedMenuSecond";
 import SelectedMenuThird from "./OneSelect/SelectedMenuThird";
+import { useRouter } from "next/router";
 
 const DashboardBox = styled(Box)(
   ({ theme }) => `
@@ -84,6 +85,7 @@ function One() {
   const [selectionMenu, setSelectionMenu] = React.useState<number>(0);
   const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
   const [moneyCurrency, setMoneyCurrency] = React.useState<number>(0);
+  const router = useRouter();
 
   const handleValue = (data: string) => {
     setValue(data);
@@ -118,6 +120,9 @@ function One() {
     }
   }, [avatarCurrency, avatarTemp]);
 
+  React.useEffect(() => {
+    if (router.query.tab === "user") setSelectionMenu(1);
+  }, [router]);
   const convertIDtoIndex = (id: number) => {
     return avatar.indexOf(avatar.filter((d) => d.id === id)[0]);
   };

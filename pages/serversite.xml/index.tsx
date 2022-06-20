@@ -11,6 +11,7 @@ export const GetProduct = async () => {
     server: "",
     sort: null,
     weapon: "",
+    queryString: "",
   });
 
   return data.data.data;

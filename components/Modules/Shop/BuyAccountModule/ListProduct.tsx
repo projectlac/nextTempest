@@ -47,6 +47,7 @@ function ListProduct() {
             server: selectedFilter.server.toString(),
             weapon: selectedFilter.weapon.toString(),
             sort: sortBy,
+            queryString: "",
           })
           .then((res) => {
             setProductList(res.data.data);

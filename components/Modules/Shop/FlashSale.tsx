@@ -78,6 +78,7 @@ function NewProduct() {
         server: "",
         weapon: "",
         sort: 3,
+        queryString: "",
       })
       .then((res) => setProductList(res.data.data));
   }, []);

@@ -1,9 +1,11 @@
-import { Card } from "@mui/material";
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Card, TextField } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import { NewsList } from "../../../../types/DashboardTypes/news";
 import TableGenshin from "./TableGenshin";
+const _ = require("lodash");
 interface AccountTable {
   name: string;
   code: string;
@@ -16,6 +18,8 @@ function DataGenshin() {
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
+
   const { update } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
@@ -33,6 +37,7 @@ function DataGenshin() {
         server: "",
         weapon: "",
         sort: null,
+        queryString: "",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -45,8 +50,51 @@ function DataGenshin() {
         setTotal(total);
       });
   }, [update, limitPage, offsetPage]);
+
+  function fetchDropdownOptions(key) {
+    tagApi
+      .getAccount({
+        limit: limitPage,
+        offset: offsetPage,
+        character: "",
+        server: "",
+        weapon: "",
+        sort: null,
+        queryString: key,
+      })
+      .then((res) => {
+        const data = res.data.data.map((d) => {
+          const { newPrice, code, name, updatedAt, id } = d;
+          return { newPrice, code, name, updatedAt, id };
+        });
+
+        setCryptoOrders(data);
+        let total = res.data.total;
+        setTotal(total);
+      });
+  }
+
+  const debounceDropDown = useCallback(
+    _.debounce((nextValue: string) => fetchDropdownOptions(nextValue), 1000),
+    []
+  );
+
+  const handleChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    debounceDropDown(e.target.value);
+  };
+
   return (
     <Card>
+      <Box mb={3}>
+        <TextField
+          id="outlined-basic"
+          label="Tìm kiếm"
+          variant="outlined"
+          fullWidth
+          onChange={handleChangeSearch}
+        />
+      </Box>
       <TableGenshin
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
