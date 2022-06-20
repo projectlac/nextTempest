@@ -76,6 +76,14 @@ function UserInfo({ openCart, wrapperRef }: ICart) {
     const index = avatar.indexOf(find);
     return avatar[index]?.url;
   };
+
+  const processEmail = (email: string) => {
+    const reEmail = email.split("@");
+    if (reEmail[0].length > 7) {
+      return reEmail[0].slice(0, 4) + "***@" + reEmail[1];
+    }
+    return email;
+  };
   return (
     <Box
       width={250}
@@ -140,7 +148,7 @@ function UserInfo({ openCart, wrapperRef }: ICart) {
               color: "#8a8a8a",
             }}
           >
-            {user.email}
+            {processEmail(user.email)}
           </Typography>
         </Box>
       </Box>
