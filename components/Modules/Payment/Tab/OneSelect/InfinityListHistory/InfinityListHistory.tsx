@@ -76,17 +76,7 @@ function InfinityListHistory() {
       Loading ...
     </div>
   );
-  const toMoney = (price: number) => {
-    return price
-      ? price
-          .toString()
-          .split("")
-          .reverse()
-          .reduce((prev, next, index) => {
-            return (index % 3 ? next : next + ".") + prev;
-          })
-      : 0;
-  };
+
   return (
     <InfiniteScroll
       loadMore={fetchItems}
@@ -98,7 +88,7 @@ function InfinityListHistory() {
           <BodyTable key={item.id}>
             <Box width={"7%"}>{index + 1}</Box>
             <Box width={"25%"}>{item.user}</Box>
-            <Box width={"24%"}>{toMoney(item.total)} VNĐ</Box>
+            <Box width={"24%"}>{item.total}</Box>
 
             <Box width={"22%"}>{item?.note}</Box>
             <Box width={"22%"} textTransform="capitalize">

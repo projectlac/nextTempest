@@ -24,7 +24,7 @@ const tagApi = {
     return axiosAudit.patch(url, result);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
-    const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}&sort=${params.sort}`;
+    const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}&sort=${params.sort}&queryString=${params.queryString}`;
     return axiosClient.get(url);
   },
   addAccount(params: FormData): Promise<PromiseApi> {
