@@ -12,11 +12,10 @@ import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import toMoney from "../../../utility/toMoney";
-import CloseIcon from "@mui/icons-material/Close";
-import { remove } from "lodash";
+import Cart from "./Cart/Cart";
+import UserInformation from "./UserInformation";
+
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
   position: fixed;
@@ -86,6 +85,7 @@ function HeaderHome() {
   };
 
   useOutsideAlerter(wrapperRef, closeCart);
+
   useEffect(() => {
     const wishList = JSON.parse(localStorage.getItem("wishList"));
     setIds(wishList);
@@ -225,6 +225,13 @@ function HeaderHome() {
             }}
           >
             <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
+            <Cart
+              wrapperRef={wrapperRef}
+              openCart={openCart}
+              ids={ids}
+              data={data}
+              removeID={removeID}
+            />
             {ids && ids?.length > 0 && (
               <Typography
                 sx={{
@@ -245,149 +252,9 @@ function HeaderHome() {
                 {ids && ids?.length}
               </Typography>
             )}
-
-            <Box
-              width={300}
-              height={300}
-              className="box-wishlist"
-              sx={{
-                background: "#fff",
-                position: "absolute",
-                height: "300px",
-                right: 0,
-                top: "40px",
-                border: "4px solid #3b5898",
-                flexDirection: "column",
-                display: `${openCart ? "flex" : "none"}`,
-              }}
-              ref={wrapperRef}
-            >
-              <ArrowDropUpIcon
-                sx={{
-                  color: "#fff",
-                  position: "absolute",
-                  top: "-14px",
-                  right: "0px",
-                }}
-              />
-              <Box
-                height={250}
-                sx={{
-                  display: "flex",
-                  alignItem: "center",
-                  justifyContent: "center",
-                }}
-              >
-                {ids && ids.length === 0 ? (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItem: "center",
-                    }}
-                  >
-                    Giỏ hàng không có gì cả
-                  </Box>
-                ) : (
-                  <Box width={300}>
-                    {data.map((d) => (
-                      <Box key={d.id}>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            padding: "5px 5px",
-                            justifyContent: "space-between",
-                            borderBottom: "1px solid #ddd",
-                          }}
-                        >
-                          <Box width={95} height={56}>
-                            <Image
-                              src={d?.imageUrl}
-                              alt=""
-                              width={95}
-                              height={56}
-                              objectFit="cover"
-                            />
-                          </Box>
-                          <Box width={"calc(100% - 130px)"}>
-                            <Typography
-                              fontSize={15}
-                              fontFamily="Montserrat"
-                              fontWeight={600}
-                              sx={{
-                                display: "-webkit-box",
-                                WebkitBoxOrient: "vertical",
-                                WebkitLineClamp: "1",
-                                overflow: "hidden",
-                              }}
-                            >
-                              <Link href={`/chi-tiet/${d.slug}`}>{d.name}</Link>
-                            </Typography>
-                            <Typography
-                              fontSize={13}
-                              fontFamily="Montserrat"
-                              color="#999"
-                            >
-                              <i> {toMoney(d.newPrice)} VND</i>
-                            </Typography>
-                          </Box>
-                          <Box
-                            width={30}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              color: "#d33",
-                            }}
-                          >
-                            <CloseIcon
-                              sx={{
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                removeID(d.id);
-                              }}
-                            />
-                          </Box>
-                        </Box>
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-              </Box>
-              {isLogin && ids && ids?.length > 0 && (
-                <Box
-                  height={50}
-                  sx={{
-                    background: "#bea579",
-                    display: "flex",
-                    alignItem: "center",
-                    cursor: "pointer",
-                    justifyContent: "center",
-                    transition: "0.2s all ease",
-                    "&:hover": {
-                      background: "#ab8f5f",
-                    },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      margin: "auto",
-                      color: "#fff",
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                      fontSize: 17,
-                    }}
-                  >
-                    <Link
-                      href={`/thanh-toan/${ids && ids.toString()}?redirect=/`}
-                    >
-                      Mua
-                    </Link>
-                  </Typography>
-                </Box>
-              )}
-            </Box>
           </Box>
+
+          <UserInformation />
           <Box
             color="#fff"
             sx={{
