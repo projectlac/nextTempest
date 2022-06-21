@@ -46,7 +46,7 @@ function DataPayment() {
 
   function fetchDropdownOptions(key) {
     audit
-      .paymentListData({
+      .showListPack({
         limit: limitPage,
         offset: offsetPage,
         status: statusPage,

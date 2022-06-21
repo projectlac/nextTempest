@@ -31,7 +31,7 @@ const audit = {
     return axiosAudit.post(url, params);
   },
   showListPack(params: PackFormManagement): Promise<PromiseApi> {
-    const url = `/audit/all?limit=${params.limit}&offsett=${params.offset}&status=${params.status}`;
+    const url = `/audit/all?limit=${params.limit}&offsett=${params.offset}&status=${params.status}&queryString=${params.queryString}`;
     return axiosAudit.get(url);
   },
   paymentListData(params: PackFormManagement): Promise<PromiseApi> {
