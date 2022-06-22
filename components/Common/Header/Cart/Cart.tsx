@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import toMoney from "../../../../utility/toMoney";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
@@ -7,6 +7,8 @@ import { remove } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { useAppContext } from "../../../../context/state";
+import audit from "../../../../api/audit";
+import { useRouter } from "next/router";
 
 interface ICart {
   openCart: boolean;
@@ -16,7 +18,38 @@ interface ICart {
   removeID: (id: string) => void;
 }
 function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
-  const { isLogin } = useAppContext();
+  const { isLogin, handleChangeMessageToast, handleChangeStatusToast } =
+    useAppContext();
+  const [wallet, setWallet] = useState<number>(0);
+  const router = useRouter();
+  useEffect(() => {
+    if (isLogin)
+      audit
+        .getProfile()
+        .then((res) => {
+          setWallet(+res.data.money);
+        })
+        .catch((res) => {
+          handleChangeMessageToast("Có lỗi định danh");
+          handleChangeStatusToast();
+        });
+  }, []);
+
+  const buyAccount = () => {
+    let sumPrice = 0;
+    data.forEach((d) => (sumPrice += +d.newPrice));
+    console.log(sumPrice);
+
+    if (sumPrice > wallet) {
+      handleChangeMessageToast(
+        "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
+      );
+      handleChangeStatusToast();
+    } else {
+      router.push(`/thanh-toan/${ids && ids.toString()}?redirect=/`);
+    }
+  };
+
   return (
     <Box
       width={300}
@@ -140,6 +173,7 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
               background: "#ab8f5f",
             },
           }}
+          onClick={buyAccount}
         >
           <Typography
             sx={{
@@ -150,9 +184,7 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
               fontSize: 17,
             }}
           >
-            <Link href={`/thanh-toan/${ids && ids.toString()}?redirect=/`}>
-              Mua
-            </Link>
+            Mua
           </Typography>
         </Box>
       )}

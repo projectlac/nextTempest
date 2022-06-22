@@ -31,15 +31,15 @@ const audit = {
     return axiosAudit.post(url, params);
   },
   showListPack(params: PackFormManagement): Promise<PromiseApi> {
-    const url = `/audit/all?limit=${params.limit}&offsett=${params.offset}&status=${params.status}&queryString=${params.queryString}`;
+    const url = `/audit/all?limit=${params.limit}&offset=${params.offset}&status=${params.status}&queryString=${params.queryString}`;
     return axiosAudit.get(url);
   },
   paymentListData(params: PackFormManagement): Promise<PromiseApi> {
-    const url = `/audit/all/?limit=${params.limit}&offsett=${params.offset}&status=${params.status}&type=ACCOUNT&queryString=${params.queryString}`;
+    const url = `/audit/all/?limit=${params.limit}&offset=${params.offset}&status=${params.status}&type=ACCOUNT&queryString=${params.queryString}`;
     return axiosAudit.get(url);
   },
   showHistoryOfAccount(params: PackHistoryOfAccount): Promise<PromiseApi> {
-    const url = `/audit?limit=${params.limit}&offsett=${params.offset}&type=STONE`;
+    const url = `/audit?limit=${params.limit}&offset=${params.offset}&type=STONE`;
     return axiosAudit.get(url);
   },
   completedThisPack(id: string): Promise<PromiseApi> {

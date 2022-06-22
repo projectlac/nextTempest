@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Bot from "../../../../styles/assets/images/Shop/bot.png";
 import Mid from "../../../../styles/assets/images/Shop/mid.png";
 import Top from "../../../../styles/assets/images/Shop/top.png";
@@ -8,6 +8,8 @@ import ButtonBG from "../../../../styles/assets/images/Shop/Button.png";
 import Link from "next/link";
 import { useAppContext } from "../../../../context/state";
 import Authentization from "../../Authentization";
+import audit from "../../../../api/audit";
+import { useRouter } from "next/router";
 
 const BGWrap = styled(Box)({
   position: "relative",
@@ -104,7 +106,23 @@ function DetailPrice({
   tinhHuy,
   moonPack,
 }: DetailProps) {
-  const { isLogin } = useAppContext();
+  const { isLogin, handleChangeStatusToast, handleChangeMessageToast } =
+    useAppContext();
+  const [wallet, setWallet] = useState<number>(0);
+  const router = useRouter();
+  useEffect(() => {
+    if (isLogin)
+      audit
+        .getProfile()
+        .then((res) => {
+          setWallet(res.data.money);
+        })
+        .catch((res) => {
+          handleChangeMessageToast("Có lỗi định danh");
+          handleChangeStatusToast();
+        });
+  }, []);
+
   const toMoney = (price: number) => {
     return price
       .toString()
@@ -121,6 +139,17 @@ function DetailPrice({
 
   const login = () => {
     setOpenAuth(true);
+  };
+
+  const buyAccount = () => {
+    if (+price > wallet) {
+      handleChangeMessageToast(
+        "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
+      );
+      handleChangeStatusToast();
+    } else {
+      router.push(`/thanh-toan/${id}?redirect=${slug}`);
+    }
   };
   return (
     <BGWrap>
@@ -157,10 +186,10 @@ function DetailPrice({
         </Box>
 
         {isLogin ? (
-          <Link href={`/thanh-toan/${id}?redirect=${slug}`} passHref>
-            <ButtonBuy> </ButtonBuy>
-          </Link>
+          // <Link href={`/thanh-toan/${id}?redirect=${slug}`} passHref>
+          <ButtonBuy onClick={buyAccount}> </ButtonBuy>
         ) : (
+          // </Link>
           <ButtonBuy onClick={login}> </ButtonBuy>
         )}
         {openAuth && (

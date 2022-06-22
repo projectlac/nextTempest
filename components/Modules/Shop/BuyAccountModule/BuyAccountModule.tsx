@@ -14,7 +14,7 @@ const ProductWrap = styled(Box)(
   ({ theme }) => `
   
     width: 100vw;
-    display: flex;
+
     background: url(${background.src});
     overflow:hidden;
     background-size: cover;

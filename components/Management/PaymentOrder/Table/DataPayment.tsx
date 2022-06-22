@@ -38,6 +38,8 @@ function DataPayment() {
         queryString: "",
       })
       .then((res) => {
+        console.log(res.data.data[0]);
+
         setCryptoOrders(res.data.data);
         let total = res.data.total;
         setTotal(total);

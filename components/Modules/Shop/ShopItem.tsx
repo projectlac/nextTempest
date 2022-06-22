@@ -171,7 +171,14 @@ function ShopItem({
     <Box>
       <ImageBox>
         <Link href={`/chi-tiet/${slug}`} passHref>
-          <Box component={"a"}>
+          <Box
+            component={"a"}
+            sx={{
+              "& span": {
+                width: "100% !important",
+              },
+            }}
+          >
             {image && (
               <Image
                 src={image}

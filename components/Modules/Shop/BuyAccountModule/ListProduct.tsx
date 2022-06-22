@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
+import FindByCode from "./FindByCode";
 import SortOption from "./SortOption";
 
 function ListProduct() {
@@ -12,6 +13,8 @@ function ListProduct() {
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
+  const [findCode, setFindCode] = useState<string>("");
+
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
     page: number
@@ -36,6 +39,10 @@ function ListProduct() {
   enum CONST_INFORMATION {
     LIMIT = 9,
   }
+
+  const handleChangeCode = (code: string) => {
+    setFindCode(code);
+  };
   useEffect(() => {
     const getData = async () => {
       try {
@@ -47,7 +54,7 @@ function ListProduct() {
             server: selectedFilter.server.toString(),
             weapon: selectedFilter.weapon.toString(),
             sort: sortBy,
-            queryString: "",
+            queryString: findCode,
           })
           .then((res) => {
             setProductList(res.data.data);
@@ -56,7 +63,7 @@ function ListProduct() {
       } catch (error) {}
     };
     getData();
-  }, [update, sortBy, pageCurrently]);
+  }, [update, sortBy, pageCurrently, findCode]);
   return (
     <Box
       sx={{
@@ -65,8 +72,9 @@ function ListProduct() {
           lg: 1014,
           md: "100%",
           sm: 666,
-          xs: 350,
+          xs: "100%",
         },
+        margin: "0 auto",
       }}
     >
       <Box
@@ -81,6 +89,7 @@ function ListProduct() {
         id="scrollTo"
       >
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
+          <FindByCode handleChangeCode={handleChangeCode} />
           <SortOption handleSortBy={handleSortBy} />
         </Box>
         <Grid container columnSpacing={3}>
