@@ -180,7 +180,7 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
             .then((res) => {
               setLoading(false);
               localStorage.setItem("access_token", res.data);
-              if (jwt_decode<any>(res.data).role === "ADMIN") {
+              if (["ADMIN", "MOD"].includes(jwt_decode<any>(res.data).role)) {
                 router.push("/dashboard");
               }
               closeAuthBox();

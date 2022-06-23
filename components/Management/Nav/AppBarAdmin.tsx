@@ -17,16 +17,13 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import AvatarImg from "../../../styles/assets/images/payment/avatar-cute-12.jpg";
 import avatar from "../../../data/avatar";
+import jwt_decode from "jwt-decode";
 
 interface PropsMenu {
   activeMenu: () => void;
 }
 const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
   const [listMenu, setMenu] = React.useState([
-    {
-      url: "/dashboard/account",
-      name: "Tài khoản",
-    },
     {
       url: "/dashboard/news",
       name: "Tin tức",
@@ -44,6 +41,34 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
       name: "Đơn mua",
     },
   ]);
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (token && jwt_decode<any>(token).role === "ADMIN") {
+      setMenu([
+        {
+          url: "/dashboard/account",
+          name: "Tài khoản",
+        },
+        {
+          url: "/dashboard/news",
+          name: "Tin tức",
+        },
+        {
+          url: "/dashboard/history",
+          name: "Lịch sử",
+        },
+        {
+          url: "/dashboard/payment-require",
+          name: "Đơn nạp",
+        },
+        {
+          url: "/dashboard/payment-list",
+          name: "Đơn mua",
+        },
+      ]);
+    }
+  }, []);
 
   const { refreshLogin } = useAppContext();
   const router = useRouter();

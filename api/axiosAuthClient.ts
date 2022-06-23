@@ -33,7 +33,9 @@ axiosAuthClient.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
+      localStorage.removeItem("access_token");
       Router.push(`/`);
+
       return Promise.reject(error);
     }
 
