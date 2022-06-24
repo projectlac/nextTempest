@@ -65,8 +65,8 @@ function DataGenshin() {
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
-          const { newPrice, code, name, updatedAt, id } = d;
-          return { newPrice, code, name, updatedAt, id };
+          const { newPrice, code, name, updatedAt, id, soldAt } = d;
+          return { newPrice, code, name, updatedAt, id, soldAt };
         });
 
         setCryptoOrders(data);
