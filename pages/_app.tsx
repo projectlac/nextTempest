@@ -18,6 +18,7 @@ import TagManager from "react-gtm-module";
 import Script from "next/script";
 import { useRouter } from "next/router";
 import * as ga from "../lib/ga";
+import Maintenance from "../components/Layout/Maintenace";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -74,7 +75,11 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           gtag('config', 'G-8SZQ8DYEBH');
         `}
           </Script>
-          <Component {...pageProps} />
+          {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
+            <Component {...pageProps} />
+          ) : (
+            <Maintenance />
+          )}
         </AppWrapper>
       </ThemeProvider>
     </CacheProvider>
