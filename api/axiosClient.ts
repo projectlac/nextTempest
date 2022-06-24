@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://acpt-app.herokuapp.com/",
+  baseURL: "https://shopgenshin.online/",
   headers: {
     "Content-Type": "application/json",
     accept: "*/*",
