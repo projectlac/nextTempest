@@ -11,6 +11,7 @@ interface AccountTable {
   code: string;
   newPrice: number;
   updatedAt: string;
+  soldAt: string | null;
   id: string;
 }
 function DataGenshin() {
@@ -41,8 +42,8 @@ function DataGenshin() {
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
-          const { newPrice, code, name, updatedAt, id } = d;
-          return { newPrice, code, name, updatedAt, id };
+          const { newPrice, code, name, updatedAt, id, soldAt } = d;
+          return { newPrice, code, name, updatedAt, id, soldAt };
         });
 
         setCryptoOrders(data);
@@ -75,7 +76,7 @@ function DataGenshin() {
   }
 
   const debounceDropDown = useCallback(
-    _.debounce((nextValue: string) => fetchDropdownOptions(nextValue), 1000),
+    _.debounce((nextValue: string) => fetchDropdownOptions(nextValue), 200),
     []
   );
 

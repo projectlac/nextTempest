@@ -21,13 +21,15 @@ import { ChangeEvent, FC, useState } from "react";
 import AddGenshin from "../DialogCommon/AddGenshin";
 import EditGenshin from "../DialogCommon/EditGenshin";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
-
+import CachedIcon from "@mui/icons-material/Cached";
+import Refund from "../DialogCommon/Refund";
 interface AccountTable {
   name: string;
   code: string;
   newPrice: number;
   id: string;
   updatedAt: string;
+  soldAt: string | null;
 }
 
 interface RecentOrdersTableProps {
@@ -217,6 +219,22 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                   </TableCell>
 
                   <TableCell align="center">
+                    {cryptoOrder.soldAt !== null && (
+                      <Tooltip title="Hoàn trả trạng thái" arrow>
+                        <IconButton
+                          sx={{
+                            "&:hover": {
+                              background: "#b16c4d45",
+                            },
+                            color: "#333",
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
+                          <Refund id={cryptoOrder.id} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
                     <Tooltip title="Chỉnh sửa bài viết" arrow>
                       <IconButton
                         sx={{

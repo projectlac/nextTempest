@@ -27,6 +27,11 @@ const tagApi = {
     const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}&sort=${params.sort}&queryString=${params.queryString}`;
     return axiosClient.get(url);
   },
+  refundAccount(id: string): Promise<PromiseApi> {
+    const url = `/account/refund/${id}`;
+    return axiosAudit.patch(url);
+  },
+
   addAccount(params: FormData): Promise<PromiseApi> {
     const url = `/account/create`;
     return axiosAuthClient.post(url, params);
