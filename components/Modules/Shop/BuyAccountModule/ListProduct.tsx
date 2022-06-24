@@ -42,6 +42,7 @@ function ListProduct() {
 
   const handleChangeCode = (code: string) => {
     setFindCode(code);
+    setPageCurrently(0);
   };
   useEffect(() => {
     const getData = async () => {
