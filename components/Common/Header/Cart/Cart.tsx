@@ -18,8 +18,12 @@ interface ICart {
   removeID: (id: string) => void;
 }
 function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
-  const { isLogin, handleChangeMessageToast, handleChangeStatusToast } =
-    useAppContext();
+  const {
+    isLogin,
+    handleChangeMessageToast,
+    refreshLogin,
+    handleChangeStatusToast,
+  } = useAppContext();
   const [wallet, setWallet] = useState<number>(0);
   const router = useRouter();
   useEffect(() => {
@@ -32,6 +36,9 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
         .catch((res) => {
           handleChangeMessageToast("Có lỗi định danh");
           handleChangeStatusToast();
+          refreshLogin();
+          localStorage.removeItem("access_token");
+          router.push("/");
         });
   }, []);
 

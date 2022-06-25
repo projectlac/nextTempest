@@ -106,8 +106,12 @@ function DetailPrice({
   tinhHuy,
   moonPack,
 }: DetailProps) {
-  const { isLogin, handleChangeStatusToast, handleChangeMessageToast } =
-    useAppContext();
+  const {
+    isLogin,
+    handleChangeStatusToast,
+    refreshLogin,
+    handleChangeMessageToast,
+  } = useAppContext();
   const [wallet, setWallet] = useState<number>(0);
   const router = useRouter();
   useEffect(() => {
@@ -120,6 +124,9 @@ function DetailPrice({
         .catch((res) => {
           handleChangeMessageToast("Có lỗi định danh");
           handleChangeStatusToast();
+          refreshLogin();
+          localStorage.removeItem("access_token");
+          router.push("/");
         });
   }, []);
 

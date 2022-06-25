@@ -71,8 +71,8 @@ function useOutsideAlerter(ref, closeCart) {
 }
 
 function HeaderHome() {
-  const { update, updated } = useAppContext();
-  const { isLogin, refreshLogin, role } = useAppContext();
+  const { update, updated, isLogin, refreshLogin, role } = useAppContext();
+
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
   const [openCart, setOpenCart] = useState<boolean>(false);
   const [ids, setIds] = useState([]);
