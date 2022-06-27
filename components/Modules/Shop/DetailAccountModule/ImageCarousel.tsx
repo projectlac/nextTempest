@@ -9,7 +9,7 @@ const ImageWrap = styled(Box)({
   position: "relative",
   background: `url(${Mid.src})`,
   backgroundSize: "contain",
-  padding: "15px 45px",
+
   "&:before": {
     content: "''",
     position: "absolute",
@@ -18,8 +18,18 @@ const ImageWrap = styled(Box)({
     backgroundSize: `contain`,
     backgroundRepeat: `no-repeat`,
     width: "100%",
-    top: "-45px",
+
     left: 0,
+
+    "@media (min-width:0)": {
+      top: "-20px",
+    },
+    "@media (min-width: 768px)": {
+      top: "-50px",
+    },
+    "@media (min-width: 1024px)": {
+      top: "-45px",
+    },
   },
   "&:after": {
     content: "''",
@@ -29,8 +39,25 @@ const ImageWrap = styled(Box)({
     backgroundSize: `contain`,
     backgroundRepeat: `no-repeat`,
     width: "100%",
-    bottom: "-55px",
+
     left: 0,
+
+    "@media (min-width:0)": {
+      bottom: "-100px",
+    },
+    "@media (min-width: 768px)": {
+      bottom: "-70px",
+    },
+    "@media (min-width: 1024px)": {
+      bottom: "-55px",
+    },
+  },
+
+  "@media (min-width:0)": {
+    padding: "15px 25px",
+  },
+  "@media (min-width: 768px)": {
+    padding: "15px 45px",
   },
 });
 

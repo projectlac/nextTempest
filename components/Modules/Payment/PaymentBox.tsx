@@ -10,23 +10,26 @@ import TitleHighlight from "../../Common/Title/TitleHighlight";
 import Authentization from "../Authentization";
 import Dashboard from "./Dashboard";
 
-const BgWrap = styled(Box)(
-  ({ theme }) => `
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 0;
-      justify-content: center;
-      align-items: center;
-      background: url(${background.src});
-      overflow:hidden;
-      background-size: cover;    
-    `
-);
+const BgWrap = styled(Box)(({ theme }) => ({
+  width: "100vw",
+  display: "flex",
+  left: "0",
+  top: "0",
+  bottom: "0",
+  right: "0",
+  zIndex: "0",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  background: ` url(${background.src})`,
+  backgroundSize: "cover",
+  "@media (min-width:0)": {
+    height: "auto",
+  },
+  "@media (min-width: 1024px)": {
+    height: "100vh",
+  },
+}));
 
 const BoxSelection = styled(Box)(
   ({ theme }) => `

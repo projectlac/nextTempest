@@ -10,19 +10,23 @@ interface PropsSelectedMenu {
   handleValue: (value: string) => void;
   value: string;
 }
-const DashboardBox = styled(Box)(
-  ({ theme }) => `
-              height: 555px;
-              width: 100%;
-              background-color: #F4ECE0;
-                border: 1px solid #DAB88F;
-                border-radius: 30px;
-                position:relative;
-                z-index: 1;
-                padding: 40px;
-                text-align:center;
-            `
-);
+const DashboardBox = styled(Box)(({ theme }) => ({
+  height: "500px",
+  width: "100%",
+  backgroundColor: "#F4ECE0",
+  border: "1px solid #DAB88F",
+  borderRadius: "30px",
+  position: "relative",
+  zIndex: "1",
+
+  textAlign: "center",
+  "@media (min-width:0)": {
+    padding: "20px 20px",
+  },
+  "@media (min-width: 1024px)": {
+    padding: "40px",
+  },
+}));
 function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
   const [notification, setNotification] = useState<string>("Copy");
   const copySuccess = () => {
@@ -38,7 +42,15 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
   };
   return (
     <DashboardBox>
-      <Typography color="#726550" fontSize={32}>
+      <Typography
+        color="#726550"
+        sx={{
+          fontSize: {
+            md: 32,
+            xs: 20,
+          },
+        }}
+      >
         Các hình thức thanh toán
       </Typography>
       <Image src={Devider} alt="devider" width={440} height={14} />
@@ -51,14 +63,28 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
             case "momo":
               return (
                 <Box textAlign={"left"}>
-                  <Typography fontSize={20} color="#9C6546" mt={1}>
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        md: 20,
+                        xs: 15,
+                      },
+                    }}
+                    color="#9C6546"
+                    mt={1}
+                  >
                     Số điện thoại:
                   </Typography>
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                      display: "flex",
+                    }}
                     color="#D09B5F"
                     mt={1}
-                    sx={{ display: "flex" }}
                   >
                     0344723594 - TRAN MINH VU
                     <Tooltip
@@ -77,7 +103,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   </Typography>
 
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                    }}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
@@ -87,10 +118,28 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
             case "bank":
               return (
                 <Box textAlign={"left"}>
-                  <Typography fontSize={20} color="#9C6546" mt={1}>
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        md: 20,
+                        xs: 15,
+                      },
+                    }}
+                    color="#9C6546"
+                    mt={1}
+                  >
                     Số tài khoản:
                   </Typography>
-                  <Typography fontSize={16} color="#D09B5F" mt={1}>
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                    }}
+                    color="#D09B5F"
+                    mt={1}
+                  >
                     <span style={{ display: "flex" }}>
                       TP bank - 04366222601 - TRAN MINH VU
                       <Tooltip
@@ -110,10 +159,15 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     Nickname Shop - Tempestgenshin
                   </Typography>
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                      display: "flex",
+                    }}
                     color="#D09B5F"
                     mt={1}
-                    sx={{ display: "flex" }}
                   >
                     MB bank - 78989899992 - TRAN MINH VU{" "}
                     <Tooltip
@@ -131,7 +185,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     </Tooltip>
                   </Typography>
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                    }}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
@@ -141,14 +200,28 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
             default:
               return (
                 <Box textAlign={"left"}>
-                  <Typography fontSize={20} color="#9C6546" mt={1}>
+                  <Typography
+                    sx={{
+                      fontSize: {
+                        md: 20,
+                        xs: 15,
+                      },
+                    }}
+                    color="#9C6546"
+                    mt={1}
+                  >
                     Paypal:
                   </Typography>
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                      display: "flex",
+                    }}
                     color="#D09B5F"
                     mt={1}
-                    sx={{ display: "flex" }}
                   >
                     hhuongtinlatao@gmail.com
                     <Tooltip
@@ -166,7 +239,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     </Tooltip>
                   </Typography>
                   <Typography
-                    fontSize={16}
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                    }}
                     color="#9C6546"
                     mt={1}
                   >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
@@ -181,11 +259,14 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
       </Box>
       <Box>
         <Typography
-          fontSize={14}
           color="#C69E72"
           sx={{
             "& span": {
               color: "#94674B",
+            },
+            fontSize: {
+              md: 14,
+              xs: 12,
             },
           }}
         >

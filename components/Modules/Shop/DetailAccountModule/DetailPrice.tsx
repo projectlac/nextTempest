@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import Bot from "../../../../styles/assets/images/Shop/bot.png";
@@ -26,6 +26,15 @@ const BGWrap = styled(Box)({
     width: "100%",
     top: "-40px",
     left: 0,
+    "@media (min-width:0)": {
+      top: "-20px",
+    },
+    "@media (min-width: 768px)": {
+      top: "-50px",
+    },
+    "@media (min-width: 1024px)": {
+      top: "-40px",
+    },
   },
   "&:after": {
     content: "''",
@@ -37,16 +46,30 @@ const BGWrap = styled(Box)({
     width: "100%",
     bottom: "-65px",
     left: 0,
+
+    "@media (min-width:0)": {
+      bottom: "-70px",
+    },
+    "@media (min-width: 1024px)": {
+      bottom: "-65px",
+    },
   },
 });
 const BoxBorder = styled(Box)(
   (theme) => `
-font-size: 35px;
+   
     color: #51A8CE;
     background: #FFFFFF;
     padding: 10px;
     border-radius: 15px;
     margin-bottom:10px;
+
+    @media (min-width: 0px) {
+      font-size: 20px;
+    },
+    @media (min-width: 1024px) {
+      font-size: 35px;
+    },
 `
 );
 
@@ -54,17 +77,32 @@ const TextSpecial = styled(Typography)(
   (theme) => `
   font-family: Montserrat;
   color:#4B65A3;
-  font-weight: 500;  font-size:20px;
+  font-weight: 500;
+  @media (min-width: 0px) {
+    font-size: 15px;
+  },
+  @media (min-width: 1024px) {
+    font-size:20px;
+  },
 `
 );
 const ButtonBuy = styled(Box)(
   (theme) => `
     background: url(${ButtonBG.src});
     width: 250px;
-    height: 56px;
+
     background-size: contain;
     background-repeat: no-repeat;
     margin: 15px auto 0;
+    @media (min-width: 0px) {
+      height: 40px;
+      width: 179px;
+    },
+    @media (min-width: 1024px) {
+      height: 56px;
+      width: 250px;
+
+    },
 `
 );
 const BgWrap = styled(Box)(
@@ -166,15 +204,32 @@ function DetailPrice({
           zIndex: 2,
         }}
       >
-        <Typography color={"#4B65A3"} fontSize={30}>
+        <Typography
+          color={"#4B65A3"}
+          sx={{
+            fontSize: {
+              lg: "30px",
+              xs: "20px",
+            },
+          }}
+        >
           Mã account
         </Typography>
         <BoxBorder>{accountId}</BoxBorder>
 
-        <Typography color={"#4B65A3"} fontSize={30}>
+        <Typography
+          color={"#4B65A3"}
+          sx={{
+            fontSize: {
+              lg: "30px",
+              xs: "20px",
+            },
+          }}
+        >
           Giá
         </Typography>
         <BoxBorder>{toMoney(price)} VND</BoxBorder>
+
         <Box textAlign={"left"}>
           <TextSpecial>
             <b>Adventure Rank:</b> {ar}

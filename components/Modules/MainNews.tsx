@@ -1,21 +1,16 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React, { useEffect, useState } from "react";
-import LeftArrow from "../../styles/assets/images/newsDes/LeftArrow.png";
-import RightArrow from "../../styles/assets/images/newsDes/RightArrow.png";
-import BGNews from "../../styles/assets/images/newsDes/BGNews.png";
-import BGNewsTop from "../../styles/assets/images/newsDes/BGNewsTop.png";
-import BGNewsBottom from "../../styles/assets/images/newsDes/BGNewsBottom.png";
-import Paimon from "../../styles/assets/images/newsDes/Paimon.png";
-import HotNews from "../../styles/assets/images/newsDes/HotNews.png";
-import DownArrow from "../../styles/assets/images/newsDes/DownArrow.png";
-import Clip from "../../styles/assets/images/newsDes/Clip.png";
 import Image from "next/image";
 import Link from "next/link";
-import { Theme } from "@mui/system";
-import TitleHighlight from "../Common/Title/TitleHighlight";
-import { NewsList } from "../../types/DashboardTypes/news";
+import { useEffect, useState } from "react";
 import newsApi from "../../api/newsApi";
+import BGNews from "../../styles/assets/images/newsDes/BGNews.png";
+import BGNewsBottom from "../../styles/assets/images/newsDes/BGNewsBottom.png";
+import BGNewsTop from "../../styles/assets/images/newsDes/BGNewsTop.png";
+import DownArrow from "../../styles/assets/images/newsDes/DownArrow.png";
+import Paimon from "../../styles/assets/images/newsDes/Paimon.png";
+import { NewsList } from "../../types/DashboardTypes/news";
+import TitleHighlight from "../Common/Title/TitleHighlight";
 
 const NewBox = styled(Box)(() => ({
   position: "relative",

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Hidden, Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import Image from "next/image";
 import React from "react";
@@ -14,24 +14,30 @@ import SelectedMenuSecond from "./OneSelect/SelectedMenuSecond";
 import SelectedMenuThird from "./OneSelect/SelectedMenuThird";
 import { useRouter } from "next/router";
 
-const DashboardBox = styled(Box)(
-  ({ theme }) => `
-            height: 555px;
-            width: 100%;
-            background-color: #F4ECE0;
-              border: 1px solid #DAB88F;
-              border-radius: 30px;
-              position:relative;
-              z-index: 1;
-              padding: 40px;
-              text-align:center;
-          `
-);
+const DashboardBox = styled(Box)(({ theme }) => ({
+  height: "555px",
+  width: "100%",
+  backgroundColor: "#F4ECE0",
+  border: "1px solid #DAB88F",
+  borderRadius: "30px",
+  position: "relative",
+  zIndex: "1",
+  padding: "40px",
+  textAlign: "center",
+  "@media (min-width:0)": {
+    height: "300px",
+    zIndex: "2",
+    marginTop: "35px",
+  },
+  "@media (min-width: 1024px)": {
+    height: "555px",
+    marginTop: "0",
+  },
+}));
 const AvatarBox = styled(Box)({
   width: "125px",
   height: "125px",
   margin: "0 auto",
-
   position: "relative",
 });
 const ImageBox = styled(Box)({
@@ -56,20 +62,51 @@ const NameBox = styled(Box)({
   width: "296px",
   height: "44px",
   background: `url(${BGName.src})`,
-  position: "absolute",
-  left: "-38px",
+
   backgroundSize: "contain",
   backgroundRepeat: "no-repeat",
   paddingTop: "7px",
+  "@media (min-width:0)": {
+    position: "relative",
+    margin: "0 auto",
+  },
+  "@media (min-width: 1024px)": {
+    position: "absolute",
+    left: "-38px",
+  },
 });
 const TextBox = styled(Typography)({
-  fontSize: "17px",
   color: "#726550",
-  borderBottom: "1px solid #DCD0BF",
-  padding: "10px 0",
+
   cursor: "pointer",
   "&.active": {
     color: "#D09B5F",
+    "@media (min-width:0)": {
+      background: "#fff",
+      borderRadius: "30px",
+    },
+    "@media (min-width: 1024px)": {
+      background: "transparent",
+      borderRadius: "0",
+    },
+  },
+  "@media (min-width:0)": {
+    borderBottom: "none",
+    width: "25%",
+    padding: "7px 0",
+    fontSize: "13px",
+    "&:nth-child(2)": {
+      width: "50%",
+    },
+  },
+  "@media (min-width: 1024px)": {
+    borderBottom: "1px solid #DCD0BF",
+    width: "auto",
+    padding: "10px 0",
+    fontSize: "17px",
+    "&:nth-child(2)": {
+      width: "auto",
+    },
   },
 });
 const Paimon = styled(Box)({
@@ -141,7 +178,7 @@ function One() {
 
   return (
     <Grid container columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-      <Grid item md={3}>
+      <Grid item md={3} xs={12}>
         <DashboardBox
           sx={{
             padding: "40px 10px !important",
@@ -163,7 +200,16 @@ function One() {
               <Image src={Crystal} width={49} height={45} alt="crys" />
             </CrystalBox>
           </AvatarBox>
-          <Typography mt={2} color="#D09B5F" fontSize={22}>
+          <Typography
+            mt={2}
+            color="#D09B5F"
+            sx={{
+              fontSize: {
+                md: "22px",
+                xs: "17px",
+              },
+            }}
+          >
             VIP 01
           </Typography>
           <NameBox>
@@ -176,10 +222,15 @@ function One() {
             </Typography>
           </NameBox>
           <Box>
-            <Typography>Số tiền hiện có</Typography>
+            <Hidden mdDown>
+              <Typography>Số tiền hiện có</Typography>
+            </Hidden>
             <Box
               sx={{
-                marginTop: "35px",
+                marginTop: {
+                  md: "35px",
+                  xs: "10px",
+                },
                 height: "50px",
                 background:
                   "linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 100%)",
@@ -198,11 +249,24 @@ function One() {
               </Box>
             </Box>
           </Box>
-          <Box mt={2}>
+          <Box
+            mt={2}
+            sx={{
+              display: {
+                md: "block",
+                xs: "flex",
+              },
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <TextBox
               className={`${selectionMenu === 0 ? "active" : ""}`}
               sx={{
-                borderTop: "1px solid #DCD0BF",
+                borderTop: {
+                  md: "1px solid #DCD0BF",
+                  xs: "none",
+                },
               }}
               onClick={() => {
                 setSelectionMenu(0);
@@ -227,12 +291,21 @@ function One() {
               Ưu đãi VIP
             </TextBox>
           </Box>
-          <Paimon width={225} height={174}>
-            <Image src={PaimonPayment} alt="Paimon" layout="responsive" />
-          </Paimon>
+          <Hidden mdDown>
+            <Paimon width={225} height={174}>
+              <Image src={PaimonPayment} alt="Paimon" layout="responsive" />
+            </Paimon>
+          </Hidden>
         </DashboardBox>
       </Grid>
-      <Grid item md={9}>
+      <Grid
+        item
+        md={9}
+        xs={12}
+        sx={{
+          mt: { md: 0, xs: 2 },
+        }}
+      >
         {(() => {
           switch (selectionMenu) {
             case 0:

@@ -35,14 +35,15 @@ const BackgroundShop = styled(Container)({
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
     left: "0",
-    top: "-50px",
+
     zIndex: "1",
     width: "100%",
-    "@media (min-width: 768px)": {
-      top: "-50px",
-    },
+
     "@media (min-width:0)": {
       top: "-20px",
+    },
+    "@media (min-width: 768px)": {
+      top: "-50px",
     },
   },
   "&:after": {
@@ -56,11 +57,12 @@ const BackgroundShop = styled(Container)({
     bottom: "-70px",
     zIndex: "1",
     width: "100%",
-    "@media (min-width: 768px)": {
-      bottom: "-70px",
-    },
+
     "@media (min-width:0)": {
       bottom: "-100px",
+    },
+    "@media (min-width: 768px)": {
+      bottom: "-70px",
     },
   },
 });
@@ -68,7 +70,13 @@ const BackgroundShop = styled(Container)({
 function BuyAccountModule() {
   return (
     <ProductWrap>
-      <Box mb={20} mt={20}>
+      <Box
+        mb={20}
+        mt={20}
+        sx={{
+          px: { xs: 2, md: 0 },
+        }}
+      >
         <TitleHighlight mb={10}>Danh sách tài khoản</TitleHighlight>
         <BackgroundShop>
           <Grid container>

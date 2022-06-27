@@ -20,11 +20,12 @@ const TitleHighlight = styled(Box)({
     top: 0,
     left: 0,
     backgroundRepeat: "no-repeat",
-    "@media (max-width: 1024px)": {
-      width: "360px",
-    },
+
     "@media (max-width: 768px)": {
       display: "none",
+    },
+    "@media (max-width: 1024px)": {
+      width: "360px",
     },
   },
   "&:after": {
@@ -38,15 +39,20 @@ const TitleHighlight = styled(Box)({
     right: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right",
-    "@media (max-width: 1024px)": {
-      width: "360px",
-    },
+
     "@media (max-width:768px)": {
       display: "none",
     },
+    "@media (max-width: 1024px)": {
+      width: "360px",
+    },
   },
   "@media (max-width: 435px)": {
-    fontSize: "23px",
+    fontSize: "20px",
+    marginBottom: 0,
+  },
+  "@media (max-width: 1024px)": {
+    fontSize: "30px",
   },
 });
 export default TitleHighlight;

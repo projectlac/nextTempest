@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 interface PropsStatusBox {
@@ -12,10 +12,15 @@ function StatusBox({ colorStatus, status }: PropsStatusBox) {
       sx={{
         display: "flex",
         justifyContent: "flex-start",
-        alignItems: "flex-end",
+        alignItems: {
+          lg: "flex-end",
+          xs: "center",
+        },
+
+        height: "24px",
         fontSize: {
           lg: 18,
-          xs: 15,
+          xs: 12,
         },
       }}
     >
@@ -28,7 +33,16 @@ function StatusBox({ colorStatus, status }: PropsStatusBox) {
           },
         }}
       />{" "}
-      {status !== "AVAILABLE" ? "Hết hàng" : "Còn hàng"}
+      <Typography
+        sx={{
+          fontSize: {
+            lg: 18,
+            xs: 12,
+          },
+        }}
+      >
+        {status !== "AVAILABLE" ? "Hết hàng" : "Còn hàng"}
+      </Typography>
     </Box>
   );
 }

@@ -29,7 +29,20 @@ function DetailAccountModule({ data }: DataDetail) {
     <ProductWrap>
       <Box mb={10} mt={20} textAlign="center">
         <TitleHighlight mb={3}>Thông số chi tiết</TitleHighlight>
-        <Typography fontSize={20} color="#fff" mb={8}>
+        <Typography
+          sx={{
+            fontSize: {
+              lg: "20px",
+              md: "18px",
+              xs: "17px",
+            },
+            mb: {
+              lg: 8,
+              xs: 6,
+            },
+          }}
+          color="#fff"
+        >
           {data.name}
         </Typography>
 
@@ -38,7 +51,18 @@ function DetailAccountModule({ data }: DataDetail) {
             <Grid item md={12} mb={7.5}>
               <ImageCarousel imageList={data.cloundinary} />
             </Grid>
-            <Grid item md={7} mt={7.5}>
+            <Grid
+              item
+              sm={7}
+              xs={12}
+              sx={{
+                mt: {
+                  lg: 7.5,
+                  sm: 2.5,
+                  xs: 0,
+                },
+              }}
+            >
               <DetailInformation
                 description={data.description}
                 weapon={[...data.tags].filter(
@@ -47,7 +71,18 @@ function DetailAccountModule({ data }: DataDetail) {
               />
             </Grid>
 
-            <Grid item md={5} mt={7.5}>
+            <Grid
+              item
+              sm={5}
+              xs={12}
+              sx={{
+                mt: {
+                  lg: 7.5,
+                  sm: 2.5,
+                  xs: 7.5,
+                },
+              }}
+            >
               <DetailPrice
                 accountId={data.code}
                 price={data.newPrice}

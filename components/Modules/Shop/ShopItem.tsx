@@ -52,11 +52,8 @@ const BoxPrice = styled(Box)(
 
   } 
   @media (min-width: 1440px) {
-
     margin-top: 20px;
     padding: 10px 10px;
-
-
   } 
       `
 );
@@ -67,9 +64,15 @@ const Sale = styled(Box)(
   background: #BF0606;
   color:#fff;
   padding:2px 5px;
-    font-family: "Montserrat";
-    font-weight:bold;
- bottom:0;
+  font-family: "Montserrat";
+  font-weight:bold;
+  bottom:0;
+  @media (min-width: 0px) {
+    font-size:13px
+  } 
+  @media (min-width: 768px){
+    font-size:15px
+  }
       `
 );
 const IdProduct = styled(Box)(
@@ -78,10 +81,16 @@ const IdProduct = styled(Box)(
   background: #0A2B6D;
   color:#fff;
   padding:2px 5px;
-    font-family: "Montserrat";
-    font-weight:bold;
- top:0;
- right:0;
+  font-family: "Montserrat";
+  font-weight:bold;
+  top:0;
+  right:0;
+  @media (min-width: 0px) {
+    font-size:13px
+  } 
+  @media (min-width: 768px){
+    font-size:15px
+  }
       `
 );
 
@@ -131,6 +140,10 @@ function ShopItem({
         <FavoriteBorderIcon
           sx={{
             color: "#d33",
+            transform: {
+              lg: "scale(1.0)",
+              xs: "scale(0.7)",
+            },
           }}
           onClick={() => {
             addToWishList(id);
@@ -142,6 +155,10 @@ function ShopItem({
       <FavoriteIcon
         sx={{
           color: "#d33",
+          transform: {
+            lg: "scale(1.0)",
+            xs: "scale(0.7)",
+          },
         }}
         onClick={() => {
           addToWishList(id);
@@ -201,15 +218,15 @@ function ShopItem({
           sx={{
             mt: {
               lg: 2,
-              xs: 1,
+              xs: 0,
             },
             fontSize: {
               lg: "1rem",
-              md: "13px",
+              xs: "13px",
             },
             minHeight: {
               lg: "50px",
-              xs: "50px",
+              xs: "40px",
             },
           }}
         >

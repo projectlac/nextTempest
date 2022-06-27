@@ -1,9 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Hidden,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
+import FilterMobile from "./FilterMobile/FilterMobile";
 import FindByCode from "./FindByCode";
 import SortOption from "./SortOption";
 
@@ -71,8 +79,6 @@ function ListProduct() {
         position: "relative",
         width: {
           lg: 1014,
-          md: "100%",
-          sm: 666,
           xs: "100%",
         },
         margin: "0 auto",
@@ -82,28 +88,38 @@ function ListProduct() {
         sx={{
           padding: {
             md: "0px 30px 50px",
-            xs: "0px 15px 50px",
+            xs: "0px 7px 50px",
           },
           position: "relative",
           zIndex: 2,
         }}
         id="scrollTo"
       >
-        <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
-          <FindByCode handleChangeCode={handleChangeCode} />
-          <SortOption handleSortBy={handleSortBy} />
-        </Box>
+        <Hidden mdDown>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
+            <FindByCode handleChangeCode={handleChangeCode} />
+            <SortOption handleSortBy={handleSortBy} />
+          </Box>
+        </Hidden>
+        <Hidden mdUp>
+          <FilterMobile></FilterMobile>
+        </Hidden>
         <Grid container columnSpacing={3}>
           {productList.length > 0 ? (
             productList.map((d, i) => (
               <Grid
                 item
                 md={4}
-                sm={6}
-                xs={12}
+                sm={4}
+                xs={6}
                 key={i}
                 sx={{
-                  mb: 5,
+                  mb: {
+                    lg: 5,
+                    md: 4,
+                    sm: 3,
+                    xs: 2,
+                  },
                 }}
               >
                 <ShopItem

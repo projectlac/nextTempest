@@ -4,45 +4,88 @@ import React, { useState } from "react";
 import backgroundAT from "../../../styles/assets/images/payment/backgroundAT.png";
 import backgroundBT from "../../../styles/assets/images/payment/buttonNormal.png";
 import background from "../../../styles/assets/images/payment/GroupPayment.png";
+
+import BGNews from "../../../styles/assets/images/newsDes/BGNews.png";
+import BGNewsBottom from "../../../styles/assets/images/newsDes/BGNewsBottom.png";
+import BGNewsTop from "../../../styles/assets/images/newsDes/BGNewsTop.png";
+
 import One from "./Tab/One";
 import Three from "./Tab/Three";
 import Two from "./Tab/Two";
 
-const DashboardWrapper = styled(Box)(
-  ({ theme }) => `
-        height: 720px;
-        width: 100%;
-        display: flex;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 0;
-        justify-content: center;
-        align-items: center;
-        background: url(${background.src});
-       
-        background-size: contain;    
-        background-repeat: no-repeat;
-        background-position:center;
-        padding: 0 65px;
-        position:relative;
-        z-index:1;
-        @media (min-width: 0px) {
-          padding: 0 65px;
-        } 
-        @media (min-width: 768px){
-          padding: 0 65px;
-        }
-        @media (min-width: 1024px) {
-          padding: 0 65px;
-        } 
-        @media (min-width: 1440px) {
-          padding: 0 160px;
-        } 
-    
-      `
-);
+const DashboardWrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  left: "0",
+  top: "0",
+  bottom: "0",
+  right: "0",
+  zIndex: "1",
+  justifyContent: "center",
+
+  background: `url(${BGNews.src})`,
+  marginLeft: "auto",
+  marginRight: "auto",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  padding: "0 65px",
+  position: "relative",
+  "&:before": {
+    position: "absolute",
+    content: '""',
+    background: `url(${BGNewsTop.src})`,
+    height: "55px",
+    width: "100%",
+    top: "0",
+    zIndex: 2,
+    left: 0,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100%",
+    "@media (max-width: 435px)": {
+      top: "-30px",
+    },
+  },
+  "&:after": {
+    position: "absolute",
+    content: '""',
+    background: `url(${BGNewsBottom.src})`,
+    backgroundSize: "100%",
+    height: "35px",
+    width: "100%",
+    bottom: "0",
+    right: 0,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right",
+    "@media (max-width: 435px)": {
+      bottom: "-20px",
+    },
+  },
+  "@media (min-width: 0px)": {
+    padding: "0 25px",
+    backgroundSize: "contain",
+    backgroundRepeat: "repeat",
+    height: "900px",
+    width: "100%",
+    alignItems: "flex-start",
+    marginBottom: "75px",
+  },
+  "@media (min-width: 768px)": {
+    padding: "0 65px",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "720px",
+    width: "1170px",
+    marginBottom: "0",
+    alignItems: "center",
+  },
+  "@media (min-width: 1024px)": {
+    padding: " 0 65px",
+  },
+  "@media (min-width: 1440px)": {
+    padding: " 0 80px",
+    width: "1170px",
+  },
+}));
 
 const ListTab = styled(Box)({
   display: "flex",
@@ -53,17 +96,27 @@ const ListTab = styled(Box)({
   marginRight: "50px",
   "& > div": {
     background: `url(${backgroundBT.src})`,
-    width: "300px",
-    height: "50px",
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
     textAlign: "center",
-    paddingTop: "13px",
     color: "#A18A6F",
-    fontSize: "20px",
     marginLeft: "5px",
     transition: "all 0.1s linear",
     cursor: "pointer",
+    "@media (min-width: 0)": {
+      width: "33%",
+      fontSize: "11px",
+      height: "36px",
+      paddingTop: "4px",
+      backgroundSize: "contain",
+    },
+    "@media (min-width: 768px)": {
+      width: "300px",
+      fontSize: "20px",
+      height: "50px",
+      paddingTop: "13px",
+      backgroundSize: "cover",
+    },
+
     "&.active": {
       background: `url(${backgroundAT.src})`,
       backgroundRepeat: "no-repeat",
@@ -73,17 +126,32 @@ const ListTab = styled(Box)({
       marginTop: "-9px",
       paddingTop: "16px",
       fontSize: "22px",
+      "@media (min-width: 0)": {
+        width: "33%",
+        fontSize: "11px",
+        height: "42px",
+        paddingTop: "5px",
+        backgroundSize: "contain",
+      },
+      "@media (min-width: 768px)": {
+        width: "300px",
+        fontSize: "20px",
+        height: "64px",
+        paddingTop: "13px",
+        backgroundSize: "cover",
+      },
     },
   },
+  "@media (min-width: 0)": { top: "-53.5px", marginRight: "5px" },
 
-  "@media (min-width: 768px)": {},
+  "@media (min-width: 768px)": { top: "-43.5px", marginRight: "50px" },
   "@media (min-width: 1024px)": {
     padding: "0 100px",
     top: "9.5px",
     marginRight: "-166px",
   },
   "@media (min-width: 1400px)": {
-    padding: "0 100px",
+    padding: "0 0",
     top: "-49.5px",
     marginRight: "50px",
   },
@@ -94,7 +162,14 @@ function Dashboard() {
     setActive(tab);
   };
   return (
-    <DashboardWrapper mt={10}>
+    <DashboardWrapper
+      sx={{
+        mt: {
+          md: 10,
+          xs: 20,
+        },
+      }}
+    >
       <ListTab>
         <Box
           className={`${active === 0 ? "active" : ""}`}

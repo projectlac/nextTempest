@@ -76,6 +76,12 @@ export default function CustomizedRadios({ handleValue }: PropsRadio) {
         <FormControlLabel
           sx={{
             color: "#726550",
+            "& span": {
+              fontSize: {
+                md: "1rem",
+                xs: "14px",
+              },
+            },
           }}
           value="bank"
           control={<BpRadio />}
@@ -84,6 +90,12 @@ export default function CustomizedRadios({ handleValue }: PropsRadio) {
         <FormControlLabel
           sx={{
             color: "#726550",
+            "& span": {
+              fontSize: {
+                md: "1rem",
+                xs: "14px",
+              },
+            },
           }}
           value="paypal"
           control={<BpRadio />}
@@ -92,6 +104,12 @@ export default function CustomizedRadios({ handleValue }: PropsRadio) {
         <FormControlLabel
           sx={{
             color: "#726550",
+            "& span": {
+              fontSize: {
+                md: "1rem",
+                xs: "14px",
+              },
+            },
           }}
           value="momo"
           control={<BpRadio />}

@@ -1,10 +1,19 @@
-import { Box, Container, Divider, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Hidden,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import background from "../../../styles/assets/images/Background.png";
 import Paper from "../../../styles/assets/images/Shop/BillPaper.png";
 import Thank from "../../../styles/assets/images/Shop/thank.png";
+import ThankMobile from "../../../styles/assets/images/Shop/thankMobile.png";
+
 import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
 import toMoney from "../../../utility/toMoney";
 import audit from "../../../api/audit";
@@ -21,18 +30,35 @@ const ProductWrap = styled(Box)(
 );
 const BillBox = styled(Box)(
   ({ theme }) => `
-      height: 819px;
-      width: 629px;
+     
       background: url(${Paper.src});
       background-size: contain;
       background-repeat: no-repeat;
       margin: 0 auto;
       position:relative;
       z-index:2;
-      padding: 45px 50px 45px 55px;
+    
       text-align: center;
       display: flex;
       flex-direction: column;
+      @media (min-width: 0px) {
+        width: 100%;
+        height: 466px;
+        padding: 20px 25px 20px 25px;
+        background-size: 100% auto;
+      } 
+      @media (min-width: 768px) {
+        width: 100%;
+        height: 819px;
+        padding: 45px 50px 45px 55px;
+        background-size: 100% auto;
+      } 
+    
+      @media (min-width: 1024px) {
+        height: 819px;
+        width: 629px;
+        padding: 45px 50px 45px 55px;
+        background-size: contain;
     `
 );
 interface IBill {
@@ -64,18 +90,45 @@ function Bill({ id }: IBill) {
             <Grid
               item
               md={3}
+              xs={12}
               sx={{
                 display: "flex",
                 alignItems: "center",
+                justifyContent: {
+                  md: "auto",
+                  xs: "center",
+                },
               }}
             >
-              <Box>
-                <Image src={Thank} alt="" width={434.81} height={352}></Image>
-              </Box>
+              <Hidden mdDown>
+                <Box>
+                  <Image src={Thank} alt="" width={434.81} height={352}></Image>
+                </Box>
+              </Hidden>
+              <Hidden mdUp>
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Image
+                    src={ThankMobile}
+                    alt=""
+                    width={320}
+                    height={150}
+                    objectFit="contain"
+                  ></Image>
+                </Box>
+              </Hidden>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} xs={12}>
               <BillBox>
-                <Typography fontSize={30} lineHeight={2} color={"#144FB5"}>
+                <Typography
+                  sx={{
+                    fontSize: {
+                      md: 30,
+                      xs: 20,
+                    },
+                  }}
+                  lineHeight={2}
+                  color={"#144FB5"}
+                >
                   Hóa đơn mua hàng
                 </Typography>
                 <Box mt={4}>
@@ -86,7 +139,12 @@ function Bill({ id }: IBill) {
                       textAlign="left"
                       fontFamily={"Montserrat"}
                       fontWeight={700}
-                      fontSize={18}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
                       color={"#58576D"}
                     >
                       Ngày: {time && format(new Date(time), "dd/MM/yyyy")}
@@ -97,7 +155,12 @@ function Bill({ id }: IBill) {
                       textAlign="right"
                       fontFamily={"Montserrat"}
                       fontWeight={700}
-                      fontSize={18}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
                       color={"#58576D"}
                       textTransform={"uppercase"}
                     >
@@ -128,14 +191,28 @@ function Bill({ id }: IBill) {
                   <Box mt={3}>
                     <Divider></Divider>
                   </Box>
-                  <Grid container mt={2}>
+                  <Grid
+                    container
+                    sx={{
+                      mt: {
+                        md: 2,
+                        xs: 1,
+                      },
+                    }}
+                  >
                     <Grid
                       item
                       md={6}
+                      xs={6}
                       textAlign="left"
                       fontFamily={"Montserrat"}
                       fontWeight={700}
-                      fontSize={18}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
                       color={"#58576D"}
                     >
                       Tổng tiền
@@ -143,10 +220,16 @@ function Bill({ id }: IBill) {
                     <Grid
                       item
                       md={6}
+                      xs={6}
                       textAlign="right"
                       fontFamily={"Montserrat"}
                       fontWeight={700}
-                      fontSize={18}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
                       color={"#58576D"}
                     >
                       {time && toMoney(totalMoney())}VND
@@ -161,38 +244,52 @@ function Bill({ id }: IBill) {
                     width: "75%",
                   }}
                 >
-                  <Typography color={"#144FB5"} fontSize={18}>
+                  <Typography
+                    color={"#144FB5"}
+                    sx={{
+                      fontSize: {
+                        md: 18,
+                        xs: 15,
+                      },
+                      mt: {
+                        lg: 0,
+                        xs: 2,
+                      },
+                    }}
+                  >
                     Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với Admin
                     nha.
                   </Typography>
                 </Box>
               </BillBox>
             </Grid>
-            <Grid
-              item
-              md={3}
-              sx={{
-                position: "relative",
-              }}
-            >
-              <Box
+            <Hidden lgDown>
+              <Grid
+                item
+                md={3}
                 sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: "-200px",
-                  width: "554px",
-                  height: "796px",
-                  zIndex: 0,
+                  position: "relative",
                 }}
               >
-                <Image
-                  src={PaiBill}
-                  alt=""
-                  objectFit="contain"
-                  layout="responsive"
-                ></Image>
-              </Box>
-            </Grid>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: "-200px",
+                    width: "554px",
+                    height: "796px",
+                    zIndex: 0,
+                  }}
+                >
+                  <Image
+                    src={PaiBill}
+                    alt=""
+                    objectFit="contain"
+                    layout="responsive"
+                  ></Image>
+                </Box>
+              </Grid>
+            </Hidden>
           </Grid>
         </Container>
       </Box>

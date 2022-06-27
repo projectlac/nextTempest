@@ -22,8 +22,18 @@ const BGWrap = styled(Box)({
     backgroundSize: `contain`,
     backgroundRepeat: `no-repeat`,
     width: "100%",
-    top: "-40px",
+
     left: 0,
+
+    "@media (min-width:0)": {
+      top: "-20px",
+    },
+    "@media (min-width: 768px)": {
+      top: "-50px",
+    },
+    "@media (min-width: 1024px)": {
+      top: "-40px",
+    },
   },
   "&:after": {
     content: "''",
@@ -34,8 +44,15 @@ const BGWrap = styled(Box)({
     backgroundSize: `contain`,
     backgroundRepeat: `no-repeat`,
     width: "100%",
-    bottom: "-65px",
+
     left: 0,
+
+    "@media (min-width:0)": {
+      bottom: "-70px",
+    },
+    "@media (min-width: 1024px)": {
+      bottom: "-65px",
+    },
   },
 });
 
@@ -52,14 +69,25 @@ function DetailInformation({ description, weapon }: DetailProps) {
           zIndex: 2,
         }}
       >
-        <Typography color={"#4B65A3"} fontSize={30}>
+        <Typography
+          color={"#4B65A3"}
+          sx={{
+            fontSize: {
+              lg: "30px",
+              xs: "20px",
+            },
+          }}
+        >
           Chi tiết nhân vật và vũ khí
         </Typography>
         <Box
           sx={{
             fontFamily: "Montserrat",
             textAlign: "initial",
-            fontSize: "20px",
+            fontSize: {
+              md: "20px",
+              xs: "15px",
+            },
             fontWeight: 500,
             color: "#4B65A3",
           }}
@@ -70,7 +98,12 @@ function DetailInformation({ description, weapon }: DetailProps) {
           fontFamily="Montserrat"
           fontWeight={"bold"}
           textAlign="left"
-          fontSize={20}
+          sx={{
+            fontSize: {
+              md: "20px",
+              xs: "15px",
+            },
+          }}
         >
           Vũ khí
         </Typography>
@@ -79,7 +112,10 @@ function DetailInformation({ description, weapon }: DetailProps) {
             fontFamily: "Montserrat",
             textAlign: "initial",
             color: "#4B65A3",
-            fontSize: 20,
+            fontSize: {
+              md: "20px",
+              xs: "15px",
+            },
             fontWeight: 500,
           }}
         >
