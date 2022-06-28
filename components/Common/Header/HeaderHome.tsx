@@ -258,6 +258,7 @@ function HeaderHome() {
           <Box
             color="#fff"
             sx={{
+              cursor: "pointer",
               marginRight: "50px",
               border: "1px solid #fff",
               padding: "5px 25px",
