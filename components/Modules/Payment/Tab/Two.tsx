@@ -23,7 +23,6 @@ import audit from "../../../../api/audit";
 import { useAppContext } from "../../../../context/state";
 const CustomField = styled(Field)(({ theme }) => ({
   width: "90%",
-
   background: "#E5DED4",
   border: "none",
   outline: "none",
@@ -617,7 +616,7 @@ function Two() {
                       sm: "152px",
                       xs: "107px",
                     },
-                    background: `url(${BGPack.src})`,
+                    // background: `url(${BGPack.src})`,
                     backgroundSize: "110%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
@@ -632,15 +631,20 @@ function Two() {
                   }}
                 >
                   <Box
-                    sx={{ paddingTop: "17px", pointerEvents: "none" }}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      pointerEvents: "none",
+                      height: "100%",
+                    }}
                     overflow="hidden"
                   >
                     {d.id !== "1" && <Value>{d.name}</Value>}
                     <Image
                       src={d.image}
                       alt=""
-                      width={137}
-                      height={122}
+                      width={300}
+                      height={300}
                       objectFit="contain"
                       objectPosition="bottom center"
                     />

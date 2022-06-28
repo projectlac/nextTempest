@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Box, Hidden, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.png";
@@ -21,7 +21,7 @@ const DashboardBox = styled(Box)(({ theme }) => ({
   textAlign: "center",
   "@media (min-width:0)": {
     padding: "20px 20px",
-    height: "500px",
+    height: "auto",
   },
   "@media (min-width: 1024px)": {
     padding: "40px",
@@ -141,23 +141,44 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     color="#D09B5F"
                     mt={1}
                   >
-                    <span style={{ display: "flex" }}>
-                      TP bank - 04366222601 - TRAN MINH VU
-                      <Tooltip
-                        title={notification}
-                        arrow
-                        placement="right"
-                        sx={{ ml: 1 }}
-                      >
-                        <ContentCopyIcon
-                          onMouseLeave={resetCopy}
-                          onClick={() => {
-                            copy("04366222601");
-                          }}
-                        />
-                      </Tooltip>
-                    </span>
-                    Nickname Shop - Tempestgenshin
+                    <Hidden smDown>
+                      <span style={{ display: "flex" }}>
+                        TP bank - 04366222601 - TRAN MINH VU
+                        <Tooltip
+                          title={notification}
+                          arrow
+                          placement="right"
+                          sx={{ ml: 1 }}
+                        >
+                          <ContentCopyIcon
+                            onMouseLeave={resetCopy}
+                            onClick={() => {
+                              copy("04366222601");
+                            }}
+                          />
+                        </Tooltip>
+                      </span>
+                      Nickname Shop - Tempestgenshin
+                    </Hidden>
+                    <Hidden smUp>
+                      <span style={{ display: "flex" }}>
+                        TP bank - 04366222601
+                        <Tooltip
+                          title={notification}
+                          arrow
+                          placement="right"
+                          sx={{ ml: 1 }}
+                        >
+                          <ContentCopyIcon
+                            onMouseLeave={resetCopy}
+                            onClick={() => {
+                              copy("04366222601");
+                            }}
+                          />
+                        </Tooltip>
+                      </span>
+                      TRAN MINH VU <br /> Nickname Shop - Tempestgenshin
+                    </Hidden>
                   </Typography>
                   <Typography
                     sx={{
@@ -170,7 +191,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     color="#D09B5F"
                     mt={1}
                   >
-                    MB bank - 78989899992 - TRAN MINH VU{" "}
+                    MB bank - 78989899992
+                    <Hidden smDown>-</Hidden>
+                    <Hidden smUp>
+                      <br />
+                    </Hidden>
+                    TRAN MINH VU
                     <Tooltip
                       title={notification}
                       arrow

@@ -14,7 +14,7 @@ const DashboardBox = styled(Box)(({ theme }) => ({
   textAlign: "center",
   "@media (min-width:0)": {
     padding: "20px 20px",
-    height: "500px",
+    height: "auto",
   },
   "@media (min-width: 1024px)": {
     padding: "40px",

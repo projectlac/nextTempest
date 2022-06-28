@@ -119,7 +119,7 @@ const ListTab = styled(Box)({
       fontSize: "11px",
       height: "36px",
       paddingTop: "4px",
-      backgroundSize: "cover",
+      backgroundSize: "100% 100%",
     },
     "@media (min-width: 768px)": {
       width: "33%",
@@ -150,7 +150,7 @@ const ListTab = styled(Box)({
         fontSize: "11px",
         height: "42px",
         paddingTop: "5px",
-        backgroundSize: "cover",
+        backgroundSize: "100% 100%",
       },
       "@media (min-width: 768px)": {
         width: "33%",

@@ -56,11 +56,13 @@ const ButtonCustom = styled(Box)(({ theme }) => ({
     height: "33px",
     width: "105px",
     fontSize: "13px",
+    margin: " 15px 0px 15px auto",
   },
   "@media (min-width: 1024px)": {
     height: "40px",
     width: "130px",
     fontSize: "16px",
+    margin: "15px auto",
   },
 }));
 const DashboardBox = styled(Box)(({ theme }) => ({
@@ -73,8 +75,8 @@ const DashboardBox = styled(Box)(({ theme }) => ({
 
   textAlign: "center",
   "@media (min-width:0)": {
-    padding: "20px 20px",
-    height: "500px",
+    padding: "20px 10px",
+    height: "auto",
   },
   "@media (min-width: 1024px)": {
     padding: "40px",
@@ -154,7 +156,12 @@ function SelectedMenuSecond() {
                 alt="crys"
               />
             </ImageBox>
-            <ButtonCustom onClick={handleClickOpen}>Đổi avatar</ButtonCustom>
+            <ButtonCustom
+              sx={{ margin: "0 auto !important" }}
+              onClick={handleClickOpen}
+            >
+              Đổi avatar
+            </ButtonCustom>
             <DialogChangeAvatar
               handleClose={handleClose}
               open={open}
@@ -168,11 +175,12 @@ function SelectedMenuSecond() {
         }}
       >
         <Box
-          width={"calc(100% - 150px)"}
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
+            width: { md: "calc(100% - 150px)", xs: "calc(100% - 100px)" },
+            justifyContent: "space-around",
           }}
         >
           <Text color="#726550">
@@ -189,7 +197,11 @@ function SelectedMenuSecond() {
             open={password}
           />
         </Box>
-        <Box width={150}>
+        <Box
+          sx={{
+            width: { md: " 150px", xs: " 100px" },
+          }}
+        >
           <ButtonCustom>Đã liên kết</ButtonCustom>
           <ButtonCustom>Đã liên kết</ButtonCustom>
           <ButtonCustom

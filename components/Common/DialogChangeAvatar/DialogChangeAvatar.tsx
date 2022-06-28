@@ -112,6 +112,14 @@ export default function DialogChangeAvatar({
             overflowY: "inherit",
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
+            "@media (min-width:0)": {
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+            },
+            "@media (min-width: 1024px)": {
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            },
             "& .MuiDialogContent-root": {
               overflowY: "inherit",
               height: "calc(100% - 130px)",
@@ -131,7 +139,16 @@ export default function DialogChangeAvatar({
             <Image src={avatarCurrency} width={150} height={150} alt="crys" />
           </ImageBox>
           <ScrollBox>
-            <Box sx={{ padding: "30px", display: "flex", flexWrap: "wrap" }}>
+            <Box
+              sx={{
+                padding: {
+                  md: "30px",
+                  xs: "10px",
+                },
+                display: "flex",
+                flexWrap: "wrap",
+              }}
+            >
               {(avatar || []).map((d, i) => (
                 <ImageChooseBox
                   key={i}

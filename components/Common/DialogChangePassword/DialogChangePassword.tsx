@@ -79,8 +79,6 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
         onClose={handleClose}
         sx={{
           "& .MuiDialog-paper": {
-            width: "900px",
-            padding: "40px",
             textAlign: "center",
             background: `url(${Background.src})`,
             height: "584px",
@@ -94,10 +92,26 @@ export default function DialogChangeAvatar({ open, handleClose }: PropsDialog) {
             "& .MuiDialogActions-root": {
               height: "130px",
             },
+            "@media (min-width:0)": {
+              backgroundSize: "cover",
+              backgroundPosition: "center center",
+              width: "95%",
+              padding: "40px 10px",
+            },
+            "@media (min-width: 1024px)": {
+              padding: "40px",
+              width: "900px",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            },
           },
         }}
       >
-        <Typography variant="h4" color="#726550">
+        <Typography
+          variant="h4"
+          sx={{ fontSize: { md: "2.125rem", xs: " 22px" } }}
+          color="#726550"
+        >
           {"Đổi mật khẩu"}
         </Typography>
         <Box

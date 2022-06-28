@@ -73,6 +73,16 @@ const NameBox = styled(Box)({
   "@media (min-width:0)": {
     position: "relative",
     margin: "0 auto",
+    width: "100%",
+  },
+  "@media (min-width:403px)": {
+    position: "relative",
+    margin: "0 auto",
+    width: "296px",
+  },
+  "@media (min-width: 768px)": {
+    position: "relative",
+    margin: "0 auto",
   },
   "@media (min-width: 1024px)": {
     position: "absolute",
@@ -98,7 +108,7 @@ const TextBox = styled(Typography)({
     borderBottom: "none",
     width: "25%",
     padding: "7px 0",
-    fontSize: "13px",
+    fontSize: "11px",
     "&:nth-of-type(2)": {
       width: "50%",
     },
@@ -219,7 +229,13 @@ function One() {
           <NameBox>
             <Typography
               color={"#94674B"}
-              fontSize={18}
+              sx={{
+                fontSize: {
+                  md: 18,
+                  sm: 17,
+                  xs: 15,
+                },
+              }}
               textTransform="capitalize"
             >
               {decodeToken()}
