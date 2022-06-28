@@ -50,11 +50,14 @@ const ContactBox = styled(Box)(
       width: 98%;
       height: 522px;
       top: 20%;
+      background-size: cover;
+      background-position: center;
     } 
     @media (min-width: 768px){
       width: 635px;
       height: 416px;
       top: 40%;
+      background-size: contain;
     }
     @media (min-width: 1024px) {
       top: 40%;

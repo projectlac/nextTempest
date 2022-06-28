@@ -29,6 +29,10 @@ const DashboardBox = styled(Box)(({ theme }) => ({
     zIndex: "2",
     marginTop: "35px",
   },
+  "@media (min-width:768px)": {
+    zIndex: "2",
+    marginTop: "75px",
+  },
   "@media (min-width: 1024px)": {
     height: "555px",
     marginTop: "0",
@@ -95,7 +99,7 @@ const TextBox = styled(Typography)({
     width: "25%",
     padding: "7px 0",
     fontSize: "13px",
-    "&:nth-child(2)": {
+    "&:nth-of-type(2)": {
       width: "50%",
     },
   },
@@ -104,7 +108,7 @@ const TextBox = styled(Typography)({
     width: "auto",
     padding: "10px 0",
     fontSize: "17px",
-    "&:nth-child(2)": {
+    "&:nth-of-type(2)": {
       width: "auto",
     },
   },

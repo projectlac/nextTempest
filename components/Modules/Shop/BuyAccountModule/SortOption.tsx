@@ -37,18 +37,60 @@ export default function SortOption({ handleSortBy }: SortOption) {
         displayEmpty={true}
         sx={{
           fontFamily: "Montserrat",
+          background: "#fff",
+          fontSize: {
+            md: "16px",
+            xs: "14px",
+          },
+          height: "40px",
         }}
       >
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={"-1"}>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={"-1"}
+        >
           Mới nhất
         </MenuItem>
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={2}>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={2}
+        >
           Đang sale
         </MenuItem>
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={0}>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={0}
+        >
           Giá thấp tới cao
         </MenuItem>
-        <MenuItem sx={{ fontFamily: "Montserrat" }} value={1}>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={1}
+        >
           Giá cao tới thấp
         </MenuItem>
       </Select>

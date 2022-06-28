@@ -25,6 +25,12 @@ const BodyTable = styled(Box)({
     "&:first-of-type": {
       borderLeft: "none",
     },
+    "@media (min-width:0)": {
+      fontSize: "13px",
+    },
+    "@media (min-width: 1024px)": {
+      fontSize: "14px",
+    },
   },
 });
 
@@ -87,7 +93,13 @@ function InfinityListHistory() {
         {items.map((item, index) => (
           <BodyTable key={item.id}>
             <Box width={"7%"}>{index + 1}</Box>
-            <Box width={"25%"}>{item.user}</Box>
+            <Box width={"25%"}>
+              <Box>
+                {item.auditInformations.map((d) => (
+                  <span key={d.id}>{d.name} - </span>
+                ))}
+              </Box>
+            </Box>
             <Box width={"24%"}>{item.total}</Box>
 
             <Box width={"22%"}>{item?.note}</Box>

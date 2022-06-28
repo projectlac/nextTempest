@@ -67,6 +67,13 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 const CheckboxCustom = styled(FormControlLabel)(({ theme }) => ({
   "& span": {
     fontFamily: "Montserrat",
+    fontSize: "16px",
+    "@media (min-width:0)": {
+      fontSize: "14px",
+    },
+    "@media (min-width: 768px)": {
+      fontSize: "16px",
+    },
   },
 }));
 
@@ -91,7 +98,16 @@ const RenderItem = ({ title, data, handleFilter, open }: AccordionProp) => {
     <Box>
       <Accordion expanded={expanded === true} onChange={handleChange()}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>{title}</Typography>
+          <Typography
+            sx={{
+              fontSize: {
+                md: "16px",
+                xs: "14px",
+              },
+            }}
+          >
+            {title}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
@@ -128,7 +144,16 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
     <Box>
       <Accordion expanded={expanded === true} onChange={handleChange()}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>{title}</Typography>
+          <Typography
+            sx={{
+              fontSize: {
+                md: "16px",
+                xs: "14px",
+              },
+            }}
+          >
+            {title}
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormControl>
@@ -144,6 +169,10 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
                 sx={{
                   "& span": {
                     fontFamily: "Montserrat",
+                    fontSize: {
+                      md: "16px",
+                      xs: "14px",
+                    },
                   },
                 }}
                 label="Tất cả"
@@ -156,6 +185,10 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
                   sx={{
                     "& span": {
                       fontFamily: "Montserrat",
+                      fontSize: {
+                        md: "16px",
+                        xs: "14px",
+                      },
                     },
                   }}
                   label={d.title}
@@ -214,7 +247,7 @@ export default function CustomizedAccordions() {
   return (
     <Box
       sx={{
-        height: "1200px",
+        height: { md: "1200px", xs: "400px" },
         overflow: "hidden",
         overflowY: "auto",
         paddingRight: "20px",

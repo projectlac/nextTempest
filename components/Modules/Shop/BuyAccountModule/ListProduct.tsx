@@ -86,6 +86,7 @@ function ListProduct() {
     >
       <Box
         sx={{
+          width: "100%",
           padding: {
             md: "0px 30px 50px",
             xs: "0px 7px 50px",
@@ -102,6 +103,10 @@ function ListProduct() {
           </Box>
         </Hidden>
         <Hidden mdUp>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+            <FindByCode handleChangeCode={handleChangeCode} />
+            <SortOption handleSortBy={handleSortBy} />
+          </Box>
           <FilterMobile></FilterMobile>
         </Hidden>
         <Grid container columnSpacing={3}>
@@ -136,7 +141,16 @@ function ListProduct() {
             ))
           ) : (
             <Box width={"100%"}>
-              <Typography textAlign={"center"} color="#4B66A2" fontSize={25}>
+              <Typography
+                textAlign={"center"}
+                color="#4B66A2"
+                sx={{
+                  fontSize: {
+                    md: 25,
+                    xs: 17,
+                  },
+                }}
+              >
                 Không có kết quả tương ứng!
               </Typography>
             </Box>

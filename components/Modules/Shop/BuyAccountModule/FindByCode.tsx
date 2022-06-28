@@ -35,7 +35,10 @@ function FindByCode({ handleChangeCode }: IFindByCode) {
     debounceDropDown(event.target.value);
   };
   return (
-    <FormControl sx={{ m: 1, width: "150px" }} variant="outlined">
+    <FormControl
+      sx={{ m: 1, width: { md: "150px", xs: "100px" } }}
+      variant="outlined"
+    >
       <InputLabel
         htmlFor="outlined-adornment-password"
         sx={{
@@ -48,6 +51,14 @@ function FindByCode({ handleChangeCode }: IFindByCode) {
           "&.MuiFormLabel-filled": {
             transform: "translate(14px, -9px) scale(0.75)",
           },
+          fontSize: {
+            md: "16px",
+            xs: "13px",
+          },
+          paddingTop: {
+            md: 0,
+            xs: "2px",
+          },
         }}
       >
         Tìm mã
@@ -59,6 +70,7 @@ function FindByCode({ handleChangeCode }: IFindByCode) {
         onChange={handleChange}
         sx={{
           height: "40px",
+          background: "#fff",
           "& input ": {
             fontFamily: "Montserrat",
           },

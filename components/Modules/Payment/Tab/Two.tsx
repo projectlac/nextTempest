@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Box, CircularProgress, Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Hidden, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -21,20 +21,28 @@ import Layer65 from "../../../../styles/assets/images/PackList/Layer65.png";
 import Layer66 from "../../../../styles/assets/images/PackList/Layer66.png";
 import audit from "../../../../api/audit";
 import { useAppContext } from "../../../../context/state";
-const CustomField = styled(Field)(
-  ({ theme }) => `
-    width: 90%;
-    height:57px;
-    background: #E5DED4;
-    border: none;
-    outline:none;
-    border-radius: 20px;
-    margin-bottom:10px;
-    font-size: 18px;
-    padding: 15px 25px;
-    font-family: 'michos';
-          `
-);
+const CustomField = styled(Field)(({ theme }) => ({
+  width: "90%",
+
+  background: "#E5DED4",
+  border: "none",
+  outline: "none",
+  borderRadius: "20px",
+  marginBottom: "10px",
+  fontSize: "18px",
+  padding: "15px 25px",
+  fontFamily: "'michos'",
+  "@media (min-width:0)": {
+    fontSize: "13px",
+    height: "45px",
+    padding: "15px",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "18px",
+    height: "57px",
+    padding: "15px 25px",
+  },
+}));
 const DashboardBox = styled(Box)(
   ({ theme }) => `
             height: 600px;
@@ -49,33 +57,50 @@ const DashboardBox = styled(Box)(
           `
 );
 
-const Price = styled(Box)(
-  ({ theme }) => `
-  width: 80%;
-  margin: 0 auto;
-  height: 35px;
-  background: #f4ece0;
-  border: solid 1px #DAB88F;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #94674B;
-          `
-);
+const Price = styled(Box)(({ theme }) => ({
+  width: "80%",
+  margin: "0 auto",
+  background: "#f4ece0",
+  border: "solid 1px #DAB88F",
+  borderBottomRightRadius: "15px",
+  borderBottomLeftRadius: "15px",
 
-const Value = styled(Typography)(
-  ({ theme }) => `
-  position: absolute;
-  top: 13px;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  color: #94674B;
-          `
-);
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#94674B",
+
+  "@media (min-width:0)": {
+    fontSize: "12px",
+    height: "30px",
+  },
+  "@media (min-width:768px)": {
+    fontSize: "14px",
+    height: "30px",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "14px",
+    height: "35px",
+  },
+}));
+
+const Value = styled(Typography)(({ theme }) => ({
+  position: "absolute",
+  top: "13px",
+  left: "0",
+  right: "0",
+  zIndex: "1",
+  color: "#94674B",
+  "@media (min-width:0)": {
+    fontSize: "13px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "15px",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "15px",
+  },
+}));
 const Quatily = styled(Box)(
   ({ theme }) => `
   position: absolute;
@@ -126,6 +151,15 @@ const BodyHead = styled(Box)({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    "@media (min-width:0)": {
+      fontSize: "13px",
+    },
+    "@media (min-width: 768px)": {
+      fontSize: "15px",
+    },
+    "@media (min-width: 1024px)": {
+      fontSize: "16px",
+    },
     "&first-of-type": {
       borderLeft: "none",
     },
@@ -153,6 +187,15 @@ const BodyTable = styled(Box)({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    "@media (min-width:0)": {
+      fontSize: "13px",
+    },
+    "@media (min-width: 768px)": {
+      fontSize: "15px",
+    },
+    "@media (min-width: 1024px)": {
+      fontSize: "16px",
+    },
     "&first-of-type": {
       borderLeft: "none",
     },
@@ -280,250 +323,281 @@ function Two() {
   };
   return (
     <Grid container>
-      <Grid item md={7}>
-        <DashboardBox
-          sx={{
-            padding: "20px 30px !important",
-          }}
-        >
-          <Typography color="#726550" fontSize={30}>
-            Nhập thông tin nạp
-          </Typography>
-          <Image src={Devider} alt="devider" width={440} height={14} />
-          <Box>
-            <Formik
-              initialValues={{
-                uid: "",
-                server: "",
-                account: "",
-                password: "",
-                ingame: "",
-                phone: "",
-                note: "",
-              }}
-              validationSchema={LoginSchema}
-              onSubmit={async (values, { resetForm }) => {
-                const { uid, server, account, password, ingame, phone, note } =
-                  values;
-                if (cart.length > 0) {
-                  const auditInformation: AuditInformation[] = [...cart].map(
-                    (d) => ({
-                      name: d.name,
-                      quantity: +d.quantily,
-                      unitPrice: +d.price,
-                    })
-                  );
-                  setLoading(true);
-                  try {
-                    await audit
-                      .buyPack({
-                        UID: uid,
-                        accountName: ingame,
-                        auditInformation,
-                        note,
-                        phone,
-                        password,
-                        server,
-                        username: account,
+      <Hidden mdDown>
+        <Grid item md={7} xs={12}>
+          <DashboardBox
+            sx={{
+              padding: "20px 30px !important",
+            }}
+          >
+            <Typography color="#726550" fontSize={30}>
+              Nhập thông tin nạp
+            </Typography>
+            <Image src={Devider} alt="devider" width={440} height={14} />
+            <Box>
+              <Formik
+                initialValues={{
+                  uid: "",
+                  server: "",
+                  account: "",
+                  password: "",
+                  ingame: "",
+                  phone: "",
+                  note: "",
+                }}
+                validationSchema={LoginSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  const {
+                    uid,
+                    server,
+                    account,
+                    password,
+                    ingame,
+                    phone,
+                    note,
+                  } = values;
+                  if (cart.length > 0) {
+                    const auditInformation: AuditInformation[] = [...cart].map(
+                      (d) => ({
+                        name: d.name,
+                        quantity: +d.quantily,
+                        unitPrice: +d.price,
                       })
-                      .then((res) => {
-                        handleChangeMessageToast("Bạn đã mua thành công!");
-                        resetForm();
-                        setCard([]);
-                        handleChangeStatusToast();
-                      })
-                      .catch((err) => {
-                        handleChangeMessageToast(err.response.data.message);
-                        handleChangeStatusToast();
-                      })
-                      .finally(() => {
-                        setLoading(false);
-                      });
-                  } catch (error) {}
-                }
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="uid"
-                          placeholder="UID (User ID)"
-                          style={{
-                            border: `1px solid ${
-                              errors.uid && touched.uid ? "#d33" : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="server"
-                          placeholder="Server"
-                          style={{
-                            border: `1px solid ${
-                              errors.server && touched.server
-                                ? "#d33"
-                                : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="account"
-                          placeholder="Tên tài khoản"
-                          style={{
-                            border: `1px solid ${
-                              errors.account && touched.account
-                                ? "#d33"
-                                : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="password"
-                          type="password"
-                          placeholder="Password"
-                          style={{
-                            border: `1px solid ${
-                              errors.password && touched.password
-                                ? "#d33"
-                                : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                  </Box>
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="ingame"
-                          placeholder="Tên nhân vật"
-                          style={{
-                            border: `1px solid ${
-                              errors.ingame && touched.ingame
-                                ? "#d33"
-                                : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Box sx={{ position: "relative" }}>
-                        <CustomField
-                          name="phone"
-                          placeholder="Số điện thoại"
-                          style={{
-                            border: `1px solid ${
-                              errors.phone && touched.phone ? "#d33" : "#E5DED4"
-                            }`,
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                  </Box>
-
-                  <Grid item md={12}>
-                    <Box>
-                      <CustomField
-                        name="note"
-                        placeholder="Ghi chú"
-                        style={{ width: "95%" }}
-                      />
-                    </Box>
-                  </Grid>
-                  <Box>
+                    );
+                    setLoading(true);
+                    try {
+                      await audit
+                        .buyPack({
+                          UID: uid,
+                          accountName: ingame,
+                          auditInformation,
+                          note,
+                          phone,
+                          password,
+                          server,
+                          username: account,
+                        })
+                        .then((res) => {
+                          handleChangeMessageToast("Bạn đã mua thành công!");
+                          resetForm();
+                          setCard([]);
+                          handleChangeStatusToast();
+                        })
+                        .catch((err) => {
+                          handleChangeMessageToast(err.response.data.message);
+                          handleChangeStatusToast();
+                        })
+                        .finally(() => {
+                          setLoading(false);
+                        });
+                    } catch (error) {}
+                  }
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form>
                     <Box
                       sx={{
                         display: "flex",
-                        alignItems: "center",
-                        ml: 4,
-                        mt: 0.5,
-                        mb: 0.5,
-                        color: "#877C69",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <ShoppingCartIcon sx={{ color: "#877C69" }} /> Giỏ hàng
-                      hiện tại
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="uid"
+                            placeholder="UID (User ID)"
+                            style={{
+                              border: `1px solid ${
+                                errors.uid && touched.uid ? "#d33" : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="server"
+                            placeholder="Server"
+                            style={{
+                              border: `1px solid ${
+                                errors.server && touched.server
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
                     </Box>
                     <Box
-                      height={175}
                       sx={{
-                        width: "95%",
-                        margin: "0 auto",
-                        borderRadius: "30px",
-                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "space-between",
                       }}
                     >
-                      <BodyHead>
-                        <Box style={{ width: "40%" }}>Gói đã chọn</Box>
-                        <Box style={{ width: "15%" }}>SL</Box>
-                        <Box style={{ width: "45%" }}>Thành tiền</Box>
-                      </BodyHead>
-                      <BoxBody>
-                        {cart.length > 0 &&
-                          cart.map((d, index) => (
-                            <BodyTable key={index + d.id}>
-                              <Box width={"40%"}>{d.name}</Box>
-                              <Box width={"15%"}>{d.quantily}</Box>
-                              <Box width={"45%"}>
-                                {totalMoney(d.price, d.quantily)}
-                              </Box>
-                            </BodyTable>
-                          ))}
-                      </BoxBody>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="account"
+                            placeholder="Tên tài khoản"
+                            style={{
+                              border: `1px solid ${
+                                errors.account && touched.account
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            style={{
+                              border: `1px solid ${
+                                errors.password && touched.password
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
                     </Box>
-                  </Box>
-                  <button id="buttonBuy" type="submit" disabled={loading}>
-                    {loading ? <CircularProgress /> : " Nạp tiền"}
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </Box>
-        </DashboardBox>
-      </Grid>
-      <Grid item md={5}>
-        <Box textAlign={"center"} ml={5} pt={3}>
-          <Typography color="#726550" fontSize={30}>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="ingame"
+                            placeholder="Tên nhân vật"
+                            style={{
+                              border: `1px solid ${
+                                errors.ingame && touched.ingame
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            style={{
+                              border: `1px solid ${
+                                errors.phone && touched.phone
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    </Box>
+
+                    <Grid item md={12}>
+                      <Box>
+                        <CustomField
+                          name="note"
+                          placeholder="Ghi chú"
+                          style={{ width: "95%" }}
+                        />
+                      </Box>
+                    </Grid>
+                    <Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          ml: 4,
+                          mt: 0.5,
+                          mb: 0.5,
+                          color: "#877C69",
+                          fontSize: "15px",
+                        }}
+                      >
+                        <ShoppingCartIcon sx={{ color: "#877C69" }} /> Giỏ hàng
+                        hiện tại
+                      </Box>
+                      <Box
+                        height={175}
+                        sx={{
+                          width: "95%",
+                          margin: "0 auto",
+                          borderRadius: "30px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <BodyHead>
+                          <Box style={{ width: "40%" }}>Gói đã chọn</Box>
+                          <Box style={{ width: "15%" }}>SL</Box>
+                          <Box style={{ width: "45%" }}>Thành tiền</Box>
+                        </BodyHead>
+                        <BoxBody>
+                          {cart.length > 0 &&
+                            cart.map((d, index) => (
+                              <BodyTable key={index + d.id}>
+                                <Box width={"40%"}>{d.name}</Box>
+                                <Box width={"15%"}>{d.quantily}</Box>
+                                <Box width={"45%"}>
+                                  {totalMoney(d.price, d.quantily)}
+                                </Box>
+                              </BodyTable>
+                            ))}
+                        </BoxBody>
+                      </Box>
+                    </Box>
+                    <button id="buttonBuy" type="submit" disabled={loading}>
+                      {loading ? <CircularProgress /> : " Nạp tiền"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
+            </Box>
+          </DashboardBox>
+        </Grid>
+      </Hidden>
+      <Grid item md={5} xs={12}>
+        <Box
+          textAlign={"center"}
+          sx={{
+            ml: {
+              md: 5,
+              xs: 0,
+            },
+          }}
+          pt={3}
+        >
+          <Typography
+            color="#726550"
+            sx={{
+              fontSize: {
+                md: 30,
+                xs: 20,
+              },
+              position: "relative",
+              zIndex: "2",
+            }}
+          >
             Chọn gói cần nạp
           </Typography>
           <Image src={Devider} alt="devider" width={440} height={14} />
           <Grid container rowSpacing={2} columnSpacing={2}>
             {defauValue.map((d, i) => (
-              <Grid item md={4} key={i}>
+              <Grid item md={4} xs={4} sm={3} key={i}>
                 <Box sx={{ position: "relative" }}>
                   {d.quantily > 0 && <Quatily>x{d.quantily}</Quatily>}
                   {d.quantily > 0 && (
@@ -537,8 +611,12 @@ function Two() {
                   )}
                 </Box>
                 <Box
-                  height={124}
                   sx={{
+                    height: {
+                      md: "124px",
+                      sm: "152px",
+                      xs: "107px",
+                    },
                     background: `url(${BGPack.src})`,
                     backgroundSize: "110%",
                     backgroundPosition: "center",
@@ -574,6 +652,263 @@ function Two() {
           </Grid>
         </Box>
       </Grid>
+      <Hidden mdUp>
+        <Grid item md={7} xs={12} mt={2}>
+          <DashboardBox
+            sx={{
+              padding: {
+                md: "20px 30px !important",
+                xs: "20px 15px !important",
+              },
+            }}
+          >
+            <Typography
+              color="#726550"
+              sx={{
+                fontSize: {
+                  md: 30,
+                  xs: 20,
+                },
+              }}
+            >
+              Nhập thông tin nạp
+            </Typography>
+            <Image src={Devider} alt="devider" width={440} height={14} />
+            <Box>
+              <Formik
+                initialValues={{
+                  uid: "",
+                  server: "",
+                  account: "",
+                  password: "",
+                  ingame: "",
+                  phone: "",
+                  note: "",
+                }}
+                validationSchema={LoginSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  const {
+                    uid,
+                    server,
+                    account,
+                    password,
+                    ingame,
+                    phone,
+                    note,
+                  } = values;
+                  if (cart.length > 0) {
+                    const auditInformation: AuditInformation[] = [...cart].map(
+                      (d) => ({
+                        name: d.name,
+                        quantity: +d.quantily,
+                        unitPrice: +d.price,
+                      })
+                    );
+                    setLoading(true);
+                    try {
+                      await audit
+                        .buyPack({
+                          UID: uid,
+                          accountName: ingame,
+                          auditInformation,
+                          note,
+                          phone,
+                          password,
+                          server,
+                          username: account,
+                        })
+                        .then((res) => {
+                          handleChangeMessageToast("Bạn đã mua thành công!");
+                          resetForm();
+                          setCard([]);
+                          handleChangeStatusToast();
+                        })
+                        .catch((err) => {
+                          handleChangeMessageToast(err.response.data.message);
+                          handleChangeStatusToast();
+                        })
+                        .finally(() => {
+                          setLoading(false);
+                        });
+                    } catch (error) {}
+                  }
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Form>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="uid"
+                            placeholder="UID (User ID)"
+                            style={{
+                              border: `1px solid ${
+                                errors.uid && touched.uid ? "#d33" : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="server"
+                            placeholder="Server"
+                            style={{
+                              border: `1px solid ${
+                                errors.server && touched.server
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="account"
+                            placeholder="Tên tài khoản"
+                            style={{
+                              border: `1px solid ${
+                                errors.account && touched.account
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            style={{
+                              border: `1px solid ${
+                                errors.password && touched.password
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="ingame"
+                            placeholder="Tên nhân vật"
+                            style={{
+                              border: `1px solid ${
+                                errors.ingame && touched.ingame
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                      <Grid item md={6} sm={6} xs={6}>
+                        <Box sx={{ position: "relative" }}>
+                          <CustomField
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            style={{
+                              border: `1px solid ${
+                                errors.phone && touched.phone
+                                  ? "#d33"
+                                  : "#E5DED4"
+                              }`,
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    </Box>
+
+                    <Grid item md={12}>
+                      <Box>
+                        <CustomField
+                          name="note"
+                          placeholder="Ghi chú"
+                          style={{ width: "95%" }}
+                        />
+                      </Box>
+                    </Grid>
+                    <Box>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          ml: 4,
+                          mt: 0.5,
+                          mb: 0.5,
+                          color: "#877C69",
+                        }}
+                      >
+                        <ShoppingCartIcon sx={{ color: "#877C69" }} /> Giỏ hàng
+                        hiện tại
+                      </Box>
+                      <Box
+                        height={175}
+                        sx={{
+                          width: "95%",
+                          margin: "0 auto",
+                          borderRadius: "30px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <BodyHead>
+                          <Box style={{ width: "40%" }}>Gói đã chọn</Box>
+                          <Box style={{ width: "15%" }}>SL</Box>
+                          <Box style={{ width: "45%" }}>Thành tiền</Box>
+                        </BodyHead>
+                        <BoxBody>
+                          {cart.length > 0 &&
+                            cart.map((d, index) => (
+                              <BodyTable key={index + d.id}>
+                                <Box width={"40%"}>{d.name}</Box>
+                                <Box width={"15%"}>{d.quantily}</Box>
+                                <Box width={"45%"}>
+                                  {totalMoney(d.price, d.quantily)}
+                                </Box>
+                              </BodyTable>
+                            ))}
+                        </BoxBody>
+                      </Box>
+                    </Box>
+                    <button id="buttonBuy" type="submit" disabled={loading}>
+                      {loading ? <CircularProgress /> : " Nạp tiền"}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
+            </Box>
+          </DashboardBox>
+        </Grid>
+      </Hidden>
     </Grid>
   );
 }

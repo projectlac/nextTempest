@@ -11,7 +11,6 @@ interface PropsSelectedMenu {
   value: string;
 }
 const DashboardBox = styled(Box)(({ theme }) => ({
-  height: "500px",
   width: "100%",
   backgroundColor: "#F4ECE0",
   border: "1px solid #DAB88F",
@@ -22,9 +21,11 @@ const DashboardBox = styled(Box)(({ theme }) => ({
   textAlign: "center",
   "@media (min-width:0)": {
     padding: "20px 20px",
+    height: "500px",
   },
   "@media (min-width: 1024px)": {
     padding: "40px",
+    height: "550px",
   },
 }));
 function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
@@ -254,7 +255,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
         })()}
       </Box>
 
-      <Box mt={5} mb={1}>
+      <Box sx={{ mt: { md: 5, xs: 2 } }} mb={1}>
         <Image src={Devider} alt="devider" width={440} height={14} />
       </Box>
       <Box>

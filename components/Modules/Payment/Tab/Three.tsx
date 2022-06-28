@@ -26,14 +26,22 @@ const BodyHead = styled(Box)({
   color: "#A25E42",
   display: "flex",
   background: "#f3e3ca",
+
   "& > div ": {
     borderBottom: " 2px solid #DAB88F",
     borderLeft: "2px solid #DAB88F",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
     "&:first-of-type": {
       borderLeft: "none",
+    },
+    "@media (min-width:0)": {
+      fontSize: "13px",
+    },
+    "@media (min-width: 1024px)": {
+      fontSize: "15px",
     },
   },
 });
@@ -108,35 +116,47 @@ function Three() {
   const [history, setHistory] = useState([]);
 
   return (
-    <Grid container>
-      <Grid item md={12}>
-        <DashboardBox
+    <Grid container sx={{ position: "relative", zIndex: 2 }}>
+      <DashboardBox
+        sx={{
+          padding: "0px 0px !important",
+          overflow: "hidden",
+
+          overflowX: "auto",
+          "&::-webkit-scrollbar": {
+            height: "5px",
+          },
+          mt: {
+            md: 0,
+            xs: 3,
+          },
+        }}
+      >
+        <Box
+          height={598}
           sx={{
-            padding: "0px 0px !important",
+            width: {
+              md: "100%",
+              xs: 700,
+            },
+
+            margin: "0 auto",
+            borderRadius: "30px",
+            overflow: "hidden",
           }}
         >
-          <Box
-            height={598}
-            sx={{
-              width: "100%",
-              margin: "0 auto",
-              borderRadius: "30px",
-              overflow: "hidden",
-            }}
-          >
-            <BodyHead>
-              <Box style={{ width: "7%" }}>STT</Box>
-              <Box style={{ width: "25%" }}>Loại tiền</Box>
-              <Box style={{ width: "24%" }}>Mệnh giá</Box>
-              <Box style={{ width: "22%" }}>Ghi chú</Box>
-              <Box style={{ width: "22%" }}>Trạng thái</Box>
-            </BodyHead>
-            <BoxBody>
-              <InfinityListHistory />
-            </BoxBody>
-          </Box>
-        </DashboardBox>
-      </Grid>
+          <BodyHead>
+            <Box style={{ width: "7%" }}>STT</Box>
+            <Box style={{ width: "25%" }}>Loại tiền</Box>
+            <Box style={{ width: "24%" }}>Mệnh giá</Box>
+            <Box style={{ width: "22%" }}>Ghi chú</Box>
+            <Box style={{ width: "22%" }}>Trạng thái</Box>
+          </BodyHead>
+          <BoxBody>
+            <InfinityListHistory />
+          </BoxBody>
+        </Box>
+      </DashboardBox>
     </Grid>
   );
 }

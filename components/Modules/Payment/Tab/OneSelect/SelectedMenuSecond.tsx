@@ -12,47 +12,75 @@ import avatar from "../../../../../data/avatar";
 
 const ImageBox = styled(Box)({
   borderRadius: "50%",
-  width: "150px",
-  height: "150px",
-  margin: "25px auto 0",
+
   overflow: "hidden",
+  "@media (min-width:0)": {
+    width: "90px",
+    height: "90px",
+    margin: "15px auto 0",
+  },
+  "@media (min-width: 1024px)": {
+    width: "150px",
+    margin: "25px auto 0",
+    height: "150px",
+  },
 });
 const Text = styled(Box)({
   color: "#94674b",
-  margin: "15px",
+
   "& span": {
     color: "#726550",
   },
+  "@media (min-width:0)": {
+    fontSize: "13px",
+    margin: "9px",
+    textAlign: "left",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "16px",
+    margin: "15px",
+  },
 });
 
-const ButtonCustom = styled(Box)(
-  ({ theme }) => `
-              height: 40px;
-              width: 130px;
-              background-color: transparent;
-                border: 2px solid #DAB88F;
-               color:#94674b;
-               margin: 15px auto;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               border-radius: 15px;
-               cursor:pointer;
-            `
-);
-const DashboardBox = styled(Box)(
-  ({ theme }) => `
-              height: 555px;
-              width: 100%;
-              background-color: #F4ECE0;
-                border: 1px solid #DAB88F;
-                border-radius: 30px;
-                position:relative;
-                z-index: 1;
-                padding: 40px;
-                text-align:center;
-            `
-);
+const ButtonCustom = styled(Box)(({ theme }) => ({
+  backgroundColor: "transparent",
+  border: "2px solid #DAB88F",
+  color: "#94674b",
+  margin: "15px auto",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "15px",
+  cursor: "pointer",
+  "@media (min-width:0)": {
+    height: "33px",
+    width: "105px",
+    fontSize: "13px",
+  },
+  "@media (min-width: 1024px)": {
+    height: "40px",
+    width: "130px",
+    fontSize: "16px",
+  },
+}));
+const DashboardBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  backgroundColor: "#F4ECE0",
+  border: "1px solid #DAB88F",
+  borderRadius: "30px",
+  position: "relative",
+  zIndex: "1",
+
+  textAlign: "center",
+  "@media (min-width:0)": {
+    padding: "20px 20px",
+    height: "500px",
+  },
+  "@media (min-width: 1024px)": {
+    padding: "40px",
+    height: "550px",
+  },
+}));
 function SelectedMenuSecond() {
   const token = localStorage.getItem("access_token");
 
@@ -103,7 +131,15 @@ function SelectedMenuSecond() {
 
   return (
     <DashboardBox>
-      <Typography color="#726550" fontSize={28}>
+      <Typography
+        color="#726550"
+        sx={{
+          fontSize: {
+            md: 28,
+            xs: 20,
+          },
+        }}
+      >
         Thông tin tài khoản
       </Typography>
       <Image src={Devider} alt="devider" width={440} height={14} />

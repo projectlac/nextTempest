@@ -222,11 +222,13 @@ function ShopItem({
             },
             fontSize: {
               lg: "1rem",
-              xs: "13px",
+              sm: "13px",
+              xs: "10px",
             },
             minHeight: {
               lg: "50px",
-              xs: "40px",
+              sm: "40px",
+              xs: "30px",
             },
           }}
         >
@@ -269,7 +271,7 @@ function ShopItem({
               lg: 18,
               md: 15,
               sm: 15,
-              xs: 12,
+              xs: 10,
             },
           }}
         >

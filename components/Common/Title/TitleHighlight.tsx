@@ -47,12 +47,13 @@ const TitleHighlight = styled(Box)({
       width: "360px",
     },
   },
-  "@media (max-width: 435px)": {
-    fontSize: "20px",
-    marginBottom: 0,
-  },
+
   "@media (max-width: 1024px)": {
     fontSize: "30px",
+  },
+  "@media (max-width: 435px)": {
+    fontSize: "22px",
+    marginBottom: 0,
   },
 });
 export default TitleHighlight;

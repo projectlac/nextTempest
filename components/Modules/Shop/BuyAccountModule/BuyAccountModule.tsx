@@ -72,12 +72,18 @@ function BuyAccountModule() {
     <ProductWrap>
       <Box
         mb={20}
-        mt={20}
         sx={{
+          mt: { md: 20, xs: 15 },
           px: { xs: 2, md: 0 },
         }}
       >
-        <TitleHighlight mb={10}>Danh sách tài khoản</TitleHighlight>
+        <TitleHighlight
+          sx={{
+            mb: { md: 10, xs: 5 },
+          }}
+        >
+          Danh sách tài khoản
+        </TitleHighlight>
         <BackgroundShop>
           <Grid container>
             <Hidden mdDown>
@@ -85,7 +91,7 @@ function BuyAccountModule() {
                 <Filter />
               </Grid>
             </Hidden>
-            <Grid item md={9} sm={12}>
+            <Grid item md={9} sm={12} xs={12}>
               <ListProduct />
             </Grid>
           </Grid>

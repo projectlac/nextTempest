@@ -41,8 +41,11 @@ const DashboardWrapper = styled(Box)(({ theme }) => ({
     left: 0,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100%",
-    "@media (max-width: 435px)": {
+    "@media (min-width: 0)": {
       top: "-30px",
+    },
+    "@media (min-width: 768px)": {
+      top: "0",
     },
   },
   "&:after": {
@@ -64,22 +67,31 @@ const DashboardWrapper = styled(Box)(({ theme }) => ({
     padding: "0 25px",
     backgroundSize: "contain",
     backgroundRepeat: "repeat",
-    height: "900px",
+    height: "auto",
     width: "100%",
     alignItems: "flex-start",
     marginBottom: "75px",
+    paddingBottom: "40px",
   },
   "@media (min-width: 768px)": {
+    padding: "0 25px",
+    backgroundSize: "cover",
+    backgroundRepeat: "repeat",
+    height: "auto",
+    width: "100%",
+    alignItems: "flex-start",
+    marginBottom: "75px",
+    paddingBottom: "40px",
+  },
+  "@media (min-width: 1024px)": {
     padding: "0 65px",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "720px",
-    width: "1170px",
+    width: "auto",
     marginBottom: "0",
     alignItems: "center",
-  },
-  "@media (min-width: 1024px)": {
-    padding: " 0 65px",
+    paddingBottom: "0",
   },
   "@media (min-width: 1440px)": {
     padding: " 0 80px",
@@ -107,9 +119,16 @@ const ListTab = styled(Box)({
       fontSize: "11px",
       height: "36px",
       paddingTop: "4px",
-      backgroundSize: "contain",
+      backgroundSize: "cover",
     },
     "@media (min-width: 768px)": {
+      width: "33%",
+      fontSize: "18px",
+      height: "45px",
+      paddingTop: "13px",
+      backgroundSize: "cover",
+    },
+    "@media (min-width: 1024px)": {
       width: "300px",
       fontSize: "20px",
       height: "50px",
@@ -131,9 +150,16 @@ const ListTab = styled(Box)({
         fontSize: "11px",
         height: "42px",
         paddingTop: "5px",
-        backgroundSize: "contain",
+        backgroundSize: "cover",
       },
       "@media (min-width: 768px)": {
+        width: "33%",
+        fontSize: "19px",
+        height: "64px",
+        paddingTop: "13px",
+        backgroundSize: "cover",
+      },
+      "@media (min-width: 1024px)": {
         width: "300px",
         fontSize: "20px",
         height: "64px",
@@ -144,10 +170,10 @@ const ListTab = styled(Box)({
   },
   "@media (min-width: 0)": { top: "-53.5px", marginRight: "5px" },
 
-  "@media (min-width: 768px)": { top: "-43.5px", marginRight: "50px" },
+  "@media (min-width: 768px)": { top: "-43.5px", marginRight: "5px" },
   "@media (min-width: 1024px)": {
     padding: "0 100px",
-    top: "9.5px",
+    top: "-48.5px",
     marginRight: "-166px",
   },
   "@media (min-width: 1400px)": {
