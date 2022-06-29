@@ -64,11 +64,12 @@ const BoxBorder = styled(Box)(
     border-radius: 15px;
     margin-bottom:10px;
 
-    @media (min-width: 0px) {
-      font-size: 20px;
-    },
+   
     @media (min-width: 1024px) {
       font-size: 35px;
+    },
+    @media (min-width: 0px) {
+      font-size: 20px;
     },
 `
 );
@@ -78,11 +79,12 @@ const TextSpecial = styled(Typography)(
   font-family: Montserrat;
   color:#4B65A3;
   font-weight: 500;
-  @media (min-width: 0px) {
-    font-size: 15px;
-  },
+ 
   @media (min-width: 1024px) {
     font-size:20px;
+  },
+  @media (min-width: 0px) {
+    font-size: 15px;
   },
 `
 );
@@ -94,14 +96,15 @@ const ButtonBuy = styled(Box)(
     background-size: contain;
     background-repeat: no-repeat;
     margin: 15px auto 0;
-    @media (min-width: 0px) {
-      height: 40px;
-      width: 179px;
-    },
+   
     @media (min-width: 1024px) {
       height: 56px;
       width: 250px;
 
+    },
+    @media (min-width: 0px) {
+      height: 40px;
+      width: 179px;
     },
 `
 );

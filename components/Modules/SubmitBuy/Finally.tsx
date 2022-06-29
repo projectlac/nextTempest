@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Divider from "../../../styles/assets/images/Shop/DividerGur.png";
 import NextBTN from "../../../styles/assets/images/Shop/NextButton.png";
 import BackBTN from "../../../styles/assets/images/Shop/BackButton.png";
@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
 import { useRouter } from "next/router";
-
+import CircularProgress from "@mui/material/CircularProgress";
 interface GuaranteeProps {
   ids: string;
   hadSelected: number;
@@ -88,6 +88,7 @@ const validationSchema = yup.object({
 
 function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
   const { handleChangeMessageToast, handleChangeStatusToast } = useAppContext();
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -100,6 +101,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      setLoading(true);
       const { gmail, phone, social, others } = values;
       let i = [];
       if (ids.includes(",")) {
@@ -121,6 +123,9 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
         .catch((err) => {
           handleChangeStatusToast();
           handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
+        })
+        .finally(() => {
+          setLoading(false);
         });
     },
   });
@@ -290,7 +295,9 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
             handleStep(2);
           }}
         >{`< Quay lại `}</BackButton>
-        <NextButton type="submit">{`Mua >`}</NextButton>
+        <NextButton type="submit">
+          {loading ? <CircularProgress sx={{ color: "#fff" }} /> : `Mua >`}
+        </NextButton>
       </ButtonGroup>
     </Box>
   );

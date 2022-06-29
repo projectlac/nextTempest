@@ -80,7 +80,11 @@ export function AppWrapper({ children }) {
       localStorage.setItem("wishList", JSON.stringify([]));
 
     if (Boolean(token)) {
-      setRole(jwt_decode<any>(token).role);
+      try {
+        setRole(jwt_decode<any>(token).role);
+      } catch (error) {
+        localStorage.removeItem("access_token");
+      }
       setIsLogin(true);
     }
   }, []);
