@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import BG from "../../../styles/assets/images/Shop/BGnewProduct.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/ButtonShowMore.png";
+import NewestProduct from "../../../styles/assets/images/Shop/newestProduct.png";
 import tagApi from "../../../api/tag";
 import ShopItem from "./ShopItem";
 import Link from "next/link";
+import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
+
 const BoxShop = styled(Box)(
   ({ theme }) => `
     height: 627px;
@@ -39,9 +42,8 @@ const ButtonShowMore = styled(Box)(
     width: 237px;
     display: flex;
     left: 0;
-    bottom:-28px;
+    bottom:-35px;
     right: 0;
-    z-index: 0;
     margin:0 auto;
     position:absolute;
     justify-content: center;
@@ -51,7 +53,33 @@ const ButtonShowMore = styled(Box)(
     background-size: contain;
     padding: 0 60px;
     color:#fff;
-    font-size:17px
+    font-size:17px;
+    z-index:2
+
+  `
+);
+
+const Title = styled(Box)(
+  ({ theme }) => `
+    display: flex;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    position:absolute;
+    justify-content: center;
+    align-items: center;
+    background: url(${NewestProduct.src});
+    overflow:hidden;
+    top: -65px;
+    width: 250px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0 60px;
+    color:#fff;
+    font-size:17px;
+    z-index:2
+
   `
 );
 
@@ -78,37 +106,56 @@ function NewProduct() {
         position: "relative",
       }}
     >
-      <BoxShop mt={4}>
-        <Grid container columnSpacing={3} mt={7}>
-          {productList &&
-            productList.map((d, i) => (
-              <Grid
-                item
-                md={3}
-                key={i}
-                sx={{
-                  mt: { lg: 18, xs: 15 },
-                }}
-              >
-                <ShopItem
-                  image={d.imageUrl}
-                  item={d.name}
-                  idProduct={d.code}
-                  oldPrice={+d.oldPrice}
-                  newPrice={+d.newPrice}
-                  status={d.status}
-                  slug={d.slug}
-                  id={d.id}
-                />
-              </Grid>
-            ))}
-        </Grid>
+      <BackgroundShopResponse>
+        <Title />
+        <Box
+          pt={4}
+          pb={8}
+          sx={{
+            mt: { lg: 18, xs: 12 },
+          }}
+        >
+          <Grid
+            container
+            columnSpacing={3}
+            sx={{
+              px: { md: 4, xs: 2 },
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            {productList &&
+              productList.map((d, i) => (
+                <Grid
+                  item
+                  md={3}
+                  sm={3}
+                  xs={6}
+                  key={i}
+                  sx={{
+                    mt: { lg: 3, xs: 3 },
+                  }}
+                >
+                  <ShopItem
+                    image={d.imageUrl}
+                    item={d.name}
+                    idProduct={d.code}
+                    oldPrice={+d.oldPrice}
+                    newPrice={+d.newPrice}
+                    status={d.status}
+                    slug={d.slug}
+                    id={d.id}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
         <ButtonShowMore>
           <Link href={`/mua-tai-khoan`} passHref>
             Xem thêm
           </Link>
         </ButtonShowMore>
-      </BoxShop>
+      </BackgroundShopResponse>
     </Box>
   );
 }

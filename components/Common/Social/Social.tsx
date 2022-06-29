@@ -23,7 +23,7 @@ const SocialWrapper = styled(Box)(
   transition:0.3s all;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 3;
     `
 );
 const ButtonToggle = styled(Box)(

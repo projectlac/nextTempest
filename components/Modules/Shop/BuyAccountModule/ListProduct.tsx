@@ -13,6 +13,7 @@ import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
 import FilterMobile from "./FilterMobile/FilterMobile";
 import FindByCode from "./FindByCode";
+import PrireFilter from "./PrireFilter";
 import SortOption from "./SortOption";
 
 function ListProduct() {
@@ -21,6 +22,8 @@ function ListProduct() {
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
+  const [sortByPrice, setSortByPrice] = useState<number>(null);
+
   const [findCode, setFindCode] = useState<string>("");
 
   const handleChangePagination = (
@@ -43,6 +46,9 @@ function ListProduct() {
 
   const handleSortBy = (data: number) => {
     setSortBy(data);
+  };
+  const handleSortByPrice = (data: number) => {
+    setSortByPrice(data);
   };
   enum CONST_INFORMATION {
     LIMIT = 9,
@@ -99,12 +105,14 @@ function ListProduct() {
         <Hidden mdDown>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
             <FindByCode handleChangeCode={handleChangeCode} />
+            {/* <PrireFilter handleSortByPrice={handleSortByPrice} /> */}
             <SortOption handleSortBy={handleSortBy} />
           </Box>
         </Hidden>
         <Hidden mdUp>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
             <FindByCode handleChangeCode={handleChangeCode} />
+            {/* <PrireFilter handleSortByPrice={handleSortByPrice} /> */}
             <SortOption handleSortBy={handleSortBy} />
           </Box>
           <FilterMobile></FilterMobile>

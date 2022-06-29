@@ -89,6 +89,9 @@ const IdProduct = styled(Box)(
     font-size:13px
   } 
   @media (min-width: 768px){
+    font-size:13px
+  }
+  @media (min-width: 1024px){
     font-size:15px
   }
       `
@@ -254,7 +257,7 @@ function ShopItem({
             sx={{
               fontSize: {
                 md: 12,
-                sm: 12,
+                sm: 10,
                 xs: 10,
               },
               textDecoration: ` ${+oldPrice > +newPrice && "line-through"}`,
@@ -270,7 +273,7 @@ function ShopItem({
             fontSize: {
               lg: 18,
               md: 15,
-              sm: 15,
+              sm: 10,
               xs: 10,
             },
           }}

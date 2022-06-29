@@ -4,10 +4,12 @@ import React, { useEffect, useState } from "react";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import BG from "../../../styles/assets/images/Shop/BGFlashSale.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/ButtonShowMore.png";
+import FlashSate from "../../../styles/assets/images/Shop/FLASH-SALE.png";
 
 import ShopItem from "./ShopItem";
 import Link from "next/link";
 import tagApi from "../../../api/tag";
+import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 const BoxShop = styled(Box)(
   ({ theme }) => `
     height: 1025px;
@@ -50,7 +52,7 @@ const ButtonShowMore = styled(Box)(
     width: 237px;
     display: flex;
     left: 0;
-    bottom:-28px;
+    bottom:-35px;
     right: 0;
     z-index: 0;
     margin:0 auto;
@@ -62,7 +64,31 @@ const ButtonShowMore = styled(Box)(
     background-size: contain;
     padding: 1px 60px;
     color:#fff;
-    font-size:17px
+    font-size:17px;
+    z-index:2
+  `
+);
+const Title = styled(Box)(
+  ({ theme }) => `
+    display: flex;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    position:absolute;
+    justify-content: center;
+    align-items: center;
+    background: url(${FlashSate.src});
+    overflow:hidden;
+    top: -65px;
+    width: 250px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 0 60px;
+    color:#fff;
+    font-size:17px;
+    z-index:2
+
   `
 );
 
@@ -86,49 +112,58 @@ function NewProduct() {
     <Box
       sx={{
         position: "relative",
+        mt: { md: 30, xs: 15 },
+        mb: { md: 20, xs: 15 },
       }}
     >
-      <BoxShop mt={4}>
-        <Grid
-          container
-          columnSpacing={3}
-          sx={{
-            mt: { lg: 18, xs: 12 },
-          }}
-        >
-          {productList &&
-            productList.map((d, i) => (
-              <Grid
-                item
-                md={3}
-                key={i}
-                mt={2}
-                sx={{
-                  mb: {
-                    lg: 4,
-                    xs: 3,
-                  },
-                }}
-              >
-                <ShopItem
-                  image={d.imageUrl}
-                  item={d.name}
-                  idProduct={d.code}
-                  oldPrice={+d.oldPrice}
-                  newPrice={+d.newPrice}
-                  status={d.status}
-                  slug={d.slug}
-                  id={d.id}
-                />
-              </Grid>
-            ))}
-        </Grid>
+      <BackgroundShopResponse>
+        <Title />
+        <Box py={5}>
+          <Grid
+            container
+            columnSpacing={3}
+            sx={{
+              px: { md: 4, xs: 2 },
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            {productList &&
+              productList.map((d, i) => (
+                <Grid
+                  item
+                  md={3}
+                  sm={3}
+                  xs={6}
+                  key={i}
+                  mt={2}
+                  sx={{
+                    mb: {
+                      lg: 4,
+                      xs: 3,
+                    },
+                  }}
+                >
+                  <ShopItem
+                    image={d.imageUrl}
+                    item={d.name}
+                    idProduct={d.code}
+                    oldPrice={+d.oldPrice}
+                    newPrice={+d.newPrice}
+                    status={d.status}
+                    slug={d.slug}
+                    id={d.id}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
         <ButtonShowMore>
           <Link href={`/mua-tai-khoan`} passHref>
             Xem thêm
           </Link>
         </ButtonShowMore>
-      </BoxShop>
+      </BackgroundShopResponse>
     </Box>
   );
 }
