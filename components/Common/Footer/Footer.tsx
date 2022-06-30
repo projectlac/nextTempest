@@ -1,4 +1,4 @@
-import { Container, Divider, styled, Typography } from "@mui/material";
+import { Container, Divider, Hidden, styled, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,6 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { FaDiscord } from "react-icons/fa";
 const FooterWrapper = styled(Box)({
-  height: "350px",
   width: "100vw",
   backgroundColor: "#000",
   backgroundImage: `url(${BG.src})`,
@@ -27,6 +26,12 @@ const FooterWrapper = styled(Box)({
     height: "100%",
     background: "rgb(0 0 0 / 67%)",
   },
+  "@media (min-width: 0px)": {
+    height: "350px",
+  },
+  "@media (min-width:760px)": {
+    height: "400px",
+  },
 });
 const TopFooter = styled(Box)({
   height: "50px",
@@ -36,23 +41,33 @@ const TopFooter = styled(Box)({
   zIndex: "2",
   position: "relative",
   textAlign: "center",
-  fontSize: "15px",
+
   fontFamily: "'Montserrat'",
   fontWeight: "500",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  "@media (min-width: 0px)": {
+    fontSize: "11px",
+  },
+  "@media (min-width:760px)": {
+    fontSize: "15px",
+  },
 });
 function Footer() {
   return (
     <FooterWrapper>
       <Container
-        sx={{ position: "relative", zIndex: 3, height: "calc(350px - 50px)" }}
+        sx={{
+          position: "relative",
+          zIndex: 3,
+          height: { md: "calc(400px - 50px)", xs: "calc(350px - 50px)" },
+        }}
       >
         <Box
           sx={{
             textAlign: "center",
-            pt: 2,
+            pt: { md: 5, xs: 3 },
             "& img": {
               WebkitFilter: "drop-shadow(1px 2px 4px  #69e0ff)",
               filter: "drop-shadow(1px 2px 4px  #69e0ff)",
@@ -71,34 +86,49 @@ function Footer() {
             Nam
           </Typography>
 
+          <Hidden mdDown>
+            <Box
+              sx={{
+                borderTop: "1px solid #fff",
+                width: {
+                  md: 700,
+                  xs: "100%",
+                },
+                margin: "15px auto",
+                paddingTop: "15px",
+                "& a": {
+                  color: "#fff",
+                  padding: "0 15px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "600",
+                },
+              }}
+            >
+              <Link href={"/"}> Trang chủ</Link>
+              <Link href={"/mua-tai-khoan"}>Mua tài khoản</Link>
+              <Link href={"/tin-tuc"}>Tin Tức</Link>
+              <Link href={"nap-tien"}>Nạp Tiền</Link>
+              <Link href={"/lien-he"}>Liên hệ</Link>
+            </Box>
+          </Hidden>
           <Box
             sx={{
-              borderTop: "1px solid #fff",
-              width: "700px",
-              margin: "15px auto",
-              paddingTop: "15px",
-              "& a": {
-                color: "#fff",
-                padding: "0 15px",
-                fontFamily: "Montserrat",
-                fontWeight: "600",
+              width: {
+                md: 700,
+                xs: "100%",
               },
-            }}
-          >
-            <Link href={"/"}> Trang chủ</Link>
-            <Link href={"/mua-tai-khoan"}>Mua tài khoản</Link>
-            <Link href={"/tin-tuc"}>Tin Tức</Link>
-            <Link href={"nap-tien"}>Nạp Tiền</Link>
-            <Link href={"/lien-he"}>Liên hệ</Link>
-          </Box>
-          <Box
-            sx={{
-              width: "700px",
               margin: "15px auto",
               paddingTop: "30px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: { md: "center", xs: "space-between" },
+              flexWrap: "wrap",
+
               "& a": {
                 color: "#fff",
-                padding: "0 15px",
+                padding: { md: "0 15px", xs: "7px 5px" },
+                fontSize: { md: 16, xs: 13 },
+                width: { md: "auto", xs: "50%" },
                 fontFamily: "Montserrat",
                 fontWeight: "600",
                 display: "flex",
