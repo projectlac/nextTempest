@@ -17,7 +17,7 @@ const FilterBox = styled(Box)(({ theme }) => ({
 
     overflow: "hidden",
   },
-  "@media (min-width: 768px)": {
+  "@media (min-width: 1024px)": {
     height: "auto",
     borderRadius: "40px",
 
