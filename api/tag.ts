@@ -24,7 +24,23 @@ const tagApi = {
     return axiosAudit.patch(url, result);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
-    const url = `/account-get?limit=${params.limit}&offset=${params.offset}&weapon=${params.weapon}&character=${params.character}&server=${params.server}&sort=${params.sort}&queryString=${params.queryString}`;
+    const handleLimitPrice = () => {
+      if (params.startPrice && params.endPrice)
+        return `startPrice=${params.startPrice}&endPrice=${params.endPrice}`;
+      if (params.startPrice && Boolean(!params.endPrice))
+        return `startPrice=${params.startPrice}`;
+      if (Boolean(!params.startPrice) && params.endPrice)
+        return `endPrice=${params.endPrice}`;
+      return `startPrice=0`;
+    };
+
+    const url = `/account-get?limit=${params.limit}&offset=${
+      params.offset
+    }&weapon=${params.weapon}&character=${params.character}&server=${
+      params.server
+    }&sort=${params.sort}&queryString=${
+      params.queryString
+    }&${handleLimitPrice()}`;
     return axiosClient.get(url);
   },
   refundAccount(id: string): Promise<PromiseApi> {

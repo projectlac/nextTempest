@@ -6,6 +6,8 @@ export interface AccountForm extends PackHistoryOfAccount {
   server: string;
   sort: number;
   queryString: string;
+  startPrice?: number;
+  endPrice?: number;
 }
 
 export enum TAG_TYPE {

@@ -5,17 +5,17 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 interface PrireFilter {
-  handleSortByPrice: (data: number) => void;
+  handleSortByPrice: (data: string) => void;
 }
 export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
-  const [age, setAge] = React.useState<string>("-1");
+  const [age, setAge] = React.useState<string>("all");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
     if (event.target.value === "-1") {
       handleSortByPrice(null);
     } else {
-      handleSortByPrice(+event.target.value);
+      handleSortByPrice(event.target.value);
     }
   };
 
@@ -53,7 +53,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={"-1"}
+          value={"all"}
         >
           Tất cả
         </MenuItem>
@@ -65,7 +65,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"0 - 2000000"}
         >
           Dưới 2 triệu
         </MenuItem>
@@ -77,7 +77,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"2000000 - 4000000"}
         >
           2 triệu - 4 triệu
         </MenuItem>
@@ -89,7 +89,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"4000000 - 6000000"}
         >
           4 triệu - 6 triệu
         </MenuItem>
@@ -101,7 +101,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"6000000 - 8000000"}
         >
           6 triệu - 8 triệu
         </MenuItem>
@@ -113,7 +113,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"8000000 - 10000000"}
         >
           8 triệu - 10 triệu
         </MenuItem>
@@ -125,7 +125,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
               xs: "13px",
             },
           }}
-          value={2}
+          value={"10000000"}
         >
           Trên 10 triệu
         </MenuItem>

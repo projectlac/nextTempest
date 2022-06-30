@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
@@ -22,7 +22,7 @@ function ListProduct() {
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
-  const [sortByPrice, setSortByPrice] = useState<number>(null);
+  const [sortByPrice, setSortByPrice] = useState<number[]>([0]);
 
   const [findCode, setFindCode] = useState<string>("");
 
@@ -47,8 +47,15 @@ function ListProduct() {
   const handleSortBy = (data: number) => {
     setSortBy(data);
   };
-  const handleSortByPrice = (data: number) => {
-    setSortByPrice(data);
+  const handleSortByPrice = (data: string) => {
+    const newArr = data.split("-");
+    if (newArr[0] !== "all") {
+      setSortByPrice(newArr.map(Number));
+    } else {
+      setSortByPrice([0]);
+    }
+
+    // setSortByPrice(data);
   };
   enum CONST_INFORMATION {
     LIMIT = 9,
@@ -70,6 +77,8 @@ function ListProduct() {
             weapon: selectedFilter.weapon.toString(),
             sort: sortBy,
             queryString: findCode,
+            startPrice: sortByPrice[0],
+            endPrice: sortByPrice[1],
           })
           .then((res) => {
             setProductList(res.data.data);
@@ -78,7 +87,7 @@ function ListProduct() {
       } catch (error) {}
     };
     getData();
-  }, [update, sortBy, pageCurrently, findCode]);
+  }, [update, sortBy, pageCurrently, findCode, sortByPrice]);
   return (
     <Box
       sx={{
@@ -105,14 +114,14 @@ function ListProduct() {
         <Hidden mdDown>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
             <FindByCode handleChangeCode={handleChangeCode} />
-            {/* <PrireFilter handleSortByPrice={handleSortByPrice} /> */}
+            <PrireFilter handleSortByPrice={handleSortByPrice} />
             <SortOption handleSortBy={handleSortBy} />
           </Box>
         </Hidden>
         <Hidden mdUp>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
             <FindByCode handleChangeCode={handleChangeCode} />
-            {/* <PrireFilter handleSortByPrice={handleSortByPrice} /> */}
+            <PrireFilter handleSortByPrice={handleSortByPrice} />
             <SortOption handleSortBy={handleSortBy} />
           </Box>
           <FilterMobile></FilterMobile>
