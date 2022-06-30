@@ -3,6 +3,7 @@ import HeaderHome from "../Common/Header/HeaderHome";
 // import { MessengerChat, showMessenger } from "react-messenger-chat-plugin";
 import Social from "../Common/Social/Social";
 import MessengerChat from "react-messenger-customer-chat";
+import Footer from "../Common/Footer/Footer";
 export default function Layout({ children }) {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Layout({ children }) {
       <MessengerChat pageId="103539711584646" language="vi_VN" />
 
       <Social />
+      <Footer />
     </>
   );
 }
