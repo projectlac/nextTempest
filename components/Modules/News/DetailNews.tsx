@@ -115,14 +115,14 @@ function DetailNews({ detailNews }: PropsDetailNews) {
               </Box>
               <Box
                 sx={{
-                  fontFamily: "Montserrat !important",
+                  fontFamily: "Montserrat, michos !important",
                 }}
               >
                 {detailNews.description}
               </Box>
               <Box
                 sx={{
-                  fontFamily: "Montserrat !important",
+                  fontFamily: "Montserrat, michos !important",
                   "& *": {
                     wordBreak: "break-word",
                     wordWrap: "break-word",

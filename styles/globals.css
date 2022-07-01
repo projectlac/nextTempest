@@ -19,3 +19,7 @@ a {
   font-family: michos;
   src: url('../styles/assets/fonts/ZH-CN.ttf');
 }
+@font-face {
+  font-family: MiHoYo_SDK_JP_Web;
+  src: url('../styles/assets/fonts/ZH-CN.ttf');
+}

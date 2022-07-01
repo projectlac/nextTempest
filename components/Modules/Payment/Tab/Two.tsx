@@ -100,41 +100,39 @@ const Value = styled(Typography)(({ theme }) => ({
     fontSize: "15px",
   },
 }));
-const Quatily = styled(Box)(
-  ({ theme }) => `
-  position: absolute;
-  top: -7px;
-  right: -7px;
-  z-index: 1;
-  background:url(${Quati.src});
-  color: #fff;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-          `
-);
+const Quatily = styled(Box)(({ theme }) => ({
+  color: "#fff",
 
-const Minus = styled(Box)(
-  ({ theme }) => `
-  position: absolute;
-  top: 37px;
-  right: 0px;
-  z-index: 1;
-  background:#a30000;
-  border-radius:50%;
-  color: #fff;
-  width: 25px;
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "30px",
+  "@media (min-width:0)": {
+    fontSize: "20px",
+    width: "40px",
+    height: "40px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "30px",
+    width: "55px",
+    height: "55px",
+  },
+  "@media (min-width: 1024px)": {
+    fontSize: "30px",
+  },
+}));
 
-          `
-);
+const Minus = styled(Box)(({ theme }) => ({
+  background: "#fff",
+  width: "24px",
+  height: "24px",
+  borderRadius: "50%",
+  color: "#66635e",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  userSelect: "none",
+}));
 
 enum COLOR_BORDER {
   MAIN = "#8A573E",
@@ -597,60 +595,97 @@ function Two() {
           <Grid container rowSpacing={2} columnSpacing={2}>
             {defauValue.map((d, i) => (
               <Grid item md={4} xs={4} sm={3} key={i}>
-                <Box sx={{ position: "relative" }}>
-                  {d.quantily > 0 && <Quatily>x{d.quantily}</Quatily>}
-                  {d.quantily > 0 && (
-                    <Minus
-                      onClick={() => {
-                        removeProduct(d.id);
-                      }}
-                    >
-                      -
-                    </Minus>
-                  )}
-                </Box>
                 <Box
                   sx={{
-                    height: {
-                      md: "124px",
-                      sm: "152px",
-                      xs: "107px",
-                    },
-                    // background: `url(${BGPack.src})`,
-                    backgroundSize: "110%",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
-                    cursor: "pointer",
                     position: "relative",
-
-                    border: "4px solid #88543c",
-                    overflow: "hidden",
-                  }}
-                  onClick={() => {
-                    addProduct(d.id);
                   }}
                 >
+                  {d.quantily > 0 && (
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        width: "100%",
+                        background: "#0000008c",
+                        zIndex: "2",
+                        height: {
+                          md: "124px",
+                          sm: "152px",
+                          xs: "107px",
+                        },
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Minus
+                          onClick={() => {
+                            removeProduct(d.id);
+                          }}
+                        >
+                          -
+                        </Minus>
+                        <Quatily>{d.quantily}</Quatily>
+                        <Minus
+                          onClick={() => {
+                            addProduct(d.id);
+                          }}
+                        >
+                          +
+                        </Minus>
+                      </Box>
+                    </Box>
+                  )}
+
                   <Box
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      pointerEvents: "none",
-                      height: "100%",
+                      height: {
+                        md: "124px",
+                        sm: "152px",
+                        xs: "107px",
+                      },
+                      // background: `url(${BGPack.src})`,
+                      backgroundSize: "110%",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                      cursor: "pointer",
+                      position: "relative",
+
+                      border: "4px solid #88543c",
+                      overflow: "hidden",
                     }}
-                    overflow="hidden"
+                    onClick={() => {
+                      addProduct(d.id);
+                    }}
                   >
-                    {d.id !== "1" && <Value>{d.name}</Value>}
-                    <Image
-                      src={d.image}
-                      alt=""
-                      width={300}
-                      height={300}
-                      objectFit="contain"
-                      objectPosition="bottom center"
-                    />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        pointerEvents: "none",
+                        height: "100%",
+                      }}
+                      overflow="hidden"
+                    >
+                      {d.id !== "1" && <Value>{d.name}</Value>}
+                      <Image
+                        src={d.image}
+                        alt=""
+                        width={300}
+                        height={300}
+                        objectFit="contain"
+                        objectPosition="bottom center"
+                      />
+                    </Box>
                   </Box>
+                  <Price>{toMoney(d.price)}</Price>
                 </Box>
-                <Price>{toMoney(d.price)}</Price>
               </Grid>
             ))}
           </Grid>
