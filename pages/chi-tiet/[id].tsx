@@ -19,9 +19,8 @@ export default function DetailProduct({ post }) {
           content={`Thông tin account ${post.name}`}
         />
         <meta property="og:image" content={post.imageUrl} />
-        <meta property="og:image:width" content="1200" />
         <meta property="og:image:alt" content={post.name} />
-
+        <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
       <DetailAccountModule data={post} />
