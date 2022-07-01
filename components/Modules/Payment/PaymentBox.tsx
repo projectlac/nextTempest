@@ -54,11 +54,14 @@ function PaymentBox() {
   const closeAuthBox = () => {
     setOpenAuth(false);
   };
+
   return (
     <BgWrap>
       {!openDashboard ? (
         <Container>
-          <TitleHighlight>Chọn hình thức nạp</TitleHighlight>
+          <Box sx={{ marginTop: { md: 0, xs: "120px" } }}>
+            <TitleHighlight>Chọn hình thức nạp</TitleHighlight>
+          </Box>
           <BoxSelection mt={2}>
             <Box width={532} height={653}>
               <Image

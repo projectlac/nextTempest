@@ -32,8 +32,8 @@ const Text = styled(Box)({
     color: "#726550",
   },
   "@media (min-width:0)": {
-    fontSize: "13px",
-    margin: "9px",
+    fontSize: "12px",
+    margin: "2px 0 0px",
     textAlign: "left",
   },
   "@media (min-width: 1024px)": {
@@ -55,7 +55,7 @@ const ButtonCustom = styled(Box)(({ theme }) => ({
   "@media (min-width:0)": {
     height: "33px",
     width: "105px",
-    fontSize: "13px",
+    fontSize: "12px",
     margin: " 15px 0px 15px auto",
   },
   "@media (min-width: 1024px)": {
@@ -92,6 +92,13 @@ function SelectedMenuSecond() {
 
   const avatarTemp = localStorage.getItem("avatar");
 
+  const processEmail = (email: string) => {
+    const reEmail = email.split("@");
+    if (reEmail[0].length > 7) {
+      return reEmail[0].slice(0, 4) + "***@" + reEmail[1];
+    }
+    return email;
+  };
   React.useEffect(() => {
     if (Boolean(avatarTemp)) {
       setAvatarCurrency(+avatarTemp);
@@ -187,7 +194,7 @@ function SelectedMenuSecond() {
             <span> Tên người dùng:</span> {decodeName()}
           </Text>
           <Text color="#726550">
-            <span> Email liên kết:</span> {decodeEmail()}
+            <span> Email liên kết:</span> {processEmail(decodeEmail())}
           </Text>
           <Text color="#726550">
             <span>Đổi mật khẩu</span>
