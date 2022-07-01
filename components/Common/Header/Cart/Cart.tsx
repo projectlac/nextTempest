@@ -34,7 +34,9 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
           setWallet(+res.data.money);
         })
         .catch((res) => {
-          handleChangeMessageToast("Có lỗi định danh");
+          handleChangeMessageToast(
+            "Phiên đăng nhập đã kết thúc, vui lòng đăng nhập lại!"
+          );
           handleChangeStatusToast();
           refreshLogin();
           localStorage.removeItem("access_token");
