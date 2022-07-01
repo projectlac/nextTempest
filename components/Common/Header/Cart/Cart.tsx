@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Typography } from "@mui/material";
 import React, { ReactNode, useEffect, useState } from "react";
 import toMoney from "../../../../utility/toMoney";

@@ -23,6 +23,7 @@ import A22 from "../styles/assets/images/Avatar/22.png";
 import A23 from "../styles/assets/images/Avatar/23.png";
 import A24 from "../styles/assets/images/Avatar/24.png";
 import A25 from "../styles/assets/images/Avatar/25.png";
+import A26 from "../styles/assets/images/Avatar/26.png";
 
 interface AvatarDecor {
   id: number;
@@ -128,6 +129,10 @@ const avatar: AvatarDecor[] = [
   {
     id: 25,
     url: A25.src,
+  },
+  {
+    id: 26,
+    url: A26.src,
   },
 ];
 export default avatar;
