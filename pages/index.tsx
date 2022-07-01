@@ -3,7 +3,7 @@ import * as React from "react";
 import Layout from "../components/Layout/BaseLayout";
 import ModuleShop from "../components/Modules/ModuleShop";
 import ModuleVideo from "../components/Modules/ModuleVideo";
-import Meta from "../../styles/assets/images/homeImage.jpg";
+import Meta from "../styles/assets/images/homeImage.jpg";
 
 export default function IndexPage() {
   return (
