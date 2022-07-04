@@ -64,13 +64,14 @@ const BoxBorder = styled(Box)(
     padding: 10px;
     border-radius: 15px;
     margin-bottom:10px;
-
+    font-size: 20px;
    
     @media (min-width: 1024px) {
-      font-size: 35px;
+      font-size: 33px;
     },
     @media (min-width: 0px) {
       font-size: 20px;
+
     },
 `
 );
@@ -92,21 +93,21 @@ const TextSpecial = styled(Typography)(
 const ButtonBuy = styled(Box)(
   (theme) => `
     background: url(${ButtonBG.src});
-    width: 250px;
-
+    width:180px;
+    height: 40px;
     background-size: contain;
     background-repeat: no-repeat;
     margin: 15px auto 0;
-   
+  
     @media (min-width: 1024px) {
       height: 56px;
       width: 250px;
 
     },
-    @media (min-width: 0px) {
-      height: 40px;
-      width: 179px;
-    },
+    // @media (min-width: 0px) {
+     
+    //   width: 179px;
+    // },
 `
 );
 const BgWrap = styled(Box)(
