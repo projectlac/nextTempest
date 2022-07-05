@@ -75,7 +75,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           gtag('config', 'G-8SZQ8DYEBH');
         `}
           </Script>
-          {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "FALSE" ? (
+          {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
             <Component {...pageProps} />
           ) : (
             <Maintenance />
