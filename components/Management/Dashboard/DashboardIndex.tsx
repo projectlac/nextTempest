@@ -18,6 +18,8 @@ import {
 import { Bar } from "react-chartjs-2";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
+import toMoney from "../../../utility/toMoney";
+import CountUp from "react-countup";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -80,11 +82,11 @@ function DashboardIndex() {
   return (
     <Box mt={5}>
       <Container>
-        <Grid container>
+        <Grid container columnSpacing={3}>
           <Grid item md={8}>
             <Card
               sx={{
-                padding: "15px",
+                padding: "30px",
               }}
             >
               <Box
@@ -126,61 +128,98 @@ function DashboardIndex() {
             </Card>
           </Grid>
           <Grid item md={4}>
-            <Card
-              sx={{
-                width: "150px",
-                height: "150px",
-                marginLeft: "auto",
-                padding: "15px",
-                background: "#d0d0f5",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                }}
-              >
-                Tổng số account đã bán
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: "center",
-                  fontSize: "50px",
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                }}
-              >
-                123
-              </Typography>
-            </Card>
-            <Card
-              sx={{
-                width: "150px",
-                height: "150px",
-                marginLeft: "auto",
-                padding: "15px",
-                marginTop: "20px",
-                background: "#41e5ff",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: "12px",
-                }}
-              >
-                Số account còn lại
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: "center",
-                  fontSize: "50px",
-                  fontFamily: "Montserrat",
-                  fontWeight: "bold",
-                }}
-              >
-                123
-              </Typography>
-            </Card>
+            <Grid container rowSpacing={3} columnSpacing={3}>
+              <Grid item md={6}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    padding: "15px",
+                    background: "#d0d0f5",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Tổng số account đã bán
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "50px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      mt: "15px",
+                    }}
+                  >
+                    <CountUp start={0} end={123} duration={0.5} delay={0} />
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item md={6}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    padding: "15px",
+
+                    background: "#41e5ff",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Số account còn lại
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "50px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      mt: "15px",
+                    }}
+                  >
+                    <CountUp start={0} end={123} duration={0.5} delay={0} />
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item md={12}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    padding: "15px",
+
+                    background: "#ffdc5f",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Doanh thu từ {format(new Date(start), "dd/MM/yyyy")} tới{" "}
+                    {format(new Date(end), "dd/MM/yyyy")}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "40px",
+                      mt: "20px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {toMoney(123000000)} VND
+                  </Typography>
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
