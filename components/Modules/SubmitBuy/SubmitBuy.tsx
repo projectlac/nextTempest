@@ -19,7 +19,7 @@ import Guarantee from "./Guarantee";
 const ProductWrap = styled(Box)(
   ({ theme }) => `
     width: 100vw;
-    height:100vh;
+    height:950px;
     background: url(${background.src});
     overflow:hidden;
     background-size: cover;
