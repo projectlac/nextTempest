@@ -47,6 +47,10 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
     if (token && jwt_decode<any>(token).role === "ADMIN") {
       setMenu([
         {
+          url: "/dashboard/",
+          name: "Thống kê",
+        },
+        {
           url: "/dashboard/account",
           name: "Tài khoản",
         },
