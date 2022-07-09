@@ -1,7 +1,7 @@
 import { Box, Card, Container, Grid, Typography } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import TextField from "@mui/material/TextField";
 import {
@@ -19,6 +19,7 @@ import { format } from "date-fns";
 import { Bar } from "react-chartjs-2";
 import CountUp from "react-countup";
 import toMoney from "../../../utility/toMoney";
+import audit from "../../../api/audit";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -28,10 +29,53 @@ ChartJS.register(
   Legend
 );
 
+interface IData {
+  label: string;
+  data: IChart;
+}
+interface IChart {
+  countCreated: number;
+  countRefund: number;
+  countSold: number;
+}
 function DashboardIndex() {
-  const [start, setStart] = React.useState<string | null>("07/10/2022");
-  const [end, setEnd] = React.useState<string | null>("07/15/2022");
+  const date = new Date();
+  const date1 = format(
+    new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000),
+    "MM/dd/yyyy"
+  );
 
+  const [start, setStart] = React.useState<string | null>(date1);
+  const [end, setEnd] = React.useState<string | null>(
+    format(new Date(), "MM/dd/yyyy")
+  );
+
+  const [totalRevenue, setTotalRevenue] = useState<string>("0 VND");
+  const [inventory, setInventory] = useState<number>(0);
+  const [sold, setSold] = useState<number>(0);
+  const [dataTotal, setDataTotal] = useState<IData[]>([
+    {
+      label: "10/7/2022",
+      data: { countCreated: 2, countSold: 0, countRefund: 0 },
+    },
+    {
+      label: "11/7/2022",
+      data: { countCreated: 2, countSold: 0, countRefund: 0 },
+    },
+  ]);
+  useEffect(() => {
+    audit
+      .getManagement({
+        startDate: format(new Date(start), "yyyy/MM/dd"),
+        endDate: format(new Date(end), "yyyy/MM/dd"),
+      })
+      .then((res) => {
+        setSold(res.data.soldAccounts);
+        setTotalRevenue(res.data.turnOver);
+        setInventory(res.data.remainingAccounts);
+        setDataTotal(res.data.data);
+      });
+  }, [start, end]);
   const options = {
     responsive: true,
     plugins: {
@@ -47,30 +91,22 @@ function DashboardIndex() {
       },
     },
   };
-  const fakeData = [
-    { label: "10/7/2022", data: [24, 2, 7] },
-    { label: "11/7/2022", data: [12, 4, 12] },
-    { label: "12/7/2022", data: [3, 4, 3] },
-    { label: "13/7/2022", data: [14, 2, 8] },
-    { label: "14/7/2022", data: [23, 2, 9] },
-    { label: "15/7/2022", data: [28, 21, 10] },
-  ];
 
-  const labels = fakeData.map((d) => d.label);
+  const labels = dataTotal.map((d) => d.label);
   const datasets = [
     {
-      label: "Tạo",
-      data: fakeData.map((d) => d.data[0]),
+      label: "Số account tạo",
+      data: dataTotal.map((d) => d.data.countCreated),
       backgroundColor: "rgba(17, 241, 44, 0.5)",
     },
     {
-      label: "Mua",
-      data: fakeData.map((d) => d.data[1]),
+      label: "Số account bán",
+      data: dataTotal.map((d) => d.data.countSold),
       backgroundColor: "rgba(162, 162, 235, 0.5)",
     },
     {
-      label: "Hoàn",
-      data: fakeData.map((d) => d.data[2]),
+      label: "Số account hoàn",
+      data: dataTotal.map((d) => d.data.countRefund),
       backgroundColor: "rgba(255, 99, 132, 0.5)",
     },
   ];
@@ -153,7 +189,7 @@ function DashboardIndex() {
                       mt: "15px",
                     }}
                   >
-                    <CountUp start={0} end={123} duration={0.5} delay={0} />
+                    <CountUp start={0} end={sold} duration={0.5} delay={0} />
                   </Typography>
                 </Card>
               </Grid>
@@ -183,7 +219,12 @@ function DashboardIndex() {
                       mt: "15px",
                     }}
                   >
-                    <CountUp start={0} end={123} duration={0.5} delay={0} />
+                    <CountUp
+                      start={0}
+                      end={inventory}
+                      duration={0.5}
+                      delay={0}
+                    />
                   </Typography>
                 </Card>
               </Grid>
@@ -214,7 +255,7 @@ function DashboardIndex() {
                       fontWeight: "bold",
                     }}
                   >
-                    {toMoney(123000000)} VND
+                    {totalRevenue}
                   </Typography>
                 </Card>
               </Grid>

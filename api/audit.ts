@@ -2,6 +2,7 @@ import {
   AuditForm,
   ChangePassword,
   EditRoleForm,
+  IManagement,
   PackForm,
   PromiseApi,
 } from "../types";
@@ -61,6 +62,10 @@ const audit = {
   },
   getAuditById(id: string): Promise<PromiseApi> {
     const url = `/audit/${id}`;
+    return axiosAudit.get(url);
+  },
+  getManagement(params:IManagement): Promise<PromiseApi> {
+    const url = `/management?startDate=${params.startDate}&endDate=${params.endDate}`;
     return axiosAudit.get(url);
   },
 };

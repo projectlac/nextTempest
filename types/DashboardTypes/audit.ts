@@ -8,3 +8,7 @@ export interface EditRoleForm {
   username: string;
   role: string;
 }
+export interface IManagement{
+  startDate:string,
+  endDate:string
+}
