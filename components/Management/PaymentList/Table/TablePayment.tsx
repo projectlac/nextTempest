@@ -321,7 +321,7 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
 
         <TableCell>
           <Typography variant="body1" color="text.primary" gutterBottom noWrap>
-            {toMoney(+row.total)} VNĐ
+            {row.total}
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap>
             {row.note}
