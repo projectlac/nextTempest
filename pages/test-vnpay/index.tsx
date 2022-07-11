@@ -17,14 +17,18 @@ function VP() {
     getData();
   }, []);
   const handlePay = () => {
-    vnPay.updateCoin({
-      amount: money,
-      bankCode: "NCB",
-      orderInfo: "orderInfo",
-      ipAddress: ip,
-      language: "vi",
-      orderType: "billpayment",
-    });
+    vnPay
+      .updateCoin({
+        amount: money,
+        bankCode: "NCB",
+        orderInfo: "orderInfo",
+        ipAddress: ip,
+        language: "vi",
+        orderType: "billpayment",
+      })
+      .then((res) => {
+        window.open(res.data, "_blank");
+      });
   };
   const changeMoney = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMoney(+e.target.value);
