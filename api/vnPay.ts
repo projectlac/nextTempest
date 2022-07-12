@@ -9,7 +9,10 @@ import axiosAudit from "./axiosAudit";
       const url = "/vn-pay";
       return axiosAudit.post(url, params);
     },
-  
+    acceptPayment(params: string): Promise<any> {
+      const url = `/vn-pay?${params}`;
+      return axiosAudit.get(url);
+    },
   };
   export default vnPay;
   

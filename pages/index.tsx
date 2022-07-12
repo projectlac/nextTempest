@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import * as React from "react";
 import Layout from "../components/Layout/BaseLayout";
 import ModuleShop from "../components/Modules/ModuleShop";
@@ -6,6 +7,10 @@ import ModuleVideo from "../components/Modules/ModuleVideo";
 import Meta from "../styles/assets/images/homeImage.jpg";
 
 export default function IndexPage() {
+  const router = useRouter();
+  React.useEffect(() => {
+    console.log(router.asPath.split("&"));
+  }, []);
   return (
     <Layout>
       <Head>
