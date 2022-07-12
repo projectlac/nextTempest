@@ -65,8 +65,6 @@ function VerifiedPayment({ token }: PropsVerifiedPayment) {
 
   const router = useRouter();
   useEffect(() => {
-    console.log(token);
-
     const callToRegister = async () => {
       if (token) {
         setLoading(true);
@@ -107,7 +105,7 @@ function VerifiedPayment({ token }: PropsVerifiedPayment) {
           )}
           {success && (
             <Typography variant="h5" color="#726550">
-              Đơn của bạn đã được thực hiện <br />{" "}
+              Đơn nạp của bạn đã được thực hiện <br />{" "}
               <span style={{ fontSize: "15px" }}>
                 Websize sẽ tự chuyển hướng trong ... {count}
               </span>
