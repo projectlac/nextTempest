@@ -107,7 +107,7 @@ function VerifiedPayment({ token }: PropsVerifiedPayment) {
           )}
           {success && (
             <Typography variant="h5" color="#726550">
-              Tài khoản của bạn đã được kích hoạt <br />{" "}
+              Đơn của bạn đã được thực hiện <br />{" "}
               <span style={{ fontSize: "15px" }}>
                 Websize sẽ tự chuyển hướng trong ... {count}
               </span>
