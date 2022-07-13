@@ -1,4 +1,11 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Hidden,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,13 +18,14 @@ import FullRimumuBG from "../../../styles/assets/images/Shop/FullRimumu.png";
 import NextBTN from "../../../styles/assets/images/Shop/NextButton.png";
 import PaimonSubmitBuyAccount from "../../../styles/assets/images/Shop/PaimonSubmitBuyAccount.png";
 import RimumuBG from "../../../styles/assets/images/Shop/Rimumu.png";
-import BackgroundShop from "../../Common/BackgroundShop/BackgroundShop";
+// import BackgroundShop from "../../Common/BackgroundShop/BackgroundShop";
+import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import Finally from "./Finally";
 import Guarantee from "./Guarantee";
 
 const ProductWrap = styled(Box)(
-  ({ theme }) => `
+  () => `
     width: 100vw;
     height:950px;
     background: url(${background.src});
@@ -29,29 +37,34 @@ const ProductWrap = styled(Box)(
 );
 
 const BoxListAccount = styled(Box)(
-  ({ theme }) => `
+  () => `
       display: flex;
-     overflow:hidden;
+      overflow:hidden;
       background-size: cover;
       justify-content:center;
       height:500px;
       overflow-Y:auto;
     `
 );
-const BoxItemAccount = styled(Box)(
-  ({ theme }) => `
-    width:100%;
-    margin:10px 0;
-    background:#fff;
-    display: flex;
-    align-items:center;
-    padding: 0 15px;
-    justify-content:center;
-    min-height:200px;
-      `
-);
+const BoxItemAccount = styled(Box)(() => ({
+  width: "100%",
+  margin: "10px 0",
+  background: "#fff",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "200px",
+  "@media (min-width:0)": {
+    flexDirection: "column-reverse",
+    padding: "15px 15px",
+  },
+  "@media (min-width: 768px)": {
+    flexDirection: "row",
+    padding: "0 15px",
+  },
+}));
 const Stepper = styled(Box)(
-  ({ theme }) => `
+  () => `
       position:absolute;
       z-index: 1;
       width: 100%;
@@ -60,7 +73,7 @@ const Stepper = styled(Box)(
         `
 );
 const BoxStep = styled(Box)(
-  ({ theme }) => `
+  () => `
     width: 500px;
     margin: 0 auto;
     display: flex;
@@ -68,7 +81,7 @@ const BoxStep = styled(Box)(
           `
 );
 const BorderStep = styled(Box)(
-  ({ theme }) => `
+  () => `
      
      width: 60px;
      height: 60px;
@@ -90,7 +103,7 @@ const Step = styled(Box)({
   alignItems: "center",
   justifyContent: "center",
   color: "#c9d2e6",
-  fontSize: "22px",
+  fontSize: "20px",
   "&.active": {
     background: "#c9d2e6",
     color: "#fff",
@@ -98,7 +111,7 @@ const Step = styled(Box)({
 });
 
 const ButtonGroup = styled(Box)(
-  ({ theme }) => `
+  () => `
         position:absolute;
         z-index:2;
         width: 100%;
@@ -107,37 +120,48 @@ const ButtonGroup = styled(Box)(
         display:flex;       justify-content: flex-end;  `
 );
 
-const NextButton = styled(Button)(
-  ({ theme }) => `
-            background: url(${NextBTN.src});
-          width: 250px;
-          height: 60px;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 20px; margin-left:15px;
-          text-transform:capitalize; `
-);
-const BackButton = styled(Box)(
-  ({ theme }) => `
-  background: url(${BackBTN.src});
-  width: 275px;
-  height: 60px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 20px;    `
-);
+const NextButton = styled(Button)(() => ({
+  background: `url(${NextBTN.src})`,
+  width: "250px",
+  height: "60px",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  fontSize: "20px",
+  marginLeft: "15px",
+  textTransform: "capitalize",
+  "@media (min-width:0)": {
+    fontSize: "15px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "20px",
+  },
+}));
+const BackButton = styled(Box)(() => ({
+  background: `url(${BackBTN.src})`,
+  width: "275px",
+  height: "60px",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  fontSize: "20px",
+  "@media (min-width:0)": {
+    fontSize: "15px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "20px",
+  },
+}));
 const PaimonSubmitBuyAccountBox = styled(Box)(
-  ({ theme }) => `
+  () => `
   background: url(${PaimonSubmitBuyAccount.src});
   width: 385px;
   height: 331px;
@@ -150,7 +174,7 @@ const PaimonSubmitBuyAccountBox = styled(Box)(
  `
 );
 const Rimumu = styled(Box)(
-  ({ theme }) => `
+  () => `
   background: url(${RimumuBG.src});
   width: 566px;
   height: 365px;
@@ -163,7 +187,7 @@ const Rimumu = styled(Box)(
  `
 );
 const FullRimumu = styled(Box)(
-  ({ theme }) => `
+  () => `
   background: url(${FullRimumuBG.src});
   width: 566px;
   height: 689px;
@@ -177,7 +201,7 @@ const FullRimumu = styled(Box)(
 );
 
 const Sale = styled(Box)(
-  ({ theme }) => `
+  () => `
   position: absolute;
   background: #BF0606;
   color:#fff;
@@ -188,7 +212,7 @@ const Sale = styled(Box)(
       `
 );
 const IdProduct = styled(Box)(
-  ({ theme }) => `
+  () => `
   position: absolute;
   background: #0A2B6D;
   color:#fff;
@@ -200,11 +224,11 @@ const IdProduct = styled(Box)(
       `
 );
 
-interface SubmitBuy {
+interface ISubmitBuy {
   ids: string;
   slug?: string;
 }
-function SubmitBuy({ ids, slug }: SubmitBuy) {
+function SubmitBuy({ ids, slug }: ISubmitBuy) {
   const [step, setStep] = useState<number>(1);
   const [listAccount, setListAccount] = useState([]);
   const [hadSelected, setHadSelected] = useState<number>(0);
@@ -246,18 +270,30 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
       {(() => {
         switch (step) {
           case 1:
-            return <PaimonSubmitBuyAccountBox></PaimonSubmitBuyAccountBox>;
+            return (
+              <Hidden mdDown>
+                <PaimonSubmitBuyAccountBox></PaimonSubmitBuyAccountBox>
+              </Hidden>
+            );
           case 2:
-            return <Rimumu></Rimumu>;
+            return (
+              <Hidden mdDown>
+                <Rimumu></Rimumu>
+              </Hidden>
+            );
           default:
-            return <FullRimumu></FullRimumu>;
+            return (
+              <Hidden mdDown>
+                <FullRimumu></FullRimumu>
+              </Hidden>
+            );
         }
       })()}
 
       <Container>
         <Box mb={10} mt={15}>
           <TitleHighlight mb={10}>Tiến hành thanh toán</TitleHighlight>
-          <BackgroundShop>
+          <BackgroundShopResponse sx={{ marginTop: "25px" }}>
             <Stepper>
               <BoxStep>
                 <BorderStep>
@@ -280,7 +316,7 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                         sx={{
                           position: "relative",
                           zIndex: "2",
-                          padding: "0 50px",
+                          padding: { md: "0 50px", xs: "25px 15px" },
                         }}
                       >
                         <Typography
@@ -297,17 +333,30 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                               <Grid item md={12} key={index}>
                                 <BoxItemAccount>
                                   <Box
-                                    width={`calc(100% - 300px)`}
                                     sx={{
+                                      width: {
+                                        md: `calc(100% - 300px)`,
+                                        xs: "100%",
+                                      },
                                       display: "flex",
-                                      flexDirection: "column",
+                                      flexDirection: {
+                                        md: "column",
+                                        xs: "row",
+                                      },
                                       justifyContent: "space-between",
-                                      minHeight: "181px",
+                                      minHeight: { md: "181px", xs: "100px" },
+                                      flexWrap: "wrap",
                                     }}
                                   >
-                                    <Box m={3}>
+                                    <Box
+                                      sx={{
+                                        margin: { md: 3, xs: "15px 0px" },
+                                      }}
+                                    >
                                       <Typography
-                                        fontSize={20}
+                                        sx={{
+                                          fontSize: { md: 20, xs: 15 },
+                                        }}
                                         color={"#2D4E96"}
                                       >
                                         {d.name}
@@ -316,14 +365,21 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                                         href={`/chi-tiet/${d.slug}`}
                                         passHref
                                       >
-                                        <Typography color={"#D5D5D5"}>
+                                        <Typography
+                                          color={"#D5D5D5"}
+                                          sx={{
+                                            fontSize: { md: 16, xs: 13 },
+                                          }}
+                                        >
                                           {"Xem thêm >>>"}
                                         </Typography>
                                       </Link>
                                     </Box>
                                     <Typography
-                                      fontSize={30}
-                                      m={3}
+                                      sx={{
+                                        fontSize: { md: 30, xs: 17 },
+                                        margin: { md: 3, xs: 0 },
+                                      }}
                                       color={"#D3A36E"}
                                     >
                                       {toMoney(d.newPrice)} VND
@@ -399,7 +455,7 @@ function SubmitBuy({ ids, slug }: SubmitBuy) {
                   );
               }
             })()}
-          </BackgroundShop>
+          </BackgroundShopResponse>
         </Box>
       </Container>
     </ProductWrap>
