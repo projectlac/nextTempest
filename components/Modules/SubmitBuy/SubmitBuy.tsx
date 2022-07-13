@@ -63,40 +63,49 @@ const BoxItemAccount = styled(Box)(() => ({
     padding: "0 15px",
   },
 }));
-const Stepper = styled(Box)(
-  () => `
-      position:absolute;
-      z-index: 1;
-      width: 100%;
-      left: 0;
-    top: -70px;
-        `
-);
-const BoxStep = styled(Box)(
-  () => `
-    width: 500px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-          `
-);
-const BorderStep = styled(Box)(
-  () => `
-     
-     width: 60px;
-     height: 60px;
-     margin: 0 15px;
-     background: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-            `
-);
+const Stepper = styled(Box)(() => ({
+  position: "absolute",
+  zIndex: "1",
+  width: "100%",
+  left: "0",
+  top: "-35px",
+  "@media (min-width:0)": {
+    top: "-30px",
+  },
+  "@media (min-width: 768px)": {
+    top: "-35px",
+  },
+}));
+const BoxStep = styled(Box)(() => ({
+  margin: "0 auto",
+  display: "flex",
+  justifyContent: "center",
+  "@media (min-width:0)": {
+    width: "100%",
+  },
+  "@media (min-width: 768px)": {
+    width: "500px",
+  },
+}));
+const BorderStep = styled(Box)(() => ({
+  margin: "0 15px",
+  background: "#fff",
+  borderRadius: "50%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "@media (min-width:0)": {
+    width: "45px",
+    height: "45px",
+  },
+  "@media (min-width: 768px)": {
+    width: "60px",
+    height: "60px",
+  },
+}));
 const Step = styled(Box)({
   border: "1px solid #c9d2e6",
-  width: "55px",
-  height: "55px",
+
   padding: "5px",
   borderRadius: "50%",
   display: "flex",
@@ -108,6 +117,14 @@ const Step = styled(Box)({
     background: "#c9d2e6",
     color: "#fff",
   },
+  "@media (min-width:0)": {
+    width: "41px",
+    height: "41px",
+  },
+  "@media (min-width: 768px)": {
+    width: "55px",
+    height: "55px",
+  },
 });
 
 const ButtonGroup = styled(Box)(
@@ -116,7 +133,7 @@ const ButtonGroup = styled(Box)(
         z-index:2;
         width: 100%;
         right: 0;
-        bottom: -93px;
+        bottom: -40px;
         display:flex;       justify-content: flex-end;  `
 );
 
@@ -316,7 +333,7 @@ function SubmitBuy({ ids, slug }: ISubmitBuy) {
                         sx={{
                           position: "relative",
                           zIndex: "2",
-                          padding: { md: "0 50px", xs: "25px 15px" },
+                          padding: { md: "25px 50px", xs: "25px 15px" },
                         }}
                       >
                         <Typography

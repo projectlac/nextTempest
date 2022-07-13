@@ -33,45 +33,55 @@ const BorderWhite = styled(Box)(
 );
 
 const ButtonGroup = styled(Box)(
-  ({ theme }) => `
+  () => `
         position:absolute;
         z-index:2;
         width: 100%;
         right: 0;
-        bottom: -93px;
+        bottom: -40px;
         display:flex;       justify-content: flex-end;  `
 );
 
-const NextButton = styled(Button)(
-  ({ theme }) => `
-            background: url(${NextBTN.src});
-          width: 250px;
-          height: 60px;
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #fff;
-          font-size: 20px; margin-left:15px;
-          text-transform:capitalize; `
-);
-const BackButton = styled(Box)(
-  ({ theme }) => `
-  background: url(${BackBTN.src});
-  width: 275px;
-  height: 60px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 20px;    `
-);
-
+const NextButton = styled(Button)(() => ({
+  background: `url(${NextBTN.src})`,
+  width: "250px",
+  height: "60px",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  fontSize: "20px",
+  marginLeft: "15px",
+  textTransform: "capitalize",
+  "@media (min-width:0)": {
+    fontSize: "15px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "20px",
+  },
+}));
+const BackButton = styled(Box)(() => ({
+  background: `url(${BackBTN.src})`,
+  width: "275px",
+  height: "60px",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  fontSize: "20px",
+  "@media (min-width:0)": {
+    fontSize: "15px",
+  },
+  "@media (min-width: 768px)": {
+    fontSize: "20px",
+  },
+}));
 const validationSchema = yup.object({
   phone: yup
     .string()
@@ -133,42 +143,60 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
   return (
     <Box component={"form"} onSubmit={formik.handleSubmit}>
       <Box
-        height={530}
-        sx={{ position: "relative", zIndex: 2 }}
+        sx={{
+          position: "relative",
+          zIndex: 2,
+          padding: "25px 0",
+          height: { md: 530, xs: 580 },
+        }}
         textAlign="center"
       >
-        <Typography color={"#4B66A2"} fontSize={30}>
+        <Typography
+          color={"#4B66A2"}
+          sx={{
+            fontSize: { md: 30, xs: 17 },
+          }}
+        >
           Hoàn tất hồ sơ
         </Typography>
         <Image src={Divider} alt="" width={440} height={15}></Image>
-        <Box width={800} sx={{ margin: "0 auto" }}>
+        <Box sx={{ margin: "0 auto", width: { md: "800px", xS: "100%" } }}>
           {hadSelected === 2 && (
             <Box>
               <Typography
                 color="#50A7CD"
                 textAlign={"left"}
-                fontSize={20}
+                sx={{
+                  fontSize: { md: 20, xs: 15 },
+                }}
                 mb={1}
               >
                 Thay đổi thông tin gmail
               </Typography>
               <BorderWhite>
                 <Grid container>
-                  <Grid item md={6}>
+                  <Grid item md={6} xs={12}>
                     <Typography
-                      fontSize={17}
-                      mt={2}
+                      sx={{
+                        fontSize: { md: 17, xs: 13 },
+                        mt: { md: 2, xs: 0 },
+                        ml: { md: 5, xs: 2 },
+                      }}
                       fontWeight={600}
                       textAlign="left"
-                      ml={5}
                       color="#9CABCC"
                       fontFamily="Montserrat"
                     >
                       Gmail bạn muốn thay đổi:
                     </Typography>
                   </Grid>
-                  <Grid item md={6}>
-                    <FormControl sx={{ width: "25ch", position: "relative" }}>
+                  <Grid item md={6} xs={12}>
+                    <FormControl
+                      sx={{
+                        width: { md: "25ch", xs: "90%" },
+                        position: "relative",
+                      }}
+                    >
                       <OutlinedInput
                         name="gmail"
                         placeholder="Ex: Abc@gmail.com"
@@ -196,26 +224,40 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
             </Box>
           )}
 
-          <Typography color="#50A7CD" textAlign={"left"} fontSize={20} mb={1}>
+          <Typography
+            color="#50A7CD"
+            textAlign={"left"}
+            sx={{
+              fontSize: { md: 20, xs: 15 },
+            }}
+            mb={1}
+          >
             Thông tin liên lạc
           </Typography>
           <BorderWhite>
-            <Grid container rowSpacing={3}>
-              <Grid item md={6}>
+            <Grid container rowSpacing={{ xs: 0, md: 3 }}>
+              <Grid item md={6} xs={12}>
                 <Typography
-                  fontSize={17}
-                  mt={2}
+                  sx={{
+                    fontSize: { md: 17, xs: 13 },
+                    mt: { md: 2, xs: 0 },
+                    ml: { md: 5, xs: 2 },
+                  }}
                   fontWeight={600}
                   textAlign="left"
-                  ml={5}
                   color="#9CABCC"
                   fontFamily="Montserrat"
                 >
                   Số điện thoại:
                 </Typography>
               </Grid>
-              <Grid item md={6}>
-                <FormControl sx={{ width: "25ch", position: "relative" }}>
+              <Grid item md={6} xs={12}>
+                <FormControl
+                  sx={{
+                    width: { md: "25ch", xs: "90%" },
+                    position: "relative",
+                  }}
+                >
                   <OutlinedInput
                     name="phone"
                     value={formik.values.phone}
@@ -235,21 +277,23 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                   </Box>
                 </FormControl>
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={6} xs={12}>
                 <Typography
-                  fontSize={17}
-                  mt={2}
+                  sx={{
+                    fontSize: { md: 17, xs: 13 },
+                    mt: { md: 2, xs: 0 },
+                    ml: { md: 5, xs: 2 },
+                  }}
                   fontWeight={600}
                   textAlign="left"
-                  ml={5}
                   color="#9CABCC"
                   fontFamily="Montserrat"
                 >
                   Facebook, Zalo, Instagram, ... :
                 </Typography>
               </Grid>
-              <Grid item md={6}>
-                <FormControl sx={{ width: "25ch" }}>
+              <Grid item md={6} xs={12}>
+                <FormControl sx={{ width: { md: "25ch", xs: "90%" } }}>
                   <OutlinedInput
                     name="social"
                     value={formik.values.social}
@@ -260,21 +304,23 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={6} xs={12}>
                 <Typography
-                  fontSize={17}
-                  mt={2}
+                  sx={{
+                    fontSize: { md: 17, xs: 13 },
+                    mt: { md: 2, xs: 0 },
+                    ml: { md: 5, xs: 2 },
+                  }}
                   fontWeight={600}
                   textAlign="left"
-                  ml={5}
                   color="#9CABCC"
                   fontFamily="Montserrat"
                 >
                   Khác:
                 </Typography>
               </Grid>
-              <Grid item md={6}>
-                <FormControl sx={{ width: "25ch" }}>
+              <Grid item md={6} xs={12}>
+                <FormControl sx={{ width: { md: "25ch", xs: "90%" } }}>
                   <OutlinedInput
                     name="others"
                     value={formik.values.others}

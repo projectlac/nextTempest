@@ -8,7 +8,7 @@ const BackgroundShopResponse = styled(Container)({
   background: `url(${BGContainer.src})`,
   position: "relative",
   backgroundSize: "contain",
-  borderRadius: "5px",
+  borderRadius: "15px",
   "&:before": {
     position: "absolute",
     content: "''",

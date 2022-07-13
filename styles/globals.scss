@@ -202,6 +202,7 @@ body {
 // }
 
 .customRadio {
+  padding-inline-start: 15px;
   li {
     list-style: none;
   }
@@ -222,6 +223,9 @@ body {
 
   input[type="radio"]:focus {
     outline-color: transparent;
+  }
+  @media screen and (min-width:760px) {
+    padding-inline-start: 40px;
   }
 }
 .custom-img {
