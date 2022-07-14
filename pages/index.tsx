@@ -7,10 +7,6 @@ import ModuleVideo from "../components/Modules/ModuleVideo";
 import Meta from "../styles/assets/images/homeImage.jpg";
 
 export default function IndexPage() {
-  const router = useRouter();
-  React.useEffect(() => {
-    console.log(router.asPath.split("&"));
-  }, []);
   return (
     <Layout>
       <Head>
