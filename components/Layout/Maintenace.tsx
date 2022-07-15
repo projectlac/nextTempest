@@ -84,9 +84,11 @@ export default function Maintenance() {
                 }}
                 lineHeight={2}
               >
-                Perhaps it flew away with Venti. <br /> Perhaps it rose up to
-                Celestia... <br />
-                Perhaps it went somewhere far away...
+                Mọi giao dịch chuyển tiền sẽ vẫn tiếp túc hoạt động sau hệ thống
+                bảo trì.
+                <br />
+                Nếu có vấn đề ngoài ý muốn, vui lòng liên hệ admin để được hỗ
+                trợ!
               </Typography>
               <Box mt={3}></Box>
             </Box>

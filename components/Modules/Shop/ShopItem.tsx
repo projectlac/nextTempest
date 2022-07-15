@@ -86,10 +86,11 @@ const IdProduct = styled(Box)(
   top:0;
   right:0;
   @media (min-width: 0px) {
-    font-size:13px
+    font-size:10px;
+    font-weight: 600;
   } 
   @media (min-width: 768px){
-    font-size:13px
+    font-size:10px
   }
   @media (min-width: 1024px){
     font-size:15px
