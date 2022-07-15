@@ -144,7 +144,7 @@ function HeaderHome() {
         >
           <Link href="/" passHref>
             <Box>
-              <Image src={logo} alt="" width="150" height="56.25" />
+              <Image src={logo} alt="" width="150" height="60" />
             </Box>
           </Link>
         </Box>
