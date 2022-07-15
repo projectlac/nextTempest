@@ -74,7 +74,7 @@ function Footer() {
             },
           }}
         >
-          <Image src={logo} alt="" width="200" height="81.67" />
+          <Image src={logo} alt="" width="256" height="105" />
           <Typography
             sx={{
               color: "#fff",
