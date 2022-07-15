@@ -49,10 +49,10 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-          <link
-            rel="alternate"
-            hrefLang="vi_VN"
-            href="https://www.tempest.vn/"
+          <link rel="alternate" hrefLang="vi" href="https://www.tempest.vn/" />
+          <meta
+            name="description"
+            content="Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
           />
         </Head>
         <body>
