@@ -30,11 +30,11 @@ export default function Maintenance() {
   return (
     <>
       <Head>
-        <title>Trang không tồn tại</title>
+        <title>Hệ thống đang bảo trì</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           property="og:description"
-          content="Trang này không tồn tại - Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+          content="Hệ thống đang bảo trì, vui lòng quay lại sau - Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
         />
       </Head>
       <Error>
