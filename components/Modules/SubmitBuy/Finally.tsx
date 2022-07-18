@@ -131,8 +131,6 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
           router.push(`/bill/${res.data[2] && res.data[2].id}`);
         })
         .catch((err) => {
-          console.log();
-
           handleChangeStatusToast();
           handleChangeMessageToast(
             err.response.data.message
