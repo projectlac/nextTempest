@@ -33,6 +33,12 @@ const tagApi = {
         return `endPrice=${params.endPrice}`;
       return `startPrice=0`;
     };
+    const isSold = () => {
+      if (params.isSold){
+        return `isSold=${params.isSold}`
+      }
+      else return ''
+    }
 
     const url = `/account-get?limit=${params.limit}&offset=${
       params.offset
@@ -40,7 +46,7 @@ const tagApi = {
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}`;
+    }&${handleLimitPrice()}&${isSold()}`;
     return axiosClient.get(url);
   },
   refundAccount(id: string): Promise<PromiseApi> {

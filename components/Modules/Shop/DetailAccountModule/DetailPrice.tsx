@@ -153,6 +153,8 @@ function DetailPrice({
     isLogin,
     handleChangeStatusToast,
     refreshLogin,
+    updated,
+    update,
     handleChangeMessageToast,
   } = useAppContext();
   const [wallet, setWallet] = useState<number>(0);
@@ -173,7 +175,7 @@ function DetailPrice({
           localStorage.removeItem("access_token");
           router.push("/");
         });
-  }, []);
+  }, [update]);
 
   const toMoney = (price: number) => {
     return price
@@ -198,7 +200,9 @@ function DetailPrice({
       handleChangeMessageToast(
         "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
       );
+
       handleChangeStatusToast();
+      updated();
     } else {
       router.push(`/thanh-toan/${id}?redirect=${slug}`);
     }

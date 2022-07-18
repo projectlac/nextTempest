@@ -131,8 +131,14 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
           router.push(`/bill/${res.data[2] && res.data[2].id}`);
         })
         .catch((err) => {
+          console.log();
+
           handleChangeStatusToast();
-          handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
+          handleChangeMessageToast(
+            err.response.data.message
+              ? err.response.data.message
+              : "Có lỗi xảy ra, vui lòng thử lại"
+          );
         })
         .finally(() => {
           setLoading(false);

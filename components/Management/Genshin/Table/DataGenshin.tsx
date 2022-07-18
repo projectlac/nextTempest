@@ -1,5 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Card, TextField } from "@mui/material";
+import {
+  Box,
+  Card,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
@@ -20,7 +27,7 @@ function DataGenshin() {
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
-
+  const [sold, setSold] = useState<boolean>(false);
   const { update } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
@@ -39,6 +46,7 @@ function DataGenshin() {
         weapon: "",
         sort: null,
         queryString: "",
+        isSold: sold,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -50,7 +58,7 @@ function DataGenshin() {
         let total = res.data.total;
         setTotal(total);
       });
-  }, [update, limitPage, offsetPage]);
+  }, [update, limitPage, offsetPage, sold]);
 
   function fetchDropdownOptions(key) {
     tagApi
@@ -85,6 +93,9 @@ function DataGenshin() {
     debounceDropDown(e.target.value);
   };
 
+  const handleChangeSold = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSold(e.target.checked);
+  };
   return (
     <Card>
       <Box mb={3}>
@@ -96,6 +107,15 @@ function DataGenshin() {
           onChange={handleChangeSearch}
         />
       </Box>
+      <Box mx={3}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox checked={sold} onChange={handleChangeSold} />}
+            label="Ưu tiên đã bán"
+          />
+        </FormGroup>
+      </Box>
+
       <TableGenshin
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
