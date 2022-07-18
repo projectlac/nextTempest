@@ -70,6 +70,7 @@ function DataGenshin() {
         weapon: "",
         sort: null,
         queryString: key,
+        isSold: sold,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
