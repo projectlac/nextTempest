@@ -27,7 +27,7 @@ const BgWrap = styled(Box)(({ theme }) => ({
     height: "auto",
   },
   "@media (min-width: 1024px)": {
-    height: "100vh",
+    height: "1000px",
   },
 }));
 
