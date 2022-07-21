@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import useTrans from "../../pages/hook/useTrans";
 import background from "../../styles/assets/images/Background.png";
 
 import Frame from "../../styles/assets/images/Frame.png";
@@ -277,6 +278,8 @@ const BoxEntry = styled(Box)(
       `
 );
 function ModuleVideo() {
+  const trans = useTrans();
+
   const [isPlay, setIsPlay] = useState<boolean>(false);
 
   const playVideo = () => {
@@ -387,8 +390,9 @@ function ModuleVideo() {
               </ButtonEven>
             </Box>
             <Title>
-              Tempest Genshin nơi cung cấp tài khoản, <br /> Nạp game an toàn
-              nhất Việt Nam
+              <span>
+                {trans.title} <br /> {trans.text2}
+              </span>
             </Title>
           </VideoBox>
         </PostBox>
