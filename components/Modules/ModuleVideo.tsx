@@ -279,9 +279,7 @@ const BoxEntry = styled(Box)(
 );
 function ModuleVideo() {
   const trans = useTrans();
-  const {
-    home: { title, text2 },
-  } = trans;
+  const { home } = trans;
   const [isPlay, setIsPlay] = useState<boolean>(false);
 
   const playVideo = () => {
@@ -393,7 +391,7 @@ function ModuleVideo() {
             </Box>
             <Title>
               <span>
-                {title} <br /> {text2}
+                {home[0]} <br /> {home[1]}
               </span>
             </Title>
           </VideoBox>

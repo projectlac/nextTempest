@@ -1,7 +1,7 @@
 const home = {
-  home: {
-    title: `Tempest Genshin nơi cung cấp tài khoản,`,
-    text2: "Nạp game an toàn nhất Việt Nam",
-  },
+  home: [
+    `Tempest Genshin nơi cung cấp tài khoản,`,
+    "Nạp game an toàn nhất Việt Nam",
+  ],
 };
 export default home;
