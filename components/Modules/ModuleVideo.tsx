@@ -36,10 +36,10 @@ const BgWrap = styled(Box)(
       height: 600px;
     }
     @media (min-width: 1024px) {
-      height: 100vh;
+      height: 1000px;
    } 
    @media (min-width: 1440px) {
-    height:100vh;
+    height:1000px;
   } 
 
   `
@@ -81,7 +81,7 @@ const FrameTop = styled(Box)({
     height: "calc(600px - 66px)",
   },
   "@media (min-width:760px)": {
-    height: "calc(100vh - 66px)",
+    height: "calc(1000px - 66px)",
   },
 });
 
@@ -279,7 +279,6 @@ const BoxEntry = styled(Box)(
 );
 function ModuleVideo() {
   const trans = useTrans();
-  const { home } = trans;
   const [isPlay, setIsPlay] = useState<boolean>(false);
 
   const playVideo = () => {
@@ -391,7 +390,7 @@ function ModuleVideo() {
             </Box>
             <Title>
               <span>
-                {home[0]} <br /> {home[1]}
+                {trans[0]} <br /> {trans[1]}
               </span>
             </Title>
           </VideoBox>
