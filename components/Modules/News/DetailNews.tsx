@@ -128,6 +128,18 @@ function DetailNews({ detailNews }: PropsDetailNews) {
                     wordWrap: "break-word",
                   },
                   "& p img": {
+                    maxWidth: "100%",
+                    width: {
+                      md: "auto",
+                      xs: "100%",
+                    },
+                    height: {
+                      md: "auto",
+                      xs: "auto",
+                    },
+                  },
+                  "& div img": {
+                    maxWidth: "100%",
                     width: {
                       md: "auto",
                       xs: "100%",
