@@ -279,7 +279,9 @@ const BoxEntry = styled(Box)(
 );
 function ModuleVideo() {
   const trans = useTrans();
-  const { title, text2 } = trans[0];
+  const {
+    home: { title, text2 },
+  } = trans;
   const [isPlay, setIsPlay] = useState<boolean>(false);
 
   const playVideo = () => {
