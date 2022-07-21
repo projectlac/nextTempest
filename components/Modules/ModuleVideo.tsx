@@ -391,7 +391,7 @@ function ModuleVideo() {
             </Box>
             <Title>
               <span>
-                {trans.title} <br /> {trans.text2}
+                {trans[0].title} <br /> {trans[0].text2}
               </span>
             </Title>
           </VideoBox>
