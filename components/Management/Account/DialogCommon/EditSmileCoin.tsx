@@ -118,7 +118,7 @@ export default function EditSmileCoin({ username, money }: PropsEditSmileCoin) {
               <Button
                 variant="contained"
                 color="warning"
-                disabled={coin > 0 && coin > coinChange ? false : true}
+                disabled={coin > 0 && coin >= coinChange ? false : true}
                 onClick={() => {
                   chageMode(false);
                 }}
