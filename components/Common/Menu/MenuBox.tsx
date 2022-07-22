@@ -8,6 +8,7 @@ import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
 
 import Close from "../../../styles/assets/images/svg/close.svg";
 import { useAppContext } from "../../../context/state";
+import useTrans from "../../../pages/hook/useTrans";
 interface PropsMenu {
   activeMenu: boolean;
   closeMenu: () => void;
@@ -59,6 +60,7 @@ const FrameBox = styled(Box)(
 function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
   const router = useRouter();
   const { isLogin, refreshLogin } = useAppContext();
+  const trans = useTrans();
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
@@ -103,19 +105,19 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             }}
           >
             <Typography className={`${activeClass("/")}`}>
-              <Link href="/">Trang Chủ</Link>
+              <Link href="/">{trans[1][0]}</Link>
             </Typography>
             <Typography className={`${activeClass("/mua-tai-khoan")}`}>
-              <Link href="/mua-tai-khoan">Mua tài khoản </Link>
+              <Link href="/mua-tai-khoan">{trans[1][1]}</Link>
             </Typography>
             <Typography className={`${activeClass("/tin-tuc")}`}>
-              <Link href="/tin-tuc">Tin Tức</Link>
+              <Link href="/tin-tuc">{trans[1][2]}</Link>
             </Typography>
             <Typography className={`${activeClass("/nap-tien")}`}>
-              <Link href="/nap-tien">Nạp Tiền </Link>
+              <Link href="/nap-tien">{trans[1][3]}</Link>
             </Typography>
             <Typography className={`${activeClass("/lien-he")}`}>
-              <Link href="/lien-he">Liên hệ</Link>
+              <Link href="/lien-he">{trans[1][4]}</Link>
             </Typography>
 
             {isLogin ? (
@@ -125,7 +127,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                   closeMenu();
                 }}
               >
-                Đăng xuất
+                {trans[1][6]}
               </Typography>
             ) : (
               <Typography
@@ -134,7 +136,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                   closeMenu();
                 }}
               >
-                Đăng nhập
+                {trans[1][5]}
               </Typography>
             )}
           </MenuTextBox>

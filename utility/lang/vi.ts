@@ -6,7 +6,16 @@ const home = [
 
   // menu
 
-  ["Home", "Buy account", "News", "Payment", "Contact"],
+  [
+    "Trang chủ",
+    "Mua tài khoản",
+    "Tin tức",
+    "Nạp coin",
+    "Liên hệ",
+    "Đăng nhập",
+    "Đăng xuất",
+    "Đăng ký",
+  ],
 ];
 
 export default home;

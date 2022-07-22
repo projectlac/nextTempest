@@ -15,6 +15,7 @@ import MenuBox from "../Menu/MenuBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cart from "./Cart/Cart";
 import UserInformation from "./UserInformation";
+import useTrans from "../../../pages/hook/useTrans";
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -71,6 +72,7 @@ function useOutsideAlerter(ref, closeCart) {
 }
 
 function HeaderHome() {
+  const trans = useTrans();
   const { update, updated, isLogin, refreshLogin, role } = useAppContext();
 
   const [activeMenu, setActiveMenu] = useState<boolean>(false);
@@ -188,20 +190,20 @@ function HeaderHome() {
             }}
           >
             <Typography className={`${activeClass("/")}`}>
-              <Link href="/">Trang Chủ</Link>
+              <Link href="/">{trans[1][0]}</Link>
             </Typography>
             <Typography className={`${activeClass("/mua-tai-khoan")}`}>
-              <Link href="/mua-tai-khoan">Mua tài khoản </Link>
+              <Link href="/mua-tai-khoan">{trans[1][1]}</Link>
             </Typography>
             <Typography className={`${activeClass("/tin-tuc")}`}>
-              <Link href="/tin-tuc">Tin Tức</Link>
+              <Link href="/tin-tuc">{trans[1][2]}</Link>
             </Typography>
 
             <Typography className={`${activeClass("/nap-tien")}`}>
-              <Link href="/nap-tien">Nạp Tiền </Link>
+              <Link href="/nap-tien">{trans[1][3]}</Link>
             </Typography>
             <Typography className={`${activeClass("/lien-he")}`}>
-              <Link href="/lien-he">Liên hệ</Link>
+              <Link href="/lien-he">{trans[1][4]}</Link>
             </Typography>
             {["ADMIN", "MOD"].includes(role) && isLogin && (
               <Typography>
@@ -273,9 +275,9 @@ function HeaderHome() {
             }}
           >
             {isLogin ? (
-              <Typography onClick={logout}>Đăng xuất</Typography>
+              <Typography onClick={logout}>{trans[1][6]}</Typography>
             ) : (
-              <Typography onClick={login}>Đăng nhập</Typography>
+              <Typography onClick={login}>{trans[1][5]}</Typography>
             )}
           </Box>
 
