@@ -1,7 +1,8 @@
 const configLanguage = {
   i18n: {
-    locales: ["en", "vi"],
+    locales: ["vi", "en"],
     defaultLocale: "vi",
+    // localeDetection: false,
   },
 };
 module.exports = configLanguage;

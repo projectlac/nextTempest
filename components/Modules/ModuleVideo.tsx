@@ -390,7 +390,7 @@ function ModuleVideo() {
             </Box>
             <Title>
               <span>
-                {trans[0]} <br /> {trans[1]}
+                {trans.home[0]} <br /> {trans.home[1]}
               </span>
             </Title>
           </VideoBox>

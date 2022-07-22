@@ -77,13 +77,15 @@ function BuyAccountModule() {
           px: { xs: 2, md: 0 },
         }}
       >
-        <TitleHighlight
-          sx={{
-            mb: { md: 10, xs: 5 },
-          }}
-        >
-          Danh sách tài khoản
-        </TitleHighlight>
+        <Container>
+          <TitleHighlight
+            sx={{
+              mb: { md: 10, xs: 5 },
+            }}
+          >
+            Danh sách tài khoản
+          </TitleHighlight>
+        </Container>
         <BackgroundShop>
           <Grid container>
             <Hidden mdDown>
