@@ -388,11 +388,11 @@ function ModuleVideo() {
                 </Link>
               </ButtonEven>
             </Box>
-            <Title>
+            {/* <Title>
               <span>
                 {trans[0].home[0]} <br /> {trans[0].home[1]}
               </span>
-            </Title>
+            </Title> */}
           </VideoBox>
         </PostBox>
       </FrameTop>
