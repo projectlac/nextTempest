@@ -10,7 +10,7 @@ const configLanguage = {
         defaultLocale: "vi",
       },
       {
-        domain: "www.tempest.vn/en",
+        domain: "www.tempest.vn",
         defaultLocale: "en",
         locales: ["en"],
       },
