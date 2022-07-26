@@ -16,6 +16,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cart from "./Cart/Cart";
 import UserInformation from "./UserInformation";
 import useTrans from "../../../pages/hook/useTrans";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -52,6 +53,45 @@ const BgWrap = styled(Box)(
     `
 );
 
+const ParentMenu = styled(Box)({
+  position: "relative",
+  "& a": { padding: 0, marginBottom: 0, paddingBottom: "6px" },
+  "&:hover": {
+    "& > div": {
+      opacity: 1,
+      visibility: "inherit",
+    },
+  },
+  "&.active a": { borderBottom: "3px solid #48A6E2" },
+});
+const ChildMenu = styled(Box)({
+  opacity: 0,
+  visibility: "hidden",
+  background: "#fff",
+  position: "absolute",
+  left: "0",
+  top: "40px",
+  border: "4px solid #3b5898",
+  width: "200px",
+  display: "flex",
+  flexDirection: "column",
+  transition: "all 0.2s",
+  "& a": {
+    color: "#000",
+    padding: "10px 10px 10px",
+    margin: "0",
+    borderBottom: "1px solid !important",
+    transition: "all 0.2s",
+    fontSize: "13px",
+    "&:last-child": {
+      borderBottom: "none",
+    },
+    "&:hover": {
+      background: "#97c3ea",
+      color: "#fff",
+    },
+  },
+});
 function useOutsideAlerter(ref, closeCart) {
   useEffect(() => {
     /**
@@ -104,7 +144,12 @@ function HeaderHome() {
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
-    return "";
+    else {
+      if (pathName !== "/") {
+        if (router.pathname.includes(pathName)) return "active";
+        return "";
+      }
+    }
   };
 
   const [openAuth, setOpenAuth] = useState<boolean>(false);
@@ -192,9 +237,23 @@ function HeaderHome() {
             <Typography className={`${activeClass("/")}`}>
               <Link href="/">{trans[1][0]}</Link>
             </Typography>
-            <Typography className={`${activeClass("/mua-tai-khoan")}`}>
-              <Link href="/mua-tai-khoan">{trans[1][1]}</Link>
-            </Typography>
+            <ParentMenu className={`${activeClass("/mua-tai-khoan")}`}>
+              <Link href="#">{trans[1][1]}</Link>
+              <ChildMenu>
+                <ArrowDropUpIcon
+                  sx={{
+                    color: "#fff",
+                    position: "absolute",
+                    top: "-14px",
+                    left: "15%",
+                  }}
+                />
+                <Link href="/mua-tai-khoan/genshin-impact">Genshin impact</Link>
+                <Link href="/mua-tai-khoan/tower-of-fantasy">
+                  Tower of fantasy
+                </Link>
+              </ChildMenu>
+            </ParentMenu>
             <Typography className={`${activeClass("/tin-tuc")}`}>
               <Link href="/tin-tuc">{trans[1][2]}</Link>
             </Typography>

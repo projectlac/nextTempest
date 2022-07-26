@@ -57,6 +57,24 @@ const FrameBox = styled(Box)(
   box-sizing: border-box;
   align-items: center;`
 );
+
+const ChildMenu = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  padding: "10px",
+  fontSize: "15px",
+
+  "& span": {
+    padding: "10px",
+
+    display: "block",
+    "&.active": {
+      background: "#fff",
+      color: "#000",
+      borderRadius: "30px",
+    },
+  },
+});
 function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
   const router = useRouter();
   const { isLogin, refreshLogin } = useAppContext();
@@ -64,7 +82,12 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
 
   const activeClass = (pathName: string) => {
     if (router.pathname === pathName) return "active";
-    return "";
+    else {
+      if (pathName !== "/") {
+        if (router.pathname.includes(pathName)) return "active";
+        return "";
+      }
+    }
   };
   return (
     <>
@@ -107,9 +130,21 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Typography className={`${activeClass("/")}`}>
               <Link href="/">{trans[1][0]}</Link>
             </Typography>
-            <Typography className={`${activeClass("/mua-tai-khoan")}`}>
-              <Link href="/mua-tai-khoan">{trans[1][1]}</Link>
-            </Typography>
+            <Box>
+              <span style={{ fontSize: "15px" }}>{trans[1][1]}</span>
+              <ChildMenu>
+                <Link href="/mua-tai-khoan/genshin-impact">
+                  <a className={`${activeClass("/genshin-impact")}`}>
+                    Genshin impact
+                  </a>
+                </Link>
+                <Link href="/mua-tai-khoan/tower-of-fantasy">
+                  <a className={`${activeClass("/tower-of-fantasy")}`}>
+                    Tower of fantasy
+                  </a>
+                </Link>
+              </ChildMenu>
+            </Box>
             <Typography className={`${activeClass("/tin-tuc")}`}>
               <Link href="/tin-tuc">{trans[1][2]}</Link>
             </Typography>
