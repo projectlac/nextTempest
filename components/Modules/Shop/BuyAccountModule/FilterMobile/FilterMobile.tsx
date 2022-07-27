@@ -12,8 +12,10 @@ const Overlay = styled(Box)(({ theme }) => ({
   background: "#000000c4",
   zIndex: "1",
 }));
-
-function FilterMobile() {
+interface IBuy {
+  slug: string;
+}
+function FilterMobile({ slug }: IBuy) {
   const [openFilter, setOpenFilter] = useState<boolean>(false);
 
   const open = () => {
@@ -57,7 +59,7 @@ function FilterMobile() {
           }}
         >
           <Overlay onClick={close} />
-          <Filter />
+          <Filter slug={slug} />
         </Box>
       )}
     </Box>

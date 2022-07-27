@@ -127,7 +127,7 @@ function ListProduct({ slug }: IBuy) {
             <PrireFilter handleSortByPrice={handleSortByPrice} />
             <SortOption handleSortBy={handleSortBy} />
           </Box>
-          <FilterMobile></FilterMobile>
+          <FilterMobile slug={slug}></FilterMobile>
         </Hidden>
         <Grid container columnSpacing={3}>
           {productList.length > 0 ? (
