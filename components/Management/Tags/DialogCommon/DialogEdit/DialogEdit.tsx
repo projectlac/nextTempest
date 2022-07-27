@@ -127,6 +127,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               error={formik.touched.title && Boolean(formik.errors.title)}
             />
           </Box>
+
           <Box>
             <Box mt={1}>Loại tag</Box>
             <Box>

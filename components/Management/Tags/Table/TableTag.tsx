@@ -215,7 +215,7 @@ const TableTag: FC<RecentOrdersTableProps> = ({
                   </TableCell>
 
                   <TableCell align="center">
-                    <Tooltip title="Chỉnh sửa bài viết" arrow>
+                    <Tooltip title="Chỉnh sửa tag" arrow>
                       <IconButton
                         sx={{
                           "&:hover": {

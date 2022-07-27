@@ -1,6 +1,6 @@
 import { PromiseApi } from "../types";
 import { AccountForm, IBuy } from "../types/account";
-import { IAddTag } from "../types/tag";
+import { IAddTag, IUpdateTag } from "../types/tag";
 import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 import axiosAudit from "./axiosAudit";
@@ -26,7 +26,7 @@ const tagApi = {
     const url = `/tag/${id}`;
     return axiosAudit.get(url);
   },
-  updateTag(id: string, params: IAddTag): Promise<PromiseApi> {
+  updateTag(id: string, params: IUpdateTag): Promise<PromiseApi> {
     const url = `/tag/update/${id}`;
     const { content, ...result } = params;
     return axiosAudit.patch(url, result);
