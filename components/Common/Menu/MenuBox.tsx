@@ -133,12 +133,22 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Box>
               <span style={{ fontSize: "15px" }}>{trans[1][1]}</span>
               <ChildMenu>
-                <Link href="/mua-tai-khoan/genshin-impact">
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
+                    query: { id: "genshin-impact" },
+                  }}
+                >
                   <a className={`${activeClass("/genshin-impact")}`}>
                     Genshin impact
                   </a>
                 </Link>
-                <Link href="/mua-tai-khoan/tower-of-fantasy">
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
+                    query: { id: "tower-of-fantasy" },
+                  }}
+                >
                   <a className={`${activeClass("/tower-of-fantasy")}`}>
                     Tower of fantasy
                   </a>

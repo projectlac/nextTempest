@@ -201,19 +201,23 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
     </Box>
   );
 };
-export default function CustomizedAccordions() {
+interface IBuy {
+  slug: string;
+}
+export default function CustomizedAccordions({ slug }: IBuy) {
+  console.log(slug);
   const { updated, handleSelectedFilter } = useAppContext();
   const [listData, setListData] = React.useState([]);
   React.useEffect(() => {
     const getData = async () => {
       try {
-        await tagApi.getTag("").then((res) => {
+        await tagApi.getTag({ type: "", game: slug }).then((res) => {
           setListData(res.data);
         });
       } catch (error) {}
     };
     getData();
-  }, []);
+  }, [slug]);
 
   const [selectedFilter, setSelectedFilter] = React.useState({
     server: "",

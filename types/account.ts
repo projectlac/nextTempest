@@ -8,7 +8,8 @@ export interface AccountForm extends PackHistoryOfAccount {
   queryString: string;
   startPrice?: number;
   endPrice?: number;
-  isSold?:boolean
+  isSold?: boolean;
+  game?: string;
 }
 
 export enum TAG_TYPE {

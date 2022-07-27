@@ -248,8 +248,20 @@ function HeaderHome() {
                     left: "15%",
                   }}
                 />
-                <Link href="/mua-tai-khoan/genshin-impact">Genshin impact</Link>
-                <Link href="/mua-tai-khoan/tower-of-fantasy">
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
+                    query: { id: "genshin-impact" },
+                  }}
+                >
+                  Genshin impact
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
+                    query: { id: "tower-of-fantasy" },
+                  }}
+                >
                   Tower of fantasy
                 </Link>
               </ChildMenu>

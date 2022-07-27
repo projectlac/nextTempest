@@ -184,10 +184,12 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        await tagApi.getTag("").then((res) => {
-          setListData(res.data);
-          setFileListCurreny(defaultData.cloundinary);
-        });
+        await tagApi
+          .getTag({ type: "", game: "genshin-impact" })
+          .then((res) => {
+            setListData(res.data);
+            setFileListCurreny(defaultData.cloundinary);
+          });
       } catch (error) {}
     };
     if (open) {

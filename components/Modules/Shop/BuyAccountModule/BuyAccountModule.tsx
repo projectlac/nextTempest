@@ -9,6 +9,7 @@ import BGContainerBot from "../../../../styles/assets/images/Shop/bot.png";
 import TitleHighlight from "../../../Common/Title/TitleHighlight";
 import Filter from "./Filter";
 import ListProduct from "./ListProduct";
+import ListProductTOF from "./TOF/ListProduct";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -67,7 +68,10 @@ const BackgroundShop = styled(Container)({
   },
 });
 
-function BuyAccountModule() {
+interface IBuy {
+  slug: string;
+}
+function BuyAccountModule({ slug }: IBuy) {
   return (
     <ProductWrap>
       <Box
@@ -90,11 +94,12 @@ function BuyAccountModule() {
           <Grid container>
             <Hidden mdDown>
               <Grid item md={3}>
-                <Filter />
+                <Filter slug={slug} />
               </Grid>
             </Hidden>
             <Grid item md={9} sm={12} xs={12}>
-              <ListProduct />
+              {/* {slug === "genshin-impact" ? <ListProduct /> : <ListProductTOF />} */}
+              <ListProduct slug={slug} />
             </Grid>
           </Grid>
         </BackgroundShop>

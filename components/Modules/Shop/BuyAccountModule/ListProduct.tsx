@@ -15,8 +15,10 @@ import FilterMobile from "./FilterMobile/FilterMobile";
 import FindByCode from "./FindByCode";
 import PrireFilter from "./PrireFilter";
 import SortOption from "./SortOption";
-
-function ListProduct() {
+interface IBuy {
+  slug: string;
+}
+function ListProduct({ slug }: IBuy) {
   const { selectedFilter, update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -79,6 +81,7 @@ function ListProduct() {
             queryString: findCode,
             startPrice: sortByPrice[0],
             endPrice: sortByPrice[1],
+            game: slug,
           })
           .then((res) => {
             setProductList(res.data.data);
@@ -87,7 +90,7 @@ function ListProduct() {
       } catch (error) {}
     };
     getData();
-  }, [update, sortBy, pageCurrently, findCode, sortByPrice]);
+  }, [update, sortBy, pageCurrently, findCode, sortByPrice, slug]);
   return (
     <Box
       sx={{

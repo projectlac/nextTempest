@@ -31,7 +31,10 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddTag() {
+interface ITagProp {
+  gameSelected: string;
+}
+export default function AddTag({ gameSelected }: ITagProp) {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
 
@@ -63,7 +66,7 @@ export default function AddTag() {
 
       setLoading(true);
       tagApi
-        .addTag({ content: {}, title, type: tag })
+        .addTag({ content: {}, title, type: tag, game: gameSelected })
         .then((res) => {
           handleChangeMessageToast("Tạo tag mới thành công");
           handleChangeStatusToast();
@@ -134,6 +137,9 @@ export default function AddTag() {
                 error={formik.touched.title && Boolean(formik.errors.title)}
                 helperText={formik.touched.title && formik.errors.title}
               />
+            </Box>
+            <Box my={1}>
+              <Typography>Game đang chọn: {gameSelected}</Typography>
             </Box>
             <Box>
               <Box mt={1}>Loại tag</Box>

@@ -1,10 +1,14 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 import Layout from "../../components/Layout/BaseLayout";
 import BuyAccountModule from "../../components/Modules/Shop/BuyAccountModule/BuyAccountModule";
 import Meta from "../../styles/assets/images/homeImage.jpg";
 
 export default function IndexPage() {
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <Layout>
       <Head>
@@ -18,7 +22,7 @@ export default function IndexPage() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <BuyAccountModule />
+      <BuyAccountModule slug={id as string} />
     </Layout>
   );
 }

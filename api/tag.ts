@@ -5,9 +5,17 @@ import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 import axiosAudit from "./axiosAudit";
 
+interface ITag {
+  type: string;
+  game: string;
+}
 const tagApi = {
-  getTag(type: string): Promise<PromiseApi> {
-    const url = `/tag?type=${type}`;
+  getTag(params: ITag): Promise<PromiseApi> {
+    const url = `/tag?type=${params.type}&game=${params.game}`;
+    return axiosClient.get(url);
+  },
+  getGame(): Promise<PromiseApi> {
+    const url = `/tag?type=GAME`;
     return axiosClient.get(url);
   },
   addTag(params: IAddTag): Promise<PromiseApi> {
@@ -34,19 +42,25 @@ const tagApi = {
       return `startPrice=0`;
     };
     const isSold = () => {
-      if (params.isSold){
-        return `isSold=${params.isSold}`
-      }
-      else return ''
-    }
+      if (params.isSold) {
+        return `isSold=${params.isSold}`;
+      } else return "";
+    };
 
+    const game = () => {
+      if (!params.game) {
+        return `game=genshin-impact`;
+      } else {
+        return `game=${params.game}`;
+      }
+    };
     const url = `/account-get?limit=${params.limit}&offset=${
       params.offset
     }&weapon=${params.weapon}&character=${params.character}&server=${
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}&${isSold()}`;
+    }&${handleLimitPrice()}&${isSold()}&${game()}`;
     return axiosClient.get(url);
   },
   refundAccount(id: string): Promise<PromiseApi> {

@@ -186,9 +186,11 @@ export default function AddGenshin() {
   React.useEffect(() => {
     const getData = async () => {
       try {
-        await tagApi.getTag("").then((res) => {
-          setListData(res.data);
-        });
+        await tagApi
+          .getTag({ type: "", game: "genshin-impact" })
+          .then((res) => {
+            setListData(res.data);
+          });
       } catch (error) {}
     };
     getData();

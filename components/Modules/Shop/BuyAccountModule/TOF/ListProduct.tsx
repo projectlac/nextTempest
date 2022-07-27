@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-function ListProduct() {
+function ListProductTOF() {
   return (
     <Box
       sx={{
@@ -54,4 +54,4 @@ function ListProduct() {
   );
 }
 
-export default ListProduct;
+export default ListProductTOF;

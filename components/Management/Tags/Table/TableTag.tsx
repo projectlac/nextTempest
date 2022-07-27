@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import AddTag from "../DialogCommon/AddTag";
 import EditTag from "../DialogCommon/EditTag";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
@@ -25,6 +25,7 @@ import WarningSubmit from "../DialogCommon/WarningSubmit";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: any[];
+  gameSelected: string;
   total: number;
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
@@ -47,6 +48,7 @@ const applyPagination = (
 
 const TableTag: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
+  gameSelected,
   handleChangeLimit,
   handleChangePage,
   total,
@@ -58,24 +60,9 @@ const TableTag: FC<RecentOrdersTableProps> = ({
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
 
-  const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    let value = null;
-
-    if (e.target.value !== "all") {
-      value = e.target.value;
-    }
-  };
-
-  const handleSelectAllCryptoOrders = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedCryptoOrders(
-      event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
-        : []
-    );
-  };
-
+  useEffect(() => {
+    setPage(0);
+  }, [gameSelected]);
   const handleSelectOneCryptoOrder = (
     event: ChangeEvent<HTMLInputElement>,
     cryptoOrderId: string
@@ -134,7 +121,7 @@ const TableTag: FC<RecentOrdersTableProps> = ({
           },
         }}
         title="Thông tin Tag"
-        action={<AddTag />}
+        action={<AddTag gameSelected={gameSelected} />}
       />
 
       <Divider />

@@ -25,8 +25,10 @@ const FilterBox = styled(Box)(({ theme }) => ({
     overflow: "auto",
   },
 }));
-
-function Filter() {
+interface IBuy {
+  slug: string;
+}
+function Filter({ slug }: IBuy) {
   return (
     <Box
       sx={{
@@ -41,7 +43,7 @@ function Filter() {
           >
             Tìm theo:
           </Typography>
-          <CustomizedAccordions />
+          <CustomizedAccordions slug={slug} />
         </FilterBox>
       </Box>
     </Box>
