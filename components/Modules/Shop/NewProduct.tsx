@@ -151,7 +151,13 @@ function NewProduct() {
           </Grid>
         </Box>
         <ButtonShowMore>
-          <Link href={`/mua-tai-khoan`} passHref>
+          <Link
+            href={{
+              pathname: "/mua-tai-khoan/[id]",
+              query: { id: "genshin-impact" },
+            }}
+            passHref
+          >
             Xem thêm
           </Link>
         </ButtonShowMore>
