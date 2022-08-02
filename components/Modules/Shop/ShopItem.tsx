@@ -68,7 +68,7 @@ const Sale = styled(Box)(
   font-weight:bold;
   bottom:0;
   @media (min-width: 0px) {
-    font-size:13px
+    font-size:10px
   } 
   @media (min-width: 768px){
     font-size:15px
@@ -195,6 +195,7 @@ function ShopItem({
           <Box
             component={"a"}
             sx={{
+              display: "flex",
               "& span": {
                 width: "100% !important",
               },
@@ -222,7 +223,7 @@ function ShopItem({
           sx={{
             mt: {
               lg: 2,
-              xs: 0,
+              xs: 0.5,
             },
             fontSize: {
               lg: "1rem",

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BG from "../../../styles/assets/images/footerBg.jpg";
-import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
+import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -74,7 +74,7 @@ function Footer() {
             },
           }}
         >
-          <Image src={logo} alt="" width="256" height="105" />
+          <Image src={logo} alt="" width="256" height="86" />
           <Typography
             sx={{
               color: "#fff",
