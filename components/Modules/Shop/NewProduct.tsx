@@ -36,28 +36,34 @@ const BoxShop = styled(Box)(
   `
 );
 
-const ButtonShowMore = styled(Box)(
-  ({ theme }) => `
-    height: 60px;
-    width: 237px;
-    display: flex;
-    left: 0;
-    bottom:-35px;
-    right: 0;
-    margin:0 auto;
-    position:absolute;
-    justify-content: center;
-    align-items: center;
-    background: url(${BGButtonShowMore.src});
-    overflow:hidden;
-    background-size: contain;
-    padding: 0 60px;
-    color:#fff;
-    font-size:17px;
-    z-index:2
+const ButtonShowMore = styled(Box)({
+  display: "flex",
+  left: "0",
+  bottom: "-35px",
+  right: "0",
+  zIndex: "2",
+  margin: "0 auto",
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  background: `url(${BGButtonShowMore.src})`,
+  backgroundSize: "contain",
+  color: "#fff",
 
-  `
-);
+  "@media (min-width: 0)": {
+    height: "47px",
+    width: "181px",
+    padding: "0 36px",
+    fontSize: "14px",
+  },
+  "@media (min-width: 768px)": {
+    height: "60px",
+    width: "237px",
+    padding: "1px 60px",
+    fontSize: "17px",
+  },
+});
 
 const Title = styled(Box)(
   ({ theme }) => `

@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
-import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
+import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -191,7 +191,7 @@ function HeaderHome() {
         >
           <Link href="/" passHref>
             <Box>
-              <Image src={logo} alt="" width="150" height="60" />
+              <Image src={logo} alt="" width="150" height="50" />
             </Box>
           </Link>
         </Box>

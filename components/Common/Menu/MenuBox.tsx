@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
-import logo from "../../../styles/assets/images/Logo/logo-nho-1.png";
+import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
 
 import Close from "../../../styles/assets/images/svg/close.svg";
 import { useAppContext } from "../../../context/state";
 import useTrans from "../../../pages/hook/useTrans";
+import { log } from "console";
 interface PropsMenu {
   activeMenu: boolean;
   closeMenu: () => void;
@@ -64,7 +65,7 @@ const ChildMenu = styled(Box)({
   padding: "10px",
   fontSize: "15px",
 
-  "& span": {
+  "& a": {
     padding: "10px",
 
     display: "block",
@@ -84,11 +85,12 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
     if (router.pathname === pathName) return "active";
     else {
       if (pathName !== "/") {
-        if (router.pathname.includes(pathName)) return "active";
+        if (router.asPath.includes(pathName)) return "active";
         return "";
       }
     }
   };
+
   return (
     <>
       <MenuSWrapper
@@ -105,7 +107,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Image src={Close} alt="" width={25} height={25} />
           </Box>
 
-          <Image src={logo} alt="" width={200} height={75} />
+          <Image src={logo} alt="" width={200} height={67} />
           <Divider
             sx={{
               borderColor: "#fff",
