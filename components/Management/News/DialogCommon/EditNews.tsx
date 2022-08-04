@@ -15,6 +15,7 @@ export default function EditNews({ id }: PropsEditNews) {
     title: "",
     description: "",
     content: "",
+    keyword: "",
     imageUrl: null,
   });
 

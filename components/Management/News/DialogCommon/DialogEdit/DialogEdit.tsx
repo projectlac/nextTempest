@@ -61,16 +61,19 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       title: defaultData.title,
       description: defaultData.description,
       content: defaultData.content,
+      keyword: defaultData.keyword,
       imageUrl: defaultData.imageUrl,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const { title, description, content, id } = values;
+      const { title, description, content, id, keyword } = values;
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
       formData.append("content", content);
+      formData.append("keyword", keyword);
+
       if (file) {
         formData.append("file", file);
       }
@@ -81,7 +84,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         .then((res) => {
           handleChangeMessageToast("Sửa bài viết thành công");
           updated();
-
           handleChangeStatusToast();
           handleClose();
         })
@@ -194,6 +196,27 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 />
               </Box>
             )}
+          </Box>
+          <Box mt={3} mb={3}>
+            <TextField
+              fullWidth={true}
+              id="outlined-basic"
+              label="Từ khóa SEO"
+              name="description"
+              variant="outlined"
+              sx={{
+                "& label": {
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
+                },
+                "& input": {
+                  fontFamily: "Montserrat",
+                },
+              }}
+              value={formik.values.keyword}
+              onChange={formik.handleChange}
+              error={formik.touched.keyword && Boolean(formik.errors.keyword)}
+            />
           </Box>
         </DialogContent>
         <DialogActions

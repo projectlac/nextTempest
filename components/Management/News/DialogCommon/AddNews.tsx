@@ -57,16 +57,18 @@ export default function AddNews() {
       title: "",
       description: "",
       body: "",
+      keyword: "",
       file: null,
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title, description, body } = values;
+      const { title, description, body, keyword } = values;
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
       formData.append("content", body);
       formData.append("file", file);
+      formData.append("keyword", keyword);
 
       setLoading(true);
       newsApi
@@ -189,6 +191,27 @@ export default function AddNews() {
                   }}
                 />
               </Button>
+            </Box>
+            <Box mt={3} mb={3}>
+              <TextField
+                fullWidth={true}
+                id="outlined-basic"
+                label="Từ khóa SEO"
+                name="keyword"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.keyword}
+                onChange={formik.handleChange}
+                error={formik.touched.keyword && Boolean(formik.errors.keyword)}
+              />
             </Box>
           </DialogContent>
           <DialogActions

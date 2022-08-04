@@ -30,7 +30,7 @@ const NewBox = styled(Box)(() => ({
   marginTop: "100px",
   marginBottom: "75px",
   backgroundSize: "100%",
-  padding: "0 50px",
+  padding: "0 50px 20px",
   "@media (max-width: 435px)": {
     padding: "20px 25px",
   },
@@ -127,15 +127,26 @@ function DetailNews({ detailNews }: PropsDetailNews) {
                     wordBreak: "break-word",
                     wordWrap: "break-word",
                   },
-                  "& p img": {
-                    maxWidth: "100%",
-                    width: {
-                      md: "auto",
-                      xs: "100%",
+                  "& p ": {
+                    fontFamily: "Montserrat, michos !important",
+                    background: "transparent !important",
+                    "& span": {
+                      fontFamily: "Montserrat, michos !important",
+                      background: "transparent !important",
+                      "& a": {
+                        color: "#337ab7",
+                      },
                     },
-                    height: {
-                      md: "auto",
-                      xs: "auto",
+                    "& img": {
+                      maxWidth: "100%",
+                      width: {
+                        md: "auto",
+                        xs: "100%",
+                      },
+                      height: {
+                        md: "auto",
+                        xs: "auto",
+                      },
                     },
                   },
                   "& div img": {
