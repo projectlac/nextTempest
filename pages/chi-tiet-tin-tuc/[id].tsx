@@ -70,6 +70,7 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const res = await newsApi.getNewsBySlug(id as string);
   const post = await res.data;
+  console.log(post);
 
   return { props: { post } };
 }
