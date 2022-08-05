@@ -12,6 +12,7 @@ export interface DetailNewsType {
   title: string;
   description: string;
   updatedAt: string;
+  keyword: string;
   imageUrl: string;
   content: string;
   slug: string;

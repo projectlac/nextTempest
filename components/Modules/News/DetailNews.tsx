@@ -163,6 +163,18 @@ function DetailNews({ detailNews }: PropsDetailNews) {
                 }}
                 dangerouslySetInnerHTML={{ __html: detailNews.content }}
               />
+              {detailNews.keyword && (
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat, michos !important",
+                    mt: 5,
+                    fontSize: { md: 14, xs: 13 },
+                    fontStyle: "italic",
+                  }}
+                >
+                  <b>Từ khóa:</b> {detailNews.keyword}
+                </Typography>
+              )}
             </NewBox>
           </Box>
         </Box>

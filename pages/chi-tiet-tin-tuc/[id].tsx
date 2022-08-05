@@ -21,7 +21,10 @@ function DetailNewsPage({ post }) {
           />
           <meta property="og:type" content="article" />
           <meta property="og:title" content={post?.title || "Tempest"} />
-          <meta property="og:description" content={post.description} />
+          <meta
+            property="og:description"
+            content={`${post.description} ${post.keyword}`}
+          />
           <meta property="og:image" content={post.imageUrl} />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:alt" content={post.title} />
