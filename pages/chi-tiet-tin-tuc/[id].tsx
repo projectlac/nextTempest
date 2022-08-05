@@ -5,7 +5,7 @@ import newsApi from "../../api/newsApi";
 import Layout from "../../components/Layout/BaseLayout";
 import DetailNews from "../../components/Modules/News/DetailNews";
 
-function DetailNewsPage({ post }) {
+function DetailNewsPage({ post, id }) {
   return (
     <Layout>
       <>
@@ -17,7 +17,7 @@ function DetailNewsPage({ post }) {
           />
           <meta
             property="og:url"
-            content={`https://www.tempest.nv/chi-tiet-tin-tuc/${post.slug}`}
+            content={`https://www.tempest.nv/chi-tiet-tin-tuc/${id}`}
           />
           <meta property="og:type" content="article" />
           <meta property="og:title" content={post?.title || "Tempest"} />
@@ -74,5 +74,5 @@ export async function getServerSideProps(context) {
   const res = await newsApi.getNewsBySlug(id as string);
   const post = await res.data;
 
-  return { props: { post } };
+  return { props: { post, id } };
 }
