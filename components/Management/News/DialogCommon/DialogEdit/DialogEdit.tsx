@@ -202,7 +202,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               fullWidth={true}
               id="outlined-basic"
               label="Từ khóa SEO"
-              name="description"
+              name="keyword"
               variant="outlined"
               sx={{
                 "& label": {
