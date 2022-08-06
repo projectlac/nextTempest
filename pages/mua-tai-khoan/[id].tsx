@@ -12,12 +12,15 @@ export default function IndexPage() {
   return (
     <Layout>
       <Head>
-        <title>Mua tài khoản</title>
+        <title>
+          Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
+          of fantasy uy tín hàng đầu Việt Nam
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+          content="Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

@@ -52,7 +52,7 @@ export default class MyDocument extends Document {
           <link rel="alternate" hrefLang="vi" href="https://www.tempest.vn/" />
           <meta
             name="description"
-            content="Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+            content="Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam"
           />
         </Head>
         <body>

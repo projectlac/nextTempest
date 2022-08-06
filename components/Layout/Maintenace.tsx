@@ -34,7 +34,7 @@ export default function Maintenance() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           property="og:description"
-          content="Hệ thống đang bảo trì, vui lòng quay lại sau - Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+          content="Hệ thống đang bảo trì, vui lòng quay lại sau - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam"
         />
       </Head>
       <Error>

@@ -13,7 +13,7 @@ export default function IndexPage() {
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt Nam"
+          content="Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

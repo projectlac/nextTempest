@@ -10,7 +10,10 @@ function DetailNewsPage({ post, id }) {
     <Layout>
       <>
         <Head>
-          <title>{post?.title || "Tempest"}</title>
+          <title>
+            {post?.title || "Tempest"} - Tempest Shop - Mua bán tài khoản
+            Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam
+          </title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"

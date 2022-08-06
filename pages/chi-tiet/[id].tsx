@@ -9,7 +9,10 @@ export default function DetailProduct({ post }) {
   return (
     <Layout>
       <Head>
-        <title>{post.name}</title>
+        <title>
+          {post.name} - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
+          of fantasy uy tín hàng đầu Việt Nam
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
         <meta property="og:type" content="article" />
