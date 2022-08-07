@@ -82,8 +82,8 @@ function Footer() {
               marginTop: "8px",
             }}
           >
-            Tempest Genshin nơi cung cấp tài khoản, Nạp game an toàn nhất Việt
-            Nam
+            Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy
+            tín hàng đầu Việt Nam
           </Typography>
 
           <Hidden mdDown>

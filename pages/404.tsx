@@ -107,7 +107,7 @@ export default function FourOhFour() {
               >
                 <Link href="/">
                   <a>
-                    Quay lại Tempest Genshin <KeyboardDoubleArrowRightIcon />
+                    Quay lại Tempest Shop <KeyboardDoubleArrowRightIcon />
                   </a>
                 </Link>
               </Box>

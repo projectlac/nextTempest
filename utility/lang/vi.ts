@@ -1,6 +1,6 @@
 const home = [
   [
-    `Tempest Genshin nơi cung cấp tài khoản,`, // home
+    `Tempest Shop nơi cung cấp tài khoản Genshin, Tower of Fantasy,`, // home
     "Nạp game an toàn nhất Việt Nam",
   ],
 
