@@ -194,7 +194,7 @@ const Title = styled(Typography)(
  } 
 
  @media (min-width: 1024px) {
-  font-size: 25px;
+  font-size: 23px;
   padding-top: 20px;
 
 } 

@@ -259,7 +259,6 @@ function DetailPrice({
         </Box>
 
         {isLogin ? (
-          // <Link href={`/thanh-toan/${id}?redirect=${slug}`} passHref>
           <ButtonBuy onClick={buyAccount}> </ButtonBuy>
         ) : (
           // </Link>
