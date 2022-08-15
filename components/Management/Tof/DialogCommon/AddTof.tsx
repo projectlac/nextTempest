@@ -56,7 +56,11 @@ export default function AddTof() {
       .string()
       .min(8, "Title should be of minimum 8 characters length")
       .required("Thông tin này là bắt buộc"),
-
+    weapon: yup
+      .array()
+      .min(1, "Thông tin này là bắt buộc")
+      .nullable()
+      .required("Thông tin này là bắt buộc"),
     ar: yup.number().required("Thông tin này là bắt buộc"),
     character: yup
       .array()
@@ -73,7 +77,7 @@ export default function AddTof() {
   const formik = useFormik({
     initialValues: {
       title: "",
-
+      weapon: ["cung-amos"],
       character: [],
       server: "",
       body: "",
@@ -89,7 +93,7 @@ export default function AddTof() {
     onSubmit: (values, { resetForm }) => {
       const {
         title,
-
+        weapon,
         character,
         server,
         body,
@@ -107,7 +111,7 @@ export default function AddTof() {
 
       formData.append("name", title);
       formData.append("ar", ar.toString());
-      formData.append("weapon", "cung-amos");
+      formData.append("weapon", weapon.toString());
       formData.append("char", character.toString());
       formData.append("code", accountId);
       formData.append("tinhHuy", tinhhuy.toString());
@@ -153,10 +157,11 @@ export default function AddTof() {
   const handleSelectedCharacter = (data: string[]) => {
     formik.handleChange({ target: { name: "character", value: data } });
   };
+  const handleSelectedWeapon = (data: string[]) => {
+    formik.handleChange({ target: { name: "weapon", value: data } });
+  };
 
   const handleSelectedServer = (data: string) => {
-    console.log(data);
-
     formik.handleChange({ target: { name: "server", value: data } });
   };
 
@@ -265,13 +270,13 @@ export default function AddTof() {
               handleSelectedCharacter={handleSelectedCharacter}
               defaultValue={[]}
             />
-            {/* <WeaponList
+            <WeaponList
               data={getNameSortAtoB(TAG_TYPE.WEAPON)}
               error={formik.touched.weapon && Boolean(formik.errors.weapon)}
               helper={formik.touched.weapon && (formik.errors.weapon as string)}
               handleSelectedWeapon={handleSelectedWeapon}
               defaultValue={[]}
-            /> */}
+            />
 
             <Grid container columnSpacing={2} rowSpacing={2} mt={1}>
               <Grid item md={6}>

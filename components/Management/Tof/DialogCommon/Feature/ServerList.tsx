@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FormHelperText } from "@mui/material";
 import { useAppContext } from "../../../../../context/state";
+import tagApi from "../../../../../api/tag";
 
 interface ServerListProps {
   error: boolean;
@@ -22,6 +23,7 @@ export default function ServerList({
 }: ServerListProps) {
   const [age, setAge] = React.useState("");
   const { update } = useAppContext();
+  const [listData, setListData] = React.useState([]); // Loading đầu game để lấy dữ liệu cho form
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
@@ -30,6 +32,19 @@ export default function ServerList({
   React.useEffect(() => {
     setAge("");
   }, [update]);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      try {
+        await tagApi
+          .getTag({ type: "SERVER", game: "tower-of-fantasy" })
+          .then((res) => {
+            setListData(res.data);
+          });
+      } catch (error) {}
+    };
+    getData();
+  }, []);
 
   React.useEffect(() => {
     setAge(defaultValue);
@@ -66,15 +81,19 @@ export default function ServerList({
           onChange={handleChange}
           error={error}
         >
-          <MenuItem
-            sx={{
-              fontFamily: "Montserrat",
-            }}
-            value={"Asia"}
-          >
-            Asia
-          </MenuItem>
-          <MenuItem
+          {listData &&
+            listData.map((d) => (
+              <MenuItem
+                key={d.id}
+                sx={{
+                  fontFamily: "Montserrat",
+                }}
+                value={d.slug}
+              >
+                {d.title}
+              </MenuItem>
+            ))}
+          {/* <MenuItem
             sx={{
               fontFamily: "Montserrat",
             }}
@@ -97,7 +116,7 @@ export default function ServerList({
             value={"TW, HK, MO"}
           >
             TW, HK, MO
-          </MenuItem>
+          </MenuItem> */}
         </Select>
         {error && (
           <FormHelperText sx={{ color: "#d32f2f" }}>{helper}</FormHelperText>
