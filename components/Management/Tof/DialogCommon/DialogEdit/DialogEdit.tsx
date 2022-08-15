@@ -55,11 +55,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       .required("Thông tin này là bắt buộc"),
 
     ar: yup.number().required("Thông tin này là bắt buộc"),
-    weapon: yup
-      .array()
-      .min(1, "Thông tin này là bắt buộc")
-      .nullable()
-      .required("Thông tin này là bắt buộc"),
+
     character: yup
       .array()
       .min(1, "Thông tin này là bắt buộc")
@@ -75,9 +71,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   const formik = useFormik({
     initialValues: {
       title: defaultData.name,
-      weapon: defaultData.tags
-        .filter((d) => d.type === TAG_TYPE.WEAPON)
-        .map((d) => d.title),
+
       character: defaultData.tags
         .filter((d) => d.type === TAG_TYPE.CHARACTER)
         .map((d) => d.title),
@@ -90,16 +84,21 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       moonPack: defaultData.moonPack,
       oldPrice: defaultData.oldPrice,
       newPrice: defaultData.newPrice,
+      tofUsername: defaultData.tofUsername,
+      tofPassword: defaultData.tofPassword,
+      ortherParamTof: defaultData.ortherParamTof,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       const {
         title,
-        weapon,
+
         character,
         server,
-
+        tofUsername,
+        tofPassword,
+        ortherParamTof,
         body,
         ar,
         primogems,
@@ -113,7 +112,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
 
       formData.append("name", title);
       formData.append("ar", ar.toString());
-      formData.append("weapon", weapon.toString());
+      formData.append("weapon", "Đang Cập Nhật");
       formData.append("char", character.toString());
       formData.append("code", accountId);
       formData.append("tinhHuy", tinhhuy.toString());
@@ -123,6 +122,10 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       formData.append("description", body.toString());
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
+      formData.append("ortherParamTof", ortherParamTof.toString());
+      formData.append("tofUsername", tofUsername);
+      formData.append("tofPassword", tofPassword);
+      formData.append("game", "tower-of-fantasy");
 
       if (fileList && fileList.length > 0) {
         for (let i = 0; i < fileList.length; i++) {
@@ -151,7 +154,8 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         });
     },
   });
-
+  console.log(defaultData);
+  console.log(formik.values.server);
   const onEditorChange = (data: string) => {
     formik.handleChange({ target: { name: "body", value: data } });
   };
@@ -160,9 +164,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     formik.handleChange({ target: { name: "character", value: data } });
   };
 
-  const handleSelectedWeapon = (data: string[]) => {
-    formik.handleChange({ target: { name: "weapon", value: data } });
-  };
   const handleSelectedServer = (data: string) => {
     formik.handleChange({ target: { name: "server", value: data } });
   };
@@ -185,9 +186,10 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     const getData = async () => {
       try {
         await tagApi
-          .getTag({ type: "", game: "genshin-impact" })
+          .getTag({ type: "", game: "tower-of-fantasy" })
           .then((res) => {
             setListData(res.data);
+
             setFileListCurreny(defaultData.cloundinary);
           });
       } catch (error) {}
@@ -274,15 +276,64 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             handleSelectedCharacter={handleSelectedCharacter}
             defaultValue={formik.values.character}
           />
-          <WeaponList
-            data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-            error={formik.touched.weapon && Boolean(formik.errors.weapon)}
-            helper={formik.touched.weapon && (formik.errors.weapon as string)}
-            handleSelectedWeapon={handleSelectedWeapon}
-            defaultValue={formik.values.weapon}
-          />
 
-          <Grid container columnSpacing={2} rowSpacing={2}>
+          <Grid container columnSpacing={2} rowSpacing={2} mt={1}>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                id="tofUsername"
+                label="Username"
+                name="tofUsername"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.tofUsername}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.tofUsername &&
+                  Boolean(formik.errors.tofUsername)
+                }
+                helperText={
+                  formik.touched.tofUsername &&
+                  (formik.errors.tofUsername as string)
+                }
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                id="tofPassword"
+                label="Password"
+                name="tofPassword"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.tofPassword}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.tofPassword &&
+                  Boolean(formik.errors.tofPassword)
+                }
+                helperText={
+                  formik.touched.tofPassword &&
+                  (formik.errors.tofPassword as string)
+                }
+              />
+            </Grid>
             <Grid item md={6}>
               <TextField
                 fullWidth
@@ -337,7 +388,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={3}>
               <TextField
                 fullWidth
                 id="accountId"
@@ -365,7 +416,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={3}>
               <TextField
                 fullWidth
                 id="moonPack"
@@ -394,19 +445,19 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             </Grid>
             <Grid item md={6}>
               <ServerList
-                error={formik.touched.weapon && Boolean(formik.errors.weapon)}
+                error={formik.touched.server && Boolean(formik.errors.server)}
                 helper={
-                  formik.touched.weapon && (formik.errors.weapon as string)
+                  formik.touched.server && (formik.errors.server as string)
                 }
                 handleSelectedServer={handleSelectedServer}
                 defaultValue={formik.values.server}
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={3}>
               <TextField
                 fullWidth
                 id="ar"
-                label="Adventure Rank"
+                label="Level"
                 name="ar"
                 type="number"
                 variant="outlined"
@@ -425,11 +476,11 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 helperText={formik.touched.ar && (formik.errors.ar as string)}
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={3}>
               <TextField
                 fullWidth
                 id="primogems"
-                label="Nguyên thạch"
+                label="Tanium"
                 name="primogems"
                 type="number"
                 variant="outlined"
@@ -453,11 +504,11 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={3}>
               <TextField
                 fullWidth
                 id="tinhhuy"
-                label="Tinh huy"
+                label="Gold nucleus"
                 name="tinhhuy"
                 type="number"
                 variant="outlined"
@@ -475,6 +526,35 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 error={formik.touched.tinhhuy && Boolean(formik.errors.tinhhuy)}
                 helperText={
                   formik.touched.tinhhuy && (formik.errors.tinhhuy as string)
+                }
+              />
+            </Grid>
+            <Grid item md={3}>
+              <TextField
+                fullWidth
+                id="ortherParamTof"
+                label="Red nucleus"
+                name="ortherParamTof"
+                type="number"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.ortherParamTof}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.ortherParamTof &&
+                  Boolean(formik.errors.ortherParamTof)
+                }
+                helperText={
+                  formik.touched.ortherParamTof &&
+                  (formik.errors.ortherParamTof as string)
                 }
               />
             </Grid>

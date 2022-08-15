@@ -64,6 +64,10 @@ const BillBox = styled(Box)(
 interface IBill {
   id: string;
 }
+interface IUserData {
+  tofPassword: string;
+  tofUsername: string;
+}
 function Bill({ id }: IBill) {
   const [time, setTime] = useState("");
   const [account, setAccount] = useState([]);
@@ -74,6 +78,7 @@ function Bill({ id }: IBill) {
     audit.getAuditById(id).then((res) => {
       setTime(res.data.updatedAt);
       setAccount(res.data.information.accounts);
+
       setType(res.data.information.gmail);
       setCode(res.data.id.split("-")[0]);
     });
@@ -190,6 +195,60 @@ function Bill({ id }: IBill) {
                   </table>
                   <Box mt={3}>
                     <Divider></Divider>
+                    <>
+                      {account &&
+                        account.map((d) => {
+                          if (d.tofUsername && d.tofUsername !== "") {
+                            return (
+                              <Box>
+                                <Typography
+                                  fontFamily={"Montserrat"}
+                                  fontWeight={700}
+                                  color={"#58576D"}
+                                  mt={2}
+                                >
+                                  Thông tin tài khoản mua
+                                </Typography>
+
+                                <Box mt={1}>
+                                  <Typography
+                                    fontFamily={"Montserrat"}
+                                    color={"#58576D"}
+                                    fontWeight={600}
+                                    fontSize={15}
+                                  >
+                                    Username:
+                                  </Typography>
+                                  <Typography
+                                    fontFamily={"Montserrat"}
+                                    color={"#58576D"}
+                                    fontWeight={700}
+                                    fontSize={18}
+                                  >
+                                    {d.tofUsername}
+                                  </Typography>
+                                  <Typography
+                                    fontFamily={"Montserrat"}
+                                    color={"#58576D"}
+                                    fontWeight={600}
+                                    fontSize={15}
+                                  >
+                                    Password:
+                                    <Typography
+                                      fontFamily={"Montserrat"}
+                                      color={"#58576D"}
+                                      fontWeight={700}
+                                      fontSize={18}
+                                    >
+                                      {d.tofPassword}
+                                    </Typography>
+                                  </Typography>
+                                </Box>
+                              </Box>
+                            );
+                          }
+                        })}
+                    </>
                   </Box>
                   <Grid
                     container

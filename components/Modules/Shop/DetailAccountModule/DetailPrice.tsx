@@ -138,6 +138,8 @@ interface DetailProps {
   moonPack: number;
   id: string;
   slug: string;
+  game: string;
+  ortherParamTof?: string;
 }
 function DetailPrice({
   price,
@@ -148,6 +150,8 @@ function DetailPrice({
   primogems,
   tinhHuy,
   moonPack,
+  game,
+  ortherParamTof,
 }: DetailProps) {
   const {
     isLogin,
@@ -241,22 +245,45 @@ function DetailPrice({
         </Typography>
         <BoxBorder>{toMoney(price)} VND</BoxBorder>
 
-        <Box textAlign={"left"}>
-          <TextSpecial>
-            <b>Adventure Rank:</b> {ar}
-          </TextSpecial>
-          <TextSpecial>
-            <b>Primogems:</b> {primogems}
-          </TextSpecial>
-          <TextSpecial>
-            <b>Tinh huy:</b> {tinhHuy}
-          </TextSpecial>
-          {moonPack > 0 && (
+        {game === "genshin-impact" && (
+          <Box textAlign={"left"}>
             <TextSpecial>
-              <b>Thẻ tháng:</b> Còn {moonPack} ngày
+              <b>Adventure Rank:</b> {ar}
             </TextSpecial>
-          )}
-        </Box>
+            <TextSpecial>
+              <b>Primogems:</b> {primogems}
+            </TextSpecial>
+            <TextSpecial>
+              <b>Tinh huy:</b> {tinhHuy}
+            </TextSpecial>
+            {moonPack > 0 && (
+              <TextSpecial>
+                <b>Thẻ tháng:</b> Còn {moonPack} ngày
+              </TextSpecial>
+            )}
+          </Box>
+        )}
+        {game === "tower-of-fantasy" && (
+          <Box textAlign={"left"}>
+            <TextSpecial>
+              <b>Level:</b> {ar}
+            </TextSpecial>
+            <TextSpecial>
+              <b>Tinium:</b> {primogems}
+            </TextSpecial>
+            <TextSpecial>
+              <b>Gold nucleus:</b> {tinhHuy}
+            </TextSpecial>
+            <TextSpecial>
+              <b>Red nucleus:</b> {ortherParamTof}
+            </TextSpecial>
+            {moonPack > 0 && (
+              <TextSpecial>
+                <b>Thẻ tháng:</b> Còn {moonPack} ngày
+              </TextSpecial>
+            )}
+          </Box>
+        )}
 
         {isLogin ? (
           <ButtonBuy onClick={buyAccount}> </ButtonBuy>

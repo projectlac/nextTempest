@@ -47,6 +47,8 @@ export default function ServerList({
   }, []);
 
   React.useEffect(() => {
+    if (defaultValue) console.log("a");
+
     setAge(defaultValue);
   }, [defaultValue]);
   return (

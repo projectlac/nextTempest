@@ -205,7 +205,6 @@ interface IBuy {
   slug: string;
 }
 export default function CustomizedAccordions({ slug }: IBuy) {
-  console.log(slug);
   const { updated, handleSelectedFilter } = useAppContext();
   const [listData, setListData] = React.useState([]);
   React.useEffect(() => {
@@ -270,13 +269,14 @@ export default function CustomizedAccordions({ slug }: IBuy) {
         handleFilter={handleFilter}
         open={true}
       />
-
-      <RenderItem
-        title={"Weapon"}
-        data={[...listData].filter((d) => d.type === TAG_TYPE.WEAPON)}
-        handleFilter={handleFilter}
-        open={false}
-      />
+      {slug !== "tower-of-fantasy" && (
+        <RenderItem
+          title={"Weapon"}
+          data={[...listData].filter((d) => d.type === TAG_TYPE.WEAPON)}
+          handleFilter={handleFilter}
+          open={false}
+        />
+      )}
     </Box>
   );
 }

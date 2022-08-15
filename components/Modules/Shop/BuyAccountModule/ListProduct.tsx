@@ -70,23 +70,25 @@ function ListProduct({ slug }: IBuy) {
   useEffect(() => {
     const getData = async () => {
       try {
-        await tagApi
-          .getAccount({
-            character: selectedFilter.character.toString(),
-            limit: CONST_INFORMATION.LIMIT,
-            offset: pageCurrently,
-            server: selectedFilter.server.toString(),
-            weapon: selectedFilter.weapon.toString(),
-            sort: sortBy,
-            queryString: findCode,
-            startPrice: sortByPrice[0],
-            endPrice: sortByPrice[1],
-            game: slug,
-          })
-          .then((res) => {
-            setProductList(res.data.data);
-            setTotal(res.data.total);
-          });
+        if (slug) {
+          await tagApi
+            .getAccount({
+              character: selectedFilter.character.toString(),
+              limit: CONST_INFORMATION.LIMIT,
+              offset: pageCurrently,
+              server: selectedFilter.server.toString(),
+              weapon: selectedFilter.weapon.toString(),
+              sort: sortBy,
+              queryString: findCode,
+              startPrice: sortByPrice[0],
+              endPrice: sortByPrice[1],
+              game: slug,
+            })
+            .then((res) => {
+              setProductList(res.data.data);
+              setTotal(res.data.total);
+            });
+        }
       } catch (error) {}
     };
     getData();

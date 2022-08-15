@@ -27,6 +27,10 @@ export default function EditTof({ id }: PropsEditNews) {
     id: "",
     tags: [],
     cloundinary: [],
+    game: "tower-of-fantasy",
+    tofUsername: "",
+    tofPassword: "",
+    ortherParamTof: 0,
   });
   // Loading đầu game để lấy dữ liệu cho form
 

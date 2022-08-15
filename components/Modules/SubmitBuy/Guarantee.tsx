@@ -192,8 +192,7 @@ function Guarantee({ handleSelect, handleStep }: GuaranteeProps) {
                   >
                     - Bị{" "}
                     <span style={{ color: "#000" }}>thay đổi Username.</span>
-                    <br />- Bị{" "}
-                    <span style={{ color: "#000" }}>refund nguyên thạch. </span>
+                    <br />- Bị <span style={{ color: "#000" }}>refund. </span>
                   </Typography>
 
                   <Typography

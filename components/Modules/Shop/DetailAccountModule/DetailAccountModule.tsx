@@ -65,6 +65,7 @@ function DetailAccountModule({ data }: DataDetail) {
             >
               <DetailInformation
                 description={data.description}
+                game={data.game}
                 weapon={[...data.tags].filter(
                   (d) => d.type === TAG_TYPE.WEAPON
                 )}
@@ -92,6 +93,8 @@ function DetailAccountModule({ data }: DataDetail) {
                 primogems={data.nguyenThach}
                 tinhHuy={data.tinhHuy}
                 moonPack={data.moonPack}
+                game={data.game}
+                ortherParamTof={data.ortherParamTof}
               />
             </Grid>
           </Grid>

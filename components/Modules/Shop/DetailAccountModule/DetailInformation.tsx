@@ -59,8 +59,9 @@ const BGWrap = styled(Box)({
 interface DetailProps {
   description: string;
   weapon: string[];
+  game: string;
 }
-function DetailInformation({ description, weapon }: DetailProps) {
+function DetailInformation({ description, weapon, game }: DetailProps) {
   return (
     <BGWrap>
       <Box
@@ -93,39 +94,43 @@ function DetailInformation({ description, weapon }: DetailProps) {
           }}
           dangerouslySetInnerHTML={{ __html: description }}
         ></Box>
-        <Typography
-          color={"#4B65A3"}
-          fontFamily="Montserrat"
-          fontWeight={"bold"}
-          textAlign="left"
-          sx={{
-            fontSize: {
-              md: "20px",
-              xs: "15px",
-            },
-          }}
-        >
-          Vũ khí
-        </Typography>
-        <Box
-          sx={{
-            fontFamily: "Montserrat",
-            textAlign: "initial",
-            color: "#4B65A3",
-            fontSize: {
-              md: "20px",
-              xs: "15px",
-            },
-            fontWeight: 500,
-          }}
-        >
-          {(weapon || []).map((d: any, i: number) => (
-            <span key={i}>
-              {d.title}
-              {weapon.length - 1 !== i && ","}{" "}
-            </span>
-          ))}
-        </Box>
+        {game !== "tower-of-fantasy" && (
+          <>
+            <Typography
+              color={"#4B65A3"}
+              fontFamily="Montserrat"
+              fontWeight={"bold"}
+              textAlign="left"
+              sx={{
+                fontSize: {
+                  md: "20px",
+                  xs: "15px",
+                },
+              }}
+            >
+              Vũ khí
+            </Typography>
+            <Box
+              sx={{
+                fontFamily: "Montserrat",
+                textAlign: "initial",
+                color: "#4B65A3",
+                fontSize: {
+                  md: "20px",
+                  xs: "15px",
+                },
+                fontWeight: 500,
+              }}
+            >
+              {(weapon || []).map((d: any, i: number) => (
+                <span key={i}>
+                  {d.title}
+                  {weapon.length - 1 !== i && ","}{" "}
+                </span>
+              ))}
+            </Box>
+          </>
+        )}
       </Box>
     </BGWrap>
   );

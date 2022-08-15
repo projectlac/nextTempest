@@ -56,11 +56,7 @@ export default function AddTof() {
       .string()
       .min(8, "Title should be of minimum 8 characters length")
       .required("Thông tin này là bắt buộc"),
-    weapon: yup
-      .array()
-      .min(1, "Thông tin này là bắt buộc")
-      .nullable()
-      .required("Thông tin này là bắt buộc"),
+
     ar: yup.number().required("Thông tin này là bắt buộc"),
     character: yup
       .array()
@@ -72,6 +68,8 @@ export default function AddTof() {
     newPrice: yup.number().required("Thông tin này là bắt buộc"),
     accountId: yup.string().required("Thông tin này là bắt buộc"),
     tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
+    tofUsername: yup.string().required("Thông tin này là bắt buộc"),
+    tofPassword: yup.string().required("Thông tin này là bắt buộc"),
   });
 
   const formik = useFormik({
@@ -88,6 +86,9 @@ export default function AddTof() {
       moonPack: 0,
       oldPrice: 0,
       newPrice: 0,
+      ortherParamTof: 0,
+      tofUsername: "",
+      tofPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -102,6 +103,9 @@ export default function AddTof() {
         tinhhuy,
         accountId,
         moonPack,
+        ortherParamTof,
+        tofUsername,
+        tofPassword,
         oldPrice,
         newPrice,
       } = values;
@@ -111,7 +115,7 @@ export default function AddTof() {
 
       formData.append("name", title);
       formData.append("ar", ar.toString());
-      formData.append("weapon", weapon.toString());
+      formData.append("weapon", "Đang Cập Nhật");
       formData.append("char", character.toString());
       formData.append("code", accountId);
       formData.append("tinhHuy", tinhhuy.toString());
@@ -121,6 +125,9 @@ export default function AddTof() {
       formData.append("description", body.toString());
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
+      formData.append("ortherParamTof", ortherParamTof.toString());
+      formData.append("tofUsername", tofUsername);
+      formData.append("tofPassword", tofPassword);
       formData.append("game", "tower-of-fantasy");
 
       for (let i = 0; i < fileList.length; i++) {
@@ -156,9 +163,6 @@ export default function AddTof() {
 
   const handleSelectedCharacter = (data: string[]) => {
     formik.handleChange({ target: { name: "character", value: data } });
-  };
-  const handleSelectedWeapon = (data: string[]) => {
-    formik.handleChange({ target: { name: "weapon", value: data } });
   };
 
   const handleSelectedServer = (data: string) => {
@@ -270,15 +274,62 @@ export default function AddTof() {
               handleSelectedCharacter={handleSelectedCharacter}
               defaultValue={[]}
             />
-            <WeaponList
-              data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-              error={formik.touched.weapon && Boolean(formik.errors.weapon)}
-              helper={formik.touched.weapon && (formik.errors.weapon as string)}
-              handleSelectedWeapon={handleSelectedWeapon}
-              defaultValue={[]}
-            />
 
             <Grid container columnSpacing={2} rowSpacing={2} mt={1}>
+              <Grid item md={6}>
+                <TextField
+                  fullWidth
+                  id="tofUsername"
+                  label="Username"
+                  name="tofUsername"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.tofUsername}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.tofUsername &&
+                    Boolean(formik.errors.tofUsername)
+                  }
+                  helperText={
+                    formik.touched.tofUsername && formik.errors.tofUsername
+                  }
+                />
+              </Grid>
+              <Grid item md={6}>
+                <TextField
+                  fullWidth
+                  id="tofPassword"
+                  label="Password"
+                  name="tofPassword"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.tofPassword}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.tofPassword &&
+                    Boolean(formik.errors.tofPassword)
+                  }
+                  helperText={
+                    formik.touched.tofPassword && formik.errors.tofPassword
+                  }
+                />
+              </Grid>
               <Grid item md={6}>
                 <TextField
                   fullWidth
@@ -329,7 +380,7 @@ export default function AddTof() {
                   helperText={formik.touched.newPrice && formik.errors.newPrice}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={3}>
                 <TextField
                   fullWidth
                   id="accountId"
@@ -356,7 +407,7 @@ export default function AddTof() {
                   }
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={3}>
                 <TextField
                   fullWidth
                   id="moonPack"
@@ -391,7 +442,7 @@ export default function AddTof() {
                   defaultValue={""}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={3}>
                 <TextField
                   fullWidth
                   id="ar"
@@ -414,7 +465,7 @@ export default function AddTof() {
                   helperText={formik.touched.ar && formik.errors.ar}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={3}>
                 <TextField
                   fullWidth
                   id="primogems"
@@ -441,7 +492,7 @@ export default function AddTof() {
                   }
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={3}>
                 <TextField
                   fullWidth
                   id="tinhhuy"
@@ -464,6 +515,35 @@ export default function AddTof() {
                     formik.touched.tinhhuy && Boolean(formik.errors.tinhhuy)
                   }
                   helperText={formik.touched.tinhhuy && formik.errors.tinhhuy}
+                />
+              </Grid>
+              <Grid item md={3}>
+                <TextField
+                  fullWidth
+                  id="ortherParamTof"
+                  label="Red nucleus"
+                  name="ortherParamTof"
+                  type="number"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.ortherParamTof}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.ortherParamTof &&
+                    Boolean(formik.errors.ortherParamTof)
+                  }
+                  helperText={
+                    formik.touched.ortherParamTof &&
+                    formik.errors.ortherParamTof
+                  }
                 />
               </Grid>
             </Grid>
