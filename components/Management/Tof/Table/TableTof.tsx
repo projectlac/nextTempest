@@ -19,7 +19,7 @@ import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
 import AddTof from "../DialogCommon/AddTof";
-import EditGenshin from "../DialogCommon/EditGenshin";
+import EditTof from "../DialogCommon/EditTof";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 import CachedIcon from "@mui/icons-material/Cached";
 import Refund from "../DialogCommon/Refund";
@@ -246,7 +246,7 @@ const TableTof: FC<RecentOrdersTableProps> = ({
                         color="inherit"
                         size="small"
                       >
-                        <EditGenshin id={cryptoOrder.id} />
+                        <EditTof id={cryptoOrder.id} />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Xóa bài viết" arrow>

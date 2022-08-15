@@ -9,7 +9,7 @@ import DialogEdit from "./DialogEdit/DialogEdit";
 interface PropsEditNews {
   id: string;
 }
-export default function EditGenshin({ id }: PropsEditNews) {
+export default function EditTof({ id }: PropsEditNews) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [defaultData, setDefaultData] = React.useState({
     ar: 0,

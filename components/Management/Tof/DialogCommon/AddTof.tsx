@@ -77,7 +77,7 @@ export default function AddTof() {
   const formik = useFormik({
     initialValues: {
       title: "",
-      weapon: ["cung-amos"],
+      weapon: ["Cung Amos"],
       character: [],
       server: "",
       body: "",
