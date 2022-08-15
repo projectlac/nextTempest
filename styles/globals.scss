@@ -224,7 +224,7 @@ body {
   input[type="radio"]:focus {
     outline-color: transparent;
   }
-  @media screen and (min-width:760px) {
+  @media screen and (min-width: 760px) {
     padding-inline-start: 40px;
   }
 }
@@ -249,4 +249,19 @@ body {
       font-size: 16px;
     }
   }
+}
+.textField111 input {
+  width: 100%;
+
+  padding: 12px 20px;
+
+  margin: 8px 0;
+
+  display: inline-block;
+
+  border-radius: 4px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
 }

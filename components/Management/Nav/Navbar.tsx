@@ -44,6 +44,11 @@ export default function Navbar() {
       link: "/dashboard/genshin",
     },
     {
+      name: "Quản lý TOF",
+      icon: <InboxIcon />,
+      link: "/dashboard/tof",
+    },
+    {
       name: "Quản lý Tags",
       icon: <InboxIcon />,
       link: "/dashboard/tags",
