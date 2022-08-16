@@ -66,6 +66,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     newPrice: yup.number().required("Thông tin này là bắt buộc"),
     accountId: yup.string().required("Thông tin này là bắt buộc"),
     tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
+    ortherParamTof: yup.number().required("Thông tin này là bắt buộc"),
   });
 
   const formik = useFormik({
@@ -84,8 +85,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       moonPack: defaultData.moonPack,
       oldPrice: defaultData.oldPrice,
       newPrice: defaultData.newPrice,
-      tofUsername: defaultData.tofUsername,
-      tofPassword: defaultData.tofPassword,
+
       ortherParamTof: defaultData.ortherParamTof,
     },
     enableReinitialize: true,
@@ -96,8 +96,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
 
         character,
         server,
-        tofUsername,
-        tofPassword,
+
         ortherParamTof,
         body,
         ar,
@@ -123,8 +122,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
       formData.append("ortherParamTof", ortherParamTof.toString());
-      formData.append("tofUsername", tofUsername);
-      formData.append("tofPassword", tofPassword);
+
       formData.append("game", "tower-of-fantasy");
 
       if (fileList && fileList.length > 0) {
@@ -278,62 +276,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
           />
 
           <Grid container columnSpacing={2} rowSpacing={2} mt={1}>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="tofUsername"
-                label="Username"
-                name="tofUsername"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.tofUsername}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.tofUsername &&
-                  Boolean(formik.errors.tofUsername)
-                }
-                helperText={
-                  formik.touched.tofUsername &&
-                  (formik.errors.tofUsername as string)
-                }
-              />
-            </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="tofPassword"
-                label="Password"
-                name="tofPassword"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.tofPassword}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.tofPassword &&
-                  Boolean(formik.errors.tofPassword)
-                }
-                helperText={
-                  formik.touched.tofPassword &&
-                  (formik.errors.tofPassword as string)
-                }
-              />
-            </Grid>
             <Grid item md={6}>
               <TextField
                 fullWidth

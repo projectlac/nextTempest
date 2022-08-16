@@ -195,60 +195,6 @@ function Bill({ id }: IBill) {
                   </table>
                   <Box mt={3}>
                     <Divider></Divider>
-                    <>
-                      {account &&
-                        account.map((d) => {
-                          if (d.tofUsername && d.tofUsername !== "") {
-                            return (
-                              <Box>
-                                <Typography
-                                  fontFamily={"Montserrat"}
-                                  fontWeight={700}
-                                  color={"#58576D"}
-                                  mt={2}
-                                >
-                                  Thông tin tài khoản mua
-                                </Typography>
-
-                                <Box mt={1}>
-                                  <Typography
-                                    fontFamily={"Montserrat"}
-                                    color={"#58576D"}
-                                    fontWeight={600}
-                                    fontSize={15}
-                                  >
-                                    Username:
-                                  </Typography>
-                                  <Typography
-                                    fontFamily={"Montserrat"}
-                                    color={"#58576D"}
-                                    fontWeight={700}
-                                    fontSize={18}
-                                  >
-                                    {d.tofUsername}
-                                  </Typography>
-                                  <Typography
-                                    fontFamily={"Montserrat"}
-                                    color={"#58576D"}
-                                    fontWeight={600}
-                                    fontSize={15}
-                                  >
-                                    Password:
-                                    <Typography
-                                      fontFamily={"Montserrat"}
-                                      color={"#58576D"}
-                                      fontWeight={700}
-                                      fontSize={18}
-                                    >
-                                      {d.tofPassword}
-                                    </Typography>
-                                  </Typography>
-                                </Box>
-                              </Box>
-                            );
-                          }
-                        })}
-                    </>
                   </Box>
                   <Grid
                     container
