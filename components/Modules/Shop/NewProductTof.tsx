@@ -161,7 +161,7 @@ function NewProductTof() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: "genshin-impact" },
+              query: { id: "tower-of-fantasy" },
             }}
             passHref
           >
