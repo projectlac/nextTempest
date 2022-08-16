@@ -177,7 +177,7 @@ function Bill({ id }: IBill) {
                       <tr>
                         <th>Mã sản phẩm</th>
                         <th>Loại BH</th>
-                        <th>Giá tền</th>
+                        <th>Giá tiền</th>
                       </tr>
                     </thead>
                     <tbody>

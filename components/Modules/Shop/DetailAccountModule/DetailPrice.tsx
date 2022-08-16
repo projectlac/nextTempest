@@ -208,7 +208,7 @@ function DetailPrice({
       handleChangeStatusToast();
       updated();
     } else {
-      router.push(`/thanh-toan/${id}?redirect=${slug}`);
+      router.push(`/thanh-toan/${game}/${id}?redirect=${slug}`);
     }
   };
   return (

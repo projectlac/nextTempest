@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import * as React from "react";
-import Layout from "../../components/Layout/BaseLayout";
-import SubmitBuy from "../../components/Modules/SubmitBuy/SubmitBuy";
+import Layout from "../../../components/Layout/BaseLayout";
+import SubmitBuyTof from "../../../components/Modules/SubmitBuyTof/SubmitBuyTof";
 
 export default function IndexPage() {
   const router = useRouter();
@@ -17,7 +16,7 @@ export default function IndexPage() {
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <SubmitBuy ids={id as string} slug={redirect as string} />
+      <SubmitBuyTof ids={id as string} slug={redirect as string} />
     </Layout>
   );
 }
