@@ -4,6 +4,7 @@ import React from "react";
 import background from "../../styles/assets/images/Background.png";
 import FlashSale from "./Shop/FlashSale";
 import NewProduct from "./Shop/NewProduct";
+import NewProductTof from "./Shop/NewProductTof";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -22,6 +23,8 @@ function ModuleShop() {
     <ProductWrap>
       <Container>
         <NewProduct></NewProduct>
+        <NewProductTof></NewProductTof>
+
         <FlashSale></FlashSale>
       </Container>
     </ProductWrap>
