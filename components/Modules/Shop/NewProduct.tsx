@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import TitleHighlight from "../../Common/Title/TitleHighlight";
 import BG from "../../../styles/assets/images/Shop/BGnewProduct.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/ButtonShowMore.png";
-import NewestProduct from "../../../styles/assets/images/Shop/newestProduct.png";
+import NewestProduct from "../../../styles/assets/images/Shop/Hàng-mới-về-Genshin-impact.png";
 import tagApi from "../../../api/tag";
 import ShopItem from "./ShopItem";
 import Link from "next/link";
@@ -65,29 +65,35 @@ const ButtonShowMore = styled(Box)({
   },
 });
 
-const Title = styled(Box)(
-  ({ theme }) => `
-    display: flex;
-    left: 0;
-    right: 0;
-    margin:0 auto;
-    position:absolute;
-    justify-content: center;
-    align-items: center;
-    background: url(${NewestProduct.src});
-    overflow:hidden;
-    top: -65px;
-    width: 250px;
-    height: 100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    padding: 0 60px;
-    color:#fff;
-    font-size:17px;
-    z-index:2
+const Title = styled(Box)({
+  display: "flex",
+  left: "0",
+  right: "0",
+  margin: "0 auto",
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  top: "-65px",
+  width: "430px",
+  height: "100px",
+  background: `url(${NewestProduct.src})`,
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  padding: "0 60px",
+  color: "#fff",
+  fontSize: "17px",
+  zIndex: "2",
 
-  `
-);
+  "@media (min-width: 0)": {
+    width: "315px",
+    top: "-50px",
+  },
+  "@media (min-width: 768px)": {
+    width: "430px",
+    top: "-65px",
+  },
+});
 
 function NewProduct() {
   const [productList, setProductList] = useState<any>([]);

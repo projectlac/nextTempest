@@ -85,6 +85,10 @@ function ListProduct({ slug }: IBuy) {
               game: slug,
             })
             .then((res) => {
+              const sold = res.data.data.filter(
+                (d) => d.status === "AVAILABLE"
+              );
+
               setProductList(res.data.data);
               setTotal(res.data.total);
             });

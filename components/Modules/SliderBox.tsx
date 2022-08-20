@@ -101,7 +101,7 @@ function SliderBox() {
       <Container>
         <Box pt={10} pb={5}>
           <Box pt={5} pb={2}>
-            <TitleHighlight>Banner hiện tại</TitleHighlight>
+            <TitleHighlight>Thông báo</TitleHighlight>
           </Box>
           <Slider {...settings} className="slick-custom">
             {(fileListCurreny || []).map((d) => (

@@ -125,7 +125,7 @@ function Banner() {
             <Box>
               <Typography textAlign={"center"} fontSize={20} my={3}>
                 {" "}
-                Banner hiện tại
+                Thông báo
               </Typography>
               <Box
                 sx={{
