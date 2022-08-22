@@ -96,7 +96,39 @@ function ListProduct({ slug }: IBuy) {
       } catch (error) {}
     };
     getData();
-  }, [update, sortBy, pageCurrently, findCode, sortByPrice, slug]);
+  }, [update, sortBy, pageCurrently, findCode, sortByPrice]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        if (slug) {
+          await tagApi
+            .getAccount({
+              character: "",
+              limit: CONST_INFORMATION.LIMIT,
+              offset: 0,
+              server: "",
+              weapon: "",
+              sort: sortBy,
+              queryString: "",
+              startPrice: sortByPrice[0],
+              endPrice: sortByPrice[1],
+              game: slug,
+            })
+            .then((res) => {
+              const sold = res.data.data.filter(
+                (d) => d.status === "AVAILABLE"
+              );
+
+              setProductList(res.data.data);
+              setTotal(res.data.total);
+            });
+        }
+      } catch (error) {}
+    };
+    getData();
+  }, [slug]);
+
   return (
     <Box
       sx={{

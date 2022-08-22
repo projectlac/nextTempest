@@ -180,7 +180,7 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
               {(data || []).map((d) => (
                 <FormControlLabel
                   key={d.id}
-                  value={d.title}
+                  value={d.slug}
                   control={<Radio />}
                   sx={{
                     "& span": {
