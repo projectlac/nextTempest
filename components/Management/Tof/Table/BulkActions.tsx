@@ -1,19 +1,17 @@
-import { useState, useRef } from "react";
-
 import {
   Box,
-  Menu,
-  IconButton,
   Button,
-  ListItemText,
-  ListItem,
-  List,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
-import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
+import tagApi from "../../../../api/tag";
+import { useState } from "react";
+import { useAppContext } from "../../../../context/state";
 
 const ButtonError = styled(Button)(
   ({ theme }) => `
@@ -27,10 +25,33 @@ const ButtonError = styled(Button)(
 );
 interface IBulk {
   selectedCryptoOrders: string[];
+  resetSelected: () => void;
 }
-function BulkActions({ selectedCryptoOrders }: IBulk) {
+function BulkActions({ selectedCryptoOrders, resetSelected }: IBulk) {
+  const { handleChangeStatusToast, updated, handleChangeMessageToast } =
+    useAppContext();
+  const [open, setOpen] = useState<boolean>(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCloseAll = () => {
+    tagApi
+      .deleteMultiAccount({ ids: selectedCryptoOrders })
+      .then(() => {
+        resetSelected();
+        handleChangeStatusToast();
+        updated();
+        handleChangeMessageToast("Xóa thành công");
+        setOpen(false);
+      })
+      .catch(() => {
+        handleChangeStatusToast();
+        updated();
+        handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
+      });
+  };
   const deleteAll = () => {
-    console.log(selectedCryptoOrders);
+    setOpen(true);
   };
   return (
     <>
@@ -47,6 +68,36 @@ function BulkActions({ selectedCryptoOrders }: IBulk) {
           </ButtonError>
         </Box>
       </Box>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle
+          sx={{
+            fontFamily: "Montserrat",
+          }}
+        >
+          Bạn có chắc chắc muốn thực hiện thao tác này?
+        </DialogTitle>
+
+        <DialogActions
+          sx={{
+            padding: "15px",
+            "& button": {
+              fontFamily: "Montserrat",
+            },
+          }}
+        >
+          <Button onClick={handleCloseAll} variant="contained" color="primary">
+            Xác nhận
+          </Button>
+          <Button onClick={handleClose} variant="contained" color="error">
+            Đóng
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
