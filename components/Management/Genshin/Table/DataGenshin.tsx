@@ -11,6 +11,7 @@ import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import { NewsList } from "../../../../types/DashboardTypes/news";
+import BulkActions from "./BulkActions";
 import TableGenshin from "./TableGenshin";
 const _ = require("lodash");
 interface AccountTable {
@@ -28,6 +29,7 @@ function DataGenshin() {
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [sold, setSold] = useState<boolean>(false);
+
   const { update } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
@@ -108,6 +110,7 @@ function DataGenshin() {
           onChange={handleChangeSearch}
         />
       </Box>
+
       <Box mx={3}>
         <FormGroup>
           <FormControlLabel

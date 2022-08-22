@@ -152,8 +152,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         });
     },
   });
-  console.log(defaultData);
-  console.log(formik.values.server);
+
   const onEditorChange = (data: string) => {
     formik.handleChange({ target: { name: "body", value: data } });
   };

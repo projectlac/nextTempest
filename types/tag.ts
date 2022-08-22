@@ -6,3 +6,6 @@ export interface IUpdateTag {
 export interface IAddTag extends IUpdateTag {
   game: string;
 }
+export interface IDeleteMulti {
+  ids: string[];
+}

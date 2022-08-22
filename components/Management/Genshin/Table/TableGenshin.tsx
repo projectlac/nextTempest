@@ -13,6 +13,7 @@ import {
   TableRow,
   Tooltip,
   Typography,
+  Checkbox,
   useTheme,
 } from "@mui/material";
 import { format } from "date-fns";
@@ -23,6 +24,7 @@ import EditGenshin from "../DialogCommon/EditGenshin";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 import CachedIcon from "@mui/icons-material/Cached";
 import Refund from "../DialogCommon/Refund";
+import BulkActions from "./BulkActions";
 interface AccountTable {
   name: string;
   code: string;
@@ -65,9 +67,13 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
     []
   );
 
+  const selectedBulkActions = selectedCryptoOrders.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
 
+  const resetSelected = () => {
+    setSelectedCryptoOrders([]);
+  };
   const handlePageChange = (event: any, newPage: number): void => {
     setPage(newPage);
     handleChangePage(newPage * 10);
@@ -76,6 +82,36 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
     handleChangeLimit(parseInt(event.target.value));
+  };
+  const selectedSomeCryptoOrders =
+    selectedCryptoOrders.length > 0 &&
+    selectedCryptoOrders.length < cryptoOrders.length;
+  const selectedAllCryptoOrders =
+    selectedCryptoOrders.length === cryptoOrders.length;
+  const handleSelectAllCryptoOrders = (
+    event: ChangeEvent<HTMLInputElement>
+  ): void => {
+    setSelectedCryptoOrders(
+      event.target.checked
+        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
+        : []
+    );
+  };
+
+  const handleSelectOneCryptoOrder = (
+    event: ChangeEvent<HTMLInputElement>,
+    cryptoOrderId: string
+  ): void => {
+    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
+      setSelectedCryptoOrders((prevSelected) => [
+        ...prevSelected,
+        cryptoOrderId,
+      ]);
+    } else {
+      setSelectedCryptoOrders((prevSelected) =>
+        prevSelected.filter((id) => id !== cryptoOrderId)
+      );
+    }
   };
 
   // const filteredCryptoOrders = applyFilters(cryptoOrders);
@@ -101,6 +137,14 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
 
   return (
     <Card>
+      {selectedBulkActions && (
+        <Box flex={1} p={2}>
+          <BulkActions
+            selectedCryptoOrders={selectedCryptoOrders}
+            resetSelected={resetSelected}
+          />
+        </Box>
+      )}
       <CardHeader
         sx={{
           "& .MuiCardHeader-content": {
@@ -128,13 +172,20 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                 },
               }}
             >
+              {" "}
+              <TableCell width={"5%"} padding="checkbox">
+                <Checkbox
+                  color="primary"
+                  checked={selectedAllCryptoOrders}
+                  indeterminate={selectedSomeCryptoOrders}
+                  onChange={handleSelectAllCryptoOrders}
+                />
+              </TableCell>
               <TableCell>STT</TableCell>
               <TableCell>Tên sản phẩm</TableCell>
               <TableCell>Mã Account</TableCell>
               <TableCell>Giá bán</TableCell>
-
               <TableCell>Ngày cập nhật</TableCell>
-
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -158,6 +209,16 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                   key={cryptoOrder.id}
                   selected={isCryptoOrderSelected}
                 >
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      color="primary"
+                      checked={isCryptoOrderSelected}
+                      onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                        handleSelectOneCryptoOrder(event, cryptoOrder.id)
+                      }
+                      value={isCryptoOrderSelected}
+                    />
+                  </TableCell>
                   <TableCell>
                     <Typography
                       variant="body1"

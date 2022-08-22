@@ -1,6 +1,6 @@
 import { PromiseApi } from "../types";
 import { AccountForm, IBuy } from "../types/account";
-import { IAddTag, IUpdateTag } from "../types/tag";
+import { IAddTag, IDeleteMulti, IUpdateTag } from "../types/tag";
 import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 import axiosAudit from "./axiosAudit";
@@ -94,6 +94,10 @@ const tagApi = {
   },
   buyAccount(params: IBuy): Promise<PromiseApi> {
     const url = `/account/buy-multi`;
+    return axiosAudit.patch(url, params);
+  },
+  deleteMultiAccount(params: IDeleteMulti): Promise<PromiseApi> {
+    const url = `/account/delete-multi-account`;
     return axiosAudit.patch(url, params);
   },
 };
