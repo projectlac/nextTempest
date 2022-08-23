@@ -73,7 +73,7 @@ function PaymentBox() {
                 }}
               />
             </Box>
-            <Box width={532} height={653}>
+            {/* <Box width={532} height={653}>
               <Image
                 src={nt}
                 alt="nap da sang the"
@@ -82,7 +82,7 @@ function PaymentBox() {
                   handleOpen(2);
                 }}
               />
-            </Box>
+            </Box> */}
           </BoxSelection>
           {openAuth && <Authentization closeAuthBox={closeAuthBox} />}
         </Container>

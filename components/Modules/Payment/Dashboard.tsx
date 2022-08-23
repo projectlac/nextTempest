@@ -213,14 +213,14 @@ function Dashboard() {
         >
           Nạp Slime Coin
         </Box>
-        <Box
+        {/* <Box
           className={`${active === 2 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(2);
           }}
         >
           Nạp đá sáng thế
-        </Box>
+        </Box> */}
       </ListTab>
       {(() => {
         switch (active) {
