@@ -17,7 +17,7 @@ export default function Layout({ children }) {
         loggedOutGreeting=""
         language="vi_VN"
       /> */}
-      {/* <Walker /> */}
+      <Walker />
       <MessengerChat pageId="103539711584646" language="vi_VN" />
 
       <Social />

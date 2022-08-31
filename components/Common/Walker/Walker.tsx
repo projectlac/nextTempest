@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import image from "../../../styles/assets/images/human.png";
+import image from "../../../styles/assets/images/rimumu.png";
 const BoxRunning = styled(Box)({
   position: "fixed",
   top: "-500px",
@@ -37,7 +37,7 @@ function Walker() {
         transform: `translateY(${scrollPosition}px)`,
       }}
     >
-      <Image src={image} height={128} width={128} alt="human" />
+      <Image src={image} height={150} width={100.5} alt="human" />
     </BoxRunning>
   );
 }
