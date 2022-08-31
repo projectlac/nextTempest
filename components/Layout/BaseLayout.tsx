@@ -4,6 +4,7 @@ import HeaderHome from "../Common/Header/HeaderHome";
 import Social from "../Common/Social/Social";
 import MessengerChat from "react-messenger-customer-chat";
 import Footer from "../Common/Footer/Footer";
+import Walker from "../Common/Walker/Walker";
 export default function Layout({ children }) {
   return (
     <>
@@ -16,7 +17,7 @@ export default function Layout({ children }) {
         loggedOutGreeting=""
         language="vi_VN"
       /> */}
-
+      {/* <Walker /> */}
       <MessengerChat pageId="103539711584646" language="vi_VN" />
 
       <Social />
