@@ -14,6 +14,7 @@ import Icon from "../../styles/assets/images/Layer19.png";
 import OnHover from "../../styles/assets/images/tag-2.png";
 import poster from "../../styles/assets/images/Videos/play.png";
 import play from "../../styles/assets/images/Videos/playbutton.png";
+import frame_video from "../../styles/assets/images/Videos/frame-video.png";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -302,7 +303,7 @@ function ModuleVideo() {
               width="825"
               height="465"
               onClick={pauseVideo}
-              poster="https://drive.google.com/uc?export=view&id=15LwsoE9YGs7bJ_P9fRiJ7z97t0ESnRe6"
+              poster={frame_video.src}
             >
               <source
                 src="https://drive.google.com/uc?export=download&id=1gKNQZKReMVcUeh5udxumDgF12q9qxJAo"

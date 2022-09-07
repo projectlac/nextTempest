@@ -53,8 +53,10 @@ function ListProduct({ slug }: IBuy) {
     const newArr = data.split("-");
     if (newArr[0] !== "all") {
       setSortByPrice(newArr.map(Number));
+      setPageCurrently(0);
     } else {
       setSortByPrice([0]);
+      setPageCurrently(0);
     }
 
     // setSortByPrice(data);

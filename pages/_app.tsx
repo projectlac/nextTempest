@@ -8,17 +8,17 @@ import type { AppProps } from "next/app";
 import NextNProgress from "nextjs-progressbar";
 import * as React from "react";
 import { AppWrapper } from "../context/state";
+import "../styles/customCarousel.scss";
 import "../styles/globals.css";
 import "../styles/globals.scss";
-import "../styles/customCarousel.scss";
 
+import { useRouter } from "next/router";
+import Script from "next/script";
+import TagManager from "react-gtm-module";
+import Maintenance from "../components/Layout/Maintenace";
+import * as ga from "../lib/ga";
 import lightThemeOptions from "../styles/theme/lightThemeOption";
 import createEmotionCache from "../utility/createEmotionCache";
-import TagManager from "react-gtm-module";
-import Script from "next/script";
-import { useRouter } from "next/router";
-import * as ga from "../lib/ga";
-import Maintenance from "../components/Layout/Maintenace";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
