@@ -10,10 +10,8 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import tagApi from "../../../../api/tag";
-import { useAppContext } from "../../../../context/state";
-import { NewsList } from "../../../../types/DashboardTypes/news";
-import BulkActions from "./BulkActions";
+import tagApi from "../../../../../api/tag";
+import { useAppContext } from "../../../../../context/state";
 import TableGenshin from "./TableGenshin";
 const _ = require("lodash");
 interface AccountTable {
@@ -40,29 +38,29 @@ function DataGenshin() {
     setOffsetPage(data);
   };
 
-  useEffect(() => {
-    tagApi
-      .getAccount({
-        limit: limitPage,
-        offset: offsetPage,
-        character: "",
-        server: "",
-        weapon: "",
-        sort: null,
-        queryString: "",
-        isSold: sold,
-      })
-      .then((res) => {
-        const data = res.data.data.map((d) => {
-          const { newPrice, code, name, updatedAt, id, soldAt } = d;
-          return { newPrice, code, name, updatedAt, id, soldAt };
-        });
+  // useEffect(() => {
+  //   tagApi
+  //     .getAccount({
+  //       limit: limitPage,
+  //       offset: offsetPage,
+  //       character: "",
+  //       server: "",
+  //       weapon: "",
+  //       sort: null,
+  //       queryString: "",
+  //       isSold: sold,
+  //     })
+  //     .then((res) => {
+  //       const data = res.data.data.map((d) => {
+  //         const { newPrice, code, name, updatedAt, id, soldAt } = d;
+  //         return { newPrice, code, name, updatedAt, id, soldAt };
+  //       });
 
-        setCryptoOrders(data);
-        let total = res.data.total;
-        setTotal(total);
-      });
-  }, [update, limitPage, offsetPage, sold]);
+  //       setCryptoOrders(data);
+  //       let total = res.data.total;
+  //       setTotal(total);
+  //     });
+  // }, [update, limitPage, offsetPage, sold]);
 
   function fetchDropdownOptions(key) {
     tagApi
@@ -125,11 +123,6 @@ function DataGenshin() {
             label="Ưu tiên đã bán"
           />
         </FormGroup>
-        <Typography>
-          <Link href={"/dashboard/genshin/reroll"} passHref>
-            <i>Quản lý tài khoản reroll</i>
-          </Link>
-        </Typography>
       </Box>
 
       <TableGenshin
