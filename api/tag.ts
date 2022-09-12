@@ -100,5 +100,13 @@ const tagApi = {
     const url = `/account/delete-multi-account`;
     return axiosAudit.patch(url, params);
   },
+  addRerollAccount(file: FormData): Promise<PromiseApi> {
+    const url = `/account-same-price/import`;
+    return axiosAudit.post(url, file);
+  },
+  getRerollAccount(limit: number, offset: number): Promise<PromiseApi> {
+    const url = `/account-same-price?limit=${limit}&offset=${offset}`;
+    return axiosAudit.get(url);
+  },
 };
 export default tagApi;

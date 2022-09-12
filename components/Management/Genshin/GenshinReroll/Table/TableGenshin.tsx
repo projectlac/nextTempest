@@ -22,12 +22,10 @@ import { ChangeEvent, FC, useState } from "react";
 import AddGenshin from "../DialogCommon/AddGenshin";
 
 interface AccountTable {
-  name: string;
-  code: string;
-  newPrice: number;
+  username: string;
   id: string;
-  updatedAt: string;
-  soldAt: string | null;
+  createdAt: string;
+  isSold: string | null;
 }
 
 interface RecentOrdersTableProps {
@@ -38,31 +36,12 @@ interface RecentOrdersTableProps {
   handleChangePage: (data: number) => void;
 }
 
-const applyFilters = (cryptoOrders: AccountTable[]): AccountTable[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
-    let matches = true;
-    return matches;
-  });
-};
-
-const applyPagination = (
-  cryptoOrders: AccountTable[],
-  page: number,
-  limit: number
-): AccountTable[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
-};
-
 const TableGenshin: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,
   handleChangePage,
   total,
 }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
-    []
-  );
-
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
 
@@ -74,48 +53,6 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
   const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setLimit(parseInt(event.target.value));
     handleChangeLimit(parseInt(event.target.value));
-  };
-  const selectedSomeCryptoOrders =
-    selectedCryptoOrders.length > 0 &&
-    selectedCryptoOrders.length < cryptoOrders.length;
-  const selectedAllCryptoOrders =
-    selectedCryptoOrders.length === cryptoOrders.length;
-  const handleSelectAllCryptoOrders = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedCryptoOrders(
-      event.target.checked
-        ? cryptoOrders.map((cryptoOrder) => cryptoOrder.id)
-        : []
-    );
-  };
-
-  const handleSelectOneCryptoOrder = (
-    event: ChangeEvent<HTMLInputElement>,
-    cryptoOrderId: string
-  ): void => {
-    if (!selectedCryptoOrders.includes(cryptoOrderId)) {
-      setSelectedCryptoOrders((prevSelected) => [
-        ...prevSelected,
-        cryptoOrderId,
-      ]);
-    } else {
-      setSelectedCryptoOrders((prevSelected) =>
-        prevSelected.filter((id) => id !== cryptoOrderId)
-      );
-    }
-  };
-
-  const toMoney = (price: number) => {
-    return price
-      ? price
-          .toString()
-          .split("")
-          .reverse()
-          .reduce((prev, next, index) => {
-            return (index % 3 ? next : next + ".") + prev;
-          })
-      : 0;
   };
 
   return (
@@ -148,9 +85,8 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
               }}
             >
               <TableCell>STT</TableCell>
-              <TableCell>Tên sản phẩm</TableCell>
-              <TableCell>Mã Account</TableCell>
-              <TableCell>Giá bán</TableCell>
+              <TableCell>Username</TableCell>
+              <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>
             </TableRow>
           </TableHead>
@@ -184,8 +120,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.name.slice(0, 40)}
-                      {cryptoOrder.name.length > 40 && "..."}
+                      {cryptoOrder.username}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -193,6 +128,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       noWrap
                     ></Typography>
                   </TableCell>
+
                   <TableCell>
                     <Typography
                       variant="body1"
@@ -200,17 +136,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.code}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography
-                      variant="body1"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {toMoney(cryptoOrder.newPrice)} VNĐ
+                      {cryptoOrder.isSold ? "Đã bán" : "Chưa bán"}
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -221,7 +147,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       noWrap
                     >
                       {format(
-                        new Date(cryptoOrder.updatedAt),
+                        new Date(cryptoOrder.createdAt),
                         "yyyy-MM-dd / hh:ss:mm"
                       )}
                     </Typography>

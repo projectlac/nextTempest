@@ -71,23 +71,23 @@ export default function AddGenshin() {
       setLoading(true);
       console.log(values);
 
-      //   tagApi
-      //     .addAccount(formData)
-      //     .then((res) => {
-      //       handleChangeMessageToast("Cập nhật danh sách thành công");
-      //       handleChangeStatusToast();
-      //       handleClose();
-      //       updated();
-      //       resetForm();
-      //       setFile(null);
-      //     })
-      //     .catch(() => {
-      //       handleChangeMessageToast("Có lỗi xảy ra");
-      //       handleChangeStatusToast();
-      //     })
-      //     .finally(() => {
-      //       setLoading(false);
-      //     });
+      tagApi
+        .addRerollAccount(formData)
+        .then((res) => {
+          handleChangeMessageToast("Cập nhật danh sách thành công");
+          handleChangeStatusToast();
+          handleClose();
+          updated();
+          resetForm();
+          setFile(null);
+        })
+        .catch(() => {
+          handleChangeMessageToast("Có lỗi xảy ra");
+          handleChangeStatusToast();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
   const handleSelectedFile = (file: File) => {
@@ -125,11 +125,10 @@ export default function AddGenshin() {
               <Button variant="contained" component="label">
                 Upload File
                 <input
-                  accept=".jpg, .png"
+                  accept=".csv"
                   name="file"
                   required
                   type="file"
-                  multiple
                   onChange={uploadFile}
                 />
               </Button>

@@ -9,3 +9,7 @@ export interface IAddTag extends IUpdateTag {
 export interface IDeleteMulti {
   ids: string[];
 }
+export interface IGetForm {
+  limit: number;
+  offset: number;
+}
