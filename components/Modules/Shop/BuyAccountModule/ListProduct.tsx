@@ -85,6 +85,7 @@ function ListProduct({ slug }: IBuy) {
               startPrice: sortByPrice[0],
               endPrice: sortByPrice[1],
               game: slug,
+              isSold: false,
             })
             .then((res) => {
               const sold = res.data.data.filter(
@@ -116,6 +117,7 @@ function ListProduct({ slug }: IBuy) {
               startPrice: sortByPrice[0],
               endPrice: sortByPrice[1],
               game: slug,
+              isSold: false,
             })
             .then((res) => {
               const sold = res.data.data.filter(
