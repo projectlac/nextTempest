@@ -90,7 +90,7 @@ function BuyAccountReroll({ slug }: IBuy) {
           <Grid container>
             <Grid item sm={12} xs={12}>
               {/* {slug === "genshin-impact" ? <ListProduct /> : <ListProductTOF />} */}
-              <ListProduct slug={slug} />
+              <ListProduct />
             </Grid>
           </Grid>
         </BackgroundShop>
