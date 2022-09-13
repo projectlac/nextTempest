@@ -173,11 +173,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
       >
         <Image src={AuthDevider} layout="responsive" alt="devider" />
       </Box>
-      <Typography>
-        Tính năng đăng ký đang được bảo trì <br /> Vui lòng liên hệ với admin để
-        mua tài khoản nếu muốn
-      </Typography>
-      {/* {success ? (
+      {success ? (
         <>
           <Box
             sx={{
@@ -337,7 +333,7 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
             </Form>
           )}
         </Formik>
-      )} */}
+      )}
     </Auth>
   );
 }
