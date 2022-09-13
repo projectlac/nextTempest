@@ -42,7 +42,7 @@ const tagApi = {
       return `startPrice=0`;
     };
     const isSold = () => {
-      if (params.isSold !== null) {
+      if (params.isSold !== null && params.isSold !== undefined) {
         return `isSold=${params.isSold}`;
       } else return "";
     };
