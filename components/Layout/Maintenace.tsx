@@ -84,7 +84,7 @@ export default function Maintenance() {
                 }}
                 lineHeight={2}
               >
-                Mọi giao dịch chuyển tiền sẽ vẫn tiếp túc hoạt động sau hệ thống
+                Mọi giao dịch chuyển tiền sẽ vẫn tiếp tục hoạt động sau hệ thống
                 bảo trì.
                 <br />
                 Nếu có vấn đề ngoài ý muốn, vui lòng liên hệ admin để được hỗ
