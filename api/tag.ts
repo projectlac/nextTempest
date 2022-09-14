@@ -108,5 +108,9 @@ const tagApi = {
     const url = `/account-same-price?limit=${limit}&offset=${offset}`;
     return axiosAudit.get(url);
   },
+  deleteRerollAccount(param: any): Promise<PromiseApi> {
+    const url = `/account-same-price/delete-multi-account`;
+    return axiosAudit.patch(url, param);
+  },
 };
 export default tagApi;

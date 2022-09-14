@@ -112,6 +112,8 @@ function ShopItem({
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
   }
+  console.log(status);
+
   const { updated, update } = useAppContext();
   const [listWishList, setListWishList] = useState<string[]>([]);
   const [reRender, setReRender] = useState<boolean>(false);
@@ -216,43 +218,46 @@ function ShopItem({
         </Link>
         {getSale() && <Sale>{getSale()}</Sale>}
 
-        <IdProduct>{idProduct}</IdProduct>
+        {idProduct && <IdProduct>{idProduct}</IdProduct>}
       </ImageBox>
-      <Box>
-        <Typography
-          color="#2D4E96"
-          sx={{
-            mt: {
-              lg: 2,
-              xs: 0.5,
-            },
-            fontSize: {
-              lg: "1rem",
-              sm: "13px",
-              xs: "10px",
-            },
-            minHeight: {
-              lg: "50px",
-              sm: "40px",
-              xs: "30px",
-            },
-          }}
-        >
-          <Link href={`/chi-tiet/${slug}`} passHref>
-            <a
-              style={{
-                display: "-webkit-box",
-                WebkitBoxOrient: "vertical",
-                WebkitLineClamp: "2",
-                overflow: "hidden",
-              }}
-            >
-              {item.slice(0, 50)}
-              {item.length > 50 && "..."}
-            </a>
-          </Link>
-        </Typography>
-      </Box>
+      {item && (
+        <Box>
+          <Typography
+            color="#2D4E96"
+            sx={{
+              mt: {
+                lg: 2,
+                xs: 0.5,
+              },
+              fontSize: {
+                lg: "1rem",
+                sm: "13px",
+                xs: "10px",
+              },
+              minHeight: {
+                lg: "50px",
+                sm: "40px",
+                xs: "30px",
+              },
+            }}
+          >
+            <Link href={`/chi-tiet/${slug}`} passHref>
+              <a
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: "2",
+                  overflow: "hidden",
+                }}
+              >
+                {item.slice(0, 50)}
+                {item.length > 50 && "..."}
+              </a>
+            </Link>
+          </Typography>
+        </Box>
+      )}
+
       <BoxPrice>
         {
           <Typography

@@ -264,7 +264,7 @@ function HeaderHome() {
                 >
                   Tower of fantasy
                 </Link>
-                {/* <Link href="/reroll">Reroll</Link> */}
+                <Link href="/reroll">Reroll</Link>
               </ChildMenu>
             </ParentMenu>
             <Typography className={`${activeClass("/tin-tuc")}`}>

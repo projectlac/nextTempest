@@ -2,7 +2,6 @@ import {
   Box,
   Card,
   CardHeader,
-  Checkbox,
   Divider,
   IconButton,
   Table,
@@ -14,11 +13,12 @@ import {
   TableRow,
   Tooltip,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
+import WarningSubmit from "../../DialogCommon/DialogReroll/WarningSubmit";
+
 import AddGenshin from "../DialogCommon/AddGenshin";
 
 interface AccountTable {
@@ -88,6 +88,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
               <TableCell>Username</TableCell>
               <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>
+              <TableCell>Xóa</TableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -151,6 +152,20 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                         "yyyy-MM-dd / hh:ss:mm"
                       )}
                     </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Tooltip title="Xóa bài viết" arrow>
+                      <IconButton
+                        sx={{
+                          "&:hover": { background: "#b16c4d45" },
+                          color: "#d33",
+                        }}
+                        color="inherit"
+                        size="small"
+                      >
+                        <WarningSubmit status={3} id={cryptoOrder.id} />
+                      </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               );
