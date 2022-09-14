@@ -18,7 +18,7 @@ interface AccountTable {
   username: string;
   id: string;
   createdAt: string;
-  isSold: string | null;
+  isSold: boolean;
 }
 
 function DataGenshin() {
@@ -40,8 +40,8 @@ function DataGenshin() {
   useEffect(() => {
     tagApi.getRerollAccount(limitPage, offsetPage).then((res) => {
       const data = res.data.data.map((d) => {
-        const { username, createdAt, id, isSole } = d;
-        return { username, createdAt, id, isSole };
+        const { username, createdAt, id, isSold } = d;
+        return { username, createdAt, id, isSold };
       });
 
       setCryptoOrders(data);

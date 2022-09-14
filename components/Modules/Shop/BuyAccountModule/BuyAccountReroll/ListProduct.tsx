@@ -3,10 +3,10 @@ import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
-import ShopItem from "../../ShopItem";
 import image from "../../../../../styles/assets/images/version25-genshinimpact-04-1643479276-51.jpg";
+import RerollItem from "./RerollItem";
 function ListProduct() {
-  const { selectedFilter, update } = useAppContext();
+  const { update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
@@ -88,14 +88,10 @@ function ListProduct() {
                   },
                 }}
               >
-                <ShopItem
+                <RerollItem
                   image={image.src}
-                  item={""}
-                  idProduct={null}
-                  oldPrice={0}
                   newPrice={50000}
                   status={!d.isSold ? "AVAILABLE" : "SOLD"}
-                  slug={d.slug}
                   id={d.id}
                 />
               </Grid>

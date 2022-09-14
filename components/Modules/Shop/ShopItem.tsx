@@ -112,7 +112,6 @@ function ShopItem({
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
   }
-  console.log(status);
 
   const { updated, update } = useAppContext();
   const [listWishList, setListWishList] = useState<string[]>([]);

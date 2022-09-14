@@ -25,7 +25,7 @@ interface AccountTable {
   username: string;
   id: string;
   createdAt: string;
-  isSold: string | null;
+  isSold: boolean;
 }
 
 interface RecentOrdersTableProps {
