@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, CircularProgress } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -22,6 +22,7 @@ export default function DialogChecking({
   openDialog,
   handleClose,
   handleSubmitBuy,
+  loading,
 }) {
   return (
     <div>
@@ -66,7 +67,7 @@ export default function DialogChecking({
             </Grid>
             <Grid item md={6} xs={6} textAlign="center">
               <Button onClick={handleSubmitBuy} fullWidth variant="contained">
-                Đồng ý
+                {loading ? <CircularProgress color="secondary" /> : "Đồng ý"}
               </Button>
             </Grid>
           </Grid>

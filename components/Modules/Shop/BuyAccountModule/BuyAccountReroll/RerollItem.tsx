@@ -100,6 +100,7 @@ function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
     OUT = "#B91C1C",
   }
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const { updated, handleChangeStatusToast, handleChangeMessageToast } =
@@ -113,12 +114,14 @@ function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
     setOpenDialog(false);
   };
   const handleSubmitBuy = async () => {
+    setLoading(true);
     tagApi
       .buyRerollAccount({ accountIds: [id] })
       .then((res) => {
         handleChangeStatusToast();
         handleChangeMessageToast("Bạn đã mua thành công");
         router.push(`/bill-reroll/${res.data[2] && res.data[2].id}`);
+        setLoading(false);
         handleClose();
       })
       .catch((error) => console.log(error));
@@ -146,7 +149,11 @@ function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
               width: "100% !important",
             },
           }}
-          onClick={handleClickOpen}
+          onClick={() => {
+            if (status === "AVAILABLE") {
+              handleClickOpen();
+            }
+          }}
         >
           {image && (
             <Image
@@ -214,6 +221,7 @@ function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
         handleClose={handleClose}
         handleSubmitBuy={handleSubmitBuy}
         openDialog={openDialog}
+        loading={loading}
       />
     </Box>
   );
