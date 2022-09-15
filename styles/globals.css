@@ -18,8 +18,10 @@ a {
 @font-face {
   font-family: michos;
   src: url('../styles/assets/fonts/ZH-CN.ttf');
+  font-display: swap;
 }
 @font-face {
   font-family: MiHoYo_SDK_JP_Web;
   src: url('../styles/assets/fonts/ZH-CN.ttf');
+  font-display: swap;
 }

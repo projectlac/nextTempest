@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import useTrans from "../../pages/hook/useTrans";
-import background from "../../styles/assets/images/Background.png";
+import background from "../../styles/assets/images/Background.webp";
 
 import Frame from "../../styles/assets/images/Frame.png";
 import Frame2 from "../../styles/assets/images/Frame2.png";
@@ -14,7 +14,7 @@ import Icon from "../../styles/assets/images/Layer19.png";
 import OnHover from "../../styles/assets/images/tag-2.png";
 import poster from "../../styles/assets/images/Videos/play.png";
 import play from "../../styles/assets/images/Videos/playbutton.png";
-import frame_video from "../../styles/assets/images/Videos/frame-video.png";
+import frame_video from "../../styles/assets/images/Videos/frame-video.webp";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
