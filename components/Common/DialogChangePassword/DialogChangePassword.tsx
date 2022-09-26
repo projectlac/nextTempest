@@ -54,7 +54,7 @@ const CustomField = styled(Field)(
     font-size: 18px;
     padding: 15px 25px;
     margin-bottom:40px;
-    font-family: 'michos';
+    font-family: 'Signika';
           `
 );
 interface PropsDialog {

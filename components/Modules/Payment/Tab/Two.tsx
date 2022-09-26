@@ -30,7 +30,7 @@ const CustomField = styled(Field)(({ theme }) => ({
   marginBottom: "10px",
   fontSize: "18px",
   padding: "15px 25px",
-  fontFamily: "'michos'",
+  fontFamily: "'Signika'",
   "@media (min-width:0)": {
     fontSize: "13px",
     height: "45px",

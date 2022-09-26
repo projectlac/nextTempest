@@ -77,10 +77,10 @@ function Bill({ id }: IBill) {
   useEffect(() => {
     audit.getAuditById(id).then((res) => {
       setTime(res.data.updatedAt);
-      setAccount(res.data.information.accounts);
+      setAccount(res.data.information?.accounts);
 
-      setType(res.data.information.gmail);
-      setCode(res.data.id.split("-")[0]);
+      setType(res.data.information?.gmail);
+      setCode(res.data.id?.split("-")[0]);
     });
   }, [id]);
   const totalMoney = () => {
@@ -262,7 +262,13 @@ function Bill({ id }: IBill) {
                       },
                     }}
                   >
-                    Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với Admin
+                    Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với{" "}
+                    <a
+                      href="https://www.facebook.com/tranminhvu128/"
+                      style={{ textDecoration: "underline" }}
+                    >
+                      Admin{" "}
+                    </a>
                     nha.
                   </Typography>
                 </Box>

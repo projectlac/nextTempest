@@ -59,7 +59,7 @@ const CustomField = styled(Field)(
     margin-bottom:50px;
     font-size: 18px;
     padding: 15px 25px;
-    font-family: 'michos';
+    font-family: 'Signika';
     @media (max-width: 435px) {
       height:50px;
       margin-bottom:30px;

@@ -115,23 +115,23 @@ function DetailNews({ detailNews }: PropsDetailNews) {
               </Box>
               <Box
                 sx={{
-                  fontFamily: "Montserrat, michos !important",
+                  fontFamily: "Montserrat, Signika !important",
                 }}
               >
                 {detailNews.description}
               </Box>
               <Box
                 sx={{
-                  fontFamily: "Montserrat, michos !important",
+                  fontFamily: "Montserrat, Signika !important",
                   "& *": {
                     wordBreak: "break-word",
                     wordWrap: "break-word",
                   },
                   "& p ": {
-                    fontFamily: "Montserrat, michos !important",
+                    fontFamily: "Montserrat, Signika !important",
                     background: "transparent !important",
                     "& span": {
-                      fontFamily: "Montserrat, michos !important",
+                      fontFamily: "Montserrat, Signika !important",
                       background: "transparent !important",
                       "& a": {
                         color: "#337ab7",
@@ -166,7 +166,7 @@ function DetailNews({ detailNews }: PropsDetailNews) {
               {detailNews.keyword && (
                 <Typography
                   sx={{
-                    fontFamily: "Montserrat, michos !important",
+                    fontFamily: "Montserrat, Signika !important",
                     mt: 5,
                     fontSize: { md: 14, xs: 13 },
                     fontStyle: "italic",

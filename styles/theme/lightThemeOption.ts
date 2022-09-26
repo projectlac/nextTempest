@@ -15,7 +15,7 @@ const lightThemeOptions: ThemeOptions = {
   },
   typography: {
     fontFamily: [
-      "michos",
+      "Signika",
       "Montserrat",
       "MiHoYo_SDK_JP_Web",
       "Arial",
