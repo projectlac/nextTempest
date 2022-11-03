@@ -5,7 +5,6 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["res.cloudinary.com"],
-    disableStaticImages: true,
   },
   i18n,
 };
