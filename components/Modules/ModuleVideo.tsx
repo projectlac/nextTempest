@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import useTrans from "../../pages/hook/useTrans";
 import background from "../../styles/assets/images/Background.webp";
-
 import Frame from "../../styles/assets/images/Frame.png";
 import Frame2 from "../../styles/assets/images/Frame2.png";
 import Frame3 from "../../styles/assets/images/Layer16.png";

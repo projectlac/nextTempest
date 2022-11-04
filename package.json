@@ -6,7 +6,6 @@
     "dev": "next dev -p 6969",
     "build": "next build",
     "start": "next start",
-    "postbuild": "next-sitemap",
     "lint": "next lint"
   },
   "dependencies": {
@@ -46,6 +45,7 @@
     "react-messenger-customer-chat": "^0.8.0",
     "react-slick": "^0.29.0",
     "sass": "^1.51.0",
+    "sharp": "^0.31.1",
     "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },
