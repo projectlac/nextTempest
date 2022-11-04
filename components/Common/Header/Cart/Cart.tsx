@@ -1,15 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Typography } from "@mui/material";
-import React, { ReactNode, useEffect, useState } from "react";
-import toMoney from "../../../../utility/toMoney";
-import CloseIcon from "@mui/icons-material/Close";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-import { remove } from "lodash";
+import CloseIcon from "@mui/icons-material/Close";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useAppContext } from "../../../../context/state";
-import audit from "../../../../api/audit";
-import { useRouter } from "next/router";
+import toMoney from "../../../../utility/toMoney";
 
 interface ICart {
   openCart: boolean;
@@ -19,46 +14,46 @@ interface ICart {
   removeID: (id: string) => void;
 }
 function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
-  const {
-    isLogin,
-    handleChangeMessageToast,
-    refreshLogin,
-    handleChangeStatusToast,
-  } = useAppContext();
-  const [wallet, setWallet] = useState<number>(0);
-  const router = useRouter();
-  useEffect(() => {
-    if (isLogin)
-      audit
-        .getProfile()
-        .then((res) => {
-          setWallet(+res.data.money);
-        })
-        .catch((res) => {
-          handleChangeMessageToast(
-            "Phiên đăng nhập đã kết thúc, vui lòng đăng nhập lại!"
-          );
-          handleChangeStatusToast();
-          refreshLogin();
-          localStorage.removeItem("access_token");
-          router.push("/");
-        });
-  }, []);
+  // const {
+  //   isLogin,
+  //   handleChangeMessageToast,
+  //   refreshLogin,
+  //   handleChangeStatusToast,
+  // } = useAppContext();
+  // const [wallet, setWallet] = useState<number>(0);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   if (isLogin)
+  //     audit
+  //       .getProfile()
+  //       .then((res) => {
+  //         setWallet(+res.data.money);
+  //       })
+  //       .catch((res) => {
+  //         handleChangeMessageToast(
+  //           "Phiên đăng nhập đã kết thúc, vui lòng đăng nhập lại!"
+  //         );
+  //         handleChangeStatusToast();
+  //         refreshLogin();
+  //         localStorage.removeItem("access_token");
+  //         router.push("/");
+  //       });
+  // }, []);
 
-  const buyAccount = () => {
-    let sumPrice = 0;
-    data.forEach((d) => (sumPrice += +d.newPrice));
-    console.log(sumPrice);
+  // const buyAccount = () => {
+  //   let sumPrice = 0;
+  //   data.forEach((d) => (sumPrice += +d.newPrice));
+  //   console.log(sumPrice);
 
-    if (sumPrice > wallet) {
-      handleChangeMessageToast(
-        "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
-      );
-      handleChangeStatusToast();
-    } else {
-      router.push(`/thanh-toan/${ids && ids.toString()}?redirect=/`);
-    }
-  };
+  //   if (sumPrice > wallet) {
+  //     handleChangeMessageToast(
+  //       "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
+  //     );
+  //     handleChangeStatusToast();
+  //   } else {
+  //     router.push(`/thanh-toan/${ids && ids.toString()}?redirect=/`);
+  //   }
+  // };
 
   return (
     <Box
@@ -169,7 +164,7 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
           </Box>
         )}
       </Box>
-      {isLogin && ids && ids?.length > 0 && (
+      {/* {isLogin && ids && ids?.length > 0 && (
         <Box
           height={50}
           sx={{
@@ -197,7 +192,7 @@ function Cart({ openCart, wrapperRef, ids, data, removeID }: ICart) {
             Mua
           </Typography>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 }

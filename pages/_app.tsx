@@ -63,7 +63,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
         <AppWrapper>
           <Script
             strategy="lazyOnload"
-            src={`https://www.googletagmanager.com/gtag/js?id=G-8SZQ8DYEBH`}
+            src={`https://www.googletagmanager.com/gtag/js?id=G-FDDJ7YRCM3`}
           />
 
           <Script strategy="lazyOnload" id="">
@@ -72,7 +72,7 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-8SZQ8DYEBH');
+          gtag('config', 'G-FDDJ7YRCM3');
         `}
           </Script>
           {process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "false" ? (
