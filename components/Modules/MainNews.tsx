@@ -119,11 +119,13 @@ function MainNews() {
         const data = res.data.data;
         const newsestData = data.splice(0, 1);
 
-        if (data.length > 0) {
-          setNewList(data);
-          setNewest(newsestData);
-          setTotal(res.data.total);
-        }
+        // if (data.length > 0) {
+        //   console.log(newsestData);
+
+        setNewList(data);
+        setNewest(newsestData);
+        setTotal(res.data.total);
+        // }
       });
     } catch (error) {}
   };
