@@ -109,6 +109,7 @@ export default function Navbar() {
                 style={{
                   display: "flex",
                   alignItems: "center",
+                  width: "100%",
                 }}
               >
                 <ListItemIcon>{text.icon}</ListItemIcon>

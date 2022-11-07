@@ -105,7 +105,25 @@ function SliderBox() {
           </Box>
           <Slider {...settings} className="slick-custom">
             {(fileListCurreny || []).map((d) => (
-              <Image src={d} alt="" key={d} width={1352} height={690} />
+              <Box
+                sx={{
+                  width: { md: "1352px", xs: "100%" },
+                  height: { md: "690px", xs: "350px" },
+                  background: `url(${d})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
+                {/* <Image
+                  src={d}
+                  alt=""
+                  key={d}
+                  width={1352}
+                  height={690}
+                  layout="responsive"
+                /> */}
+              </Box>
             ))}
           </Slider>
         </Box>
