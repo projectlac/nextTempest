@@ -106,6 +106,7 @@ function SliderBox() {
           <Slider {...settings} className="slick-custom">
             {(fileListCurreny || []).map((d) => (
               <Box
+                key={d}
                 sx={{
                   width: { md: "1352px", xs: "100%" },
                   height: { md: "690px", xs: "350px" },
