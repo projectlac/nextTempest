@@ -256,43 +256,42 @@ const ButtonEven = styled(Box)(({ theme }) => ({
   //   backgroundPosition: "bottom right",
   //   backgroundSize: "cover",
   // },
-  [theme.breakpoints.up("xl")]: {
-    height: "78px",
-    width: "261px",
-  },
-  [theme.breakpoints.down("xl")]: {
-    height: "70px",
-    width: "220px",
+
+  [theme.breakpoints.up("xs")]: {
+    width: "50%",
+    height: "50px",
+    justifyContent: "center",
+    margin: "25px auto 5px",
+    fontSize: "10px",
   },
 
-  [theme.breakpoints.down("lg")]: {
-    width: "28%",
-    justifyContent: "center",
-    paddingTop: "2px",
-    marginBottom: "22px",
-    height: "67px",
-  },
-  [theme.breakpoints.down("md")]: {
-    margin: "15px auto 5px",
-    width: "33%",
-    justifyContent: "center",
-    paddingTop: "2px",
-    height: "40px",
-    fontSize: "16px",
-  },
-  [theme.breakpoints.down("sm")]: {
+  [theme.breakpoints.up("sm")]: {
     width: "50%",
     height: "50px",
     justifyContent: "center",
     margin: "25px auto 5px",
     fontSize: "15px",
   },
-  [theme.breakpoints.down("xs")]: {
-    width: "50%",
-    height: "50px",
+
+  [theme.breakpoints.up("md")]: {
+    margin: "15px auto 5px",
+    width: "33%",
     justifyContent: "center",
-    margin: "25px auto 5px",
-    fontSize: "10px",
+    paddingTop: "2px",
+    height: "60px",
+    fontSize: "16px",
+  },
+
+  [theme.breakpoints.up("lg")]: {
+    width: "220px",
+    justifyContent: "center",
+    paddingTop: "2px",
+    marginBottom: "22px",
+    height: "67px",
+  },
+  [theme.breakpoints.up("xl")]: {
+    height: "70px",
+    width: "220px",
   },
 }));
 
