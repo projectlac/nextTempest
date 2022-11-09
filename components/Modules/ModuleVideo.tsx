@@ -1,17 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import banner from "../../api/banner";
 import useTrans from "../../pages/hook/useTrans";
-import Frame3 from "../../styles/assets/images/Layer16.png";
 import background from "../../styles/assets/images/Videos/Background_sumeru.png";
 import book from "../../styles/assets/images/Videos/Book.png";
-
 import Even from "../../styles/assets/images/Videos/button-group.png";
-import frame_video from "../../styles/assets/images/Videos/frame-video.webp";
 import Frame from "../../styles/assets/images/Videos/Frame.png";
-import poster from "../../styles/assets/images/Videos/play.png";
-import play from "../../styles/assets/images/Videos/playbutton.png";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -338,19 +334,27 @@ const Item = styled("div")(
 );
 function ModuleVideo() {
   const trans = useTrans();
-  const [isPlay, setIsPlay] = useState<boolean>(false);
+  const [data, setData] = useState({});
+  useEffect(() => {
+    banner.getInforHomePage().then((res) => {
+      let rawData = res.data[res.data.length - 1];
+      let data = { title: rawData.title, url: rawData.url };
+      setData(data);
+    });
+  }, []);
+  // const [isPlay, setIsPlay] = useState<boolean>(false);
 
-  const playVideo = () => {
-    setIsPlay(true);
-    const myVideo = document.getElementById("video") as HTMLVideoElement | null;
-    myVideo.volume = 0.75;
-    myVideo.play();
-  };
-  const pauseVideo = () => {
-    setIsPlay(false);
-    const myVideo = document.getElementById("video") as HTMLVideoElement | null;
-    myVideo.pause();
-  };
+  // const playVideo = () => {
+  //   setIsPlay(true);
+  //   const myVideo = document.getElementById("video") as HTMLVideoElement | null;
+  //   myVideo.volume = 0.75;
+  //   myVideo.play();
+  // };
+  // const pauseVideo = () => {
+  //   setIsPlay(false);
+  //   const myVideo = document.getElementById("video") as HTMLVideoElement | null;
+  //   myVideo.pause();
+  // };
 
   const next = () => {
     let lists = document.querySelectorAll(".item");

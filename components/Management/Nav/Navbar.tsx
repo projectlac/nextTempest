@@ -53,6 +53,11 @@ export default function Navbar() {
       icon: <InboxIcon />,
       link: "/dashboard/tags",
     },
+    {
+      name: "Cài đăt",
+      icon: <InboxIcon />,
+      link: "/dashboard/setting",
+    },
   ]);
 
   const toggleDrawer =
