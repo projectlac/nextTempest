@@ -10,6 +10,8 @@ import React, { useEffect, useRef, useState } from "react";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
+import left from "../../../styles/assets/images/header-left.png";
+import right from "../../../styles/assets/images/header-right.png";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -27,7 +29,7 @@ const HeaderWrapper = styled(Box)(
   display:flex;
   width: 100%;
   height: 66px;
-  background-color: rgba(17,17,17,0.75);
+  background-color: rgba(17,17,17,0.60);
   box-shadow: 0 3px 7px 0 rgb(0 0 0 / 35%);
   align-items:center;
   font-size: 14px;
@@ -187,202 +189,238 @@ function HeaderHome() {
     <div>
       <HeaderWrapper>
         <Box
-          sx={{ textAlign: "center", width: { lg: 260, md: 230, xs: "50%" } }}
-        >
-          <Link href="/" passHref>
-            <Box>
-              <Image src={logo} alt="" width="150" height="50" />
-            </Box>
-          </Link>
-        </Box>
+          sx={{
+            background: `url(${left.src})`,
+            width: "120px",
+            height: "120px",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            left: "0",
+            top: "0",
+            position: "absolute",
+          }}
+        ></Box>
         <Box
           sx={{
-            width: {
-              lg: "calc(100% - 260px)",
-              sm: "calc(100% - 230px)",
-              xs: "50%",
-            },
+            background: `url(${right.src})`,
+            width: "277px",
+            height: "205px",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            right: "0",
+            top: "0",
+            position: "fixed",
+          }}
+        ></Box>
+        <Box
+          sx={{
+            width: "100%",
             display: "flex",
-            justifyContent: {
-              md: "space-between",
-              sm: "flex-end",
-              xs: "flex-end",
-            },
-            alignItems: "center",
+            padding: "50px",
+            zIndex: "2",
+            position: "relative",
           }}
         >
           <Box
+            sx={{ textAlign: "center", width: { lg: 260, md: 230, xs: "50%" } }}
+          >
+            <Link href="/" passHref>
+              <Box>
+                <Image src={logo} alt="" width="150" height="50" />
+              </Box>
+            </Link>
+          </Box>
+          <Box
             sx={{
-              display: { md: "flex", sm: "none", xs: "none" },
-              "& p.active a": {
-                borderBottom: "3px solid #48A6E2",
+              width: {
+                lg: "calc(100% - 260px)",
+                sm: "calc(100% - 230px)",
+                xs: "50%",
               },
-              "& a": {
-                color: "#fff",
-                margin: { lg: " 0 20px", md: "0 15px" },
-                fontSize: {
-                  lg: "1rem",
-                  md: "13px",
-                },
-                textDecoration: "none",
-                paddingBottom: "6px",
-                transition: "0.2s all linear",
-                "&:hover": {
-                  textShadow:
-                    "0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff",
-                },
+              display: "flex",
+              justifyContent: {
+                md: "space-between",
+                sm: "flex-end",
+                xs: "flex-end",
               },
+              alignItems: "center",
             }}
           >
-            <Typography className={`${activeClass("/")}`}>
-              <Link href="/">{trans[1][0]}</Link>
-            </Typography>
-            <ParentMenu className={`${activeClass("/mua-tai-khoan")}`}>
-              <Link href="#">{trans[1][1]}</Link>
-              <ChildMenu>
-                <ArrowDropUpIcon
+            <Box
+              sx={{
+                display: { md: "flex", sm: "none", xs: "none" },
+                "& p.active a": {
+                  borderBottom: "3px solid #48A6E2",
+                },
+                "& a": {
+                  color: "#fff",
+                  margin: { lg: " 0 20px", md: "0 15px" },
+                  fontSize: {
+                    lg: "1rem",
+                    md: "13px",
+                  },
+                  textDecoration: "none",
+                  paddingBottom: "6px",
+                  transition: "0.2s all linear",
+                  "&:hover": {
+                    textShadow:
+                      "0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff",
+                  },
+                },
+              }}
+            >
+              <Typography className={`${activeClass("/")}`}>
+                <Link href="/">{trans[1][0]}</Link>
+              </Typography>
+              <ParentMenu className={`${activeClass("/mua-tai-khoan")}`}>
+                <Link href="#">{trans[1][1]}</Link>
+                <ChildMenu>
+                  <ArrowDropUpIcon
+                    sx={{
+                      color: "#fff",
+                      position: "absolute",
+                      top: "-14px",
+                      left: "15%",
+                    }}
+                  />
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
+                      query: { id: "genshin-impact" },
+                    }}
+                  >
+                    Genshin impact
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
+                      query: { id: "tower-of-fantasy" },
+                    }}
+                  >
+                    Tower of fantasy
+                  </Link>
+                  <Link href="/reroll">Reroll</Link>
+                </ChildMenu>
+              </ParentMenu>
+              <Typography className={`${activeClass("/tin-tuc")}`}>
+                <Link href="/tin-tuc">{trans[1][2]}</Link>
+              </Typography>
+
+              <Typography className={`${activeClass("/nap-tien")}`}>
+                <Link href="/nap-tien">{trans[1][3]}</Link>
+              </Typography>
+              <Typography className={`${activeClass("/lien-he")}`}>
+                <Link href="/lien-he">{trans[1][4]}</Link>
+              </Typography>
+              {["ADMIN", "MOD"].includes(role) && isLogin && (
+                <Typography>
+                  <Link href="/dashboard">Quản lý</Link>
+                </Typography>
+              )}
+            </Box>
+            <Box
+              sx={{
+                marginLeft: "auto",
+                marginRight: "15px",
+                border: "1px solid #fff",
+                borderRadius: "999px",
+                padding: "5px",
+                display: "flex",
+                cursor: "pointer",
+                position: "relative",
+              }}
+              onClick={() => {
+                setOpenCart(!openCart);
+              }}
+            >
+              <ShoppingCartIcon
+                sx={{ color: "#fff", transform: "scale(0.8)" }}
+              />
+              <Cart
+                wrapperRef={wrapperRef}
+                openCart={openCart}
+                ids={ids}
+                data={data}
+                removeID={removeID}
+              />
+              {ids && ids?.length > 0 && (
+                <Typography
+                  sx={{
+                    background: "#d33",
+                    width: " 16px",
+                    height: "16px",
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "11px",
+                    borderRadius: "50%",
+                    position: "absolute",
+                    top: "-2px",
+                    right: "-6px",
+                  }}
+                >
+                  {ids && ids?.length}
+                </Typography>
+              )}
+            </Box>
+
+            <UserInformation />
+            <Box
+              color="#fff"
+              sx={{
+                cursor: "pointer",
+                marginRight: "50px",
+                border: "1px solid #fff",
+                padding: "5px 25px",
+                borderRadius: "15px",
+                transition: "0.3s all linear",
+                display: { md: "block", sm: "none", xs: "none" },
+                "&:hover": {
+                  background: "#4c81427a",
+                  color: "#fff",
+                  borderColor: "#bfbfbfbd",
+                },
+              }}
+            >
+              {isLogin ? (
+                <Typography onClick={logout}>{trans[1][6]}</Typography>
+              ) : (
+                <Typography onClick={login}>{trans[1][5]}</Typography>
+              )}
+            </Box>
+
+            <Box
+              sx={{
+                display: { md: "none", sm: "block" },
+                textAlign: "right",
+                paddingRight: { sm: "50px", xs: "15px" },
+              }}
+            >
+              {activeMenu ? (
+                <MenuOpenIcon
                   sx={{
                     color: "#fff",
-                    position: "absolute",
-                    top: "-14px",
-                    left: "15%",
+                    transform: "scale(1.5)",
+                    marginTop: "10px",
+                  }}
+                  onClick={() => {
+                    setActiveMenu(false);
                   }}
                 />
-                <Link
-                  href={{
-                    pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "genshin-impact" },
+              ) : (
+                <MenuIcon
+                  sx={{
+                    color: "#fff",
+                    transform: "scale(1.5)",
+                    marginTop: "10px",
                   }}
-                >
-                  Genshin impact
-                </Link>
-                <Link
-                  href={{
-                    pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "tower-of-fantasy" },
+                  onClick={() => {
+                    setActiveMenu(true);
                   }}
-                >
-                  Tower of fantasy
-                </Link>
-                <Link href="/reroll">Reroll</Link>
-              </ChildMenu>
-            </ParentMenu>
-            <Typography className={`${activeClass("/tin-tuc")}`}>
-              <Link href="/tin-tuc">{trans[1][2]}</Link>
-            </Typography>
-
-            <Typography className={`${activeClass("/nap-tien")}`}>
-              <Link href="/nap-tien">{trans[1][3]}</Link>
-            </Typography>
-            <Typography className={`${activeClass("/lien-he")}`}>
-              <Link href="/lien-he">{trans[1][4]}</Link>
-            </Typography>
-            {["ADMIN", "MOD"].includes(role) && isLogin && (
-              <Typography>
-                <Link href="/dashboard">Quản lý</Link>
-              </Typography>
-            )}
-          </Box>
-          <Box
-            sx={{
-              marginLeft: "auto",
-              marginRight: "15px",
-              border: "1px solid #fff",
-              borderRadius: "999px",
-              padding: "5px",
-              display: "flex",
-              cursor: "pointer",
-              position: "relative",
-            }}
-            onClick={() => {
-              setOpenCart(!openCart);
-            }}
-          >
-            <ShoppingCartIcon sx={{ color: "#fff", transform: "scale(0.8)" }} />
-            <Cart
-              wrapperRef={wrapperRef}
-              openCart={openCart}
-              ids={ids}
-              data={data}
-              removeID={removeID}
-            />
-            {ids && ids?.length > 0 && (
-              <Typography
-                sx={{
-                  background: "#d33",
-                  width: " 16px",
-                  height: "16px",
-                  color: "#fff",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "11px",
-                  borderRadius: "50%",
-                  position: "absolute",
-                  top: "-2px",
-                  right: "-6px",
-                }}
-              >
-                {ids && ids?.length}
-              </Typography>
-            )}
-          </Box>
-
-          <UserInformation />
-          <Box
-            color="#fff"
-            sx={{
-              cursor: "pointer",
-              marginRight: "50px",
-              border: "1px solid #fff",
-              padding: "5px 25px",
-              borderRadius: "15px",
-              transition: "0.3s all linear",
-              display: { md: "block", sm: "none", xs: "none" },
-              "&:hover": {
-                background: "#fff",
-                color: "#000",
-                borderColor: "#000",
-              },
-            }}
-          >
-            {isLogin ? (
-              <Typography onClick={logout}>{trans[1][6]}</Typography>
-            ) : (
-              <Typography onClick={login}>{trans[1][5]}</Typography>
-            )}
-          </Box>
-
-          <Box
-            sx={{
-              display: { md: "none", sm: "block" },
-              textAlign: "right",
-              paddingRight: { sm: "50px", xs: "15px" },
-            }}
-          >
-            {activeMenu ? (
-              <MenuOpenIcon
-                sx={{
-                  color: "#fff",
-                  transform: "scale(1.5)",
-                  marginTop: "10px",
-                }}
-                onClick={() => {
-                  setActiveMenu(false);
-                }}
-              />
-            ) : (
-              <MenuIcon
-                sx={{
-                  color: "#fff",
-                  transform: "scale(1.5)",
-                  marginTop: "10px",
-                }}
-                onClick={() => {
-                  setActiveMenu(true);
-                }}
-              />
-            )}
+                />
+              )}
+            </Box>
           </Box>
         </Box>
       </HeaderWrapper>

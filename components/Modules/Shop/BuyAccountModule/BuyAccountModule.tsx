@@ -1,6 +1,7 @@
 import { Box, Container, Grid, Hidden } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import background from "../../../../styles/assets/images/Background.png";
+// import background from "../../../../styles/assets/images/Background.png";
+import background from "../../../../styles/assets/images/Shop/Mask-Group-1.png";
 import BGContainerBot from "../../../../styles/assets/images/Shop/bot.png";
 import BGContainer from "../../../../styles/assets/images/Shop/mid.png";
 import BGContainerTop from "../../../../styles/assets/images/Shop/top.png";

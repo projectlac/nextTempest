@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import background from "../../styles/assets/images/Background.webp";
+import background from "../../styles/assets/images/Shop/Mask-Group-1.png";
 import FlashSale from "./Shop/FlashSale";
 import NewProduct from "./Shop/NewProduct";
 import NewProductTof from "./Shop/NewProductTof";
@@ -14,6 +14,7 @@ const ProductWrap = styled(Box)(
     background: url(${background.src});
     overflow:hidden;
     background-size: cover;
+    background-position:bottom;
     justify-content:center;
   `
 );

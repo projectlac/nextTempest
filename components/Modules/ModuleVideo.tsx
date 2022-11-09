@@ -1,19 +1,17 @@
-import { Box, Button, Hidden, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import useTrans from "../../pages/hook/useTrans";
-import background from "../../styles/assets/images/Background.webp";
-import Frame from "../../styles/assets/images/Frame.png";
-import Frame2 from "../../styles/assets/images/Frame2.png";
 import Frame3 from "../../styles/assets/images/Layer16.png";
-import Even from "../../styles/assets/images/Layer17.png";
-import Icon from "../../styles/assets/images/Layer19.png";
-import OnHover from "../../styles/assets/images/tag-2.png";
+import background from "../../styles/assets/images/Videos/Background_sumeru.png";
+import book from "../../styles/assets/images/Videos/Book.png";
+
+import Even from "../../styles/assets/images/Videos/button-group.png";
+import frame_video from "../../styles/assets/images/Videos/frame-video.webp";
+import Frame from "../../styles/assets/images/Videos/Frame.png";
 import poster from "../../styles/assets/images/Videos/play.png";
 import play from "../../styles/assets/images/Videos/playbutton.png";
-import frame_video from "../../styles/assets/images/Videos/frame-video.webp";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -33,12 +31,12 @@ const BgWrap = styled(Box)(
       height: 600px;
     } 
     @media (min-width: 768px){
-      height: 600px;
+      height: 720px;
     }
     @media (min-width: 1024px) {
       height: 1000px;
    } 
-   @media (min-width: 1440px) {
+   @media (min-width: 1400px) {
     height:1000px;
   } 
 
@@ -50,102 +48,133 @@ const FrameTop = styled(Box)({
   width: "100%",
   display: "flex",
   alignItems: "self-end",
-  "&::before": {
+  // "&::before": {
+  //   background: `url(${Frame.src})`,
+  //   content: '""',
+  //   position: "absolute",
+  //   top: 0,
+  //   left: 0,
+  //   right: 0,
+  //   width: "100%",
+  //   height: "150px",
+  //   backgroundSize: "contain",
+  //   backgroundRepeat: "no-repeat",
+  //   filter: "drop-shadow(0 0 47px #69e0ff)",
+  // },
+  "&::after": {
     background: `url(${Frame.src})`,
     content: '""',
     position: "absolute",
-    top: 0,
+    bottom: "5px",
     left: 0,
     right: 0,
     width: "100%",
-    height: "150px",
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    filter: "drop-shadow(0 0 47px #69e0ff)",
-  },
-  "&::after": {
-    background: `url(${Frame2.src})`,
-    content: '""',
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    width: "100%",
-    height: "150px",
+    height: "36px",
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "bottom",
     filter: " drop-shadow(0 0 47px #69e0ff)",
   },
   "@media (min-width: 0px)": {
-    height: "calc(600px - 66px)",
+    height: "calc(600px - 56px)",
   },
   "@media (min-width:760px)": {
-    height: "calc(1000px - 66px)",
+    height: "calc(720px - 56px)",
+  },
+  "@media (min-width:1024px)": {
+    height: "calc(1000px - 56px)",
+  },
+  "@media (min-width:1400px)": {
+    height: "calc(1000px - 56px)",
   },
 });
 
-const PostBox = styled(Box)(
+const BookWrap = styled(Box)(
   ({ theme }) => `
-  width:875px;
-  height:516px;
+  width:100%;
+ height: 530px;
   position: absolute;
   left: 0;
   right: 0;
   margin: 0 auto;
   top: 50%;
   transform: translateY(-55%);
-  background:url(${Frame3.src});
+  background:url(${book.src});
   background-repeat: no-repeat;
-  background-size: cover;
-
-  
+  background-size: contain;
+  position:relative;
+  background-position:center;
   @media (min-width: 0px) {
     width: 320px;
-    height: 189px; top: 26%;
+    height: 189px;
+     top: 26%;
+ 
+  } 
+    @media (min-width: 450px) {
+    width: 400px;
+    height: 224px;
+     top: 40%;
  
   } 
   @media (min-width: 768px){
-    width: 570px;
-    height: 336px;
+        width: 640px;
+    height: 346px;
     top: 40%;
   }
   @media (min-width: 1024px) {
-    top: 40%;
-    width:875px;
-    height:516px;
+    top: 56%;
+    width:100%;
+   height: 491px;
  } 
- @media (min-width: 1440px) {
+ @media (min-width: 1400px) {
   top: 50%;
-  width:875px;
-  height:516px;
+  width:100%;
+height: 479px;
 } 
     `
 );
 
 const VideoBox = styled(Box)(
   ({ theme }) => `
-  width: 825px;
-  height: 465px;
+     width: 957px;
+    height: 658px;
   position: absolute;
   left: 0;
   right: 0;
   margin: 0 auto;
   top: 50%;
-  transform: translateY(-50%);
-
+  transform: translateY(-56%);
+  
   @media (min-width: 0px) {
     width: 320px;
     height: 189px;
     text-align: center;
   }
+  @media (min-width: 450px) {
+    width: 440px;
+    height: 100%;
+    text-align: center;
+  }
   @media (min-width: 768px) {
-     width: 540px;height: 316px;
+        width: 630px;
+    height: 100%;
      
   } 
   @media (min-width: 1024px) {
-    width: 825px;
-    height: 465px;
+         width: 840px;
+    height: 737px;
+        top: 36%;
+ } 
+   @media (min-width: 1400px) {
+       top: 50%;
+      width: 840px;
+    height: 737px;
+
+ } 
+  @media (min-width: 1650px) {
+        width: 957px;
+    height: 658px;
+     top: 50%;
  } 
   
       `
@@ -180,17 +209,17 @@ const Title = styled(Typography)(
   ({ theme }) => `
   width: 100%;
   text-align: center;
-  padding-top: 40px;
+  padding-top: 80px;
   font-size: 25px;
   color: #fff;
   text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
   @media (min-width: 0px) {
     font-size: 14px;  
-  
+   padding-top: 20px;
  }
   @media (min-width: 768px) {
      font-size: 15px;
-
+ padding-top: 20px;
  } 
 
  @media (min-width: 1024px) {
@@ -198,8 +227,8 @@ const Title = styled(Typography)(
   padding-top: 20px;
 
 } 
-@media (min-width: 1440px) {
-  padding-top: 40px;
+@media (min-width: 1400px) {
+  padding-top: 80px;
 } 
       `
 );
@@ -210,35 +239,46 @@ const ButtonEven = styled(Box)(({ theme }) => ({
   display: "flex",
   fontWeight: 600,
   alignItems: "center",
-  backgroundPosition: "bottom right",
-  height: "77px",
-  width: "200px",
-  backgroundSize: "cover",
-  paddingTop: "15px",
-  justifyContent: "flex-start",
+  backgroundPosition: "center",
+  height: "78px",
+  width: "261px",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  justifyContent: "center",
   transition: "all 0.3s ease",
+  marginBottom: "22px",
   "& a": {
     display: "flex",
     alignItems: "center",
   },
-  "&:hover": {
-    background: `url(${OnHover.src})`,
-    backgroundPosition: "bottom right",
-    backgroundSize: "cover",
+  // "&:hover": {
+  //   background: `url(${OnHover.src})`,
+  //   backgroundPosition: "bottom right",
+  //   backgroundSize: "cover",
+  // },
+  [theme.breakpoints.up("xl")]: {
+    height: "78px",
+    width: "261px",
   },
+  [theme.breakpoints.down("xl")]: {
+    height: "70px",
+    width: "220px",
+  },
+
   [theme.breakpoints.down("lg")]: {
-    margin: "35px auto 5px",
-    width: "33%",
+    width: "28%",
     justifyContent: "center",
     paddingTop: "2px",
+    marginBottom: "22px",
+    height: "67px",
   },
   [theme.breakpoints.down("md")]: {
-    margin: "35px auto 5px",
+    margin: "15px auto 5px",
     width: "33%",
     justifyContent: "center",
     paddingTop: "2px",
-    height: "50px",
-    fontSize: "18px",
+    height: "40px",
+    fontSize: "16px",
   },
   [theme.breakpoints.down("sm")]: {
     width: "50%",
@@ -246,34 +286,47 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     justifyContent: "center",
     margin: "25px auto 5px",
     fontSize: "15px",
-    "&:last-child": {
-      margin: "5px auto 5px",
-    },
   },
 }));
 
-const BoxEntry = styled(Box)(
+const Item = styled("div")(
   ({ theme }) => `
-    width: 356px;
-    height: 76px;
-    background: url(${poster.src});
+    width: 774px;
+     height: 430px;
+    border: 10px solid #fff7ed;
+    background-size: cover;
     position: absolute;
-    top: 50%;
+    z-index: 3;
+    transition: transform 1s;
+    opacity: 1;
     left: 0;
     right: 0;
     margin: 0 auto;
-    transform: translateY(-50%);
-    
+    top: 50%;
+    transform: translateY(-51%);
+    box-shadow: 0px 0px 5px 1px #d4d4d4;
+    opacity: 0;
   @media (min-width: 0px) {
     width: 282px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 60px;
+    height: 172px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 450px) {
     width: 356px; 
-    height: 76px; 
+    height: 180px; 
   } 
+  @media (min-width: 768px) {
+    width: 504px;
+    height: 279px;
+  } 
+  @media (min-width: 1024px) {
+    width: 700px; 
+    height: 400px; 
+  } 
+  @media (min-width: 1440px) {
+    width: 700px;
+     height: 400px; 
+  } 
+  
  
       `
 );
@@ -292,109 +345,200 @@ function ModuleVideo() {
     const myVideo = document.getElementById("video") as HTMLVideoElement | null;
     myVideo.pause();
   };
+
+  const next = () => {
+    let lists = document.querySelectorAll(".item");
+    lists[0].classList.remove("active");
+    lists[0].classList.add("remove");
+    setTimeout(() => {
+      lists[0].classList.remove("remove");
+      document.getElementById("sliderBox").appendChild(lists[0]);
+    }, 1500);
+    lists[1].classList.add("active");
+  };
+  const prev = () => {
+    let lists = document.querySelectorAll(".item");
+    lists[0].classList.remove("active");
+    lists[lists.length - 1].classList.add("add");
+    setTimeout(() => {
+      lists[lists.length - 1].classList.remove("add");
+      document.getElementById("sliderBox").prepend(lists[lists.length - 1]);
+    }, 1500);
+    lists[lists.length - 1].classList.add("active");
+  };
+
   return (
     <BgWrap>
       <FrameTop>
-        <PostBox>
-          <VideoBox>
-            <video
-              id="video"
-              width="825"
-              height="465"
-              onClick={pauseVideo}
-              poster={frame_video.src}
-            >
-              <source
-                src="https://drive.google.com/uc?export=download&id=1gKNQZKReMVcUeh5udxumDgF12q9qxJAo"
-                type="video/mp4"
-              />
-            </video>
+        {/* <PostBox> */}
+        <VideoBox className="box-slider">
+          <button id="prev" onClick={prev}></button>
+          <button id="next" onClick={next}></button>
+          <BookWrap id="sliderBox">
+            {/* <Box className="item">
+              <video
+                id="video"
+                width="825"
+                height="465"
+                onClick={pauseVideo}
+                poster={frame_video.src}
+              >
+                <source
+                  src="https://drive.google.com/uc?export=download&id=1gKNQZKReMVcUeh5udxumDgF12q9qxJAo"
+                  type="video/mp4"
+                />
+              </video>
 
-            {!isPlay && (
-              <BoxEntry>
-                <PlayButton
-                  sx={{
-                    "&:before": {
-                      content: '""',
-                      display: "block",
-                      position: "absolute",
-                      left: "50%",
-                      top: "50%",
-                      zIndex: "1",
-                      width: "28px",
-                      height: "28px",
-                      transform: "translate(-50%, -50%)",
-                      background: `url(${play.src})`,
-                      backgroundPosition: "center top",
-                    },
-                    "&:hover": {
-                      background: "transparent",
+              {!isPlay && (
+                <BoxEntry>
+                  <PlayButton
+                    sx={{
                       "&:before": {
-                        backgroundPosition: "center bottom",
+                        content: '""',
+                        display: "block",
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        zIndex: "1",
+                        width: "28px",
+                        height: "28px",
+                        transform: "translate(-50%, -50%)",
+                        background: `url(${play.src})`,
+                        backgroundPosition: "center top",
                       },
-                    },
-                  }}
-                  onClick={playVideo}
-                >
-                  play
-                </PlayButton>
-              </BoxEntry>
-            )}
-
-            <Box
-              sx={{
-                position: {
-                  lg: "absolute",
-                  xs: "relative",
-                },
-                display: { lg: "inherit", xs: "flex" },
-                flexWrap: "wrap",
-                right: { lg: "-211.5px" },
-                top: { lg: "10%" },
+                      "&:hover": {
+                        background: "transparent",
+                        "&:before": {
+                          backgroundPosition: "center bottom",
+                        },
+                      },
+                    }}
+                    onClick={playVideo}
+                  >
+                    play
+                  </PlayButton>
+                </BoxEntry>
+              )}
+            </Box> */}
+            <Item
+              className="item active"
+              style={{
+                backgroundImage: `url(https://cdn.sforum.vn/sforum/wp-content/uploads/2022/10/maxresdefault-2-3.jpg)`,
               }}
-            >
-              <ButtonEven>
-                <Link href={`https://zalo.me/0344723594`} passHref>
-                  <a target="_blank" rel="noopener noreferrer">
-                    <Hidden lgDown>
-                      <Image src={Icon} alt="" width={38} height={38} />{" "}
-                    </Hidden>
-                    Zalo
-                  </a>
-                </Link>
-              </ButtonEven>
-              <ButtonEven>
-                <Link href={`https://www.facebook.com/tranminhvu128`} passHref>
-                  <a target="_blank" rel="noopener noreferrer">
-                    <Hidden lgDown>
-                      <Image src={Icon} alt="" width={38} height={38} />{" "}
-                    </Hidden>{" "}
-                    Facebook
-                  </a>
-                </Link>
-              </ButtonEven>
+            ></Item>
+            <Item
+              className="item"
+              style={{
+                backgroundImage:
+                  "url(https://gamingonphone.com/wp-content/uploads/2022/06/genshin-impact-3.0.jpg)",
+              }}
+            ></Item>
+            <Item
+              className="item"
+              style={{
+                backgroundImage:
+                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
+              }}
+            ></Item>
+            <Item
+              className="item"
+              style={{
+                backgroundImage:
+                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
+              }}
+            ></Item>
+            <Item
+              className="item"
+              style={{
+                backgroundImage:
+                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
+              }}
+            ></Item>
+            <Item
+              className="item"
+              style={{
+                backgroundImage:
+                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
+              }}
+            ></Item>
+          </BookWrap>
 
-              <ButtonEven>
-                <Link
-                  href={`https://www.facebook.com/groups/congdong.genshinimpact.vietnam`}
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    <Hidden lgDown>
-                      <Image src={Icon} alt="" width={38} height={38} />{" "}
-                    </Hidden>{" "}
-                    Group
-                  </a>
-                </Link>
-              </ButtonEven>
-            </Box>
-            <Title>
-              <span>
-                {trans[0][0]} <br /> {trans[0][1]}
-              </span>
-            </Title>
-          </VideoBox>
-        </PostBox>
+          <Box
+            sx={{
+              position: {
+                lg: "absolute",
+                xs: "relative",
+              },
+              display: { lg: "inherit", xs: "flex" },
+              // flexWrap: "wrap",
+              justifyContent: "space-around",
+              width: { lg: "auto", md: "80%", sm: "100%", xs: "100%" },
+              margin: {
+                lg: "0 auto",
+                md: "177px auto 0",
+                sm: "100px auto 0",
+                xs: "-100px auto 0",
+              },
+              left: { xl: "-330px", lg: "-274px" },
+              top: { xl: "25.6%", lg: "29.6%" },
+            }}
+          >
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Tips & Fact</a>
+              </Link>
+            </ButtonEven>
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Goods</a>
+              </Link>
+            </ButtonEven>
+
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Thu mua account</a>
+              </Link>
+            </ButtonEven>
+          </Box>
+          <Box
+            sx={{
+              position: {
+                lg: "absolute",
+                xs: "relative",
+              },
+              width: { lg: "auto", md: "80%", sm: "100%", xs: "100%" },
+              margin: { sm: "0 auto", xs: "-35px auto 0" },
+              display: { lg: "inherit", xs: "flex" },
+              justifyContent: "space-around",
+
+              right: { xl: "-330px", lg: "-274px" },
+              top: { xl: "25.6%", lg: "29.6%" },
+            }}
+          >
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Check UID Scam</a>
+              </Link>
+            </ButtonEven>
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Nạp đá sáng thế</a>
+              </Link>
+            </ButtonEven>
+
+            <ButtonEven>
+              <Link href={`#`} passHref>
+                <a rel="noopener noreferrer">Trả góp</a>
+              </Link>
+            </ButtonEven>
+          </Box>
+          <Title>
+            <span>
+              {trans[0][0]} <br /> {trans[0][1]}
+            </span>
+          </Title>
+        </VideoBox>
+        {/* </PostBox> */}
       </FrameTop>
     </BgWrap>
   );

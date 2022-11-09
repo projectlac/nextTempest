@@ -1,18 +1,18 @@
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { Box, styled, Typography } from "@mui/material";
+import { Box, styled } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
   FaDiscord,
   FaFacebookF,
   FaInstagram,
+  FaPhoneAlt,
   FaTwitter,
   FaYoutube,
-  FaPhoneAlt,
 } from "react-icons/fa";
 
-import { showMessenger } from "react-messenger-chat-plugin";
-
+import zalo from "../../../styles/assets/images/icons9-zalo.svg";
 import Smile from "../../../styles/assets/images/Smile.png";
 const SocialWrapper = styled(Box)(
   ({ theme }) => `
@@ -124,9 +124,9 @@ function Social() {
           </a>
         </Link>
 
-        <Link href="tel:0344723594" passHref>
+        <Link href="https://zalo.me/0344723594" passHref>
           <a>
-            <FaPhoneAlt /> Liên hệ trực tiếp
+            <Image src={zalo} width={25} height={25} /> Zalo
           </a>
         </Link>
       </SocialList>
