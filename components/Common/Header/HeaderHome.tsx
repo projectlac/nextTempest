@@ -191,8 +191,8 @@ function HeaderHome() {
         <Box
           sx={{
             background: `url(${left.src})`,
-            width: "120px",
-            height: "120px",
+            width: { md: "120px", xs: "80px" },
+            height: { md: "120px", xs: "80px" },
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             left: "0",
@@ -203,8 +203,8 @@ function HeaderHome() {
         <Box
           sx={{
             background: `url(${right.src})`,
-            width: "277px",
-            height: "205px",
+            width: { md: "277px", xs: "165px" },
+            height: { md: "205px", xs: "123px" },
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
             right: "0",
@@ -216,7 +216,7 @@ function HeaderHome() {
           sx={{
             width: "100%",
             display: "flex",
-            padding: "50px",
+            padding: { md: "50px", xs: "0px" },
             zIndex: "2",
             position: "relative",
           }}
