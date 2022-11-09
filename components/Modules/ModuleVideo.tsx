@@ -287,6 +287,13 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     margin: "25px auto 5px",
     fontSize: "15px",
   },
+  [theme.breakpoints.down("xs")]: {
+    width: "50%",
+    height: "50px",
+    justifyContent: "center",
+    margin: "25px auto 5px",
+    fontSize: "10px",
+  },
 }));
 
 const Item = styled("div")(
