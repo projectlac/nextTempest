@@ -16,9 +16,9 @@ const banner = {
     const url = "/information";
     return axiosAudit.get(url);
   },
-  updateInforHomePage(data:any): Promise<PromiseApi> {
+  updateInforHomePage(data: any): Promise<PromiseApi> {
     const url = "/information/update/b910c308-8cef-4400-86c6-9e5e13d5cfe8";
-    return axiosAudit.post(url,data);
+    return axiosAudit.put(url, data);
   },
 };
 export default banner;

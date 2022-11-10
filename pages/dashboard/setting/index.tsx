@@ -9,15 +9,30 @@ import {
   TextField,
 } from "@mui/material";
 import Head from "next/head";
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
+import banner from "../../../api/banner";
 import DashboardLayout from "../../../components/Layout/DashboardLayout";
-
+import { useAppContext } from "../../../context/state";
+import CircularProgress from "@mui/material/CircularProgress";
 function index() {
-  const [numberOfImage, setNumberOfImage] = useState<number>(1);
-  const [defaultData, setDefaultData] = useState([
-    { type: "image", url: "", poster: "" },
+  const { handleChangeStatusToast, updated, handleChangeMessageToast } =
+    useAppContext();
+  const [numberOfImage, setNumberOfImage] = useState<number>(3);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [defaultDataButton, setDefaultDataButton] = useState([
+    { title: "", url: "", poster: "" },
+    { title: "", url: "", poster: "" },
+    { title: "", url: "", poster: "" },
+    { title: "", url: "", poster: "" },
+    { title: "", url: "", poster: "" },
+    { title: "", url: "", poster: "" },
   ]);
-  const defaultItem = { type: "image", url: "", poster: "" };
+  const [defaultData, setDefaultData] = useState([
+    { title: "image", url: "", poster: "" },
+    { title: "image", url: "", poster: "" },
+    { title: "image", url: "", poster: "" },
+  ]);
+  const defaultItem = { title: "image", url: "", poster: "" };
 
   const addItem = () => {
     setNumberOfImage((prev) => prev + 1);
@@ -33,9 +48,85 @@ function index() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index) => {
     let temp = [...defaultData];
-    temp[index].type = event.target.value;
+    temp[index].title = event.target.value;
     setDefaultData(temp);
   };
+  const changeUrl = (event: React.ChangeEvent<HTMLInputElement>, index) => {
+    let temp = [...defaultData];
+    temp[index].url = event.target.value;
+    setDefaultData(temp);
+  };
+  // const changePoster = (event: React.ChangeEvent<HTMLInputElement>, index) => {
+  //   let temp = [...defaultData];
+  //   temp[index].poster = event.target.value;
+  //   setDefaultData(temp);
+  // };
+
+  const changeButtonUrl = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index
+  ) => {
+    let temp = [...defaultDataButton];
+    temp[index].url = event.target.value;
+    setDefaultDataButton(temp);
+  };
+  const changeButtonTitle = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index
+  ) => {
+    let temp = [...defaultDataButton];
+    temp[index].title = event.target.value;
+    setDefaultDataButton(temp);
+  };
+
+  const submit = () => {
+    let rawData = [...defaultDataButton, ...defaultData];
+    let getTitle = rawData.map((d) => d.title).toString();
+    let geturl = rawData.map((d) => d.url).toString();
+    let getPoster = rawData.map((d) => d.poster).toString();
+    let finalData = { title: getTitle, url: geturl, poster: getPoster };
+    setLoading(true);
+    banner
+      .updateInforHomePage(finalData)
+      .then((res) => {
+        handleChangeMessageToast("Cập nhật thành công");
+        handleChangeStatusToast();
+        updated();
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    banner.getInforHomePage().then((res) => {
+      let rawData = {
+        title: res.data[5].title.split(","),
+        url: res.data[5].url.split(","),
+        poster: res.data[5].poster.split(","),
+      };
+
+      let button = [];
+      let image = [];
+      for (let index = 0; index < 6; index++) {
+        button.push({
+          title: rawData.title[index],
+          url: rawData.url[index],
+          poster: rawData.poster[index],
+        });
+      }
+      for (let index = 6; index < rawData.title.length; index++) {
+        image.push({
+          title: rawData.title[index],
+          url: rawData.url[index],
+          poster: rawData.poster[index],
+        });
+      }
+      setDefaultData(image);
+      setDefaultDataButton(button);
+      setNumberOfImage(rawData.title.length - 6);
+    });
+  }, []);
   return (
     <DashboardLayout>
       <Head>
@@ -70,28 +161,112 @@ function index() {
               Cụm nút
               <Grid container columnSpacing={2} rowSpacing={2}>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[0].title}
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 0);
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[0].url}
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 0);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[1].title}
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 1);
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[1].url}
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 1);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[2].title}
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 2);
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[2].url}
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 2);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    value={defaultDataButton[3].title}
+                    fullWidth
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 3);
+                    }}
+                  />
+                  <TextField
+                    value={defaultDataButton[3].url}
+                    fullWidth
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 3);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[4].title}
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 4);
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    value={defaultDataButton[4].url}
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 4);
+                    }}
+                  />
                 </Grid>
                 <Grid item md={4}>
-                  <TextField fullWidth placeholder="Tiêu đề" />
-                  <TextField fullWidth placeholder="Đường dẫn" />
+                  <TextField
+                    value={defaultDataButton[5].title}
+                    fullWidth
+                    placeholder="Tiêu đề"
+                    onChange={(e: any) => {
+                      changeButtonTitle(e, 5);
+                    }}
+                  />
+                  <TextField
+                    value={defaultDataButton[5].url}
+                    fullWidth
+                    placeholder="Đường dẫn"
+                    onChange={(e: any) => {
+                      changeButtonUrl(e, 5);
+                    }}
+                  />
                 </Grid>
               </Grid>
             </Box>
@@ -120,15 +295,21 @@ function index() {
                             alignItems: "center",
                           }}
                         >
-                          <TextField
+                          {/* <TextField
                             select
-                            value={defaultData[i]?.type}
+                            value={defaultData[i]?.title}
                             onChange={(e: any) => handleChange(e, i)}
                           >
                             <MenuItem value={"image"}>Ảnh</MenuItem>
                             <MenuItem value={"video"}>Video</MenuItem>
-                          </TextField>
-                          {i !== 0 && (
+                          </TextField> */}
+                          <TextField
+                            fullWidth
+                            placeholder="Đường dẫn"
+                            value={defaultData[i]?.url}
+                            onChange={(e: any) => changeUrl(e, i)}
+                          />
+                          {i > 2 && (
                             <Button
                               variant="contained"
                               color="error"
@@ -139,24 +320,23 @@ function index() {
                             </Button>
                           )}
                         </Box>
-                        <TextField
-                          fullWidth
-                          placeholder="Đường dẫn"
-                          value={defaultData[i]?.url}
-                        />
-                        {defaultData[i]?.type === "video" && (
+
+                        {/* {defaultData[i]?.title === "video" && (
                           <TextField
                             fullWidth
                             placeholder="Đường dẫn poster"
                             value={defaultData[i]?.poster}
+                            onChange={(e: any) => changePoster(e, i)}
                           />
-                        )}
+                        )} */}
                       </Box>
                     </Box>
                   </Grid>
                 ))}
               </Grid>
-              <Button variant="contained">Lưu</Button>
+              <Button variant="contained" onClick={submit}>
+                {loading ? <CircularProgress /> : "Lưu"}
+              </Button>
             </Box>
           </Card>
         </Container>

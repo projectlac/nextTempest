@@ -332,14 +332,45 @@ const Item = styled("div")(
  
       `
 );
+interface IInfor {
+  url: string;
+  title: string;
+}
 function ModuleVideo() {
   const trans = useTrans();
-  const [data, setData] = useState({});
+  const [button, setButton] = useState<IInfor[]>([
+    { title: "", url: "" },
+    { title: "", url: "" },
+    { title: "", url: "" },
+    { title: "", url: "" },
+    { title: "", url: "" },
+    { title: "", url: "" },
+  ]);
+  const [image, setImage] = useState<IInfor[]>([]);
+
   useEffect(() => {
     banner.getInforHomePage().then((res) => {
       let rawData = res.data[res.data.length - 1];
-      let data = { title: rawData.title, url: rawData.url };
-      setData(data);
+      let data = {
+        title: rawData.title.split(","),
+        url: rawData.url.split(","),
+      };
+      let button = [];
+      let image = [];
+      for (let index = 0; index < 6; index++) {
+        button.push({
+          title: data.title[index],
+          url: data.url[index],
+        });
+      }
+      for (let index = 6; index < data.title.length; index++) {
+        image.push({
+          title: data.title[index],
+          url: data.url[index],
+        });
+      }
+      setButton(button);
+      setImage(image);
     });
   }, []);
   // const [isPlay, setIsPlay] = useState<boolean>(false);
@@ -363,7 +394,7 @@ function ModuleVideo() {
     setTimeout(() => {
       lists[0].classList.remove("remove");
       document.getElementById("sliderBox").appendChild(lists[0]);
-    }, 1500);
+    }, 1200);
     lists[1].classList.add("active");
   };
   const prev = () => {
@@ -373,7 +404,7 @@ function ModuleVideo() {
     setTimeout(() => {
       lists[lists.length - 1].classList.remove("add");
       document.getElementById("sliderBox").prepend(lists[lists.length - 1]);
-    }, 1500);
+    }, 1200);
     lists[lists.length - 1].classList.add("active");
   };
 
@@ -430,47 +461,16 @@ function ModuleVideo() {
                 </BoxEntry>
               )}
             </Box> */}
-            <Item
-              className="item active"
-              style={{
-                backgroundImage: `url(https://cdn.sforum.vn/sforum/wp-content/uploads/2022/10/maxresdefault-2-3.jpg)`,
-              }}
-            ></Item>
-            <Item
-              className="item"
-              style={{
-                backgroundImage:
-                  "url(https://gamingonphone.com/wp-content/uploads/2022/06/genshin-impact-3.0.jpg)",
-              }}
-            ></Item>
-            <Item
-              className="item"
-              style={{
-                backgroundImage:
-                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
-              }}
-            ></Item>
-            <Item
-              className="item"
-              style={{
-                backgroundImage:
-                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
-              }}
-            ></Item>
-            <Item
-              className="item"
-              style={{
-                backgroundImage:
-                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
-              }}
-            ></Item>
-            <Item
-              className="item"
-              style={{
-                backgroundImage:
-                  "url(https://i.vietgiaitri.com/2022/10/5/genshin-impact-so-huu-doanh-thu-an-tuong-sau-hai-nam-tiep-tuc-tai-dau-tu-de-phat-trien-game-c52-6677129.jpg)",
-              }}
-            ></Item>
+            {image.length > 0 &&
+              image.map((d, i) => (
+                <Item
+                  key={i}
+                  className="item"
+                  style={{
+                    backgroundImage: `url(${d.url})`,
+                  }}
+                ></Item>
+              ))}
           </BookWrap>
 
           <Box
@@ -494,19 +494,19 @@ function ModuleVideo() {
             }}
           >
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Tips & Fact</a>
+              <Link href={button[0].url} passHref>
+                <a rel="noopener noreferrer">{button[0].title}</a>
               </Link>
             </ButtonEven>
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Goods</a>
+              <Link href={button[1].url} passHref>
+                <a rel="noopener noreferrer">{button[1].title}</a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Thu mua account</a>
+              <Link href={button[2].url} passHref>
+                <a rel="noopener noreferrer">{button[2].title}</a>
               </Link>
             </ButtonEven>
           </Box>
@@ -526,19 +526,19 @@ function ModuleVideo() {
             }}
           >
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Check UID Scam</a>
+              <Link href={button[3].url} passHref>
+                <a rel="noopener noreferrer">{button[3].title}</a>
               </Link>
             </ButtonEven>
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Nạp đá sáng thế</a>
+              <Link href={button[4].url} passHref>
+                <a rel="noopener noreferrer">{button[4].title}</a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
-              <Link href={`#`} passHref>
-                <a rel="noopener noreferrer">Trả góp</a>
+              <Link href={button[5].url} passHref>
+                <a rel="noopener noreferrer">{button[5].title}</a>
               </Link>
             </ButtonEven>
           </Box>
