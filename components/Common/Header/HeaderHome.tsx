@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Hidden, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,9 @@ import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
 import left from "../../../styles/assets/images/header-left.png";
 import right from "../../../styles/assets/images/header-right.png";
+import logoTempest from "../../../styles/assets/images/tempestlogo-2.png";
+import logoTips from "../../../styles/assets/images/Logo-tnf-2.png";
+
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -318,6 +321,54 @@ function HeaderHome() {
                 </Typography>
               )}
             </Box>
+            <Hidden mdDown>
+              <Box
+                sx={{
+                  border: "1px solid #fff",
+                  borderRadius: "30px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0 25px",
+                  margin: "0 auto",
+                }}
+              >
+                <Typography sx={{ mr: 3, color: "#fff", fontSize: "14px" }}>
+                  Các đơn vị hợp tác
+                </Typography>
+                <Box
+                  sx={{
+                    height: "37px",
+                    width: "37px",
+                    position: "relative",
+                    mr: 3,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      background: `url(${logoTips.src})`,
+                      backgroundSize: "contain",
+                      backgroundRepeat: "no-repeat",
+
+                      height: "52px",
+                      top: "50%",
+                      width: "52px",
+                      transform: "translateY(-50%)",
+                      position: "absolute",
+                    }}
+                  ></Box>
+                </Box>
+                <Box
+                  sx={{
+                    background: `url(${logoTempest.src})`,
+                    height: "30px",
+                    width: "75px",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                ></Box>
+              </Box>
+            </Hidden>
             <Box
               sx={{
                 marginLeft: "auto",

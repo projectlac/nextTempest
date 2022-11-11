@@ -5,7 +5,8 @@ import { useRouter } from "next/router";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
-
+import logoTempest from "../../../styles/assets/images/tempestlogo-2.png";
+import logoTips from "../../../styles/assets/images/Logo-tnf-2.png";
 import Close from "../../../styles/assets/images/svg/close.svg";
 import { useAppContext } from "../../../context/state";
 import useTrans from "../../../pages/hook/useTrans";
@@ -187,6 +188,51 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
               </Typography>
             )}
           </MenuTextBox>
+
+          <Box
+            sx={{
+              border: "1px solid #fff",
+              borderRadius: "30px",
+
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px 25px",
+              margin: "0 auto",
+            }}
+          >
+            <Typography sx={{ mr: 3, color: "#fff", fontSize: "14px" }}>
+              Các đơn vị hợp tác
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+              }}
+            >
+              <Box
+                sx={{
+                  background: `url(${logoTips.src})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+
+                  height: "52px",
+
+                  width: "52px",
+                }}
+              ></Box>
+
+              <Box
+                sx={{
+                  background: `url(${logoTempest.src})`,
+                  height: "30px",
+                  width: "75px",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                }}
+              ></Box>
+            </Box>
+          </Box>
         </FrameBox>
       </MenuSWrapper>
       {activeMenu && <OverlayMenu />}
