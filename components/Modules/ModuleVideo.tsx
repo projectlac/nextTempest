@@ -506,7 +506,7 @@ function ModuleVideo() {
           >
             <ButtonEven>
               <Link href={"https://www.facebook.com/Paimon2Quotes"} passHref>
-                <a rel="noopener noreferrer">Tips & Fact </a>
+                <a rel="noopener noreferrer">Fangape </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
@@ -516,7 +516,7 @@ function ModuleVideo() {
             </ButtonEven>
 
             <ButtonEven>
-              <Link href={"#"} passHref>
+              <Link href={"https://m.me/100023554816978"} passHref>
                 <a rel="noopener noreferrer">Thu mua account </a>
               </Link>
             </ButtonEven>

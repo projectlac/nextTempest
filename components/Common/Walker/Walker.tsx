@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import image from "../../../styles/assets/images/rimumu.png";
+import image from "../../../styles/assets/images/Logo-tnf-2.png";
 const BoxRunning = styled(Box)({
   position: "fixed",
   top: "-500px",
@@ -16,12 +16,12 @@ const BoxRunning = styled(Box)({
 });
 
 function Walker() {
-  const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const [scrollPosition, setScrollPosition] = useState<number>(650);
 
   const handleScroll = () => {
     const position =
       (window.pageYOffset * window.innerHeight) / document.body.offsetHeight;
-    setScrollPosition(position + 350);
+    setScrollPosition(position + 650);
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function Walker() {
         transform: `translateY(${scrollPosition}px)`,
       }}
     >
-      <Image src={image} height={150} width={100.5} alt="human" />
+      <Image src={image} height={83} width={75} alt="human" />
     </BoxRunning>
   );
 }
