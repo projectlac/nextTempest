@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import banner from "../../api/banner";
 import useTrans from "../../pages/hook/useTrans";
-import background from "../../styles/assets/images/Videos/Background_sumeru.png";
+import background from "../../styles/assets/images/Videos/Background_sumeru.jpg";
 import book from "../../styles/assets/images/Videos/Book.png";
 import Even from "../../styles/assets/images/Videos/button-group.png";
 import Frame from "../../styles/assets/images/Videos/Frame.png";
