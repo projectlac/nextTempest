@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import background from "../../styles/assets/images/Shop/Mask-Group-1.png";
+import background from "../../styles/assets/images/Shop/Mask-Group-1.jpg";
 import FlashSale from "./Shop/FlashSale";
 import NewProduct from "./Shop/NewProduct";
 import NewProductTof from "./Shop/NewProductTof";
