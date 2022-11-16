@@ -13,7 +13,7 @@ import background from "../../../styles/assets/images/Background.png";
 import Paper from "../../../styles/assets/images/Shop/BillPaper.png";
 import Thank from "../../../styles/assets/images/Shop/thank.png";
 import ThankMobile from "../../../styles/assets/images/Shop/thankMobile.png";
-
+import Arrow from "../../../styles/assets/images/PackList/arrow.png";
 import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
 import toMoney from "../../../utility/toMoney";
 import audit from "../../../api/audit";
@@ -258,9 +258,29 @@ function BillReroll({ id }: IBill) {
                         lg: 0,
                         xs: 2,
                       },
+                      "& a:before": {
+                        content: '""',
+                        background: `url(${Arrow.src})`,
+                        width: "50px",
+                        height: "50px",
+                        position: "absolute",
+                        backgroundSize: "contain",
+                        transform: "translate(-15px, 24px) rotate(-45deg)",
+                        backgroundRepeat: "no-repeat",
+                        filter: "opacity(0.5)",
+                      },
                     }}
                   >
-                    Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với Admin
+                    Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với{" "}
+                    <a
+                      href="https://www.facebook.com/tranminhvu128/"
+                      style={{
+                        textDecoration: "underline",
+                        position: "relative",
+                      }}
+                    >
+                      Admin
+                    </a>{" "}
                     nha.
                   </Typography>
                 </Box>

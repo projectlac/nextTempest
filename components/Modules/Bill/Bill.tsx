@@ -12,6 +12,8 @@ import React, { useEffect, useState } from "react";
 import background from "../../../styles/assets/images/Background.png";
 import Paper from "../../../styles/assets/images/Shop/BillPaper.png";
 import Thank from "../../../styles/assets/images/Shop/thank.png";
+import Arrow from "../../../styles/assets/images/PackList/arrow.png";
+
 import ThankMobile from "../../../styles/assets/images/Shop/thankMobile.png";
 
 import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
@@ -260,15 +262,29 @@ function Bill({ id }: IBill) {
                         lg: 0,
                         xs: 2,
                       },
+                      "& a:before": {
+                        content: '""',
+                        background: `url(${Arrow.src})`,
+                        width: "50px",
+                        height: "50px",
+                        position: "absolute",
+                        backgroundSize: "contain",
+                        transform: "translate(-15px, 24px) rotate(-45deg)",
+                        backgroundRepeat: "no-repeat",
+                        filter: "opacity(0.5)",
+                      },
                     }}
                   >
                     Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với{" "}
                     <a
                       href="https://www.facebook.com/tranminhvu128/"
-                      style={{ textDecoration: "underline" }}
+                      style={{
+                        textDecoration: "underline",
+                        position: "relative",
+                      }}
                     >
-                      Admin{" "}
-                    </a>
+                      Admin
+                    </a>{" "}
                     nha.
                   </Typography>
                 </Box>
