@@ -91,9 +91,9 @@ function Setting() {
   useEffect(() => {
     banner.getInforHomePage().then((res) => {
       let rawData = {
-        title: res.data[5].title.split(","),
-        url: res.data[5].url.split(","),
-        poster: res.data[5].poster.split(","),
+        title: res.data[0].title.split(","),
+        url: res.data[0].url.split(","),
+        poster: res.data[0].poster.split(","),
       };
 
       let button = [];

@@ -17,7 +17,7 @@ const banner = {
     return axiosAudit.get(url);
   },
   updateInforHomePage(data: any): Promise<PromiseApi> {
-    const url = "/information/update/b910c308-8cef-4400-86c6-9e5e13d5cfe8";
+    const url = "/information/update/e7f97af1-d398-4a13-809a-e6f3349d866a";
     return axiosAudit.put(url, data);
   },
 };

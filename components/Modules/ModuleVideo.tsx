@@ -352,7 +352,7 @@ function ModuleVideo() {
 
   useEffect(() => {
     banner.getInforHomePage().then((res) => {
-      let rawData = res.data[res.data.length - 1];
+      let rawData = res.data[0];
       let data = {
         title: rawData.title.split(","),
         url: rawData.url.split(","),
@@ -389,15 +389,6 @@ function ModuleVideo() {
   //   myVideo.pause();
   // };
 
-  const itemHUH = [
-    { url: "https://images.alphacoders.com/127/1273175.jpg" },
-    {
-      url: "https://64.media.tumblr.com/4b64d2e197d9ec69011331a691677a8c/afe10a8e6df35d67-6d/s1280x1920/c01214a7a10efcf9433a02c7d8147a7e1b1ba311.jpg",
-    },
-    {
-      url: "https://tintuc-divineshop.cdn.vccloud.vn/wp-content/uploads/2022/11/genshin-impact-huong-dan-build-nahida-thao-than-sumeru_636201c92ffd4.jpeg",
-    },
-  ];
   const next = () => {
     let lists = document.querySelectorAll(".item");
     lists[0].classList.remove("active");
@@ -472,8 +463,8 @@ function ModuleVideo() {
                 </BoxEntry>
               )}
             </Box> */}
-            {itemHUH.length > 0 &&
-              itemHUH.map((d, i) => (
+            {image.length > 0 &&
+              image.map((d, i) => (
                 <Item
                   key={i}
                   className="item"
@@ -505,19 +496,19 @@ function ModuleVideo() {
             }}
           >
             <ButtonEven>
-              <Link href={"https://www.facebook.com/Paimon2Quotes"} passHref>
-                <a rel="noopener noreferrer">Fangape </a>
+              <Link href={button[0].url} passHref>
+                <a rel="noopener noreferrer">{button[0].title} </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
-              <Link href={"#"} passHref>
-                <a rel="noopener noreferrer">Goods </a>
+              <Link href={button[1].url} passHref>
+                <a rel="noopener noreferrer">{button[1].title} </a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
-              <Link href={"https://m.me/100023554816978"} passHref>
-                <a rel="noopener noreferrer">Thu mua account </a>
+              <Link href={button[2].url} passHref>
+                <a rel="noopener noreferrer">{button[2].title} </a>
               </Link>
             </ButtonEven>
           </Box>
@@ -537,19 +528,19 @@ function ModuleVideo() {
             }}
           >
             <ButtonEven>
-              <Link href={"#"} passHref>
-                <a rel="noopener noreferrer">Check UID Scam</a>
+              <Link href={button[3].url} passHref>
+                <a rel="noopener noreferrer">{button[3].title}</a>
               </Link>
             </ButtonEven>
             <ButtonEven>
-              <Link href={"#"} passHref>
-                <a rel="noopener noreferrer">Nạp đá sáng thế</a>
+              <Link href={button[4].url} passHref>
+                <a rel="noopener noreferrer">{button[4].title}</a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
-              <Link href={"#"} passHref>
-                <a rel="noopener noreferrer">Trả góp</a>
+              <Link href={button[5].url} passHref>
+                <a rel="noopener noreferrer">{button[5].title}</a>
               </Link>
             </ButtonEven>
           </Box>
