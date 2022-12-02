@@ -85,6 +85,7 @@ const IdProduct = styled(Box)(
   font-weight:bold;
   top:0;
   right:0;
+  margin:0;
   @media (min-width: 0px) {
     font-size:10px;
     font-weight: 600;
@@ -217,12 +218,12 @@ function ShopItem({
         </Link>
         {getSale() && <Sale>{getSale()}</Sale>}
 
-        {idProduct && <IdProduct>{idProduct}</IdProduct>}
+        {idProduct && <IdProduct component={"h6"}>{idProduct}</IdProduct>}
       </ImageBox>
       {item && (
         <Box>
           <Typography
-            component="h1"
+            component="h2"
             color="#2D4E96"
             sx={{
               mt: {
@@ -261,6 +262,7 @@ function ShopItem({
       <BoxPrice>
         {
           <Typography
+            component="h3"
             color={"#898989"}
             sx={{
               fontSize: {

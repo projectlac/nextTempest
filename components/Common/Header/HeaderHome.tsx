@@ -69,34 +69,7 @@ const ParentMenu = styled(Box)({
   },
   "&.active a": { borderBottom: "3px solid #48A6E2" },
 });
-const ChildMenu = styled(Box)({
-  opacity: 0,
-  visibility: "hidden",
-  background: "#fff",
-  position: "absolute",
-  left: "0",
-  top: "40px",
-  border: "4px solid #3b5898",
-  width: "200px",
-  display: "flex",
-  flexDirection: "column",
-  transition: "all 0.2s",
-  "& a": {
-    color: "#000",
-    padding: "10px 10px 10px",
-    margin: "0",
-    borderBottom: "1px solid !important",
-    transition: "all 0.2s",
-    fontSize: "13px",
-    "&:last-child": {
-      borderBottom: "none",
-    },
-    "&:hover": {
-      background: "#97c3ea",
-      color: "#fff",
-    },
-  },
-});
+const ChildMenu = styled(Box)({});
 function useOutsideAlerter(ref, closeCart) {
   useEffect(() => {
     /**
@@ -252,9 +225,10 @@ function HeaderHome() {
             <Box
               sx={{
                 display: { md: "flex", sm: "none", xs: "none" },
-                "& p.active a": {
+                "& h2.active a": {
                   borderBottom: "3px solid #48A6E2",
                 },
+
                 "& a": {
                   color: "#fff",
                   margin: { lg: " 0 20px", md: "0 15px" },
@@ -272,12 +246,41 @@ function HeaderHome() {
                 },
               }}
             >
-              <Typography className={`${activeClass("/")}`}>
+              <Typography component="h2" className={`${activeClass("/")}`}>
                 <Link href="/">{trans[1][0]}</Link>
               </Typography>
               <ParentMenu className={`${activeClass("/mua-tai-khoan")}`}>
                 <Link href="#">{trans[1][1]}</Link>
-                <ChildMenu>
+                <ChildMenu
+                  sx={{
+                    opacity: 0,
+                    visibility: "hidden",
+                    background: "#fff",
+                    position: "absolute",
+                    left: "0",
+                    top: "40px",
+                    border: "4px solid #3b5898",
+                    width: "200px",
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all 0.2s",
+                    "& a": {
+                      color: "#000",
+                      padding: "10px 10px 10px",
+                      margin: "0",
+                      borderBottom: "1px solid !important",
+                      transition: "all 0.2s",
+                      fontSize: "13px",
+                      "&:last-child": {
+                        borderBottom: "none",
+                      },
+                      "&:hover": {
+                        background: "#97c3ea",
+                        color: "#fff",
+                      },
+                    },
+                  }}
+                >
                   <ArrowDropUpIcon
                     sx={{
                       color: "#fff",
@@ -305,18 +308,27 @@ function HeaderHome() {
                   <Link href="/reroll">Reroll</Link>
                 </ChildMenu>
               </ParentMenu>
-              <Typography className={`${activeClass("/tin-tuc")}`}>
+              <Typography
+                component="h2"
+                className={`${activeClass("/tin-tuc")}`}
+              >
                 <Link href="/tin-tuc">{trans[1][2]}</Link>
               </Typography>
 
-              <Typography className={`${activeClass("/nap-tien")}`}>
+              <Typography
+                component="h2"
+                className={`${activeClass("/nap-tien")}`}
+              >
                 <Link href="/nap-tien">{trans[1][3]}</Link>
               </Typography>
-              <Typography className={`${activeClass("/lien-he")}`}>
+              <Typography
+                component="h2"
+                className={`${activeClass("/lien-he")}`}
+              >
                 <Link href="/lien-he">{trans[1][4]}</Link>
               </Typography>
               {["ADMIN", "MOD"].includes(role) && isLogin && (
-                <Typography>
+                <Typography component="h2">
                   <Link href="/dashboard">Quản lý</Link>
                 </Typography>
               )}
@@ -333,7 +345,10 @@ function HeaderHome() {
                   margin: "0 auto",
                 }}
               >
-                <Typography sx={{ mr: 3, color: "#fff", fontSize: "14px" }}>
+                <Typography
+                  component="h2"
+                  sx={{ mr: 3, color: "#fff", fontSize: "14px" }}
+                >
                   Các đơn vị hợp tác
                 </Typography>
                 <Box
@@ -396,6 +411,7 @@ function HeaderHome() {
               />
               {ids && ids?.length > 0 && (
                 <Typography
+                  component="h2"
                   sx={{
                     background: "#d33",
                     width: " 16px",
@@ -435,9 +451,13 @@ function HeaderHome() {
               }}
             >
               {isLogin ? (
-                <Typography onClick={logout}>{trans[1][6]}</Typography>
+                <Typography component="h2" onClick={logout}>
+                  {trans[1][6]}
+                </Typography>
               ) : (
-                <Typography onClick={login}>{trans[1][5]}</Typography>
+                <Typography component="h2" onClick={login}>
+                  {trans[1][5]}
+                </Typography>
               )}
             </Box>
 

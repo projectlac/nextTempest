@@ -498,14 +498,14 @@ function ModuleVideo() {
             <ButtonEven>
               <Link href={button[0].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[0].title}</Typography>
+                  <Typography component="h2">{button[0].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
               <Link href={button[1].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[1].title}</Typography>
+                  <Typography component="h2">{button[1].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
@@ -513,7 +513,7 @@ function ModuleVideo() {
             <ButtonEven>
               <Link href={button[2].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[2].title}</Typography>
+                  <Typography component="h2">{button[2].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
@@ -536,14 +536,14 @@ function ModuleVideo() {
             <ButtonEven>
               <Link href={button[3].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[3].title}</Typography>
+                  <Typography component="h2">{button[3].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
               <Link href={button[4].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[4].title}</Typography>
+                  <Typography component="h2">{button[4].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
@@ -551,16 +551,18 @@ function ModuleVideo() {
             <ButtonEven>
               <Link href={button[5].url} passHref>
                 <a rel="noopener noreferrer">
-                  <Typography component="h1">{button[5].title}</Typography>
+                  <Typography component="h2">{button[5].title}</Typography>
                 </a>
               </Link>
             </ButtonEven>
           </Box>
-          <Title>
-            <span>
-              {trans[0][0]} <br /> {trans[0][1]}
-            </span>
-          </Title>
+          <Typography component={"h1"}>
+            <Title>
+              <span>
+                {trans[0][0]} <br /> {trans[0][1]}
+              </span>
+            </Title>
+          </Typography>
         </VideoBox>
         {/* </PostBox> */}
       </FrameTop>
