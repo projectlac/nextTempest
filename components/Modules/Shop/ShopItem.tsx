@@ -222,6 +222,7 @@ function ShopItem({
       {item && (
         <Box>
           <Typography
+            variant="h1"
             color="#2D4E96"
             sx={{
               mt: {

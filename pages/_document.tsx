@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=GTM-T6BB6MV`}
           />
-
+          <link rel="canonical" href="https://www.tempest.vn" />
           <script
             dangerouslySetInnerHTML={{
               __html: `

@@ -80,6 +80,7 @@ function NewProduct() {
         weapon: "",
         sort: null,
         queryString: "",
+        isSold: false,
       })
       .then((res) => setProductList(res.data.data));
   }, []);

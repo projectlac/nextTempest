@@ -80,6 +80,7 @@ function NewProductTof() {
         weapon: "",
         sort: null,
         queryString: "",
+        isSold: false,
         game: "tower-of-fantasy",
       })
       .then((res) => setProductList(res.data.data));
