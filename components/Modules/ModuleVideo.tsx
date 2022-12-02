@@ -556,13 +556,12 @@ function ModuleVideo() {
               </Link>
             </ButtonEven>
           </Box>
-          <Typography component={"h1"}>
-            <Title>
-              <span>
-                {trans[0][0]} <br /> {trans[0][1]}
-              </span>
-            </Title>
-          </Typography>
+
+          <Title>
+            <span>
+              {trans[0][0]} <br /> {trans[0][1]}
+            </span>
+          </Title>
         </VideoBox>
         {/* </PostBox> */}
       </FrameTop>

@@ -81,6 +81,7 @@ function Footer() {
               fontSize: "15px",
               marginTop: "8px",
             }}
+            component={"h1"}
           >
             Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy
             tín hàng đầu Việt Nam
