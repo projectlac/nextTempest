@@ -75,6 +75,7 @@ function Footer() {
           }}
         >
           <Image src={logo} alt="" width="256" height="86" />
+
           <Typography
             sx={{
               color: "#fff",
@@ -83,10 +84,17 @@ function Footer() {
             }}
             component={"h1"}
           >
-            Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy
-            tín hàng đầu Việt Nam
+            Mua bán tài khoản Genshin Impact, Tower of fantasy
           </Typography>
-
+          <Typography
+            sx={{
+              color: "#fff",
+              fontSize: "15px",
+              marginTop: "8px",
+            }}
+          >
+            uy tín hàng đầu Việt Nam
+          </Typography>
           <Hidden mdDown>
             <Box
               sx={{
