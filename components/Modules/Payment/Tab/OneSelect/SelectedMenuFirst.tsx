@@ -160,7 +160,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography
                     sx={{
                       fontSize: {
-                        md: 17,
+                        md: 20,
                         xs: 15,
                       },
                     }}
@@ -173,13 +173,13 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                   <Typography
                     sx={{
                       fontSize: {
-                        md: 15,
+                        md: 16,
                         xs: 13,
                       },
                       display: "flex",
                     }}
                     color="#D09B5F"
-                    mt={0.5}
+                    mt={1}
                   >
                     MB bank - 78989899992
                     <Hidden smDown> - </Hidden>
@@ -202,6 +202,16 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     </Tooltip>
                   </Typography>
                   <Typography
+                    sx={{
+                      fontSize: {
+                        md: 16,
+                        xs: 13,
+                      },
+                    }}
+                    color="#9C6546"
+                    mt={1}
+                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                  {/* <Typography
                     sx={{
                       fontSize: {
                         md: 15,
@@ -253,7 +263,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     * Sau khi lấy mã, mã sẽ tồn tại trong <span>5 phút</span>.
                     Vui lòng sử dụng trước khi mã hết hạn! Bạn có thế click{" "}
                     <span>lấy mã</span> để làm mới mã.
-                  </Typography>
+                  </Typography> */}
                 </Box>
               );
               break;
