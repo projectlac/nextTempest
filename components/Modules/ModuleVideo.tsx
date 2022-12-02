@@ -497,18 +497,24 @@ function ModuleVideo() {
           >
             <ButtonEven>
               <Link href={button[0].url} passHref>
-                <a rel="noopener noreferrer">{button[0].title} </a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[0].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
               <Link href={button[1].url} passHref>
-                <a rel="noopener noreferrer">{button[1].title} </a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[1].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
               <Link href={button[2].url} passHref>
-                <a rel="noopener noreferrer">{button[2].title} </a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[2].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
           </Box>
@@ -529,18 +535,24 @@ function ModuleVideo() {
           >
             <ButtonEven>
               <Link href={button[3].url} passHref>
-                <a rel="noopener noreferrer">{button[3].title}</a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[3].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
             <ButtonEven>
               <Link href={button[4].url} passHref>
-                <a rel="noopener noreferrer">{button[4].title}</a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[4].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
 
             <ButtonEven>
               <Link href={button[5].url} passHref>
-                <a rel="noopener noreferrer">{button[5].title}</a>
+                <a rel="noopener noreferrer">
+                  <Typography component="h1">{button[5].title}</Typography>
+                </a>
               </Link>
             </ButtonEven>
           </Box>

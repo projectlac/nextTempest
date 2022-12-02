@@ -13,7 +13,7 @@ function StatusBox({ colorStatus, status }: PropsStatusBox) {
         display: "flex",
         justifyContent: "flex-start",
         alignItems: {
-          lg: "flex-end",
+          lg: "center",
           xs: "center",
         },
 
@@ -34,6 +34,7 @@ function StatusBox({ colorStatus, status }: PropsStatusBox) {
         }}
       />{" "}
       <Typography
+        component="h6"
         sx={{
           fontSize: {
             lg: 18,
