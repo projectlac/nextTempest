@@ -67,6 +67,7 @@ function UserInfo({ openCart, wrapperRef }: ICart) {
         role,
         ...data
       } = res.data;
+
       setUser(data);
     });
   }, [openCart]);
