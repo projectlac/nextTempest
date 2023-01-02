@@ -4,11 +4,13 @@ import banner from "../../../api/banner";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppContext } from "../../../context/state";
+import TriggerShowProduct from "./TriggerShowProduct";
 function Setting() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [numberOfImage, setNumberOfImage] = useState<number>(3);
   const [loading, setLoading] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   const [defaultDataButton, setDefaultDataButton] = useState([
     { title: "", url: "", poster: "" },
     { title: "", url: "", poster: "" },
@@ -46,11 +48,6 @@ function Setting() {
     temp[index].url = event.target.value;
     setDefaultData(temp);
   };
-  // const changePoster = (event: React.ChangeEvent<HTMLInputElement>, index) => {
-  //   let temp = [...defaultData];
-  //   temp[index].poster = event.target.value;
-  //   setDefaultData(temp);
-  // };
 
   const changeButtonUrl = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -115,6 +112,7 @@ function Setting() {
       setDefaultData(image);
       setDefaultDataButton(button);
       setNumberOfImage(rawData.title.length - 6);
+      setShow(res.data[0].show);
     });
   }, []);
   return (
@@ -320,6 +318,8 @@ function Setting() {
           {loading ? <CircularProgress /> : "Lưu"}
         </Button>
       </Box>
+
+      <TriggerShowProduct show={show}></TriggerShowProduct>
     </Card>
   );
 }

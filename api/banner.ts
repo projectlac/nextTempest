@@ -20,5 +20,10 @@ const banner = {
     const url = "/information/update/e7f97af1-d398-4a13-809a-e6f3349d866a";
     return axiosAudit.put(url, data);
   },
+
+  changeShowProduct(data:boolean): Promise<PromiseApi> {
+    const url = `/information/set-show/${data}`;
+    return axiosAudit.get(url);
+  },
 };
 export default banner;
