@@ -35,7 +35,7 @@ export default function Navbar() {
       name: "Go to Home",
       icon: <InboxIcon />,
       link: "/",
-      role: "ADMIN, MOD",
+      role: "ADMIN, MOD, CHECKED",
     },
     {
       name: "Quản lý banner",
