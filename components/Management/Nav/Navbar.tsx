@@ -1,19 +1,16 @@
-import * as React from "react";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { Avatar, IconButton, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import AppBarAdmin from "./AppBarAdmin";
-import { Avatar, IconButton, Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import Link from "next/link";
-import { useAppContext } from "../../../context/state";
+import * as React from "react";
+import AppBarAdmin from "./AppBarAdmin";
 
 type Anchor = "left";
 
@@ -89,7 +86,6 @@ export default function Navbar() {
   };
 
   const list = () => {
-    const {} = useAppContext();
     return (
       <Box
         width={300}
