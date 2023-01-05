@@ -11,6 +11,7 @@ export default function DashboardLayout({ children }) {
     if (
       (token &&
         jwt_decode<any>(token).role !== "ADMIN" &&
+        jwt_decode<any>(token).role !== "CHECKED" &&
         jwt_decode<any>(token).role !== "MOD") ||
       !token
     ) {

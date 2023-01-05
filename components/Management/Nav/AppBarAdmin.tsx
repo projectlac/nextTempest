@@ -44,6 +44,23 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
 
   React.useEffect(() => {
     const token = localStorage.getItem("access_token");
+    if (token && jwt_decode<any>(token).role === "CHECKED") {
+      setMenu([
+        {
+          url: "/dashboard/",
+          name: "Thống kê",
+        },
+
+        {
+          url: "/dashboard/news",
+          name: "Tin tức",
+        },
+        {
+          url: "/dashboard/history",
+          name: "Lịch sử",
+        },
+      ]);
+    }
     if (token && jwt_decode<any>(token).role === "ADMIN") {
       setMenu([
         {
