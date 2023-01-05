@@ -21,7 +21,7 @@ const banner = {
     return axiosAudit.put(url, data);
   },
 
-  changeShowProduct(data:boolean): Promise<PromiseApi> {
+  changeShowProduct(data: boolean): Promise<PromiseApi> {
     const url = `/information/set-show/${data}`;
     return axiosAudit.get(url);
   },

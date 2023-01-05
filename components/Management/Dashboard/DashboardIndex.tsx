@@ -13,7 +13,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-
+import jwt_decode from "jwt-decode";
 import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
 import { Bar } from "react-chartjs-2";
@@ -49,7 +49,7 @@ function DashboardIndex() {
   const [end, setEnd] = React.useState<string | null>(
     format(new Date(), "MM/dd/yyyy")
   );
-
+  const [ctvData, setCtvData] = useState([]);
   const [totalRevenue, setTotalRevenue] = useState<string>("0 VND");
   const [inventory, setInventory] = useState<number>(0);
   const [sold, setSold] = useState<number>(0);
@@ -63,6 +63,20 @@ function DashboardIndex() {
       data: { countCreated: 2, countSold: 0, countRefund: 0 },
     },
   ]);
+
+  const decodeToken = () => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("access_token");
+
+      if (Boolean(token))
+        return {
+          name: jwt_decode<any>(token).username,
+          role: jwt_decode<any>(token).role,
+        };
+      return "";
+    }
+  };
+
   useEffect(() => {
     audit
       .getManagement({
@@ -75,6 +89,14 @@ function DashboardIndex() {
         setInventory(res.data.remainingAccounts);
         setDataTotal(res.data.data);
       });
+    if (decodeToken()?.["role"] === "ADMIN") {
+      audit
+        .getManagementWithUser({
+          startDate: format(new Date(start), "yyyy/MM/dd"),
+          endDate: format(new Date(end), "yyyy/MM/dd"),
+        })
+        .then((res) => setCtvData(res.data));
+    }
   }, [start, end]);
   const options = {
     responsive: true,
@@ -258,6 +280,35 @@ function DashboardIndex() {
                     {totalRevenue}
                   </Typography>
                 </Card>
+              </Grid>
+
+              <Grid item md={12}>
+                {ctvData.length > 0 &&
+                  ctvData.map((d, i) => (
+                    <Box key={i} mt={2}>
+                      Tháng {d.month}/{d.year}
+                      <Card
+                        sx={{
+                          padding: "15px",
+                          background: "#ccffed",
+                        }}
+                      >
+                        {d.data.length > 0 &&
+                          d.data.map((x, j) => (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                              key={`${j}1`}
+                            >
+                              <Typography>{x.name}</Typography> -
+                              <Typography>{toMoney(x.total)} VNĐ</Typography>
+                            </Box>
+                          ))}
+                      </Card>
+                    </Box>
+                  ))}
               </Grid>
             </Grid>
           </Grid>

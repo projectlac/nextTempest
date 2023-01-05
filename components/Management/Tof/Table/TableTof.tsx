@@ -131,10 +131,8 @@ const TableTof: FC<RecentOrdersTableProps> = ({
               <TableCell>STT</TableCell>
               <TableCell>Tên sản phẩm</TableCell>
               <TableCell>Mã Account</TableCell>
-              <TableCell>Giá bán</TableCell>
-
+              <TableCell>Giá bán</TableCell> <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>
-
               <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -202,6 +200,32 @@ const TableTof: FC<RecentOrdersTableProps> = ({
                       noWrap
                     >
                       {toMoney(cryptoOrder.newPrice)} VNĐ
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                      sx={{
+                        "& span": {
+                          background: `${
+                            cryptoOrder.soldAt !== null ? "#ff8484" : "#86ff84"
+                          }`,
+                          color: `${
+                            cryptoOrder.soldAt !== null ? "#a30000" : "#00a33a"
+                          }`,
+                          fontSize: "14px",
+                          textAlign: "center",
+                          borderRadius: "15px",
+                          padding: "2px 7px",
+                        },
+                      }}
+                    >
+                      <span>
+                        {cryptoOrder.soldAt !== null ? "Hết hàng" : "Còn hàng"}{" "}
+                      </span>
                     </Typography>
                   </TableCell>
                   <TableCell>

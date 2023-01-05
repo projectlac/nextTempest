@@ -13,6 +13,7 @@ import AppBarAdmin from "./AppBarAdmin";
 import { Avatar, IconButton, Typography } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import Link from "next/link";
+import { useAppContext } from "../../../context/state";
 
 type Anchor = "left";
 
@@ -22,7 +23,12 @@ export default function Navbar() {
   const decodeToken = () => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("access_token");
-      if (Boolean(token)) return jwt_decode<any>(token).username;
+
+      if (Boolean(token))
+        return {
+          name: jwt_decode<any>(token).username,
+          role: jwt_decode<any>(token).role,
+        };
       return "";
     }
   };
@@ -32,31 +38,37 @@ export default function Navbar() {
       name: "Go to Home",
       icon: <InboxIcon />,
       link: "/",
+      role: "ADMIN, MOD",
     },
     {
       name: "Quản lý banner",
       icon: <InboxIcon />,
       link: "/dashboard/banner",
+      role: "ADMIN",
     },
     {
       name: "Quản lý Genshin",
       icon: <InboxIcon />,
       link: "/dashboard/genshin",
+      role: "ADMIN, MOD",
     },
     {
       name: "Quản lý TOF",
       icon: <InboxIcon />,
       link: "/dashboard/tof",
+      role: "ADMIN, MOD",
     },
     {
       name: "Quản lý Tags",
       icon: <InboxIcon />,
       link: "/dashboard/tags",
+      role: "ADMIN",
     },
     {
       name: "Cài đăt",
       icon: <InboxIcon />,
       link: "/dashboard/setting",
+      role: "ADMIN",
     },
   ]);
 
@@ -76,56 +88,62 @@ export default function Navbar() {
     setState(true);
   };
 
-  const list = () => (
-    <Box
-      width={300}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
+  const list = () => {
+    const {} = useAppContext();
+    return (
       <Box
-        height={68.5}
         width={300}
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          paddingLeft: "20px",
-        }}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
       >
-        <Box sx={{ display: "flex" }}>
-          <IconButton sx={{ p: 0, mr: 3 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-          </IconButton>
-          <Box>
-            <Typography fontSize={13}>Xin chào:</Typography>
-            <Typography fontSize={15} textTransform="capitalize">
-              {decodeToken()}
-            </Typography>
+        <Box
+          height={68.5}
+          width={300}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            paddingLeft: "20px",
+          }}
+        >
+          <Box sx={{ display: "flex" }}>
+            <IconButton sx={{ p: 0, mr: 3 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+            <Box>
+              <Typography fontSize={13}>Xin chào:</Typography>
+              <Typography fontSize={15} textTransform="capitalize">
+                {decodeToken()?.["name"]}
+              </Typography>
+            </Box>
           </Box>
         </Box>
+        <Divider />
+        <List>
+          {menu.map((text, index) => {
+            if (text.role.includes(decodeToken()?.["role"]))
+              return (
+                <ListItem button key={index}>
+                  <Link href={text.link} passHref>
+                    <a
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
+                    >
+                      <ListItemIcon>{text.icon}</ListItemIcon>
+                      <ListItemText primary={text.name} />
+                    </a>
+                  </Link>
+                </ListItem>
+              );
+          })}
+        </List>
       </Box>
-      <Divider />
-      <List>
-        {menu.map((text, index) => (
-          <ListItem button key={index}>
-            <Link href={text.link} passHref>
-              <a
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "100%",
-                }}
-              >
-                <ListItemIcon>{text.icon}</ListItemIcon>
-                <ListItemText primary={text.name} />
-              </a>
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+    );
+  };
 
   return (
     <div>

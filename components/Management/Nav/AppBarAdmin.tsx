@@ -25,6 +25,10 @@ interface PropsMenu {
 const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
   const [listMenu, setMenu] = React.useState([
     {
+      url: "/dashboard/",
+      name: "Thống kê",
+    },
+    {
       url: "/dashboard/news",
       name: "Tin tức",
     },
@@ -33,8 +37,8 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
       name: "Lịch sử",
     },
     {
-      url: "/dashboard/payment-require",
-      name: "Đơn nạp",
+      url: "/dashboard/payment-list",
+      name: "Đơn mua",
     },
   ]);
 

@@ -64,9 +64,16 @@ const audit = {
     const url = `/audit/${id}`;
     return axiosAudit.get(url);
   },
-  getManagement(params:IManagement): Promise<PromiseApi> {
+  getManagement(params: IManagement): Promise<PromiseApi> {
     const url = `/management?startDate=${params.startDate}&endDate=${params.endDate}`;
     return axiosAudit.get(url);
+  },
+  getManagementWithUser(params: IManagement): Promise<PromiseApi> {
+    const url = `/management/user`;
+    return axiosAudit.post(url, {
+      start: params.startDate,
+      end: params.endDate,
+    });
   },
 };
 export default audit;
