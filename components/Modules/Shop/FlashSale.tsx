@@ -85,60 +85,62 @@ function NewProduct() {
         mb: { md: 20, xs: 15 },
       }}
     >
-      <BackgroundShopResponse>
-        <Title />
-        <Box py={5}>
-          <Grid
-            container
-            columnSpacing={3}
-            sx={{
-              px: { md: 4, xs: 2 },
-              position: "relative",
-              zIndex: 2,
-            }}
-          >
-            {productList &&
-              productList.map((d, i) => (
-                <Grid
-                  item
-                  md={3}
-                  sm={3}
-                  xs={6}
-                  key={i}
-                  mt={2}
-                  sx={{
-                    mb: {
-                      lg: 4,
-                      xs: 3,
-                    },
-                  }}
-                >
-                  <ShopItem
-                    image={d.imageUrl}
-                    item={d.name}
-                    idProduct={d.code}
-                    oldPrice={+d.oldPrice}
-                    newPrice={+d.newPrice}
-                    status={d.status}
-                    slug={d.slug}
-                    id={d.id}
-                  />
-                </Grid>
-              ))}
-          </Grid>
-        </Box>
-        <ButtonShowMore>
-          <Link
-            href={{
-              pathname: "/mua-tai-khoan/[id]",
-              query: { id: "genshin-impact" },
-            }}
-            passHref
-          >
-            Xem thêm
-          </Link>
-        </ButtonShowMore>
-      </BackgroundShopResponse>
+      {productList.lenght > 0 && (
+        <BackgroundShopResponse>
+          <Title />
+          <Box py={5}>
+            <Grid
+              container
+              columnSpacing={3}
+              sx={{
+                px: { md: 4, xs: 2 },
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              {productList &&
+                productList.map((d, i) => (
+                  <Grid
+                    item
+                    md={3}
+                    sm={3}
+                    xs={6}
+                    key={i}
+                    mt={2}
+                    sx={{
+                      mb: {
+                        lg: 4,
+                        xs: 3,
+                      },
+                    }}
+                  >
+                    <ShopItem
+                      image={d.imageUrl}
+                      item={d.name}
+                      idProduct={d.code}
+                      oldPrice={+d.oldPrice}
+                      newPrice={+d.newPrice}
+                      status={d.status}
+                      slug={d.slug}
+                      id={d.id}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+          </Box>
+          <ButtonShowMore>
+            <Link
+              href={{
+                pathname: "/mua-tai-khoan/[id]",
+                query: { id: "genshin-impact" },
+              }}
+              passHref
+            >
+              Xem thêm
+            </Link>
+          </ButtonShowMore>
+        </BackgroundShopResponse>
+      )}
     </Box>
   );
 }

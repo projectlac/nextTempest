@@ -196,8 +196,7 @@ function Bill({ id }: IBill) {
                     </tbody>
                   </table>
 
-                  {(account[0]?.tofUsername !== "" ||
-                    account[0]?.tofUsername !== null) && (
+                  {account[0]?.tofUsername != null && (
                     <table className="table-bill">
                       <thead>
                         <tr>
