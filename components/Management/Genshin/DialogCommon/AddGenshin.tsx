@@ -85,7 +85,7 @@ export default function AddGenshin() {
       title: "",
       weapon: [],
       character: [],
-      server: "",
+      server: "Asia",
       body: "",
       ar: 0,
       primogems: 0,
@@ -441,12 +441,12 @@ export default function AddGenshin() {
               </Grid>
               <Grid item md={6}>
                 <ServerList
-                  error={formik.touched.weapon && Boolean(formik.errors.weapon)}
+                  error={formik.touched.server && Boolean(formik.errors.server)}
                   helper={
-                    formik.touched.weapon && (formik.errors.weapon as string)
+                    formik.touched.server && (formik.errors.server as string)
                   }
                   handleSelectedServer={handleSelectedServer}
-                  defaultValue={""}
+                  defaultValue={"Asia"}
                 />
               </Grid>
               <Grid item md={6}>
