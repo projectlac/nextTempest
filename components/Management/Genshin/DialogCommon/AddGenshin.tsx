@@ -94,6 +94,8 @@ export default function AddGenshin() {
       moonPack: 0,
       oldPrice: 0,
       newPrice: 0,
+      username: "",
+      password: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -102,7 +104,8 @@ export default function AddGenshin() {
         weapon,
         character,
         server,
-
+        username,
+        password,
         body,
         ar,
         primogems,
@@ -126,6 +129,8 @@ export default function AddGenshin() {
       formData.append("description", body.toString());
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
+      formData.append("tofUsername", username);
+      formData.append("tofPassword", password);
 
       for (let i = 0; i < fileList.length; i++) {
         formData.append("files", fileList[i]);
@@ -283,6 +288,57 @@ export default function AddGenshin() {
             />
 
             <Grid container columnSpacing={2} rowSpacing={2}>
+              <Grid item md={6}>
+                <TextField
+                  fullWidth
+                  id="username"
+                  label="Tài khoản(reroll)"
+                  name="username"
+                  type="number"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.username}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.username && Boolean(formik.errors.username)
+                  }
+                  helperText={formik.touched.username && formik.errors.username}
+                />
+              </Grid>
+              <Grid item md={6}>
+                <TextField
+                  fullWidth
+                  id="password"
+                  label="Mật khẩu"
+                  name="password"
+                  type="number"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
+                />
+              </Grid>
+
               <Grid item md={6}>
                 <TextField
                   fullWidth

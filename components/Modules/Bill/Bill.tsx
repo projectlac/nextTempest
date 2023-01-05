@@ -195,6 +195,27 @@ function Bill({ id }: IBill) {
                         ))}
                     </tbody>
                   </table>
+
+                  {(account[0]?.tofUsername !== "" ||
+                    account[0]?.tofUsername !== null) && (
+                    <table className="table-bill">
+                      <thead>
+                        <tr>
+                          <th>Tài khoản</th>
+                          <th>Mật khẩu</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {account &&
+                          account.map((d) => (
+                            <tr key={d.id}>
+                              <td>{d.tofUsername}</td>
+                              <td>{d.tofPassword}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  )}
                   <Box mt={3}>
                     <Divider></Divider>
                   </Box>

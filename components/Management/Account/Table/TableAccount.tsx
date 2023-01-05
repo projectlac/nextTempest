@@ -55,6 +55,10 @@ const getStatusLabel = (cryptoOrderStatus: AccountDataRole): JSX.Element => {
       text: "CTV",
       color: "warning",
     },
+    CHECKED: {
+      text: "CHECKED",
+      color: "warning",
+    },
   };
 
   const { text, color }: any = map[cryptoOrderStatus];
