@@ -292,7 +292,7 @@ export default function AddGenshin() {
                 <TextField
                   fullWidth
                   id="username"
-                  label="Tài khoản(reroll)"
+                  label="Tài khoản"
                   name="username"
                   variant="outlined"
                   sx={{
