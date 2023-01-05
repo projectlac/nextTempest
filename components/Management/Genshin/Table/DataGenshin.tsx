@@ -42,7 +42,7 @@ function DataGenshin() {
 
   useEffect(() => {
     tagApi
-      .getAccount({
+      .getAccountByAdmin({
         limit: limitPage,
         offset: offsetPage,
         character: "",

@@ -38,7 +38,7 @@ function DataTof() {
 
   useEffect(() => {
     tagApi
-      .getAccount({
+      .getAccountByAdmin({
         limit: limitPage,
         offset: offsetPage,
         character: "",
