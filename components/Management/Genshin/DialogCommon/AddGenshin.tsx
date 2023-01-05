@@ -294,7 +294,6 @@ export default function AddGenshin() {
                   id="username"
                   label="Tài khoản(reroll)"
                   name="username"
-                  type="number"
                   variant="outlined"
                   sx={{
                     "& label": {
@@ -319,7 +318,6 @@ export default function AddGenshin() {
                   id="password"
                   label="Mật khẩu"
                   name="password"
-                  type="number"
                   variant="outlined"
                   sx={{
                     "& label": {
