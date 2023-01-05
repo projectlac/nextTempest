@@ -98,6 +98,13 @@ function DashboardIndex() {
         .then((res) => setCtvData(res.data));
     }
   }, [start, end]);
+
+  useEffect(() => {
+    let startDate = localStorage.getItem("startDate");
+    if (startDate) {
+      setStart(startDate);
+    }
+  }, []);
   const options = {
     responsive: true,
     plugins: {
@@ -166,6 +173,10 @@ function DashboardIndex() {
                     inputFormat="dd/MM/yyyy"
                     onChange={(newValue) => {
                       setStart(format(new Date(newValue), "MM/dd/yyyy"));
+                      localStorage.setItem(
+                        "startDate",
+                        format(new Date(newValue), "MM/dd/yyyy")
+                      );
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
