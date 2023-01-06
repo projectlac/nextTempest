@@ -19,10 +19,9 @@ import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import { TAG_TYPE } from "../../../../../types/account";
+import AutoCompleteHarderForEdit from "../../../../Common/AutoCompleteHarderForEdit";
 import TinyEditor from "../../../../Common/Editor/TinyEditor";
-import CharacterList from "../Feature/CharacterList";
 import ServerList from "../Feature/ServerList";
-import WeaponList from "../Feature/WeaponList";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -47,7 +46,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   const [fileList, setFileList] = React.useState<FileList>();
   const [fileListCurreny, setFileListCurreny] = React.useState<string[]>();
   const [listData, setListData] = React.useState([]);
-
+  const [trigger, setTrigger] = React.useState<boolean>(false);
   const validationSchema = yup.object({
     title: yup
       .string()
@@ -75,12 +74,8 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   const formik = useFormik({
     initialValues: {
       title: defaultData.name,
-      weapon: defaultData.tags
-        .filter((d) => d.type === TAG_TYPE.WEAPON)
-        .map((d) => d.title),
-      character: defaultData.tags
-        .filter((d) => d.type === TAG_TYPE.CHARACTER)
-        .map((d) => d.title),
+      weapon: defaultData.tags.filter((d) => d.type === TAG_TYPE.WEAPON),
+      character: defaultData.tags.filter((d) => d.type === TAG_TYPE.CHARACTER),
       server: defaultData.tags.find((d) => d.type === TAG_TYPE.SERVER)?.title,
       body: defaultData.description,
       ar: defaultData.ar,
@@ -110,11 +105,12 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         newPrice,
       } = values;
       const formData = new FormData();
-
+      let convertDataCharacter = character.map((d) => d.title);
+      let convertDataWeapon = weapon.map((d) => d.title);
       formData.append("name", title);
       formData.append("ar", ar.toString());
-      formData.append("weapon", weapon.toString());
-      formData.append("char", character.toString());
+      formData.append("weapon", convertDataWeapon.toString());
+      formData.append("char", convertDataCharacter.toString());
       formData.append("code", accountId);
       formData.append("tinhHuy", tinhhuy.toString());
       formData.append("nguyenThach", primogems.toString());
@@ -138,7 +134,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
           handleChangeStatusToast();
           handleClose();
           updated();
-
+          setTrigger(false);
           setFile(null);
           setFileListCurreny(null);
         })
@@ -194,6 +190,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     };
     if (open) {
       getData();
+      setTrigger(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
@@ -265,7 +262,33 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               }
             />
           </Box>
-          <CharacterList
+
+          <Box mb={3}>
+            <AutoCompleteHarderForEdit
+              trigger={trigger}
+              title="Danh sách nhân vật"
+              data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
+              id="create-vip-character"
+              name="character"
+              formik={formik}
+              handleSelected={handleSelectedCharacter}
+              defaultValue={formik.values.character}
+            />
+          </Box>
+          <Box mb={3}>
+            <AutoCompleteHarderForEdit
+              trigger={trigger}
+              title="Danh sách vũ khí"
+              data={getNameSortAtoB(TAG_TYPE.WEAPON)}
+              id="create-vip-character"
+              name="weapon"
+              formik={formik}
+              handleSelected={handleSelectedWeapon}
+              defaultValue={formik.values.weapon}
+            />
+          </Box>
+
+          {/* <CharacterList
             data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
             error={formik.touched.character && Boolean(formik.errors.character)}
             helper={
@@ -280,7 +303,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             helper={formik.touched.weapon && (formik.errors.weapon as string)}
             handleSelectedWeapon={handleSelectedWeapon}
             defaultValue={formik.values.weapon}
-          />
+          /> */}
 
           <Grid container columnSpacing={2} rowSpacing={2}>
             <Grid item md={6}>

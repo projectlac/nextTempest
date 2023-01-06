@@ -19,6 +19,7 @@ import * as yup from "yup";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import { TAG_TYPE } from "../../../../types/account";
+import AutoCompleteHarder from "../../../Common/AutoCompleteHarder";
 import TinyEditor from "../../../Common/Editor/TinyEditor";
 import CharacterList from "./Feature/CharacterList";
 import ServerList from "./Feature/ServerList";
@@ -42,7 +43,7 @@ export default function AddGenshin() {
   const [fileList, setFileList] = React.useState<FileList>();
   const [fileListCurreny, setFileListCurreny] = React.useState<string[]>();
   const [listData, setListData] = React.useState([]); // Loading đầu game để lấy dữ liệu cho form
-
+  const [trigger, setTrigger] = React.useState<boolean>(false);
   //
   // const [characterList, setCharacterList] = React.useState<string[]>([]);
 
@@ -54,6 +55,7 @@ export default function AddGenshin() {
 
   const handleClose = () => {
     setOpen(false);
+    setTrigger(false);
   };
 
   const validationSchema = yup.object({
@@ -115,12 +117,16 @@ export default function AddGenshin() {
         oldPrice,
         newPrice,
       } = values;
+
+      let convertDataCharacter = character.map((d) => d.title);
+      let convertDataWeapon = weapon.map((d) => d.title);
+
       const formData = new FormData();
 
       formData.append("name", title);
       formData.append("ar", ar.toString());
-      formData.append("weapon", weapon.toString());
-      formData.append("char", character.toString());
+      formData.append("weapon", convertDataWeapon.toString());
+      formData.append("char", convertDataCharacter.toString());
       formData.append("code", accountId);
       formData.append("tinhHuy", tinhhuy.toString());
       formData.append("nguyenThach", primogems.toString());
@@ -135,6 +141,7 @@ export default function AddGenshin() {
       for (let i = 0; i < fileList.length; i++) {
         formData.append("files", fileList[i]);
       }
+      console.log(values);
 
       setLoading(true);
       tagApi
@@ -199,6 +206,7 @@ export default function AddGenshin() {
       } catch (error) {}
     };
     getData();
+    setTrigger(true);
   }, [open]);
 
   const getNameSortAtoB = (type: string) => {
@@ -268,6 +276,32 @@ export default function AddGenshin() {
                 helperText={formik.touched.title && formik.errors.title}
               />
             </Box>
+            <Box mb={3}>
+              <AutoCompleteHarder
+                trigger={trigger}
+                title="Danh sách nhân vật"
+                data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
+                id="create-vip-character"
+                name="character"
+                formik={formik}
+                handleSelected={handleSelectedCharacter}
+                defaultValue={[]}
+              />
+            </Box>
+            <Box mb={3}>
+              <AutoCompleteHarder
+                trigger={trigger}
+                title="Danh sách vũ khí"
+                data={getNameSortAtoB(TAG_TYPE.WEAPON)}
+                id="create-vip-character"
+                name="weapon"
+                formik={formik}
+                handleSelected={handleSelectedWeapon}
+                defaultValue={[]}
+              />
+            </Box>
+
+            {/* 
             <CharacterList
               data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
               error={
@@ -285,7 +319,7 @@ export default function AddGenshin() {
               helper={formik.touched.weapon && (formik.errors.weapon as string)}
               handleSelectedWeapon={handleSelectedWeapon}
               defaultValue={[]}
-            />
+            /> */}
 
             <Grid container columnSpacing={2} rowSpacing={2}>
               <Grid item md={6}>

@@ -28,7 +28,7 @@ export default function ServerList({
     handleSelectedServer(event.target.value as string);
   };
   React.useEffect(() => {
-    setAge("");
+    setAge("Asia");
   }, [update]);
 
   React.useEffect(() => {
