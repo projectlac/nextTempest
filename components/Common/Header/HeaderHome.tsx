@@ -327,7 +327,7 @@ function HeaderHome() {
               >
                 <Link href="/lien-he">{trans[1][4]}</Link>
               </Typography>
-              {["ADMIN", "MOD"].includes(role) && isLogin && (
+              {["ADMIN", "MOD", "CHECKED"].includes(role) && isLogin && (
                 <Typography component="h2">
                   <Link href="/dashboard">Quản lý</Link>
                 </Typography>
