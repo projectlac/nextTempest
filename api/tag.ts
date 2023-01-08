@@ -109,7 +109,7 @@ const tagApi = {
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
-    const url = `/account-same-price/destroy-multi-account`;
+    const url = `/account-same-price/delete-multi-account`;
     return axiosAudit.patch(url, param);
   },
   buyRerollAccount(param: any): Promise<PromiseApi> {

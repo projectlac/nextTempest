@@ -51,6 +51,9 @@ function DashboardIndex() {
   );
   const [ctvData, setCtvData] = useState([]);
   const [totalRevenue, setTotalRevenue] = useState<string>("0 VND");
+  const [totalRemainingPrice, setTotalRemainingPriceRevenue] =
+    useState<string>("0 VND");
+
   const [inventory, setInventory] = useState<number>(0);
   const [sold, setSold] = useState<number>(0);
   const [dataTotal, setDataTotal] = useState<IData[]>([
@@ -88,6 +91,7 @@ function DashboardIndex() {
         setTotalRevenue(res.data.turnOver);
         setInventory(res.data.remainingAccounts);
         setDataTotal(res.data.data);
+        setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
       });
     if (decodeToken()?.["role"] === "ADMIN") {
       audit
@@ -289,6 +293,36 @@ function DashboardIndex() {
                     }}
                   >
                     {totalRevenue}
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item md={12}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    padding: "15px",
+
+                    background: "#90c7ff",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Tổng tiền còn tồn cho tới nay
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "40px",
+                      mt: "20px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {totalRemainingPrice}
                   </Typography>
                 </Card>
               </Grid>
