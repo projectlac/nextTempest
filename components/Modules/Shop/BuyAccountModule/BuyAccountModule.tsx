@@ -68,8 +68,9 @@ const BackgroundShop = styled(Container)({
 
 interface IBuy {
   slug: string;
+  type: string;
 }
-function BuyAccountModule({ slug }: IBuy) {
+function BuyAccountModule({ slug, type }: IBuy) {
   return (
     <ProductWrap>
       <Box
@@ -97,7 +98,7 @@ function BuyAccountModule({ slug }: IBuy) {
             </Hidden>
             <Grid item md={9} sm={12} xs={12}>
               {/* {slug === "genshin-impact" ? <ListProduct /> : <ListProductTOF />} */}
-              <ListProduct slug={slug} />
+              <ListProduct slug={slug} type={type} />
             </Grid>
           </Grid>
         </BackgroundShop>

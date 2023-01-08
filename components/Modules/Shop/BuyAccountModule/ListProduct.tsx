@@ -17,8 +17,9 @@ import PrireFilter from "./PrireFilter";
 import SortOption from "./SortOption";
 interface IBuy {
   slug: string;
+  type: string;
 }
-function ListProduct({ slug }: IBuy) {
+function ListProduct({ slug, type }: IBuy) {
   const { selectedFilter, update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -86,6 +87,7 @@ function ListProduct({ slug }: IBuy) {
               endPrice: sortByPrice[1],
               game: slug,
               isSold: true,
+              type: type !== undefined ? type : "",
             })
             .then((res) => {
               const sold = res.data.data.filter(
@@ -118,6 +120,7 @@ function ListProduct({ slug }: IBuy) {
               endPrice: sortByPrice[1],
               game: slug,
               isSold: false,
+              type: type !== undefined ? type : "",
             })
             .then((res) => {
               const sold = res.data.data.filter(

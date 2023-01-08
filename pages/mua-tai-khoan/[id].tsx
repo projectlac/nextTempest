@@ -7,7 +7,7 @@ import Meta from "../../styles/assets/images/homeImage.jpg";
 
 export default function IndexPage() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, search } = router.query;
 
   return (
     <Layout>
@@ -25,7 +25,7 @@ export default function IndexPage() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <BuyAccountModule slug={id as string} />
+      <BuyAccountModule slug={id as string} type={search as string} />
     </Layout>
   );
 }
