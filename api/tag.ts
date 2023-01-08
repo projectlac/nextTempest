@@ -60,7 +60,7 @@ const tagApi = {
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}`;
+    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
     return axiosClient.get(url);
   },
   refundAccount(id: string): Promise<PromiseApi> {

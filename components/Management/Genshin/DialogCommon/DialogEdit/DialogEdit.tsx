@@ -2,6 +2,7 @@ import {
   Box,
   CircularProgress,
   Grid,
+  MenuItem,
   Slide,
   TextField,
   Typography,
@@ -85,6 +86,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       moonPack: defaultData.moonPack,
       oldPrice: defaultData.oldPrice,
       newPrice: defaultData.newPrice,
+      type: defaultData.type,
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
@@ -94,7 +96,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         weapon,
         character,
         server,
-
+        type,
         body,
         ar,
         primogems,
@@ -119,6 +121,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       formData.append("description", body.toString());
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
+      formData.append("type", type);
 
       if (fileList && fileList.length > 0) {
         for (let i = 0; i < fileList.length; i++) {
@@ -288,23 +291,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             />
           </Box>
 
-          {/* <CharacterList
-            data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
-            error={formik.touched.character && Boolean(formik.errors.character)}
-            helper={
-              formik.touched.character && (formik.errors.character as string)
-            }
-            handleSelectedCharacter={handleSelectedCharacter}
-            defaultValue={formik.values.character}
-          />
-          <WeaponList
-            data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-            error={formik.touched.weapon && Boolean(formik.errors.weapon)}
-            helper={formik.touched.weapon && (formik.errors.weapon as string)}
-            handleSelectedWeapon={handleSelectedWeapon}
-            defaultValue={formik.values.weapon}
-          /> */}
-
           <Grid container columnSpacing={2} rowSpacing={2}>
             <Grid item md={6}>
               <TextField
@@ -359,6 +345,36 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                   formik.touched.newPrice && (formik.errors.newPrice as string)
                 }
               />
+            </Grid>
+            <Grid item md={12}>
+              <Grid item md={2}>
+                <TextField
+                  select
+                  fullWidth
+                  id="type"
+                  label="Loại acc"
+                  name="type"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.type}
+                  onChange={formik.handleChange}
+                  error={formik.touched.type && Boolean(formik.errors.type)}
+                  helperText={
+                    formik.touched.type && (formik.errors.type as string)
+                  }
+                >
+                  <MenuItem value="VIP">Mặc định</MenuItem>
+                  <MenuItem value="NEW">Acc khởi đầu</MenuItem>
+                </TextField>
+              </Grid>
             </Grid>
             <Grid item md={6}>
               <TextField

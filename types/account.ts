@@ -10,6 +10,7 @@ export interface AccountForm extends PackHistoryOfAccount {
   endPrice?: number;
   isSold?: boolean;
   game?: string;
+  type?:string | null;
 }
 
 export enum TAG_TYPE {

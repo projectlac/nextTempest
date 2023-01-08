@@ -81,6 +81,7 @@ function NewProduct() {
         sort: null,
         queryString: "",
         isSold: false,
+        type: "VIP",
       })
       .then((res) => setProductList(res.data.data));
   }, []);

@@ -493,6 +493,9 @@ function ModuleVideo() {
               },
               left: { xl: "-330px", lg: "-274px" },
               top: { xl: "25.6%", lg: "29.6%" },
+              "& h2": {
+                fontSize: { md: "1rem", xs: "11px" },
+              },
             }}
           >
             <ButtonEven>
@@ -531,6 +534,9 @@ function ModuleVideo() {
 
               right: { xl: "-330px", lg: "-274px" },
               top: { xl: "25.6%", lg: "29.6%" },
+              "& h2": {
+                fontSize: { md: "1rem", xs: "11px" },
+              },
             }}
           >
             <ButtonEven>

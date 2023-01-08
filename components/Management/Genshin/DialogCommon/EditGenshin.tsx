@@ -26,6 +26,7 @@ export default function EditGenshin({ id }: PropsEditNews) {
     description: "",
     id: "",
     tags: [],
+    type: "",
     cloundinary: [],
   });
   // Loading đầu game để lấy dữ liệu cho form

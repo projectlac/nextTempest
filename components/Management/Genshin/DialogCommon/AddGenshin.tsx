@@ -2,6 +2,7 @@ import {
   Box,
   CircularProgress,
   Grid,
+  MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
@@ -98,6 +99,7 @@ export default function AddGenshin() {
       newPrice: 0,
       username: "",
       password: "",
+      type: "VIP",
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -116,6 +118,7 @@ export default function AddGenshin() {
         moonPack,
         oldPrice,
         newPrice,
+        type,
       } = values;
 
       let convertDataCharacter = character.map((d) => d.title);
@@ -137,32 +140,33 @@ export default function AddGenshin() {
       formData.append("moonPack", moonPack.toString());
       formData.append("tofUsername", username);
       formData.append("tofPassword", password);
+      formData.append("type", type);
 
       for (let i = 0; i < fileList.length; i++) {
         formData.append("files", fileList[i]);
       }
-      console.log(values);
+      // console.log(values);
 
-      setLoading(true);
-      tagApi
-        .addAccount(formData)
-        .then((res) => {
-          handleChangeMessageToast("Tạo tài khoản thành thành công");
-          handleChangeStatusToast();
-          handleClose();
-          updated();
-          resetForm();
-          setFile(null);
-          setFileList(null);
-          setFileListCurreny(null);
-        })
-        .catch(() => {
-          handleChangeMessageToast("Có lỗi xảy ra");
-          handleChangeStatusToast();
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      // setLoading(true);
+      // tagApi
+      //   .addAccount(formData)
+      //   .then((res) => {
+      //     handleChangeMessageToast("Tạo tài khoản thành thành công");
+      //     handleChangeStatusToast();
+      //     handleClose();
+      //     updated();
+      //     resetForm();
+      //     setFile(null);
+      //     setFileList(null);
+      //     setFileListCurreny(null);
+      //   })
+      //   .catch(() => {
+      //     handleChangeMessageToast("Có lỗi xảy ra");
+      //     handleChangeStatusToast();
+      //   })
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
     },
   });
 
@@ -322,7 +326,7 @@ export default function AddGenshin() {
             /> */}
 
             <Grid container columnSpacing={2} rowSpacing={2}>
-              <Grid item md={6}>
+              <Grid item md={5}>
                 <TextField
                   fullWidth
                   id="username"
@@ -346,7 +350,7 @@ export default function AddGenshin() {
                   helperText={formik.touched.username && formik.errors.username}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={5}>
                 <TextField
                   fullWidth
                   id="password"
@@ -370,7 +374,32 @@ export default function AddGenshin() {
                   helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
-
+              <Grid item md={2}>
+                <TextField
+                  select
+                  fullWidth
+                  id="type"
+                  label="Loại acc"
+                  name="type"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.type}
+                  onChange={formik.handleChange}
+                  error={formik.touched.type && Boolean(formik.errors.type)}
+                  helperText={formik.touched.type && formik.errors.type}
+                >
+                  <MenuItem value="VIP">Mặc định</MenuItem>
+                  <MenuItem value="NEW">Acc khởi đầu</MenuItem>
+                </TextField>
+              </Grid>
               <Grid item md={6}>
                 <TextField
                   fullWidth

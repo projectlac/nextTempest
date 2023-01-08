@@ -82,6 +82,7 @@ function NewProductTof() {
         queryString: "",
         isSold: false,
         game: "tower-of-fantasy",
+        type: "",
       })
       .then((res) => setProductList(res.data.data));
   }, []);

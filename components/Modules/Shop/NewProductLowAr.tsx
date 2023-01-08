@@ -1,11 +1,10 @@
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
-import { useEffect, useState } from "react";
-import FlashSate from "../../../styles/assets/images/Shop/FLASH-SALE.png";
-import BGButtonShowMore from "../../../styles/assets/images/Shop/Layer-28.png";
-
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import tagApi from "../../../api/tag";
+import NewestProduct from "../../../styles/assets/images/Shop/Account-zin-Ar.png";
+import BGButtonShowMore from "../../../styles/assets/images/Shop/Layer-28.png";
 import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 import ShopItem from "./ShopItem";
 
@@ -37,29 +36,36 @@ const ButtonShowMore = styled(Box)({
     fontSize: "17px",
   },
 });
-const Title = styled(Box)(
-  ({ theme }) => `
-    display: flex;
-    left: 0;
-    right: 0;
-    margin:0 auto;
-    position:absolute;
-    justify-content: center;
-    align-items: center;
-    background: url(${FlashSate.src});
-    overflow:hidden;
-    top: -65px;
-    width: 250px;
-    height: 100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    padding: 0 60px;
-    color:#fff;
-    font-size:17px;
-    z-index:2
 
-  `
-);
+const Title = styled(Box)({
+  display: "flex",
+  left: "0",
+  right: "0",
+  margin: "0 auto",
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
+  overflow: "hidden",
+  top: "-65px",
+  width: "430px",
+  height: "100px",
+  background: `url(${NewestProduct.src})`,
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  padding: "0 60px",
+  color: "#fff",
+  fontSize: "17px",
+  zIndex: "2",
+
+  "@media (min-width: 0)": {
+    width: "215px",
+    top: "-50px",
+  },
+  "@media (min-width: 768px)": {
+    width: "354px",
+    top: "-65px",
+  },
+});
 
 function NewProduct() {
   const [productList, setProductList] = useState<any>([]);
@@ -68,27 +74,33 @@ function NewProduct() {
     tagApi
       .getAccount({
         character: "",
-        limit: 8,
+        limit: 4,
         offset: 0,
         server: "",
         weapon: "",
-        sort: 3,
+        sort: null,
         queryString: "",
-        type: "",
+        isSold: false,
+        type: "NEW",
       })
       .then((res) => setProductList(res.data.data));
   }, []);
+
   return (
     <Box
       sx={{
         position: "relative",
-        mt: { md: 30, xs: 15 },
-        mb: { md: 20, xs: 15 },
       }}
     >
       <BackgroundShopResponse>
         <Title />
-        <Box py={5}>
+        <Box
+          pt={4}
+          pb={8}
+          sx={{
+            mt: { lg: 18, xs: 12 },
+          }}
+        >
           <Grid
             container
             columnSpacing={3}
@@ -106,12 +118,8 @@ function NewProduct() {
                   sm={3}
                   xs={6}
                   key={i}
-                  mt={2}
                   sx={{
-                    mb: {
-                      lg: 4,
-                      xs: 3,
-                    },
+                    mt: { lg: 3, xs: 3 },
                   }}
                 >
                   <ShopItem
