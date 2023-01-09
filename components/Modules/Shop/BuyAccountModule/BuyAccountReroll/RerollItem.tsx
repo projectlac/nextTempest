@@ -201,8 +201,8 @@ function RerollItem({ image, name, newPrice, status, id }: PropRerollItem) {
                   overflow: "hidden",
                 }}
               >
-                {name.slice(0, 50)}
-                {name.length > 50 && "..."}
+                {name.slice(0, 70)}
+                {name.length > 70 && "..."}
               </a>
             </Link>
           </Typography>

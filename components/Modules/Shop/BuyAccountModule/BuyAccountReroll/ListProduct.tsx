@@ -34,17 +34,18 @@ function ListProduct() {
   }
 
   useEffect(() => {
-    // const getData = async () => {
-    //   try {
-    //     await tagApi
-    //       .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently)
-    //       .then((res) => {
-    //         setProductList(res.data.data);
-    //         setTotal(res.data.total);
-    //       });
-    //   } catch (error) {}
-    // };
-    // getData();
+    const getData = async () => {
+      try {
+        await tagApi
+          .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently)
+          .then((res) => {
+            setProductList(res.data.data);
+
+            setTotal(res.data.total);
+          });
+      } catch (error) {}
+    };
+    getData();
   }, [update, pageCurrently]);
 
   return (
