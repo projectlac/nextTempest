@@ -15,7 +15,7 @@ import { useAppContext } from "../../../../../context/state";
 import TableGenshin from "./TableGenshin";
 const _ = require("lodash");
 interface AccountTable {
-  username: string;
+  name: string;
   id: string;
   createdAt: string;
   isSold: boolean;
