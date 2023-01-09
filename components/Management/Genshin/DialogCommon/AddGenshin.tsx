@@ -147,26 +147,26 @@ export default function AddGenshin() {
       }
       // console.log(values);
 
-      // setLoading(true);
-      // tagApi
-      //   .addAccount(formData)
-      //   .then((res) => {
-      //     handleChangeMessageToast("Tạo tài khoản thành thành công");
-      //     handleChangeStatusToast();
-      //     handleClose();
-      //     updated();
-      //     resetForm();
-      //     setFile(null);
-      //     setFileList(null);
-      //     setFileListCurreny(null);
-      //   })
-      //   .catch(() => {
-      //     handleChangeMessageToast("Có lỗi xảy ra");
-      //     handleChangeStatusToast();
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      setLoading(true);
+      tagApi
+        .addAccount(formData)
+        .then((res) => {
+          handleChangeMessageToast("Tạo tài khoản thành thành công");
+          handleChangeStatusToast();
+          handleClose();
+          updated();
+          resetForm();
+          setFile(null);
+          setFileList(null);
+          setFileListCurreny(null);
+        })
+        .catch(() => {
+          handleChangeMessageToast("Có lỗi xảy ra");
+          handleChangeStatusToast();
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
 

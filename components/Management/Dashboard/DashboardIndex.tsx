@@ -296,36 +296,38 @@ function DashboardIndex() {
                   </Typography>
                 </Card>
               </Grid>
-              <Grid item md={12}>
-                <Card
-                  sx={{
-                    height: "150px",
-                    marginLeft: "auto",
-                    padding: "15px",
+              {decodeToken()?.["role"] === "ADMIN" && (
+                <Grid item md={12}>
+                  <Card
+                    sx={{
+                      height: "150px",
+                      marginLeft: "auto",
+                      padding: "15px",
 
-                    background: "#90c7ff",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "12px",
+                      background: "#90c7ff",
                     }}
                   >
-                    Tổng tiền còn tồn cho tới nay
-                  </Typography>
-                  <Typography
-                    sx={{
-                      textAlign: "center",
-                      fontSize: "40px",
-                      mt: "20px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {totalRemainingPrice}
-                  </Typography>
-                </Card>
-              </Grid>
+                    <Typography
+                      sx={{
+                        fontSize: "12px",
+                      }}
+                    >
+                      Tổng tiền còn tồn cho tới nay
+                    </Typography>
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        fontSize: "40px",
+                        mt: "20px",
+                        fontFamily: "Montserrat",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {totalRemainingPrice}
+                    </Typography>
+                  </Card>
+                </Grid>
+              )}
 
               <Grid item md={12}>
                 {ctvData.length > 0 &&

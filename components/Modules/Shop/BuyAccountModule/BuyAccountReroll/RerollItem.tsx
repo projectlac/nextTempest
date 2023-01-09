@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import tagApi from "../../../../../api/tag";
@@ -12,6 +13,7 @@ interface PropRerollItem {
   newPrice: number;
   status: string;
   id: string;
+  name: string;
   image: string;
 }
 
@@ -94,7 +96,7 @@ const IdProduct = styled(Box)(
       `
 );
 
-function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
+function RerollItem({ image, name, newPrice, status, id }: PropRerollItem) {
   enum STATUS_OF_PRODUCT {
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
@@ -168,6 +170,44 @@ function RerollItem({ image, newPrice, status, id }: PropRerollItem) {
           )}
         </Box>
       </ImageBox>
+      {id && (
+        <Box>
+          <Typography
+            component="h2"
+            color="#2D4E96"
+            sx={{
+              mt: {
+                lg: 2,
+                xs: 0.5,
+              },
+              fontSize: {
+                lg: "1rem",
+                sm: "13px",
+                xs: "10px",
+              },
+              minHeight: {
+                lg: "50px",
+                sm: "40px",
+                xs: "30px",
+              },
+            }}
+          >
+            <Link href={`javascript:void(0)`} passHref>
+              <a
+                style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: "2",
+                  overflow: "hidden",
+                }}
+              >
+                {name.slice(0, 50)}
+                {name.length > 50 && "..."}
+              </a>
+            </Link>
+          </Typography>
+        </Box>
+      )}
       <BoxPrice>
         {
           <Typography

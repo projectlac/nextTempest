@@ -40,6 +40,7 @@ function ListProduct() {
           .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently)
           .then((res) => {
             setProductList(res.data.data);
+
             setTotal(res.data.total);
           });
       } catch (error) {}
@@ -93,6 +94,7 @@ function ListProduct() {
                   newPrice={50000}
                   status={!d.isSold ? "AVAILABLE" : "SOLD"}
                   id={d.id}
+                  name={d.name}
                 />
               </Grid>
             ))
@@ -117,7 +119,7 @@ function ListProduct() {
           sx={{ margin: "0 auto", display: "flex", justifyContent: "center" }}
         >
           <Stack spacing={2}>
-            {total > 10 && (
+            {total > 9 && (
               <Pagination
                 sx={{
                   "& .MuiPaginationItem-root": {
