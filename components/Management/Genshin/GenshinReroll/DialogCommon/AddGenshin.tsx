@@ -100,7 +100,7 @@ export default function AddGenshin() {
         variant="contained"
         sx={{ fontFamily: "Montserrat" }}
       >
-        Thêm tài khoản bằng xlxs
+        Thêm tài khoản bằng xlsx
       </Button>
 
       <Dialog
@@ -117,7 +117,7 @@ export default function AddGenshin() {
             fontFamily: "Montserrat",
           }}
         >
-          Thêm tài khoản bằng cxlxs
+          Thêm tài khoản bằng xlsx
         </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
@@ -125,7 +125,7 @@ export default function AddGenshin() {
               <Button variant="contained" component="label">
                 Upload File
                 <input
-                  accept=".xlxs"
+                  accept=".xlsx"
                   name="file"
                   required
                   type="file"
