@@ -91,7 +91,7 @@ function ListProduct() {
               >
                 <RerollItem
                   image={image.src}
-                  newPrice={50000}
+                  newPrice={d.cost}
                   status={!d.isSold ? "AVAILABLE" : "SOLD"}
                   id={d.id}
                   name={d.name}

@@ -22,7 +22,7 @@ import WarningSubmit from "../../DialogCommon/DialogReroll/WarningSubmit";
 import AddGenshin from "../DialogCommon/AddGenshin";
 
 interface AccountTable {
-  username: string;
+  name: string;
   id: string;
   createdAt: string;
   isSold: boolean;
@@ -85,7 +85,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
               }}
             >
               <TableCell>STT</TableCell>
-              <TableCell>Username</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>
               <TableCell>Xóa</TableCell>
@@ -121,7 +121,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.username}
+                      {cryptoOrder.name}
                     </Typography>
                     <Typography
                       variant="body2"

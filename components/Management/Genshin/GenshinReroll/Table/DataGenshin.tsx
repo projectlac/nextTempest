@@ -40,8 +40,8 @@ function DataGenshin() {
   useEffect(() => {
     tagApi.getRerollAccount(limitPage, offsetPage).then((res) => {
       const data = res.data.data.map((d) => {
-        const { username, createdAt, id, isSold } = d;
-        return { username, createdAt, id, isSold };
+        const { name, createdAt, id, isSold } = d;
+        return { name, createdAt, id, isSold };
       });
 
       setCryptoOrders(data);
