@@ -126,7 +126,11 @@ function RerollItem({ image, name, newPrice, status, id }: PropRerollItem) {
         setLoading(false);
         handleClose();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setLoading(false);
+        handleChangeStatusToast();
+        handleChangeMessageToast(error.response.data.message);
+      });
   };
 
   const toMoney = (price: number) => {
