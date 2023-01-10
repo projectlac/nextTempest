@@ -132,6 +132,7 @@ function DataGenshin() {
           <TextField
             type="text"
             onChange={handleChange}
+            placeholder="Tìm kiếm username"
             sx={{
               "& input": {
                 padding: "7px",
