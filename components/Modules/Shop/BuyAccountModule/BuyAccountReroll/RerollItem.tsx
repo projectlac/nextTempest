@@ -123,6 +123,7 @@ function RerollItem({ image, name, newPrice, status, id }: PropRerollItem) {
         handleChangeStatusToast();
         handleChangeMessageToast("Bạn đã mua thành công");
         router.push(`/bill-reroll/${res.data[2] && res.data[2].id}`);
+        updated();
         setLoading(false);
         handleClose();
       })
