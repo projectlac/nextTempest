@@ -24,8 +24,9 @@ import AddGenshin from "../DialogCommon/AddGenshin";
 interface AccountTable {
   name: string;
   id: string;
-  createdAt: string;
+  updatedAt: string;
   isSold: boolean;
+  username: string;
 }
 
 interface RecentOrdersTableProps {
@@ -86,6 +87,8 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
             >
               <TableCell>STT</TableCell>
               <TableCell>Name</TableCell>
+              <TableCell>Username</TableCell>
+
               <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>
               <TableCell>Xóa</TableCell>
@@ -129,7 +132,6 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       noWrap
                     ></Typography>
                   </TableCell>
-
                   <TableCell>
                     <Typography
                       variant="body1"
@@ -137,7 +139,38 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       gutterBottom
                       noWrap
                     >
-                      {cryptoOrder.isSold ? "Đã bán" : "Chưa bán"}
+                      {cryptoOrder.username}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      noWrap
+                    ></Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                      sx={{
+                        "& span": {
+                          background: `${
+                            cryptoOrder.isSold !== false ? "#ff8484" : "#86ff84"
+                          }`,
+                          color: `${
+                            cryptoOrder.isSold !== false ? "#a30000" : "#00a33a"
+                          }`,
+                          fontSize: "14px",
+                          textAlign: "center",
+                          borderRadius: "15px",
+                          padding: "2px 7px",
+                        },
+                      }}
+                    >
+                      <span>
+                        {cryptoOrder.isSold !== false ? "Đã bán" : "Còn hàng"}
+                      </span>
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -148,7 +181,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                       noWrap
                     >
                       {format(
-                        new Date(cryptoOrder.createdAt),
+                        new Date(cryptoOrder.updatedAt),
                         "yyyy-MM-dd / hh:ss:mm"
                       )}
                     </Typography>

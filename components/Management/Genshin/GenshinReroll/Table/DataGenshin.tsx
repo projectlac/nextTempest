@@ -17,8 +17,9 @@ const _ = require("lodash");
 interface AccountTable {
   name: string;
   id: string;
-  createdAt: string;
+  updatedAt: string;
   isSold: boolean;
+  username: string;
 }
 
 function DataGenshin() {
@@ -38,10 +39,10 @@ function DataGenshin() {
   };
 
   useEffect(() => {
-    tagApi.getRerollAccount(limitPage, offsetPage).then((res) => {
+    tagApi.getRerollAccountForAdmin(limitPage, offsetPage, sold).then((res) => {
       const data = res.data.data.map((d) => {
-        const { name, createdAt, id, isSold } = d;
-        return { name, createdAt, id, isSold };
+        const { name, updatedAt, id, isSold, username } = d;
+        return { name, updatedAt, id, isSold, username };
       });
 
       setCryptoOrders(data);
@@ -64,8 +65,8 @@ function DataGenshin() {
   //     })
   //     .then((res) => {
   //       const data = res.data.data.map((d) => {
-  //         const { username, createdAt, id, isSole } = d;
-  //         return { username, createdAt, id, isSole };
+  //         const { username, updatedAt, id, isSole } = d;
+  //         return { username, updatedAt, id, isSole };
   //       });
   //       setCryptoOrders(data);
   //       let total = res.data.total;
@@ -107,7 +108,7 @@ function DataGenshin() {
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={sold} onChange={handleChangeSold} />}
-            label="Ưu tiên đã bán"
+            label="Chỉ hiện đã bán"
           />
         </FormGroup>
       </Box>

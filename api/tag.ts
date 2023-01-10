@@ -105,7 +105,15 @@ const tagApi = {
     return axiosAudit.post(url, file);
   },
   getRerollAccount(limit: number, offset: number): Promise<PromiseApi> {
-    const url = `/account-same-price?limit=${limit}&offset=${offset}`;
+    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}`;
+    return axiosAudit.get(url);
+  },
+  getRerollAccountForAdmin(
+    limit: number,
+    offset: number,
+    sold: boolean
+  ): Promise<PromiseApi> {
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
@@ -147,8 +155,7 @@ const tagApi = {
     }&sort=${params.sort}&queryString=${
       params.queryString
     }&${handleLimitPrice()}&${isSold()}&${game()}`;
-    return axiosAuthClient
-    .get(url);
+    return axiosAuthClient.get(url);
   },
 };
 export default tagApi;
