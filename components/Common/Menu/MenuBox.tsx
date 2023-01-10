@@ -156,6 +156,9 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                     Tower of fantasy
                   </a>
                 </Link>
+                <Link href="/reroll">
+                  <a className={`${activeClass("/reroll")}`}>Reroll</a>
+                </Link>
               </ChildMenu>
             </Box>
             <Typography className={`${activeClass("/tin-tuc")}`}>
