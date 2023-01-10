@@ -6,13 +6,12 @@ import {
   FormControlLabel,
   FormGroup,
   TextField,
-  Typography,
 } from "@mui/material";
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import TableGenshin from "./TableGenshin";
+import _debounce from "lodash/debounce";
 const _ = require("lodash");
 interface AccountTable {
   name: string;
@@ -27,7 +26,7 @@ function DataGenshin() {
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
-  // const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>("");
   const [sold, setSold] = useState<boolean>(false);
 
   const { update } = useAppContext();
@@ -39,18 +38,35 @@ function DataGenshin() {
   };
 
   useEffect(() => {
-    tagApi.getRerollAccountForAdmin(limitPage, offsetPage, sold).then((res) => {
-      const data = res.data.data.map((d) => {
-        const { name, updatedAt, id, isSold, username } = d;
-        return { name, updatedAt, id, isSold, username };
-      });
-
-      setCryptoOrders(data);
-      let total = res.data.total;
-      setTotal(total);
-    });
+    callApi("");
   }, [update, limitPage, offsetPage, sold]);
 
+  const callApi = (search: string) => {
+    tagApi
+      .getRerollAccountForAdmin(limitPage, offsetPage, sold, search)
+      .then((res) => {
+        const data = res.data.data.map((d) => {
+          const { name, updatedAt, id, isSold, username } = d;
+          return { name, updatedAt, id, isSold, username };
+        });
+
+        setCryptoOrders(data);
+        let total = res.data.total;
+        setTotal(total);
+      });
+  };
+
+  const debounceFn = useCallback(_debounce(handleDebounceFn, 1000), []);
+
+  function handleDebounceFn(inputValue: string) {
+    setOffsetPage(0);
+    callApi(inputValue);
+  }
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+    debounceFn(event.target.value);
+  };
   // function fetchDropdownOptions(key) {
   //   tagApi
   //     .getAccount({
@@ -87,6 +103,7 @@ function DataGenshin() {
   const handleChangeSold = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSold(e.target.checked);
   };
+
   return (
     <Card>
       {/* <Box mb={3}>
@@ -110,6 +127,17 @@ function DataGenshin() {
             control={<Checkbox checked={sold} onChange={handleChangeSold} />}
             label="Chỉ hiện đã bán"
           />
+        </FormGroup>
+        <FormGroup>
+          <TextField
+            type="text"
+            onChange={handleChange}
+            sx={{
+              "& input": {
+                padding: "7px",
+              },
+            }}
+          ></TextField>
         </FormGroup>
       </Box>
 

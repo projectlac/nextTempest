@@ -111,9 +111,10 @@ const tagApi = {
   getRerollAccountForAdmin(
     limit: number,
     offset: number,
-    sold: boolean
+    sold: boolean,
+    search: string
   ): Promise<PromiseApi> {
-    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}`;
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
