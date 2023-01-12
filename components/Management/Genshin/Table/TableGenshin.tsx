@@ -67,7 +67,6 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
     []
   );
 
-  console.log(cryptoOrders);
   const selectedBulkActions = selectedCryptoOrders.length > 0;
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
@@ -324,20 +323,24 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
                         </IconButton>
                       </Tooltip>
                     )}
-                    <Tooltip title="Chỉnh sửa bài viết" arrow>
-                      <IconButton
-                        sx={{
-                          "&:hover": {
-                            background: "#b16c4d45",
-                          },
-                          color: "#333",
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <EditGenshin id={cryptoOrder.id} />
-                      </IconButton>
-                    </Tooltip>
+
+                    {cryptoOrder.soldAt === null && (
+                      <Tooltip title="Chỉnh sửa bài viết" arrow>
+                        <IconButton
+                          sx={{
+                            "&:hover": {
+                              background: "#b16c4d45",
+                            },
+                            color: "#333",
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
+                          <EditGenshin id={cryptoOrder.id} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+
                     <Tooltip title="Xóa bài viết" arrow>
                       <IconButton
                         sx={{
