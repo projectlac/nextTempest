@@ -79,7 +79,12 @@ function DashboardIndex() {
       return "";
     }
   };
-
+  useEffect(() => {
+    let startDate = localStorage.getItem("startDate");
+    if (startDate) {
+      setStart(startDate);
+    }
+  }, []);
   useEffect(() => {
     audit
       .getManagement({
@@ -103,12 +108,6 @@ function DashboardIndex() {
     }
   }, [start, end]);
 
-  useEffect(() => {
-    let startDate = localStorage.getItem("startDate");
-    if (startDate) {
-      setStart(startDate);
-    }
-  }, []);
   const options = {
     responsive: true,
     plugins: {
