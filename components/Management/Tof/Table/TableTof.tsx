@@ -259,20 +259,23 @@ const TableTof: FC<RecentOrdersTableProps> = ({
                         </IconButton>
                       </Tooltip>
                     )}
-                    <Tooltip title="Chỉnh sửa bài viết" arrow>
-                      <IconButton
-                        sx={{
-                          "&:hover": {
-                            background: "#b16c4d45",
-                          },
-                          color: "#333",
-                        }}
-                        color="inherit"
-                        size="small"
-                      >
-                        <EditTof id={cryptoOrder.id} />
-                      </IconButton>
-                    </Tooltip>
+                    {cryptoOrder.soldAt === null && (
+                      <Tooltip title="Chỉnh sửa bài viết" arrow>
+                        <IconButton
+                          sx={{
+                            "&:hover": {
+                              background: "#b16c4d45",
+                            },
+                            color: "#333",
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
+                          <EditTof id={cryptoOrder.id} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+
                     <Tooltip title="Xóa bài viết" arrow>
                       <IconButton
                         sx={{
