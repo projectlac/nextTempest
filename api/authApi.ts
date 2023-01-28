@@ -30,7 +30,7 @@ const authApi = {
   },
   getAll(params: AccountTable): Promise<PromiseApi> {
     const url = `hide-auth/list-user?role=${params.role}&limit=${params.limit}&offset=${params.offset}&username=${params.username}`;
-    return axiosClient.get(url);
+    return axiosAuthClient.get(url);
   },
 };
 export default authApi;

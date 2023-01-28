@@ -75,7 +75,7 @@ function ListProduct({ slug, type }: IBuy) {
       try {
         if (slug) {
           await tagApi
-            .getAccount({
+            .getAccountWithPage({
               character: selectedFilter.character.toString(),
               limit: CONST_INFORMATION.LIMIT,
               offset: pageCurrently,

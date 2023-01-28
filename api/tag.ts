@@ -31,6 +31,38 @@ const tagApi = {
     const { content, ...result } = params;
     return axiosAudit.patch(url, result);
   },
+  getAccountWithPage(params: AccountForm): Promise<PromiseApi> {
+    const handleLimitPrice = () => {
+      if (params.startPrice && params.endPrice)
+        return `startPrice=${params.startPrice}&endPrice=${params.endPrice}`;
+      if (params.startPrice && Boolean(!params.endPrice))
+        return `startPrice=${params.startPrice}`;
+      if (Boolean(!params.startPrice) && params.endPrice)
+        return `endPrice=${params.endPrice}`;
+      return `startPrice=0`;
+    };
+    const isSold = () => {
+      if (params.isSold !== null && params.isSold !== undefined) {
+        return `isSold=${params.isSold}`;
+      } else return "";
+    };
+
+    const game = () => {
+      if (!params.game) {
+        return `game=genshin-impact`;
+      } else {
+        return `game=${params.game}`;
+      }
+    };
+    const url = `/account-get?limit=${params.limit}&offset=${
+      params.offset
+    }&weapon=${params.weapon}&character=${params.character}&server=${
+      params.server
+    }&sort=${params.sort}&queryString=${
+      params.queryString
+    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}&vipToNew=true`;
+    return axiosClient.get(url);
+  },
   getAccount(params: AccountForm): Promise<PromiseApi> {
     const handleLimitPrice = () => {
       if (params.startPrice && params.endPrice)

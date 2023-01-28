@@ -79,7 +79,7 @@ const ChildMenu = styled(Box)({
 });
 function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
   const router = useRouter();
-  const { isLogin, refreshLogin } = useAppContext();
+  const { isLogin, refreshLogin, role } = useAppContext();
   const trans = useTrans();
 
   const activeClass = (pathName: string) => {
@@ -170,7 +170,11 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">{trans[1][4]}</Link>
             </Typography>
-
+            {["ADMIN", "MOD", "CHECKED"].includes(role) && isLogin && (
+              <Typography component="h2">
+                <Link href="/dashboard">Quản lý</Link>
+              </Typography>
+            )}
             {isLogin ? (
               <Typography
                 onClick={() => {
