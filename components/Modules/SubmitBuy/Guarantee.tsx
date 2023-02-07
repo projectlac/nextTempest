@@ -205,8 +205,7 @@ function Guarantee({ handleSelect, handleStep }: GuaranteeProps) {
                     fontWeight={600}
                     mt={4}
                   >
-                    Nhận trả account nếu không hài lòng (70% trong tháng đầu
-                    tiên, sau tháng đầu là 50%)
+                    Nhận trả account nếu không hài lòng (50% trong 14 ngày đầu)
                   </Typography>
                 </Box>
               </Box>
