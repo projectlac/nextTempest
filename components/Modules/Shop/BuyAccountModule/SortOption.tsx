@@ -20,7 +20,7 @@ export default function SortOption({ handleSortBy }: SortOption) {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: { md: 120, xs: 85 } }} size="small">
+    <FormControl sx={{ m: 1, minWidth: { md: 120, xs: "44%" } }} size="small">
       <InputLabel
         id="demo-select-small"
         sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}

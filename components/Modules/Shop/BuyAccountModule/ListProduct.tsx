@@ -12,6 +12,7 @@ import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
 import FilterMobile from "./FilterMobile/FilterMobile";
+import FindByAr from "./FindByAr";
 import FindByCode from "./FindByCode";
 import PrireFilter from "./PrireFilter";
 import SortOption from "./SortOption";
@@ -28,6 +29,7 @@ function ListProduct({ slug, type }: IBuy) {
   const [sortByPrice, setSortByPrice] = useState<number[]>([0]);
 
   const [findCode, setFindCode] = useState<string>("");
+  const [findAr, setFindAr] = useState<string>("");
 
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
@@ -70,6 +72,13 @@ function ListProduct({ slug, type }: IBuy) {
     setFindCode(code);
     setPageCurrently(0);
   };
+
+  const handleChangeAr = (code: string) => {
+    setFindAr(code);
+
+    setPageCurrently(0);
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -87,12 +96,14 @@ function ListProduct({ slug, type }: IBuy) {
               endPrice: sortByPrice[1],
               game: slug,
               isSold: true,
+              arFrom: 0,
+              arTo: findAr,
               type: type !== undefined ? type : "",
             })
             .then((res) => {
-              const sold = res.data.data.filter(
-                (d) => d.status === "AVAILABLE"
-              );
+              // const sold = res.data.data.filter(
+              //   (d) => d.status === "AVAILABLE"
+              // );
 
               setProductList(res.data.data);
               setTotal(res.data.total);
@@ -101,7 +112,7 @@ function ListProduct({ slug, type }: IBuy) {
       } catch (error) {}
     };
     getData();
-  }, [update, sortBy, pageCurrently, findCode, sortByPrice]);
+  }, [update, sortBy, pageCurrently, findCode, sortByPrice, findAr]);
 
   useEffect(() => {
     const getData = async () => {
@@ -123,9 +134,9 @@ function ListProduct({ slug, type }: IBuy) {
               type: type !== undefined ? type : "",
             })
             .then((res) => {
-              const sold = res.data.data.filter(
-                (d) => d.status === "AVAILABLE"
-              );
+              // const sold = res.data.data.filter(
+              //   (d) => d.status === "AVAILABLE"
+              // );
 
               setProductList(res.data.data);
               setTotal(res.data.total);
@@ -161,13 +172,23 @@ function ListProduct({ slug, type }: IBuy) {
       >
         <Hidden mdDown>
           <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
+            <FindByAr handleChangeCode={handleChangeAr} />
+
             <FindByCode handleChangeCode={handleChangeCode} />
             <PrireFilter handleSortByPrice={handleSortByPrice} />
             <SortOption handleSortBy={handleSortBy} />
           </Box>
         </Hidden>
         <Hidden mdUp>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              mb: 1,
+            }}
+          >
+            <FindByAr handleChangeCode={handleChangeAr} />
             <FindByCode handleChangeCode={handleChangeCode} />
             <PrireFilter handleSortByPrice={handleSortByPrice} />
             <SortOption handleSortBy={handleSortBy} />

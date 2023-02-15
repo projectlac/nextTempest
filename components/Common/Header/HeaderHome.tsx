@@ -292,6 +292,14 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
+                      query: { id: "honkai-star-rail" },
+                    }}
+                  >
+                    Honkai Star Rail
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
                       query: { id: "genshin-impact" },
                     }}
                   >

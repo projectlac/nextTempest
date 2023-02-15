@@ -10,10 +10,10 @@ import React, { useCallback, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 const _ = require("lodash");
 
-interface IFindByCode {
+interface IFindByAr {
   handleChangeCode: (code: string) => void;
 }
-function FindByCode({ handleChangeCode }: IFindByCode) {
+function FindByAr({ handleChangeCode }: IFindByAr) {
   const [code, setCode] = useState<string>("");
   const handleMouseDownPassword = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -61,7 +61,7 @@ function FindByCode({ handleChangeCode }: IFindByCode) {
           },
         }}
       >
-        Tìm mã
+        Tìm theo Ar
       </InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
@@ -89,10 +89,10 @@ function FindByCode({ handleChangeCode }: IFindByCode) {
             </InputAdornment>
           )
         }
-        label="Tìm mã"
+        label="Tìm theo Ar"
       />
     </FormControl>
   );
 }
 
-export default FindByCode;
+export default FindByAr;
