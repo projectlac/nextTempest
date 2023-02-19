@@ -20,7 +20,7 @@ export default function PrireFilter({ handleSortByPrice }: PrireFilter) {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: { md: 120, xs: 100 } }} size="small">
+    <FormControl sx={{ m: 1, minWidth: { md: 120, xs: "44%" } }} size="small">
       <InputLabel
         id="demo-select-small"
         sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}

@@ -11,13 +11,13 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Tempest - Mua bán account Genshin Impact, TOF uy tín hàng đầu
+          Tempest - Mua bán account Honkai Star Rail, GI, TOF, uy tín hàng đầu
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam"
+          content="Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

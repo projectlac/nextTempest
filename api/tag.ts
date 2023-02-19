@@ -60,7 +60,9 @@ const tagApi = {
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}&vipToNew=true`;
+    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${
+      params.type
+    }&vipToNew=true&arForm=${params.arFrom}&arTo=${params.arTo}`;
     return axiosClient.get(url);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
@@ -93,6 +95,7 @@ const tagApi = {
     }&sort=${params.sort}&queryString=${
       params.queryString
     }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
+
     return axiosClient.get(url);
   },
   refundAccount(id: string): Promise<PromiseApi> {
