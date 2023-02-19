@@ -195,7 +195,7 @@ function Guarantee({ handleSelect, handleStep }: GuaranteeProps) {
                     <br />- Bị <span style={{ color: "#000" }}>refund. </span>
                   </Typography>
 
-                  <Typography
+                  {/* <Typography
                     color={"#9CABCC"}
                     sx={{
                       fontSize: { md: 18, xs: 13 },
@@ -206,7 +206,7 @@ function Guarantee({ handleSelect, handleStep }: GuaranteeProps) {
                     mt={4}
                   >
                     Nhận trả account nếu không hài lòng (50% trong 14 ngày đầu)
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Box>
             </label>

@@ -58,10 +58,10 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
   useEffect(() => {
     setKey("");
   }, [value]);
-  const getKeyFunc = async () => {
+  const getKeyFunc = async (bank: string) => {
     try {
       await paymentApi
-        .getKey()
+        .getKey(bank)
         .then((res) => {
           setKey(res.data);
         })
@@ -181,12 +181,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     color="#D09B5F"
                     mt={1}
                   >
-                    MB bank - 78989899992
+                    VietComBank - 1035300889
                     <Hidden smDown> - </Hidden>
                     <Hidden smUp>
                       <br />
                     </Hidden>
-                    TRAN MINH VU
+                    Lê Nguyễn Thùy Phương
                     <Tooltip
                       title={notification}
                       arrow
@@ -196,12 +196,12 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                       <ContentCopyIcon
                         onMouseLeave={resetCopy}
                         onClick={() => {
-                          copy("78989899992");
+                          copy("1035300889");
                         }}
                       />
                     </Tooltip>
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     sx={{
                       fontSize: {
                         md: 16,
@@ -210,8 +210,8 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     }}
                     color="#9C6546"
                     mt={1}
-                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
-                  {/* <Typography
+                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography> */}
+                  <Typography
                     sx={{
                       fontSize: {
                         md: 15,
@@ -229,7 +229,9 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     </SpanGetData>
 
                     <Button
-                      onClick={getKeyFunc}
+                      onClick={() => {
+                        getKeyFunc("VCB");
+                      }}
                       sx={{
                         width: "100px",
                         borderRadius: "15px",
@@ -263,7 +265,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     * Sau khi lấy mã, mã sẽ tồn tại trong <span>5 phút</span>.
                     Vui lòng sử dụng trước khi mã hết hạn! Bạn có thế click{" "}
                     <span>lấy mã</span> để làm mới mã.
-                  </Typography> */}
+                  </Typography>
                 </Box>
               );
               break;
