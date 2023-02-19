@@ -145,7 +145,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     }}
                     color="#9C6546"
                     mt={1}
-                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                  >{`Nội Dung : "Tên Tài Khoản"  - lưu ý không ghi dấu hoặc kép`}</Typography>
                 </Box>
               );
               break;
