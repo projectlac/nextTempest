@@ -5,10 +5,13 @@ import banner from "../../../api/banner";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAppContext } from "../../../context/state";
 import TriggerShowProduct from "./TriggerShowProduct";
+import TokenMomo from "./TokenMomo";
 function Setting() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [numberOfImage, setNumberOfImage] = useState<number>(3);
+  const [thisIsTokenMomo, setThisIsTokenMomo] = useState<string>("");
+
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [defaultDataButton, setDefaultDataButton] = useState([
@@ -86,12 +89,16 @@ function Setting() {
   };
 
   useEffect(() => {
-    banner.getInforHomePage().then((res) => {
+    banner.getInforAdmin().then((res) => {
       let rawData = {
         title: res.data[0].title.split(","),
         url: res.data[0].url.split(","),
         poster: res.data[0].poster.split(","),
       };
+
+      setThisIsTokenMomo(
+        res.data.filter((d: any) => d.title === "api_momo")[0].value
+      );
 
       let button = [];
       let image = [];
@@ -320,6 +327,7 @@ function Setting() {
       </Box>
 
       <TriggerShowProduct show={show}></TriggerShowProduct>
+      <TokenMomo show={thisIsTokenMomo}></TokenMomo>
     </Card>
   );
 }
