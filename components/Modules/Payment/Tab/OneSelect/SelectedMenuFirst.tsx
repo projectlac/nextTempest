@@ -140,7 +140,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                       />
                     </Tooltip>
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     sx={{
                       fontSize: {
                         md: 16,
@@ -149,8 +149,8 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     }}
                     color="#9C6546"
                     mt={1}
-                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
-                  {/* <Typography
+                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography> */}
+                  <Typography
                     sx={{
                       fontSize: {
                         md: 15,
@@ -204,7 +204,7 @@ function SelectedMenuFirst({ handleValue, value }: PropsSelectedMenu) {
                     * Sau khi lấy mã, mã sẽ tồn tại trong <span>5 phút</span>.
                     Vui lòng sử dụng trước khi mã hết hạn! Bạn có thế click{" "}
                     <span>lấy mã</span> để làm mới mã.
-                  </Typography> */}
+                  </Typography>
                 </Box>
               );
               break;
