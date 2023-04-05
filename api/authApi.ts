@@ -6,6 +6,7 @@ import {
   RegisterForm,
 } from "../types";
 import { AccountTable } from "../types/DashboardTypes/account";
+import axiosAudit from "./axiosAudit";
 import axiosAuthClient from "./axiosAuthClient";
 import axiosClient from "./axiosClient";
 
@@ -31,6 +32,10 @@ const authApi = {
   getAll(params: AccountTable): Promise<PromiseApi> {
     const url = `hide-auth/list-user?role=${params.role}&limit=${params.limit}&offset=${params.offset}&username=${params.username}`;
     return axiosAuthClient.get(url);
+  },
+  changeInfoUser(description: string): Promise<PromiseApi> {
+    const url = "/auth/update-description";
+    return axiosAudit.patch(url, {description});
   },
 };
 export default authApi;
