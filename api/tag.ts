@@ -140,7 +140,7 @@ const tagApi = {
     return axiosAudit.post(url, file);
   },
   getRerollAccount(limit: number, offset: number): Promise<PromiseApi> {
-    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}`;
+    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&isSold=false`;
     return axiosAudit.get(url);
   },
   getRerollAccountForAdmin(
