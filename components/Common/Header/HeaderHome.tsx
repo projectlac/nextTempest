@@ -316,12 +316,12 @@ function HeaderHome() {
                   <Link href="/reroll">Reroll</Link>
                 </ChildMenu>
               </ParentMenu>
-              {/* <Typography
+              <Typography
                 component="h2"
                 className={`${activeClass("/tin-tuc")}`}
               >
                 <Link href="/tin-tuc">{trans[1][2]}</Link>
-              </Typography> */}
+              </Typography>
 
               <Typography
                 component="h2"
