@@ -73,16 +73,6 @@ function PaymentBox() {
                 }}
               />
             </Box>
-            {/* <Box width={532} height={653}>
-              <Image
-                src={nt}
-                alt="nap da sang the"
-                layout="responsive"
-                onClick={() => {
-                  handleOpen(2);
-                }}
-              />
-            </Box> */}
           </BoxSelection>
           {openAuth && <Authentization closeAuthBox={closeAuthBox} />}
         </Container>
