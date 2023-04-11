@@ -9,6 +9,7 @@ import background from "../../styles/assets/images/Videos/Background_sumeru.jpg"
 import book from "../../styles/assets/images/Videos/Book.png";
 import Frame from "../../styles/assets/images/Videos/Frame.png";
 import Authentization from "./Authentization";
+import Link from "next/link";
 const BgWrap = styled(Box)(
   ({ theme }) => `
     width: 100vw;
@@ -290,16 +291,49 @@ function ModuleGiftCode() {
                 >
                   Thông báo
                 </Typography>
-                <Typography
+                <Box
                   sx={{
-                    fontWeight: "medium",
-                    fontSize: "17px",
-                    padding: "30px 0 20px",
-                    color: error ? "red" : "black",
-                    wordBreak: "break-word",
+                    height: !error ? "75%" : "50%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
                   }}
-                  dangerouslySetInnerHTML={{ __html: message }}
-                ></Typography>
+                >
+                  <Typography
+                    sx={{
+                      fontWeight: "medium",
+                      fontSize: "17px",
+                      padding: {
+                        xs: "30px 0 20px",
+                        sm: "0px 0 10px",
+                        md: "30px 0 20px",
+                      },
+                      color: error ? "red" : "black",
+                      wordBreak: "break-word",
+                    }}
+                    dangerouslySetInnerHTML={{ __html: message }}
+                  ></Typography>
+                  {!error && (
+                    <Typography
+                      sx={{
+                        fontWeight: "normal",
+                        fontSize: "15px",
+                        fontStyle: "italic",
+                        padding: "30px 0 20px",
+                        color: "#835b20",
+                        wordBreak: "break-word",
+                        a: {
+                          color: "orange",
+                        },
+                      }}
+                    >
+                      Mong bạn ủng hộ Page cũng như Shop để phát triển và phát
+                      những code chất lượng hơn nhé
+                      <br />
+                      Mua account an toàn tại <Link href="/">Tempest.vn</Link>
+                    </Typography>
+                  )}
+                </Box>
                 {error && (
                   <Typography
                     sx={{
@@ -316,6 +350,7 @@ function ModuleGiftCode() {
                       borderRadius: "6px",
                       color: "#fff",
                       cursor: "pointer",
+                      marginTop: "15xp",
                     }}
                     onClick={() => {
                       setError(false);
