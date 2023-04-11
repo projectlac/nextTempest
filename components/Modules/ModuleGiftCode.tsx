@@ -98,7 +98,7 @@ const BookWrap = styled(Box)(
     @media (min-width: 450px) {
     width: 400px;
     height: auto;
-     top:56%;
+     top:31%;
 
      padding:0px 40px 20px;
   } 
@@ -147,12 +147,13 @@ const VideoBox = styled(Box)(
   }
   @media (min-width: 450px) {
     width: 440px;
-    height: 100%;
+    height: 200px;
     text-align: center;
+  
   }
   @media (min-width: 768px) {
         width: 630px;
-    height: 100%;
+    height: 440px;
      
   } 
   @media (min-width: 1024px) {
@@ -228,7 +229,12 @@ const CustomField = styled(Field)(
     font-size: 18px;
     padding: 15px 25px;
     font-family: 'Signika';
-    @media (max-width: 435px) {
+    @media (min-width:0px) {
+      height:50px;
+      margin-bottom:30px;
+      font-size: 15px;
+    }
+    @media (min-width: 435px) {
       height:50px;
       margin-bottom:30px;
       font-size: 15px;
@@ -513,7 +519,46 @@ function ModuleGiftCode() {
               </Formik>
             )}
           </BookWrap>
+          <Box
+            sx={{
+              position: { xs: "absolute", sm: "absolute" },
+              width: { xs: "320px", sm: "450px", md: "774px" },
+              margin: "0 auto",
+              left: 0,
+              right: 0,
+              bottom: { xs: "-160px", sm: "-30px" },
+              textAlign: "left",
+              paddingLeft: "15px",
+              color: "#000",
+              background: { xs: "#f2efe0", md: "" },
+              padding: { xs: "15px", md: "" },
+              borderRadius: { xs: "8px", md: "" },
+              a: {
+                color: "orange",
+              },
+            }}
+          >
+            <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
+              Lưu ý:{" "}
+            </Typography>
+            <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
+              1. Các bạn không cần đăng nhập tài khoản shop để lấy tài khoản
+              Amazone mới. Sau khi lấy được tài khoản Amazone mới, các bạn login
+              và get code như page đã hướng dẫn ở link bên dưới
+            </Typography>
+            <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
+              2. Hướng dẫn get code:{" "}
+              <a
+                href="http://boom.so/wezbro"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                http://boom.so/wezbro
+              </a>
+            </Typography>
+          </Box>
         </VideoBox>
+
         {/* </PostBox> */}
       </FrameTop>
     </BgWrap>
