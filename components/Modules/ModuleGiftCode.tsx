@@ -259,23 +259,16 @@ interface IInfor {
   title: string;
 }
 function ModuleGiftCode() {
-  const [openAuth, setOpenAuth] = React.useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { isLogin } = useAppContext();
-
-  const closeAuthBox = () => {
-    setOpenAuth(false);
-  };
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required("*Tên đăng nhập không được để trống "),
     password: Yup.string().required("*Mật khẩu không được để trống "),
   });
   return (
     <BgWrap>
-      {openAuth && <Authentization closeAuthBox={closeAuthBox} />}
       <FrameTop>
         {/* <PostBox> */}
         <VideoBox className="box-slider">
@@ -313,12 +306,56 @@ function ModuleGiftCode() {
                     }}
                     dangerouslySetInnerHTML={{ __html: message }}
                   ></Typography>
-                  {!error && (
+                  {!error ? (
+                    <>
+                      <Typography
+                        sx={{
+                          fontWeight: "medium",
+                          fontSize: "17px",
+                          width: "150px",
+                          margin: "0 auto",
+                          background: "#8e985d",
+                          height: "50px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "0",
+                          borderRadius: "6px",
+                          color: "#fff",
+                          cursor: "pointer",
+                          marginTop: "15xp",
+                        }}
+                        onClick={() => {
+                          setError(false);
+                          setMessage("");
+                        }}
+                      >
+                        Tiếp tục
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: "normal",
+                          fontSize: "15px",
+                          fontStyle: "italic",
+                          padding: "30px 0 20px",
+                          color: "#835b20",
+                          wordBreak: "break-word",
+                          a: {
+                            color: "orange",
+                          },
+                        }}
+                      >
+                        Mong bạn ủng hộ Page cũng như Shop để phát triển và phát
+                        những code chất lượng hơn nhé
+                        <br />
+                        Mua account an toàn tại <Link href="/">Tempest.vn</Link>
+                      </Typography>
+                    </>
+                  ) : (
                     <Typography
                       sx={{
                         fontWeight: "normal",
                         fontSize: "15px",
-                        fontStyle: "italic",
                         padding: "30px 0 20px",
                         color: "#835b20",
                         wordBreak: "break-word",
@@ -327,10 +364,8 @@ function ModuleGiftCode() {
                         },
                       }}
                     >
-                      Mong bạn ủng hộ Page cũng như Shop để phát triển và phát
-                      những code chất lượng hơn nhé
-                      <br />
-                      Mua account an toàn tại <Link href="/">Tempest.vn</Link>
+                      Nếu bạn chắc chắn đã nhập đúng tài khoản và mật khẩu nhưng
+                      bị lỗi này, vui lòng inbox lại page để được hỗ trợ
                     </Typography>
                   )}
                 </Box>
@@ -370,23 +405,20 @@ function ModuleGiftCode() {
                 validationSchema={LoginSchema}
                 onSubmit={(values) => {
                   const { username, password } = values;
-                  if (isLogin) {
-                    setLoading(true);
-                    paymentApi.getCode(username, password).then((res) => {
-                      if (res.data.length === 0) {
-                        setMessage("Tài khoản này không tồn tại!");
-                        setError(true);
-                      } else {
-                        setMessage(
-                          `<p>Token của bạn là <span style="color:#d33">${res.data[0].token}</span> <br/> Code:  <span style="color:#d33">${res.data[0].code}</span></p>`
-                        );
-                        setError(false);
-                      }
-                      setLoading(false);
-                    });
-                  } else {
-                    setOpenAuth(true);
-                  }
+
+                  setLoading(true);
+                  paymentApi.getCode(username, password).then((res) => {
+                    if (res.data.length === 0) {
+                      setMessage("Tài khoản này không tồn tại!");
+                      setError(true);
+                    } else {
+                      setMessage(
+                        `<p>Tài khoản Amazone mới của bạn là <br/> <span style="color:#d33">${res.data[0].token}</span></p>`
+                      );
+                      setError(false);
+                    }
+                    setLoading(false);
+                  });
                 }}
               >
                 {({ errors, touched }) => (

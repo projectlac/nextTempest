@@ -1,4 +1,5 @@
 import axiosAudit from "./axiosAudit";
+import axiosClient from "./axiosClient";
   
   const paymentApi = {
     getKey(bank:string): Promise<any> {
@@ -8,7 +9,7 @@ import axiosAudit from "./axiosAudit";
     //get code amazon
     getCode(acc:string, pass:string) : Promise<any> {
       const url = `/code/find-acc`;
-      return axiosAudit.get(`${url}?acc=${acc}&pass=${pass}`);
+      return axiosClient.get(`${url}?acc=${acc}&pass=${pass}`);
     },
   };
   export default paymentApi;
