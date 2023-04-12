@@ -508,7 +508,7 @@ function ModuleGiftCode() {
                       {loading ? (
                         <CircularProgress sx={{ color: "#fff", mt: 1 }} />
                       ) : (
-                        "Get Code"
+                        "Nhận tài khoản mới"
                       )}
                     </button>
                   </Form>
@@ -539,9 +539,8 @@ function ModuleGiftCode() {
               Lưu ý:{" "}
             </Typography>
             <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
-              1. Các bạn không cần đăng nhập tài khoản shop để lấy tài khoản
-              Amazone mới. Sau khi lấy được tài khoản Amazone mới, các bạn login
-              và get code như page đã hướng dẫn ở link bên dưới
+              1. Sau khi lấy được tài khoản Amazone mới, các bạn login và get
+              code như page đã hướng dẫn ở link bên dưới
             </Typography>
             <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
               2. Hướng dẫn get code:{" "}
