@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Layout from "../../components/Layout/BaseLayout";
+
 import ModuleGiftCode from "../../components/Modules/ModuleGiftCode";
 import Meta from "../../styles/assets/images/homeImage.jpg";
 
@@ -8,7 +9,7 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Tin tức - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of
+          GiftCode - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of
           fantasy uy tín hàng đầu Việt Nam
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

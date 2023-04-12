@@ -259,7 +259,7 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     width: "50%",
     height: "50px",
     justifyContent: "center",
-    margin: "25px auto 5px",
+    margin: "0px auto 5px",
     fontSize: "10px",
   },
 
@@ -528,7 +528,7 @@ function ModuleVideo() {
                 xs: "relative",
               },
               width: { lg: "auto", md: "80%", sm: "100%", xs: "100%" },
-              margin: { sm: "0 auto", xs: "-35px auto 0" },
+              margin: { sm: "0 auto", xs: "0px auto 0" },
               display: { lg: "inherit", xs: "flex" },
               justifyContent: "space-around",
 
