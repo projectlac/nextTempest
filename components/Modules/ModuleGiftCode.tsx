@@ -260,10 +260,7 @@ const CustomField = styled(Field)(
   } 
           `
 );
-interface IInfor {
-  url: string;
-  title: string;
-}
+
 function ModuleGiftCode() {
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
@@ -436,7 +433,7 @@ function ModuleGiftCode() {
                         padding: "30px 0 20px",
                       }}
                     >
-                      Đăng nhập tài khoản được cung cấp để nhận code
+                      Đăng nhập tài khoản Amazone cũ để nhận tài khoản mới
                     </Typography>
                     <Box width={"90%"} sx={{ margin: "0 auto" }}>
                       <Box sx={{ position: "relative" }}>
@@ -511,7 +508,7 @@ function ModuleGiftCode() {
                       {loading ? (
                         <CircularProgress sx={{ color: "#fff", mt: 1 }} />
                       ) : (
-                        "Get Code"
+                        "Nhận tài khoản mới"
                       )}
                     </button>
                   </Form>
@@ -542,18 +539,17 @@ function ModuleGiftCode() {
               Lưu ý:{" "}
             </Typography>
             <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
-              1. Các bạn không cần đăng nhập tài khoản shop để lấy tài khoản
-              Amazone mới. Sau khi lấy được tài khoản Amazone mới, các bạn login
-              và get code như page đã hướng dẫn ở link bên dưới
+              1. Sau khi lấy được tài khoản Amazone mới, các bạn login và get
+              code như page đã hướng dẫn ở link bên dưới
             </Typography>
             <Typography sx={{ fontSize: { xs: "13px", md: "15px" } }}>
               2. Hướng dẫn get code:{" "}
               <a
-                href="http://boom.so/wezbro"
+                href="https://bom.so/wezbro"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                http://boom.so/wezbro
+                https://bom.so/wezbro
               </a>
             </Typography>
           </Box>
