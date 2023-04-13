@@ -95,7 +95,7 @@ function ListProduct({ slug, type }: IBuy) {
               startPrice: sortByPrice[0],
               endPrice: sortByPrice[1],
               game: slug,
-              isSold: true,
+              isSold: false,
               arFrom: 0,
               arTo: findAr,
               type: type !== undefined ? type : "",
