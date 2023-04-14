@@ -74,6 +74,7 @@ function NewProduct() {
         weapon: "",
         sort: 3,
         queryString: "",
+        isSold: false,
         type: "",
       })
       .then((res) => setProductList(res.data.data));
