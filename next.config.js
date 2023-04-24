@@ -4,7 +4,7 @@ const { i18n } = require("./i18n.config");
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["res.cloudinary.com", "imagedelivery.net"],
   },
   i18n,
 };

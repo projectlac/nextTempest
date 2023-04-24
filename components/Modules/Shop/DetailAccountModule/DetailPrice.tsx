@@ -98,7 +98,7 @@ const ButtonBuy = styled(Box)(
     background-size: contain;
     background-repeat: no-repeat;
     margin: 15px auto 0;
-  
+    cursor:pointer;
     @media (min-width: 1024px) {
       height: 56px;
       width: 250px;

@@ -139,17 +139,27 @@ const tagApi = {
     const url = `/account-same-price/import`;
     return axiosAudit.post(url, file);
   },
-  getRerollAccount(limit: number, offset: number): Promise<PromiseApi> {
-    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&isSold=false`;
+  getRerollAccount(limit: number, offset: number, game:string): Promise<PromiseApi> {
+    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&isSold=false&game=${game}`;
     return axiosAudit.get(url);
   },
   getRerollAccountForAdmin(
     limit: number,
     offset: number,
     sold: boolean,
-    search: string
+    search: string,
+    game?:string
   ): Promise<PromiseApi> {
-    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}`;
+
+    const gameParams = () => {
+      if (!game) {
+        return `game=genshin-impact`;
+      } else {
+        return `game=${game}`;
+      }
+    };
+
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {

@@ -5,12 +5,13 @@ import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import image from "../../../../../styles/assets/images/version25-genshinimpact-04-1643479276-51.jpg";
 import RerollItem from "./RerollItem";
+import FilterByGame from "../FilterByGame";
 function ListProduct() {
   const { update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
-
+  const [game, setGame] = React.useState<string>("genshin-impact");
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
     page: number
@@ -37,17 +38,19 @@ function ListProduct() {
     const getData = async () => {
       try {
         await tagApi
-          .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently)
+          .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently, game)
           .then((res) => {
             setProductList(res.data.data);
-
             setTotal(res.data.total);
           });
       } catch (error) {}
     };
     getData();
-  }, [update, pageCurrently]);
+  }, [update, pageCurrently, game]);
 
+  const handleGame = (data: string) => {
+    setGame(data);
+  };
   return (
     <Box
       sx={{
@@ -59,6 +62,18 @@ function ListProduct() {
         margin: "0 auto",
       }}
     >
+      <Box
+        sx={{
+          mt: { md: 3, xs: 2 },
+          mb: 3,
+          mx: { md: 3, xs: 0 },
+          textAlign: "right",
+          zIndex: 999,
+          position: "relative",
+        }}
+      >
+        <FilterByGame handleGame={handleGame} />
+      </Box>
       <Box
         sx={{
           width: "100%",
@@ -90,7 +105,7 @@ function ListProduct() {
                 }}
               >
                 <RerollItem
-                  image={image.src}
+                  image={d.image ? d.image : image.src}
                   newPrice={d.cost}
                   status={!d.isSold ? "AVAILABLE" : "SOLD"}
                   id={d.id}

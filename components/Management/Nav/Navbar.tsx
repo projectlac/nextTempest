@@ -50,6 +50,12 @@ export default function Navbar() {
       role: "ADMIN, MOD",
     },
     {
+      name: "Quản lý HSR",
+      icon: <InboxIcon />,
+      link: "/dashboard/hsr",
+      role: "ADMIN, MOD",
+    },
+    {
       name: "Quản lý TOF",
       icon: <InboxIcon />,
       link: "/dashboard/tof",
