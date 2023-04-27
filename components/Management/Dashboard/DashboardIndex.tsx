@@ -79,12 +79,7 @@ function DashboardIndex() {
       return "";
     }
   };
-  useEffect(() => {
-    let startDate = localStorage.getItem("startDate");
-    if (startDate) {
-      setStart(startDate);
-    }
-  }, []);
+
   useEffect(() => {
     audit
       .getManagement({
@@ -176,10 +171,6 @@ function DashboardIndex() {
                     inputFormat="dd/MM/yyyy"
                     onChange={(newValue) => {
                       setStart(format(new Date(newValue), "MM/dd/yyyy"));
-                      localStorage.setItem(
-                        "startDate",
-                        format(new Date(newValue), "MM/dd/yyyy")
-                      );
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />

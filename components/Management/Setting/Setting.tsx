@@ -90,12 +90,18 @@ function Setting() {
 
   useEffect(() => {
     banner.getInforAdmin().then((res) => {
-      let rawData = {
-        title: res.data[0].title.split(","),
-        url: res.data[0].url.split(","),
-        poster: res.data[0].poster.split(","),
-      };
+      let index = res.data.indexOf(
+        res.data.filter(
+          (d) => d.id === "e7f97af1-d398-4a13-809a-e6f3349d866a"
+        )[0]
+      );
 
+      let rawData = {
+        title: res.data[index].title.split(","),
+        url: res.data[index].url.split(","),
+        poster: res.data[index].poster.split(","),
+      };
+      setShow(res.data[index].show);
       setThisIsTokenMomo(
         res.data.filter((d: any) => d.title === "api_momo")[0].value
       );
@@ -326,7 +332,7 @@ function Setting() {
         </Button>
       </Box>
 
-      <TriggerShowProduct show={show}></TriggerShowProduct>
+      {/* <TriggerShowProduct show={show}></TriggerShowProduct> */}
       <TokenMomo show={thisIsTokenMomo}></TokenMomo>
     </Card>
   );

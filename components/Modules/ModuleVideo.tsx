@@ -352,7 +352,13 @@ function ModuleVideo() {
 
   useEffect(() => {
     banner.getInforHomePage().then((res) => {
-      let rawData = res.data[0];
+      let index = res.data.indexOf(
+        res.data.filter(
+          (d) => d.id === "e7f97af1-d398-4a13-809a-e6f3349d866a"
+        )[0]
+      );
+
+      let rawData = res.data[index];
       let data = {
         title: rawData.title.split(","),
         url: rawData.url.split(","),

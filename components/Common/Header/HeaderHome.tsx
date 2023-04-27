@@ -337,9 +337,9 @@ function HeaderHome() {
               </Typography>
               <Typography
                 component="h2"
-                className={`${activeClass("/ift-code")}`}
+                className={`${activeClass("/uy-tin")}`}
               >
-                <Link href="/gift-code">GiftCode</Link>
+                <Link href="/uy-tin">Check UT</Link>
               </Typography>
               {["ADMIN", "MOD", "CHECKED"].includes(role) && isLogin && (
                 <Typography component="h2">
