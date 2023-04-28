@@ -15,7 +15,7 @@ import {
 } from "chart.js";
 import jwt_decode from "jwt-decode";
 import { DatePicker } from "@mui/x-date-pickers";
-import { format } from "date-fns";
+import { format, addDays } from "date-fns";
 import { Bar } from "react-chartjs-2";
 import CountUp from "react-countup";
 import toMoney from "../../../utility/toMoney";
@@ -80,29 +80,6 @@ function DashboardIndex() {
     }
   };
 
-  useEffect(() => {
-    audit
-      .getManagement({
-        startDate: format(new Date(start), "yyyy/MM/dd"),
-        endDate: format(new Date(end), "yyyy/MM/dd"),
-      })
-      .then((res) => {
-        setSold(res.data.soldAccounts);
-        setTotalRevenue(res.data.turnOver);
-        setInventory(res.data.remainingAccounts);
-        setDataTotal(res.data.data);
-        setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
-      });
-    if (decodeToken()?.["role"] === "ADMIN") {
-      audit
-        .getManagementWithUser({
-          startDate: format(new Date(start), "yyyy/MM/dd"),
-          endDate: format(new Date(end), "yyyy/MM/dd"),
-        })
-        .then((res) => setCtvData(res.data));
-    }
-  }, [start, end]);
-
   const options = {
     responsive: true,
     plugins: {
@@ -141,6 +118,33 @@ function DashboardIndex() {
     labels,
     datasets,
   };
+
+  useEffect(() => {
+    let startDate = localStorage.getItem("startDate");
+    if (startDate) {
+      setStart(startDate);
+      audit
+        .getManagement({
+          startDate: format(new Date(startDate), "yyyy/MM/dd"),
+          endDate: format(new Date(end), "yyyy/MM/dd"),
+        })
+        .then((res) => {
+          setSold(res.data.soldAccounts);
+          setTotalRevenue(res.data.turnOver);
+          setInventory(res.data.remainingAccounts);
+          setDataTotal(res.data.data);
+          setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
+        });
+      if (decodeToken()?.["role"] === "ADMIN") {
+        audit
+          .getManagementWithUser({
+            startDate: format(new Date(start), "yyyy/MM/dd"),
+            endDate: format(addDays(new Date(end), 1), "yyyy/MM/dd"),
+          })
+          .then((res) => setCtvData(res.data));
+      }
+    }
+  }, [start, end]);
   return (
     <Box mt={5}>
       <Container>
@@ -171,6 +175,10 @@ function DashboardIndex() {
                     inputFormat="dd/MM/yyyy"
                     onChange={(newValue) => {
                       setStart(format(new Date(newValue), "MM/dd/yyyy"));
+                      localStorage.setItem(
+                        "startDate",
+                        format(new Date(newValue), "MM/dd/yyyy")
+                      );
                     }}
                     renderInput={(params) => <TextField {...params} />}
                   />
