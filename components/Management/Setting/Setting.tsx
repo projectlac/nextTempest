@@ -125,7 +125,7 @@ function Setting() {
       setDefaultData(image);
       setDefaultDataButton(button);
       setNumberOfImage(rawData.title.length - 6);
-      setShow(res.data[0].show);
+      setShow(res.data[index].show);
     });
   }, []);
   return (
@@ -332,7 +332,7 @@ function Setting() {
         </Button>
       </Box>
 
-      {/* <TriggerShowProduct show={show}></TriggerShowProduct> */}
+      <TriggerShowProduct show={show}></TriggerShowProduct>
       <TokenMomo show={thisIsTokenMomo}></TokenMomo>
     </Card>
   );
