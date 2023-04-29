@@ -32,7 +32,7 @@ function DataHrs() {
 
   const [sold, setSold] = useState<boolean>(false);
 
-  const { update } = useAppContext();
+  const { update, role } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
   };
@@ -131,14 +131,17 @@ function DataHrs() {
             label="Ưu tiên đã bán"
           />
         </FormGroup>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox checked={yourSelf} onChange={handleChangeYourSelf} />
-            }
-            label="Chỉ hiện tài khoản bản thân"
-          />
-        </FormGroup>
+        {["ADMIN"].includes(role) && (
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox checked={yourSelf} onChange={handleChangeYourSelf} />
+              }
+              label="Chỉ hiện tài khoản bản thân"
+            />
+          </FormGroup>
+        )}
+
         <Typography>
           <Link href={"/dashboard/hsr/reroll"} passHref>
             <i>Quản lý tài khoản reroll</i>
