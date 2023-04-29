@@ -77,7 +77,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       title: defaultData.name,
       weapon: defaultData.tags.filter((d) => d.type === TAG_TYPE.WEAPON),
       character: defaultData.tags.filter((d) => d.type === TAG_TYPE.CHARACTER),
-      server: defaultData.tags.find((d) => d.type === TAG_TYPE.SERVER)?.slug,
+      server: defaultData.tags.find((d) => d.type === TAG_TYPE.SERVER)?.title,
       body: defaultData.description,
       ar: defaultData.ar,
       primogems: defaultData.nguyenThach,

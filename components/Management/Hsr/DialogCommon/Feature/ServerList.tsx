@@ -92,7 +92,7 @@ export default function ServerList({
                 sx={{
                   fontFamily: "Montserrat",
                 }}
-                value={d.slug}
+                value={d.title}
               >
                 {d.title}
               </MenuItem>
