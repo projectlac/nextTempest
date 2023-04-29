@@ -74,6 +74,7 @@ function DataHrs() {
         sort: null,
         queryString: key,
         isSold: sold,
+        game: "honkai-star-rail",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
