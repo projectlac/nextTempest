@@ -510,6 +510,7 @@ export default function AddHsr() {
                   }
                   handleSelectedServer={handleSelectedServer}
                   defaultValue={"Asia"}
+                  open={open}
                 />
               </Grid>
               <Grid item md={6}>
