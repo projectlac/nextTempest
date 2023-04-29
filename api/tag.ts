@@ -210,7 +210,7 @@ const tagApi = {
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}${userParams}`;
+    }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}`;
     return axiosAuthClient.get(url);
   },
 };
