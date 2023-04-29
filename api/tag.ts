@@ -161,7 +161,7 @@ const tagApi = {
     };
  
 
-    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}}`;
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
