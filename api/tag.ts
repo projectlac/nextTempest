@@ -148,7 +148,8 @@ const tagApi = {
     offset: number,
     sold: boolean,
     search: string,
-    game?:string
+    game?:string,
+
   ): Promise<PromiseApi> {
 
     const gameParams = () => {
@@ -158,8 +159,9 @@ const tagApi = {
         return `game=${game}`;
       }
     };
+ 
 
-    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}`;
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
@@ -194,13 +196,21 @@ const tagApi = {
         return `game=${params.game}`;
       }
     };
+    const userParams = () => {
+      if (!params.createUser) {
+        return ``;
+      } else {
+        return `&createUser=${params.createUser}`;
+      }
+    };
+
     const url = `/account-get/by-admin?limit=${params.limit}&offset=${
       params.offset
     }&weapon=${params.weapon}&character=${params.character}&server=${
       params.server
     }&sort=${params.sort}&queryString=${
       params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}`;
+    }&${handleLimitPrice()}&${isSold()}&${game()}${userParams}`;
     return axiosAuthClient.get(url);
   },
 };

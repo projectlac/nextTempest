@@ -434,7 +434,7 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
                 </TableHead>
                 <TableBody>
                   {row.information &&
-                    row.information.accounts.map((historyRow, index) => (
+                    row.information.accounts?.map((historyRow, index) => (
                       <TableRow
                         key={index}
                         sx={{

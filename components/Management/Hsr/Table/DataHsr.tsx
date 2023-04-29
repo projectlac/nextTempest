@@ -28,6 +28,8 @@ function DataHrs() {
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
+  const [yourSelf, setYourSelf] = useState<boolean>(false);
+
   const [sold, setSold] = useState<boolean>(false);
 
   const { update } = useAppContext();
@@ -50,6 +52,7 @@ function DataHrs() {
         queryString: "",
         game: "honkai-star-rail",
         isSold: sold,
+        createUser: yourSelf ? "admintp" : undefined,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -61,7 +64,7 @@ function DataHrs() {
         let total = res.data.total;
         setTotal(total);
       });
-  }, [update, limitPage, offsetPage, sold]);
+  }, [update, limitPage, offsetPage, sold, yourSelf]);
 
   function fetchDropdownOptions(key) {
     tagApi
@@ -101,6 +104,9 @@ function DataHrs() {
   const handleChangeSold = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSold(e.target.checked);
   };
+  const handleChangeYourSelf = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setYourSelf(e.target.checked);
+  };
   return (
     <Card>
       <Box mb={3}>
@@ -123,6 +129,14 @@ function DataHrs() {
           <FormControlLabel
             control={<Checkbox checked={sold} onChange={handleChangeSold} />}
             label="Ưu tiên đã bán"
+          />
+        </FormGroup>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox checked={yourSelf} onChange={handleChangeYourSelf} />
+            }
+            label="Chỉ hiện tài khoản bản thân"
           />
         </FormGroup>
         <Typography>

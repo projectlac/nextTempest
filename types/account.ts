@@ -13,6 +13,7 @@ export interface AccountForm extends PackHistoryOfAccount {
   arFrom?: number;
   arTo?: number | string;
   type?: string | null;
+  createUser?:string
 }
 
 export enum TAG_TYPE {
