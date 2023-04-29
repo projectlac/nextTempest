@@ -6,6 +6,7 @@ import FlashSale from "./Shop/FlashSale";
 import NewProduct from "./Shop/NewProduct";
 import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductTof from "./Shop/NewProductTof";
+import NewProductHsr from "./Shop/NewProductHsr";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -24,6 +25,7 @@ function ModuleShop() {
   return (
     <ProductWrap>
       <Container>
+        <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
         <NewProductLowAr></NewProductLowAr>
         <NewProductTof></NewProductTof>
