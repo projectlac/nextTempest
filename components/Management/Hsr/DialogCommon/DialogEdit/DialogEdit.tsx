@@ -77,7 +77,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       title: defaultData.name,
       weapon: defaultData.tags.filter((d) => d.type === TAG_TYPE.WEAPON),
       character: defaultData.tags.filter((d) => d.type === TAG_TYPE.CHARACTER),
-      server: defaultData.tags.find((d) => d.type === TAG_TYPE.SERVER)?.title,
+      server: defaultData.tags.find((d) => d.type === TAG_TYPE.SERVER)?.slug,
       body: defaultData.description,
       ar: defaultData.ar,
       primogems: defaultData.nguyenThach,
@@ -188,6 +188,8 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
           .getTag({ type: "", game: "honkai-star-rail" })
           .then((res) => {
             setListData(res.data);
+            console.log(res.data);
+
             setFileListCurreny(defaultData.cloundinary);
           });
       } catch (error) {}
@@ -197,7 +199,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       setTrigger(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, []);
 
   React.useEffect(() => {
     if (open) {
@@ -438,6 +440,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 helper={
                   formik.touched.weapon && (formik.errors.weapon as string)
                 }
+                open={open}
                 handleSelectedServer={handleSelectedServer}
                 defaultValue={formik.values.server}
               />

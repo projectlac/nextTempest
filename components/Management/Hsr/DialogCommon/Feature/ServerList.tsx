@@ -13,6 +13,7 @@ interface ServerListProps {
   helper: string;
   handleSelectedServer: (data: string) => void;
   defaultValue: string;
+  open: boolean;
 }
 
 export default function ServerList({
@@ -20,6 +21,7 @@ export default function ServerList({
   helper,
   handleSelectedServer,
   defaultValue,
+  open,
 }: ServerListProps) {
   const [age, setAge] = React.useState("");
   const { update } = useAppContext();
@@ -43,13 +45,13 @@ export default function ServerList({
           });
       } catch (error) {}
     };
-    getData();
-  }, []);
+    if (open) {
+      getData();
+    }
+  }, [open]);
 
   React.useEffect(() => {
-    if (defaultValue) console.log("a");
-
-    setAge(defaultValue);
+    if (defaultValue) setAge(defaultValue);
   }, [defaultValue]);
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -90,7 +92,7 @@ export default function ServerList({
                 sx={{
                   fontFamily: "Montserrat",
                 }}
-                value={d.title}
+                value={d.slug}
               >
                 {d.title}
               </MenuItem>
