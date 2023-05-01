@@ -34,7 +34,7 @@ export default function Maintenance() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           property="og:description"
-          content="Hệ thống đang bảo trì, vui lòng quay lại sau - Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail uy tín hàng đầu Việt Nam"
+          content="Hệ thống đang bảo trì, vui lòng quay lại sau - Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail VIP, Reroll uy tín hàng đầu Việt Namm"
         />
       </Head>
       <Error>

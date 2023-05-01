@@ -21,7 +21,7 @@ export default function IndexPage() {
       case "honkai-star-rail":
         return {
           title: `Mua tài khoản - Tempest Shop - Shop Acc Mua bán tài khoản Honkai star rail uy tín, chất lương`,
-          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail uy tín hàng đầu Việt Nam",
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail VIP, Reroll uy tín hàng đầu Việt Namm",
         };
       case "tower-of-fantasy":
         return {

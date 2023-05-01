@@ -17,7 +17,7 @@ export default function IndexPage() {
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail uy tín hàng đầu Việt Nam"
+          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail VIP, Reroll uy tín hàng đầu Việt Namm"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
