@@ -34,7 +34,7 @@ export default function FourOhFour() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           property="og:description"
-          content="Trang này không tồn tại - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam"
+          content="Trang này không tồn tại - Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail uy tín hàng đầu Việt Nam"
         />
       </Head>
       <Error>

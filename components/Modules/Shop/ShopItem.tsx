@@ -211,6 +211,7 @@ function ShopItem({
                 height={182}
                 objectFit="cover"
                 className="custom-img"
+
                 // loading="eager"
               />
             )}
