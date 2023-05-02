@@ -462,7 +462,7 @@ function MainNews() {
                   <iframe
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/kNNSvFD4Wek"
+                    src="https://www.youtube.com/embed/-_CJ6FlvTHs"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
