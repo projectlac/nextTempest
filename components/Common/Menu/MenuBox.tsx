@@ -178,8 +178,8 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">{trans[1][4]}</Link>
             </Typography>
-            <Typography className={`${activeClass("/ift-code")}`}>
-              <Link href="/gift-code">GiftCode</Link>
+            <Typography className={`${activeClass("/uy-tin")}`}>
+              <Link href="/uy-tin">Check UT</Link>
             </Typography>
             {["ADMIN", "MOD", "CHECKED"].includes(role) && isLogin && (
               <Typography component="h2">

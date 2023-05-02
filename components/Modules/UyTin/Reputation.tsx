@@ -12,6 +12,7 @@ import yourLogo4 from "../../../styles/assets/images/Reputation/4.jpg";
 import yourLogo5 from "../../../styles/assets/images/Reputation/5.jpg";
 import yourLogo8 from "../../../styles/assets/images/Reputation/7.jpg";
 import yourLogo9 from "../../../styles/assets/images/Reputation/8.jpg";
+import yourLogo10 from "../../../styles/assets/images/Reputation/9.jpg";
 
 import yourLogo6 from "../../../styles/assets/images/Reputation/6.png";
 import yourLogo7 from "../../../styles/assets/images/Reputation/channels4_profile.jpg";
@@ -74,7 +75,7 @@ function MainNews() {
         </TitleHighlight>
         <NewBox>
           <Grid container columnSpacing={3} rowSpacing={3}>
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -165,7 +166,7 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -256,7 +257,7 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item md={6} xs={12}>
+            <Grid item md={4} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -438,7 +439,98 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item md={4} xs={12}>
+            <Grid item md={6} xs={12}>
+              <Box
+                sx={{
+                  "& div.video": {
+                    position: "relative",
+                    height: "0%",
+                    borderRadius: "5px",
+                    overflow: "hidden",
+                    paddingBottom: { md: `50.3%`, xs: "56.25%" },
+                    "& iframe": {
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      width: "100%",
+                      height: "100%",
+                    },
+                  },
+                }}
+              >
+                <Box className="video">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/kNNSvFD4Wek"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </Box>
+                <Box
+                  display={"flex"}
+                  sx={{
+                    padding: "15px",
+                    borderRadius: "5px",
+                    width: "auto",
+                    background: "#fff",
+                    margin: "0 auto",
+
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: "50px",
+                      height: "50px",
+
+                      borderRadius: "50%",
+                      background: `url(${yourLogo9.src})`,
+                      backgroundSize: "cover",
+                    }}
+                  />
+                  <Box
+                    ml={3}
+                    textAlign="left"
+                    sx={{
+                      display: { md: "flex", xs: "block" },
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "calc(100% - 50px)",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        fontSize: { md: "15px", xs: "13px" },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { md: "17px", xs: "13px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Bót-chan UwU
+                      </Typography>
+                      @botchanuwuofficial <br /> 11,5 N người đăng ký
+                    </Box>
+                    <Box>
+                      <a
+                        href="https://www.youtube.com/@botchanuwuofficial"
+                        target="__blank"
+                      >
+                        <Button color="error" variant="contained">
+                          Subscribe now
+                        </Button>
+                      </a>
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item md={6} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -521,7 +613,7 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>
-            <Grid item md={4} xs={12}>
+            <Grid item md={6} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -604,7 +696,7 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>{" "}
-            <Grid item md={4} xs={12}>
+            <Grid item md={6} xs={12}>
               <Box
                 sx={{
                   "& div.video": {
@@ -682,6 +774,89 @@ function MainNews() {
                         </a>
                       </Typography>
                       @WutheringWaves.Vi · Trò chơi điện tử
+                    </Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <Box
+                sx={{
+                  "& div.video": {
+                    position: "relative",
+                    height: "0%",
+                    borderRadius: "5px",
+                    overflow: "hidden",
+                    paddingBottom: { md: `50.3%`, xs: "56.25%" },
+                    "& iframe": {
+                      position: "absolute",
+                      top: "0",
+                      left: "0",
+                      width: "100%",
+                      height: "100%",
+                    },
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "175px",
+                    background: `url(${yourLogo3.src})`,
+                    backgroundSize: "cover",
+                  }}
+                ></Box>
+
+                <Box
+                  display={"flex"}
+                  sx={{
+                    padding: "15px",
+                    borderRadius: "5px",
+                    width: "auto",
+                    background: "#fff",
+                    margin: "0 auto",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: "50px",
+                      height: "50px",
+
+                      borderRadius: "50%",
+                      background: `url(${yourLogo4.src})`,
+                      backgroundSize: "cover",
+                    }}
+                  />
+                  <Box
+                    ml={1}
+                    textAlign="left"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "calc(100% - 70px)",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        fontSize: { md: "15px", xs: "13px" },
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: { md: "20px", xs: "13px" },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <a
+                          href="https://www.facebook.com/paimon2quotes2"
+                          target="__blank"
+                        >
+                          Genshin Impact - Tips & Facts 2
+                        </a>
+                      </Typography>
+                      16K lượt thích • 19K người theo dõi
                     </Box>
                   </Box>
                 </Box>
