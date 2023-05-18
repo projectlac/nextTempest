@@ -43,7 +43,7 @@ function DataGenshin() {
 
   const callApi = (search: string) => {
     tagApi
-      .getRerollAccountForAdmin('REROLL', limitPage, offsetPage, sold, search)
+      .getRerollAccountForAdmin('RANDOM', limitPage, offsetPage, sold, search)
       .then((res) => {
         const data = res.data.data.map((d) => {
           const { name, updatedAt, id, isSold, username } = d;

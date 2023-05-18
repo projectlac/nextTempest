@@ -43,7 +43,7 @@ function DataHsr() {
 
   const callApi = (search: string) => {
     tagApi
-      .getRerollAccountForAdmin('REROLL',
+      .getRerollAccountForAdmin('RANDOM',
         limitPage,
         offsetPage,
         sold,

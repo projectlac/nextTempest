@@ -142,11 +142,20 @@ function DataHrs() {
           </FormGroup>
         )}
 
-        <Typography>
-          <Link href={"/dashboard/hsr/reroll"} passHref>
-            <i>Quản lý tài khoản reroll</i>
-          </Link>
-        </Typography>
+
+        <Box>
+          <Typography>
+            <Link href={"/dashboard/hsr/reroll"} passHref>
+              <i>Quản lý tài khoản Reroll</i>
+            </Link>
+          </Typography>
+
+          <Typography>
+            <Link href={"/dashboard/hsr/random"} passHref>
+              <i>Quản lý tài khoản Random</i>
+            </Link>
+          </Typography>
+        </Box>
       </Box>
 
       <TableHsr

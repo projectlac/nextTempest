@@ -54,15 +54,11 @@ const tagApi = {
         return `game=${params.game}`;
       }
     };
-    const url = `/account-get?limit=${params.limit}&offset=${
-      params.offset
-    }&weapon=${params.weapon}&character=${params.character}&server=${
-      params.server
-    }&sort=${params.sort}&queryString=${
-      params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${
-      params.type
-    }&vipToNew=true&arForm=${params.arFrom}&arTo=${params.arTo}`;
+    const url = `/account-get?limit=${params.limit}&offset=${params.offset
+      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
+      }&sort=${params.sort}&queryString=${params.queryString
+      }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type
+      }&vipToNew=true&arForm=${params.arFrom}&arTo=${params.arTo}`;
     return axiosClient.get(url);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
@@ -88,13 +84,10 @@ const tagApi = {
         return `game=${params.game}`;
       }
     };
-    const url = `/account-get?limit=${params.limit}&offset=${
-      params.offset
-    }&weapon=${params.weapon}&character=${params.character}&server=${
-      params.server
-    }&sort=${params.sort}&queryString=${
-      params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
+    const url = `/account-get?limit=${params.limit}&offset=${params.offset
+      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
+      }&sort=${params.sort}&queryString=${params.queryString
+      }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
 
     return axiosClient.get(url);
   },
@@ -139,16 +132,17 @@ const tagApi = {
     const url = `/account-same-price/import`;
     return axiosAudit.post(url, file);
   },
-  getRerollAccount(limit: number, offset: number, game:string): Promise<PromiseApi> {
-    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&isSold=false&game=${game}`;
+  getRerollAccount(type: string, limit: number, offset: number, game: string): Promise<PromiseApi> {
+    const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&type=${type}&isSold=false&game=${game}`;
     return axiosAudit.get(url);
   },
   getRerollAccountForAdmin(
+    type: string,
     limit: number,
     offset: number,
     sold: boolean,
     search: string,
-    game?:string,
+    game?: string,
 
   ): Promise<PromiseApi> {
 
@@ -159,9 +153,9 @@ const tagApi = {
         return `game=${game}`;
       }
     };
- 
 
-    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&isSold=${sold}&search=${search}&${gameParams()}`;
+
+    const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&type=${type}&isSold=${sold}&search=${search}&${gameParams()}`;
     return axiosAudit.get(url);
   },
   deleteRerollAccount(param: any): Promise<PromiseApi> {
@@ -204,13 +198,10 @@ const tagApi = {
       }
     };
 
-    const url = `/account-get/by-admin?limit=${params.limit}&offset=${
-      params.offset
-    }&weapon=${params.weapon}&character=${params.character}&server=${
-      params.server
-    }&sort=${params.sort}&queryString=${
-      params.queryString
-    }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}`;
+    const url = `/account-get/by-admin?limit=${params.limit}&offset=${params.offset
+      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
+      }&sort=${params.sort}&queryString=${params.queryString
+      }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}`;
     return axiosAuthClient.get(url);
   },
 };

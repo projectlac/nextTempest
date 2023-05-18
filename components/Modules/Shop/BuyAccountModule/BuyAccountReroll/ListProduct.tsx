@@ -6,6 +6,7 @@ import { useAppContext } from "../../../../../context/state";
 import image from "../../../../../styles/assets/images/version25-genshinimpact-04-1643479276-51.jpg";
 import RerollItem from "./RerollItem";
 import FilterByGame from "../FilterByGame";
+import { useRouter } from "next/router";
 function ListProduct() {
   const { update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);
@@ -20,6 +21,7 @@ function ListProduct() {
     executeScroll();
   };
 
+  const router = useRouter()
   const executeScroll = () => {
     const id = "scrollTo";
     const yOffset = -95;
@@ -35,15 +37,17 @@ function ListProduct() {
   }
 
   useEffect(() => {
+
+
     const getData = async () => {
       try {
         await tagApi
-          .getRerollAccount(CONST_INFORMATION.LIMIT, pageCurrently, game)
+          .getRerollAccount(router.pathname.slice(1).toUpperCase(), CONST_INFORMATION.LIMIT, pageCurrently, game)
           .then((res) => {
             setProductList(res.data.data);
             setTotal(res.data.total);
           });
-      } catch (error) {}
+      } catch (error) { }
     };
     getData();
   }, [update, pageCurrently, game]);

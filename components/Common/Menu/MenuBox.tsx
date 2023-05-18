@@ -167,6 +167,9 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link href="/reroll">
                   <a className={`${activeClass("/reroll")}`}>Reroll</a>
                 </Link>
+                <Link href="/random">
+                  <a className={`${activeClass("/random")}`}>Random</a>
+                </Link>
               </ChildMenu>
             </Box>
             <Typography className={`${activeClass("/tin-tuc")}`}>

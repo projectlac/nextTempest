@@ -125,11 +125,19 @@ function DataGenshin() {
             label="Ưu tiên đã bán"
           />
         </FormGroup>
-        <Typography>
-          <Link href={"/dashboard/genshin/reroll"} passHref>
-            <i>Quản lý tài khoản reroll</i>
-          </Link>
-        </Typography>
+        <Box>
+          <Typography>
+            <Link href={"/dashboard/genshin/reroll"} passHref>
+              <i>Quản lý tài khoản Reroll</i>
+            </Link>
+
+          </Typography>
+          <Typography>
+            <Link href={"/dashboard/genshin/random"} passHref>
+              <i>Quản lý tài khoản Random</i>
+            </Link>
+          </Typography>
+        </Box>
       </Box>
 
       <TableGenshin

@@ -314,6 +314,7 @@ function HeaderHome() {
                     Tower of fantasy
                   </Link>
                   <Link href="/reroll">Reroll</Link>
+                  <Link href="/random">Random</Link>
                 </ChildMenu>
               </ParentMenu>
               <Typography
