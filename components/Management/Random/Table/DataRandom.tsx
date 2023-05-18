@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
-import TableHsr from "./TableHsr";
+import TableRandom from "./TableRandom";
 const _ = require("lodash");
 interface AccountTable {
   name: string;
@@ -22,7 +22,7 @@ interface AccountTable {
   soldAt: string | null;
   id: string;
 }
-function DataHrs() {
+function DataRandom() {
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
@@ -43,6 +43,7 @@ function DataHrs() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
+        type: "RANDOM",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -143,15 +144,15 @@ function DataHrs() {
         )}
 
         <Box>
-          <Typography>
-            <Link href={"/dashboard/hsr/reroll"} passHref>
-              <i>Quản lý tài khoản Reroll</i>
+          <Typography sx={{ cursor: "pointer" }}>
+            <Link href={"/dashboard/random/genshin"} passHref>
+              <i>Quản lý RANDOM Genshin Impact</i>
             </Link>
           </Typography>
         </Box>
       </Box>
 
-      <TableHsr
+      <TableRandom
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
@@ -161,4 +162,4 @@ function DataHrs() {
   );
 }
 
-export default DataHrs;
+export default DataRandom;

@@ -198,10 +198,18 @@ const tagApi = {
       }
     };
 
+    const typeParams = () => {
+      if (!params.type) {
+        return ``;
+      } else {
+        return `&type=${params.type}`;
+      }
+    };
+
     const url = `/account-get/by-admin?limit=${params.limit}&offset=${params.offset
       }&weapon=${params.weapon}&character=${params.character}&server=${params.server
       }&sort=${params.sort}&queryString=${params.queryString
-      }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}`;
+      }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}${typeParams()}`;
     return axiosAuthClient.get(url);
   },
 };

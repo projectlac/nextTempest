@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import tagApi from "../../../../api/tag";
-import { useAppContext } from "../../../../context/state";
-import TableHsr from "./TableHsr";
+
+import TableRandom from "./TableRandomGI";
+import { useAppContext } from "../../../../../context/state";
+import tagApi from "../../../../../api/tag";
 const _ = require("lodash");
 interface AccountTable {
   name: string;
@@ -22,7 +23,7 @@ interface AccountTable {
   soldAt: string | null;
   id: string;
 }
-function DataHrs() {
+function DataRandomGI() {
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
@@ -43,6 +44,7 @@ function DataHrs() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
+        type: "RANDOM",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -50,7 +52,7 @@ function DataHrs() {
         weapon: "",
         sort: null,
         queryString: "",
-        game: "honkai-star-rail",
+        game: "genshin-impact",
         isSold: sold,
         createUser: yourSelf ? "admintp" : undefined,
       })
@@ -77,7 +79,7 @@ function DataHrs() {
         sort: null,
         queryString: key,
         isSold: sold,
-        game: "honkai-star-rail",
+        game: "genshin-impact",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -141,17 +143,9 @@ function DataHrs() {
             />
           </FormGroup>
         )}
-
-        <Box>
-          <Typography>
-            <Link href={"/dashboard/hsr/reroll"} passHref>
-              <i>Quản lý tài khoản Reroll</i>
-            </Link>
-          </Typography>
-        </Box>
       </Box>
 
-      <TableHsr
+      <TableRandom
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
@@ -161,4 +155,4 @@ function DataHrs() {
   );
 }
 
-export default DataHrs;
+export default DataRandomGI;

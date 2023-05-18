@@ -27,7 +27,6 @@ function ListProduct({ slug, type }: IBuy) {
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
   const [sortByPrice, setSortByPrice] = useState<number[]>([0]);
-
   const [findCode, setFindCode] = useState<string>("");
   const [findAr, setFindAr] = useState<string>("");
 
@@ -116,6 +115,8 @@ function ListProduct({ slug, type }: IBuy) {
 
   useEffect(() => {
     const getData = async () => {
+      console.log(type);
+
       try {
         if (slug) {
           await tagApi

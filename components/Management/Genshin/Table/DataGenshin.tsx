@@ -51,6 +51,7 @@ function DataGenshin() {
         sort: null,
         queryString: "",
         isSold: sold,
+        game: "genshin-impact",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -75,6 +76,7 @@ function DataGenshin() {
         sort: null,
         queryString: key,
         isSold: sold,
+        game: "genshin-impact",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -129,12 +131,6 @@ function DataGenshin() {
           <Typography>
             <Link href={"/dashboard/genshin/reroll"} passHref>
               <i>Quản lý tài khoản Reroll</i>
-            </Link>
-
-          </Typography>
-          <Typography>
-            <Link href={"/dashboard/genshin/random"} passHref>
-              <i>Quản lý tài khoản Random</i>
             </Link>
           </Typography>
         </Box>
