@@ -292,7 +292,7 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
-                      query: { id: "honkai-star-rail" },
+                      query: { id: "honkai-star-rail", search: "VIP,NEW" },
                     }}
                   >
                     Honkai Star Rail
@@ -300,7 +300,7 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
-                      query: { id: "genshin-impact" },
+                      query: { id: "genshin-impact", search: "VIP,NEW" },
                     }}
                   >
                     Genshin impact

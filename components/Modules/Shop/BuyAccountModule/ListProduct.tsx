@@ -100,22 +100,19 @@ function ListProduct({ slug, type }: IBuy) {
               type: type !== undefined ? type : "",
             })
             .then((res) => {
-              // const sold = res.data.data.filter(
-              //   (d) => d.status === "AVAILABLE"
-              // );
 
               setProductList(res.data.data);
               setTotal(res.data.total);
             });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     getData();
   }, [update, sortBy, pageCurrently, findCode, sortByPrice, findAr]);
 
   useEffect(() => {
     const getData = async () => {
-      console.log(type);
+
 
       try {
         if (slug) {
@@ -143,7 +140,7 @@ function ListProduct({ slug, type }: IBuy) {
               setTotal(res.data.total);
             });
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     getData();
   }, [slug]);
