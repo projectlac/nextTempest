@@ -16,8 +16,8 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as React from "react";
 import * as yup from "yup";
-import tagApi from "../../../../api/tag";
-import { useAppContext } from "../../../../context/state";
+import tagApi from "../../../../../api/tag";
+import { useAppContext } from "../../../../../context/state";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -66,37 +66,42 @@ export default function AddHsr() {
       title: "",
       accountId: "",
       oldPrice: 0,
+      ar: 0,
       newPrice: 0,
       username: "",
       password: "",
+      type: "REROLL",
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title, username, password, accountId, oldPrice, newPrice } =
+      const { title, username, password, accountId, ar, oldPrice, newPrice } =
         values;
 
       const formData = new FormData();
 
       formData.append("name", title);
-      formData.append("ar", "0");
-      formData.append("weapon", "Chuyến Tàu Đêm Trên Dải Ngân Hà");
-      formData.append("char", "Arlan");
+      formData.append("ar", ar.toString());
+      formData.append("weapon", "Bàn Nham Kết Lục");
+      formData.append("char", "Albedo");
       formData.append("code", accountId);
       formData.append("tinhHuy", "0");
       formData.append("nguyenThach", "0");
-      formData.append("server", "ASIA");
+      formData.append("server", "Asia");
       formData.append("oldPrice", oldPrice.toString());
-      formData.append("description", "Đây là honkai random");
+      formData.append(
+        "description",
+        "<p>Đ&acirc;y l&agrave; genshinReroll</p>"
+      );
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", "0");
       formData.append("tofUsername", username);
       formData.append("tofPassword", password);
-      formData.append("type", "RANDOM");
-      formData.append("game", "honkai-star-rail");
+      formData.append("type", "REROLL");
+      formData.append("game", "genshin-impact");
+
       for (let i = 0; i < fileList.length; i++) {
         formData.append("files", fileList[i]);
       }
-      // console.log(values);
 
       setLoading(true);
       tagApi
@@ -110,6 +115,8 @@ export default function AddHsr() {
           setFile(null);
           setFileList(null);
           setFileListCurreny(null);
+          (document.getElementById("reset-image") as HTMLInputElement).value =
+            "";
         })
         .catch(() => {
           handleChangeMessageToast("Có lỗi xảy ra");
@@ -124,11 +131,14 @@ export default function AddHsr() {
   const uploadMultiFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     let fileObj = [];
     let fileArray = [];
+
     fileObj.push(e.target.files);
+
     setFileList(e.target.files);
     for (let i = 0; i < fileObj[0].length; i++) {
       fileArray.push(URL.createObjectURL(fileObj[0][i]));
     }
+
     setFileListCurreny(fileArray);
   };
 
@@ -136,7 +146,7 @@ export default function AddHsr() {
     const getData = async () => {
       try {
         await tagApi
-          .getTag({ type: "", game: "honkai-star-rail" })
+          .getTag({ type: "", game: "genshin-impact" })
           .then((res) => {
             setListData(res.data);
           });
@@ -170,7 +180,7 @@ export default function AddHsr() {
             fontFamily: "Montserrat",
           }}
         >
-          Thêm tài khoản HSR
+          Thêm tài khoản GI Reroll
         </DialogTitle>
         <form onSubmit={formik.handleSubmit}>
           <DialogContent>
@@ -274,7 +284,30 @@ export default function AddHsr() {
                 />
               </Grid>
 
-              <Grid item md={6}>
+              <Grid item md={4}>
+                <TextField
+                  fullWidth
+                  id="ar"
+                  label="Adventure Rank"
+                  name="ar"
+                  type="number"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.ar}
+                  onChange={formik.handleChange}
+                  error={formik.touched.ar && Boolean(formik.errors.ar)}
+                  helperText={formik.touched.ar && formik.errors.ar}
+                />
+              </Grid>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
                   id="oldPrice"
@@ -299,7 +332,7 @@ export default function AddHsr() {
                   helperText={formik.touched.oldPrice && formik.errors.oldPrice}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
                   id="newPrice"
@@ -337,6 +370,7 @@ export default function AddHsr() {
                   name="fileSlide"
                   required
                   type="file"
+                  id="reset-image"
                   multiple
                   onChange={uploadMultiFile}
                 />

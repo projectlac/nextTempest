@@ -153,26 +153,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
   };
 
   React.useEffect(() => {
-    const getData = async () => {
-      try {
-        await tagApi
-          .getTag({ type: "", game: "honkai-star-rail" })
-          .then((res) => {
-            setListData(res.data);
-            console.log(res.data);
-
-            setFileListCurreny(defaultData.cloundinary);
-          });
-      } catch (error) {}
-    };
-    if (open) {
-      getData();
-      setTrigger(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  React.useEffect(() => {
     if (open) {
       setFileListCurreny(defaultData.cloundinary);
     }
@@ -226,6 +206,57 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             <Grid item md={6}>
               <TextField
                 fullWidth
+                id="accountId"
+                label="Mã Account"
+                name="accountId"
+                type="text"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.accountId}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.accountId && Boolean(formik.errors.accountId)
+                }
+                helperText={
+                  formik.touched.accountId &&
+                  (formik.errors.accountId as string)
+                }
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                id="ar"
+                label="Adventure Rank"
+                name="ar"
+                type="number"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.ar}
+                onChange={formik.handleChange}
+                error={formik.touched.ar && Boolean(formik.errors.ar)}
+                helperText={formik.touched.ar && (formik.errors.ar as string)}
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
                 id="oldPrice"
                 label="Giá cũ"
                 name="oldPrice"
@@ -274,35 +305,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
                 helperText={
                   formik.touched.newPrice && (formik.errors.newPrice as string)
-                }
-              />
-            </Grid>
-
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="accountId"
-                label="Mã Account"
-                name="accountId"
-                type="text"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.accountId}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.accountId && Boolean(formik.errors.accountId)
-                }
-                helperText={
-                  formik.touched.accountId &&
-                  (formik.errors.accountId as string)
                 }
               />
             </Grid>

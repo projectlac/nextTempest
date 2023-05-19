@@ -10,10 +10,9 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-
-import TableRandom from "./TableRandomGI";
-import { useAppContext } from "../../../../../context/state";
-import tagApi from "../../../../../api/tag";
+import tagApi from "../../../../api/tag";
+import { useAppContext } from "../../../../context/state";
+import TableReroll from "./TableReroll";
 const _ = require("lodash");
 interface AccountTable {
   name: string;
@@ -23,7 +22,7 @@ interface AccountTable {
   soldAt: string | null;
   id: string;
 }
-function DataRandomGI() {
+function DataReroll() {
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
@@ -44,7 +43,7 @@ function DataRandomGI() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
-        type: "RANDOM",
+        type: "REROLL",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -52,7 +51,7 @@ function DataRandomGI() {
         weapon: "",
         sort: null,
         queryString: "",
-        game: "genshin-impact",
+        game: "honkai-star-rail",
         isSold: sold,
         createUser: yourSelf ? "admintp" : undefined,
       })
@@ -71,7 +70,7 @@ function DataRandomGI() {
   function fetchDropdownOptions(key) {
     tagApi
       .getAccountByAdmin({
-        type: "RANDOM",
+        type: "REROLL",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -80,7 +79,7 @@ function DataRandomGI() {
         sort: null,
         queryString: key,
         isSold: sold,
-        game: "genshin-impact",
+        game: "honkai-star-rail",
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -144,16 +143,17 @@ function DataRandomGI() {
             />
           </FormGroup>
         )}
+
         <Box>
           <Typography sx={{ cursor: "pointer" }}>
-            <Link href={"/dashboard/random"} passHref>
-              <i>Quản lý RANDOM Honkai</i>
+            <Link href={"/dashboard/reroll/genshin"} passHref>
+              <i>Quản lý Reroll Genshin Impact</i>
             </Link>
           </Typography>
         </Box>
       </Box>
 
-      <TableRandom
+      <TableReroll
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
@@ -163,4 +163,4 @@ function DataRandomGI() {
   );
 }
 
-export default DataRandomGI;
+export default DataReroll;

@@ -64,37 +64,14 @@ export default function AddHsr() {
       .string()
       .min(8, "Title should be of minimum 8 characters length")
       .required("Thông tin này là bắt buộc"),
-
-    ar: yup.number().required("Thông tin này là bắt buộc"),
-    weapon: yup
-      .array()
-      .min(1, "Thông tin này là bắt buộc")
-      .nullable()
-      .required("Thông tin này là bắt buộc"),
-    character: yup
-      .array()
-      .min(1, "Thông tin này là bắt buộc")
-      .nullable()
-      .required("Thông tin này là bắt buộc"),
-    server: yup.string().required("Thông tin này là bắt buộc"),
-    primogems: yup.number().required("Thông tin này là bắt buộc"),
     newPrice: yup.number().required("Thông tin này là bắt buộc"),
     accountId: yup.string().required("Thông tin này là bắt buộc"),
-    tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
   });
 
   const formik = useFormik({
     initialValues: {
       title: "",
-      weapon: [],
-      character: [],
-      server: "Asia",
-      body: "",
-      ar: 0,
-      primogems: 0,
-      tinhhuy: 0,
       accountId: "",
-      moonPack: 0,
       oldPrice: 0,
       newPrice: 0,
       username: "",
@@ -103,41 +80,26 @@ export default function AddHsr() {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const {
-        title,
-        weapon,
-        character,
-        server,
-        username,
-        password,
-        body,
-        ar,
-        primogems,
-        tinhhuy,
-        accountId,
-        moonPack,
-        oldPrice,
-        newPrice,
-        type,
-      } = values;
-
-      let convertDataCharacter = character.map((d) => d.title);
-      let convertDataWeapon = weapon.map((d) => d.title);
+      const { title, username, password, accountId, oldPrice, newPrice, type } =
+        values;
 
       const formData = new FormData();
 
       formData.append("name", title);
-      formData.append("ar", ar.toString());
-      formData.append("weapon", convertDataWeapon.toString());
-      formData.append("char", convertDataCharacter.toString());
+      formData.append("ar", "0");
+      formData.append("weapon", "Bàn Nham Kết Lục");
+      formData.append("char", "Albedo");
       formData.append("code", accountId);
-      formData.append("tinhHuy", tinhhuy.toString());
-      formData.append("nguyenThach", primogems.toString());
-      formData.append("server", server);
+      formData.append("tinhHuy", "0");
+      formData.append("nguyenThach", "0");
+      formData.append("server", "Asia");
       formData.append("oldPrice", oldPrice.toString());
-      formData.append("description", body.toString());
+      formData.append(
+        "description",
+        "<p>Đ&acirc;y l&agrave; genshinRandom</p>"
+      );
       formData.append("newPrice", newPrice.toString());
-      formData.append("moonPack", moonPack.toString());
+      formData.append("moonPack", "0");
       formData.append("tofUsername", username);
       formData.append("tofPassword", password);
       formData.append("type", type);
@@ -172,17 +134,6 @@ export default function AddHsr() {
 
   const onEditorChange = (data: string) => {
     formik.handleChange({ target: { name: "body", value: data } });
-  };
-
-  const handleSelectedCharacter = (data: string[]) => {
-    formik.handleChange({ target: { name: "character", value: data } });
-  };
-
-  const handleSelectedWeapon = (data: string[]) => {
-    formik.handleChange({ target: { name: "weapon", value: data } });
-  };
-  const handleSelectedServer = (data: string) => {
-    formik.handleChange({ target: { name: "server", value: data } });
   };
 
   const uploadMultiFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -280,50 +231,6 @@ export default function AddHsr() {
                 helperText={formik.touched.title && formik.errors.title}
               />
             </Box>
-            <Box mb={3}>
-              <AutoCompleteHarder
-                trigger={trigger}
-                title="Danh sách nhân vật"
-                data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
-                id="create-vip-character"
-                name="character"
-                formik={formik}
-                handleSelected={handleSelectedCharacter}
-                defaultValue={[]}
-              />
-            </Box>
-            <Box mb={3}>
-              <AutoCompleteHarder
-                trigger={trigger}
-                title="Danh sách vũ khí"
-                data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-                id="create-vip-character"
-                name="weapon"
-                formik={formik}
-                handleSelected={handleSelectedWeapon}
-                defaultValue={[]}
-              />
-            </Box>
-
-            {/* 
-            <CharacterList
-              data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
-              error={
-                formik.touched.character && Boolean(formik.errors.character)
-              }
-              helper={
-                formik.touched.character && (formik.errors.character as string)
-              }
-              handleSelectedCharacter={handleSelectedCharacter}
-              defaultValue={[]}
-            />
-            <WeaponList
-              data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-              error={formik.touched.weapon && Boolean(formik.errors.weapon)}
-              helper={formik.touched.weapon && (formik.errors.weapon as string)}
-              handleSelectedWeapon={handleSelectedWeapon}
-              defaultValue={[]}
-            /> */}
 
             <Grid container columnSpacing={2} rowSpacing={2}>
               <Grid item md={6}>
@@ -374,58 +281,7 @@ export default function AddHsr() {
                   helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
-
-              <Grid item md={6}>
-                <TextField
-                  fullWidth
-                  id="oldPrice"
-                  label="Giá cũ"
-                  name="oldPrice"
-                  type="number"
-                  variant="outlined"
-                  sx={{
-                    "& label": {
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    },
-                    "& input": {
-                      fontFamily: "Montserrat",
-                    },
-                  }}
-                  value={formik.values.oldPrice}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.oldPrice && Boolean(formik.errors.oldPrice)
-                  }
-                  helperText={formik.touched.oldPrice && formik.errors.oldPrice}
-                />
-              </Grid>
-              <Grid item md={6}>
-                <TextField
-                  fullWidth
-                  id="newPrice"
-                  label="Giá mới"
-                  name="newPrice"
-                  type="number"
-                  variant="outlined"
-                  sx={{
-                    "& label": {
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    },
-                    "& input": {
-                      fontFamily: "Montserrat",
-                    },
-                  }}
-                  value={formik.values.newPrice}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.newPrice && Boolean(formik.errors.newPrice)
-                  }
-                  helperText={formik.touched.newPrice && formik.errors.newPrice}
-                />
-              </Grid>
-              <Grid item md={6}>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
                   id="accountId"
@@ -452,12 +308,12 @@ export default function AddHsr() {
                   }
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
-                  id="moonPack"
-                  label="Thẻ thảng"
-                  name="moonPack"
+                  id="oldPrice"
+                  label="Giá cũ"
+                  name="oldPrice"
                   type="number"
                   variant="outlined"
                   sx={{
@@ -469,31 +325,20 @@ export default function AddHsr() {
                       fontFamily: "Montserrat",
                     },
                   }}
-                  value={formik.values.moonPack}
+                  value={formik.values.oldPrice}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.moonPack && Boolean(formik.errors.moonPack)
+                    formik.touched.oldPrice && Boolean(formik.errors.oldPrice)
                   }
-                  helperText={formik.touched.moonPack && formik.errors.moonPack}
+                  helperText={formik.touched.oldPrice && formik.errors.oldPrice}
                 />
               </Grid>
-              <Grid item md={6}>
-                <ServerList
-                  error={formik.touched.server && Boolean(formik.errors.server)}
-                  helper={
-                    formik.touched.server && (formik.errors.server as string)
-                  }
-                  handleSelectedServer={handleSelectedServer}
-                  defaultValue={"Asia"}
-                  open={open}
-                />
-              </Grid>
-              <Grid item md={6}>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
-                  id="ar"
-                  label="Adventure Rank"
-                  name="ar"
+                  id="newPrice"
+                  label="Giá mới"
+                  name="newPrice"
                   type="number"
                   variant="outlined"
                   sx={{
@@ -505,88 +350,16 @@ export default function AddHsr() {
                       fontFamily: "Montserrat",
                     },
                   }}
-                  value={formik.values.ar}
-                  onChange={formik.handleChange}
-                  error={formik.touched.ar && Boolean(formik.errors.ar)}
-                  helperText={formik.touched.ar && formik.errors.ar}
-                />
-              </Grid>
-              <Grid item md={6}>
-                <TextField
-                  fullWidth
-                  id="primogems"
-                  label="Nguyên thạch"
-                  name="primogems"
-                  type="number"
-                  variant="outlined"
-                  sx={{
-                    "& label": {
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    },
-                    "& input": {
-                      fontFamily: "Montserrat",
-                    },
-                  }}
-                  value={formik.values.primogems}
+                  value={formik.values.newPrice}
                   onChange={formik.handleChange}
                   error={
-                    formik.touched.primogems && Boolean(formik.errors.primogems)
+                    formik.touched.newPrice && Boolean(formik.errors.newPrice)
                   }
-                  helperText={
-                    formik.touched.primogems && formik.errors.primogems
-                  }
-                />
-              </Grid>
-              <Grid item md={6}>
-                <TextField
-                  fullWidth
-                  id="tinhhuy"
-                  label="Tinh huy"
-                  name="tinhhuy"
-                  type="number"
-                  variant="outlined"
-                  sx={{
-                    "& label": {
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    },
-                    "& input": {
-                      fontFamily: "Montserrat",
-                    },
-                  }}
-                  value={formik.values.tinhhuy}
-                  onChange={formik.handleChange}
-                  error={
-                    formik.touched.tinhhuy && Boolean(formik.errors.tinhhuy)
-                  }
-                  helperText={formik.touched.tinhhuy && formik.errors.tinhhuy}
+                  helperText={formik.touched.newPrice && formik.errors.newPrice}
                 />
               </Grid>
             </Grid>
-            <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-              Chi tiết account
-            </Typography>
-            <TinyEditor changeBody={onEditorChange} defaultValue="" />
 
-            {/* <Box mt={3}>
-              <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-                Ảnh chính
-              </Typography>
-              <Button variant="contained" component="label">
-                Upload File
-                <input
-                  type="file"
-                  accept=".jpg, .png"
-                  name="file"
-                  required
-                  onChange={(e) => {
-                    formik.handleChange(e);
-                    setFile((e.target as HTMLInputElement).files[0]);
-                  }}
-                />
-              </Button>
-            </Box> */}
             <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
                 Ảnh slide (Tối đa 5 ảnh) 1000x500

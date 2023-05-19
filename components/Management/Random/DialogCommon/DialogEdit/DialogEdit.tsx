@@ -268,34 +268,8 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               }
             />
           </Box>
-
-          <Box mb={3}>
-            <AutoCompleteHarderForEdit
-              trigger={trigger}
-              title="Danh sách nhân vật"
-              data={getNameSortAtoB(TAG_TYPE.CHARACTER)}
-              id="create-vip-character"
-              name="character"
-              formik={formik}
-              handleSelected={handleSelectedCharacter}
-              defaultValue={formik.values.character}
-            />
-          </Box>
-          <Box mb={3}>
-            <AutoCompleteHarderForEdit
-              trigger={trigger}
-              title="Danh sách vũ khí"
-              data={getNameSortAtoB(TAG_TYPE.WEAPON)}
-              id="create-vip-character"
-              name="weapon"
-              formik={formik}
-              handleSelected={handleSelectedWeapon}
-              defaultValue={formik.values.weapon}
-            />
-          </Box>
-
           <Grid container columnSpacing={2} rowSpacing={2}>
-            <Grid item md={6}>
+            <Grid item md={4}>
               <TextField
                 fullWidth
                 id="oldPrice"
@@ -322,7 +296,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={4}>
               <TextField
                 fullWidth
                 id="newPrice"
@@ -349,37 +323,8 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={12}>
-              <Grid item md={2}>
-                <TextField
-                  select
-                  fullWidth
-                  id="type"
-                  label="Loại acc"
-                  name="type"
-                  variant="outlined"
-                  sx={{
-                    "& label": {
-                      fontFamily: "Montserrat",
-                      fontWeight: "bold",
-                    },
-                    "& input": {
-                      fontFamily: "Montserrat",
-                    },
-                  }}
-                  value={formik.values.type}
-                  onChange={formik.handleChange}
-                  error={formik.touched.type && Boolean(formik.errors.type)}
-                  helperText={
-                    formik.touched.type && (formik.errors.type as string)
-                  }
-                >
-                  <MenuItem value="VIP">Mặc định</MenuItem>
-                  <MenuItem value="NEW">Acc khởi đầu</MenuItem>
-                </TextField>
-              </Grid>
-            </Grid>
-            <Grid item md={6}>
+
+            <Grid item md={4}>
               <TextField
                 fullWidth
                 id="accountId"
@@ -407,128 +352,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="moonPack"
-                label="Thẻ thảng"
-                name="moonPack"
-                type="number"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.moonPack}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.moonPack && Boolean(formik.errors.moonPack)
-                }
-                helperText={
-                  formik.touched.moonPack && (formik.errors.moonPack as string)
-                }
-              />
-            </Grid>
-            <Grid item md={6}>
-              <ServerList
-                error={formik.touched.weapon && Boolean(formik.errors.weapon)}
-                helper={
-                  formik.touched.weapon && (formik.errors.weapon as string)
-                }
-                open={open}
-                handleSelectedServer={handleSelectedServer}
-                defaultValue={formik.values.server}
-              />
-            </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="ar"
-                label="Adventure Rank"
-                name="ar"
-                type="number"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.ar}
-                onChange={formik.handleChange}
-                error={formik.touched.ar && Boolean(formik.errors.ar)}
-                helperText={formik.touched.ar && (formik.errors.ar as string)}
-              />
-            </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="primogems"
-                label="Nguyên thạch"
-                name="primogems"
-                type="number"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.primogems}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.primogems && Boolean(formik.errors.primogems)
-                }
-                helperText={
-                  formik.touched.primogems &&
-                  (formik.errors.primogems as string)
-                }
-              />
-            </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="tinhhuy"
-                label="Tinh huy"
-                name="tinhhuy"
-                type="number"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.tinhhuy}
-                onChange={formik.handleChange}
-                error={formik.touched.tinhhuy && Boolean(formik.errors.tinhhuy)}
-                helperText={
-                  formik.touched.tinhhuy && (formik.errors.tinhhuy as string)
-                }
-              />
-            </Grid>
           </Grid>
-          <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
-            Chi tiết account
-          </Typography>
-          <TinyEditor
-            changeBody={onEditorChange}
-            defaultValue={defaultData.description}
-          />
 
           {/* <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>

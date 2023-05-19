@@ -36,12 +36,6 @@ export default function AddHsr() {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [fileList, setFileList] = React.useState<FileList>();
   const [fileListCurreny, setFileListCurreny] = React.useState<string[]>();
-  const [listData, setListData] = React.useState([]); // Loading đầu game để lấy dữ liệu cho form
-  const [trigger, setTrigger] = React.useState<boolean>(false);
-  //
-  // const [characterList, setCharacterList] = React.useState<string[]>([]);
-
-  //
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,7 +43,6 @@ export default function AddHsr() {
 
   const handleClose = () => {
     setOpen(false);
-    setTrigger(false);
   };
 
   const validationSchema = yup.object({
@@ -59,12 +52,14 @@ export default function AddHsr() {
       .required("Thông tin này là bắt buộc"),
     newPrice: yup.number().required("Thông tin này là bắt buộc"),
     accountId: yup.string().required("Thông tin này là bắt buộc"),
+    ar: yup.string().required("Thông tin này là bắt buộc"),
   });
 
   const formik = useFormik({
     initialValues: {
       title: "",
       accountId: "",
+      ar: 0,
       oldPrice: 0,
       newPrice: 0,
       username: "",
@@ -72,13 +67,13 @@ export default function AddHsr() {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      const { title, username, password, accountId, oldPrice, newPrice } =
+      const { title, username, password, ar, accountId, oldPrice, newPrice } =
         values;
 
       const formData = new FormData();
 
       formData.append("name", title);
-      formData.append("ar", "0");
+      formData.append("ar", ar.toString());
       formData.append("weapon", "Chuyến Tàu Đêm Trên Dải Ngân Hà");
       formData.append("char", "Arlan");
       formData.append("code", accountId);
@@ -86,12 +81,12 @@ export default function AddHsr() {
       formData.append("nguyenThach", "0");
       formData.append("server", "ASIA");
       formData.append("oldPrice", oldPrice.toString());
-      formData.append("description", "Đây là honkai random");
+      formData.append("description", "Đây là honkai reroll");
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", "0");
       formData.append("tofUsername", username);
       formData.append("tofPassword", password);
-      formData.append("type", "RANDOM");
+      formData.append("type", "REROLL");
       formData.append("game", "honkai-star-rail");
       for (let i = 0; i < fileList.length; i++) {
         formData.append("files", fileList[i]);
@@ -131,20 +126,6 @@ export default function AddHsr() {
     }
     setFileListCurreny(fileArray);
   };
-
-  React.useEffect(() => {
-    const getData = async () => {
-      try {
-        await tagApi
-          .getTag({ type: "", game: "honkai-star-rail" })
-          .then((res) => {
-            setListData(res.data);
-          });
-      } catch (error) {}
-    };
-    getData();
-    setTrigger(true);
-  }, [open]);
 
   return (
     <div>
@@ -273,8 +254,30 @@ export default function AddHsr() {
                   helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
-
-              <Grid item md={6}>
+              <Grid item md={4}>
+                <TextField
+                  fullWidth
+                  id="ar"
+                  label="Adventure Rank"
+                  name="ar"
+                  type="number"
+                  variant="outlined"
+                  sx={{
+                    "& label": {
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                    },
+                    "& input": {
+                      fontFamily: "Montserrat",
+                    },
+                  }}
+                  value={formik.values.ar}
+                  onChange={formik.handleChange}
+                  error={formik.touched.ar && Boolean(formik.errors.ar)}
+                  helperText={formik.touched.ar && formik.errors.ar}
+                />
+              </Grid>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
                   id="oldPrice"
@@ -299,7 +302,7 @@ export default function AddHsr() {
                   helperText={formik.touched.oldPrice && formik.errors.oldPrice}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={4}>
                 <TextField
                   fullWidth
                   id="newPrice"

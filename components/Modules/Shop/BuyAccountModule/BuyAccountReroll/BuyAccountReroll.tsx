@@ -64,10 +64,7 @@ const BackgroundShop = styled(Container)({
   },
 });
 
-interface IBuy {
-  slug: string;
-}
-function BuyAccountReroll({ slug }: IBuy) {
+function BuyAccountReroll() {
   return (
     <ProductWrap>
       <Box

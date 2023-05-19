@@ -17,12 +17,9 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import React from "react";
 import * as yup from "yup";
-import ServerList from "../Feature/ServerList";
-import { useAppContext } from "../../../../../../context/state";
-import { TAG_TYPE } from "../../../../../../types/account";
-import tagApi from "../../../../../../api/tag";
-import AutoCompleteHarderForEdit from "../../../../../Common/AutoCompleteHarderForEdit";
-import TinyEditor from "../../../../../Common/Editor/TinyEditor";
+import tagApi from "../../../../../api/tag";
+import { useAppContext } from "../../../../../context/state";
+import { TAG_TYPE } from "../../../../../types/account";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -53,9 +50,23 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       .string()
       .min(8, "Title should be of minimum 8 characters length")
       .required("Thông tin này là bắt buộc"),
+
     ar: yup.number().required("Thông tin này là bắt buộc"),
+    weapon: yup
+      .array()
+      .min(1, "Thông tin này là bắt buộc")
+      .nullable()
+      .required("Thông tin này là bắt buộc"),
+    character: yup
+      .array()
+      .min(1, "Thông tin này là bắt buộc")
+      .nullable()
+      .required("Thông tin này là bắt buộc"),
+    server: yup.string().required("Thông tin này là bắt buộc"),
+    primogems: yup.number().required("Thông tin này là bắt buộc"),
     newPrice: yup.number().required("Thông tin này là bắt buộc"),
     accountId: yup.string().required("Thông tin này là bắt buộc"),
+    tinhhuy: yup.number().required("Thông tin này là bắt buộc"),
   });
 
   const formik = useFormik({
@@ -108,7 +119,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
       formData.append("newPrice", newPrice.toString());
       formData.append("moonPack", moonPack.toString());
       formData.append("type", type);
-      formData.append("game", "genshin-impact");
+      formData.append("game", "honkai-star-rail");
 
       if (fileList && fileList.length > 0) {
         for (let i = 0; i < fileList.length; i++) {
@@ -178,6 +189,24 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     }
   }, [defaultData, open]);
 
+  const getNameSortAtoB = (type: string) => {
+    return [...listData]
+      .filter((d) => d.type === type)
+      .sort((a, b) => {
+        const nameA = a.title.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.title.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        // names must be equal
+        return 0;
+      });
+  };
+
   return (
     <Dialog
       open={open}
@@ -221,8 +250,58 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               }
             />
           </Box>
-
           <Grid container columnSpacing={2} rowSpacing={2}>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                id="accountId"
+                label="Mã Account"
+                name="accountId"
+                type="text"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.accountId}
+                onChange={formik.handleChange}
+                error={
+                  formik.touched.accountId && Boolean(formik.errors.accountId)
+                }
+                helperText={
+                  formik.touched.accountId &&
+                  (formik.errors.accountId as string)
+                }
+              />
+            </Grid>
+            <Grid item md={6}>
+              <TextField
+                fullWidth
+                id="ar"
+                label="Adventure Rank"
+                name="ar"
+                type="number"
+                variant="outlined"
+                sx={{
+                  "& label": {
+                    fontFamily: "Montserrat",
+                    fontWeight: "bold",
+                  },
+                  "& input": {
+                    fontFamily: "Montserrat",
+                  },
+                }}
+                value={formik.values.ar}
+                onChange={formik.handleChange}
+                error={formik.touched.ar && Boolean(formik.errors.ar)}
+                helperText={formik.touched.ar && (formik.errors.ar as string)}
+              />
+            </Grid>
             <Grid item md={6}>
               <TextField
                 fullWidth
@@ -277,37 +356,26 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
                 }
               />
             </Grid>
-
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                id="accountId"
-                label="Mã Account"
-                name="accountId"
-                type="text"
-                variant="outlined"
-                sx={{
-                  "& label": {
-                    fontFamily: "Montserrat",
-                    fontWeight: "bold",
-                  },
-                  "& input": {
-                    fontFamily: "Montserrat",
-                  },
-                }}
-                value={formik.values.accountId}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.accountId && Boolean(formik.errors.accountId)
-                }
-                helperText={
-                  formik.touched.accountId &&
-                  (formik.errors.accountId as string)
-                }
-              />
-            </Grid>
           </Grid>
 
+          {/* <Box mt={3}>
+              <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
+                Ảnh chính
+              </Typography>
+              <Button variant="contained" component="label">
+                Upload File
+                <input
+                  type="file"
+                  accept=".jpg, .png"
+                  name="file"
+                  required
+                  onChange={(e) => {
+                    formik.handleChange(e);
+                    setFile((e.target as HTMLInputElement).files[0]);
+                  }}
+                />
+              </Button>
+            </Box> */}
           <Box mt={3}>
             <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
               Ảnh slide (Tối đa 5 ảnh) 1000x500

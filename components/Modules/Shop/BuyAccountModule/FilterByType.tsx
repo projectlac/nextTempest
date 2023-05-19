@@ -7,8 +7,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 interface FilterByGame {
   handleGame: (data: string) => void;
 }
-export default function FilterByGame({ handleGame }: FilterByGame) {
-  const [age, setAge] = React.useState<string>("honkai-star-rail");
+export default function FilterByType({ handleGame }: FilterByGame) {
+  const [age, setAge] = React.useState<string>("1");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -21,14 +21,14 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
         id="demo-select-small"
         sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
       >
-        Chọn game
+        Chọn loại Acc
       </InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
         value={age}
         defaultValue=""
-        label="Chọn game"
+        label="Chọn loại Acc"
         onChange={handleChange}
         sx={{
           fontFamily: "Montserrat",
@@ -48,9 +48,9 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
               xs: "13px",
             },
           }}
-          value={"genshin-impact"}
+          value={"1"}
         >
-          Genshin Impact
+          Loại 1
         </MenuItem>
         <MenuItem
           sx={{
@@ -60,9 +60,9 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
               xs: "13px",
             },
           }}
-          value={"honkai-star-rail"}
+          value={"2"}
         >
-          Honkai star rail
+          Loại 2
         </MenuItem>
       </Select>
     </FormControl>

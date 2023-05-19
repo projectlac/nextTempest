@@ -70,6 +70,7 @@ function DataRandom() {
   function fetchDropdownOptions(key) {
     tagApi
       .getAccountByAdmin({
+        type: "RANDOM",
         limit: limitPage,
         offset: offsetPage,
         character: "",

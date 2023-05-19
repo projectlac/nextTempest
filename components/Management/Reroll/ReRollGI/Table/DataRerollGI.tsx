@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
-import TableRandom from "./TableRandomGI";
+import TableRerollGI from "./TableRerollGI";
 import { useAppContext } from "../../../../../context/state";
 import tagApi from "../../../../../api/tag";
 const _ = require("lodash");
@@ -23,7 +23,7 @@ interface AccountTable {
   soldAt: string | null;
   id: string;
 }
-function DataRandomGI() {
+function DataRerollGI() {
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
@@ -44,7 +44,7 @@ function DataRandomGI() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
-        type: "RANDOM",
+        type: "REROLL",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -71,7 +71,7 @@ function DataRandomGI() {
   function fetchDropdownOptions(key) {
     tagApi
       .getAccountByAdmin({
-        type: "RANDOM",
+        type: "REROLL",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -146,14 +146,14 @@ function DataRandomGI() {
         )}
         <Box>
           <Typography sx={{ cursor: "pointer" }}>
-            <Link href={"/dashboard/random"} passHref>
-              <i>Quản lý RANDOM Honkai</i>
+            <Link href={"/dashboard/reroll"} passHref>
+              <i>Quản lý Reroll Honkai</i>
             </Link>
           </Typography>
         </Box>
       </Box>
 
-      <TableRandom
+      <TableRerollGI
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
@@ -163,4 +163,4 @@ function DataRandomGI() {
   );
 }
 
-export default DataRandomGI;
+export default DataRerollGI;

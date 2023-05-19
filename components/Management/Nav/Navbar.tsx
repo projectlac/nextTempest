@@ -61,12 +61,18 @@ export default function Navbar() {
       link: "/dashboard/tof",
       role: "ADMIN, MOD",
     },
-    // {
-    //   name: "Quản lý Random",
-    //   icon: <InboxIcon />,
-    //   link: "/dashboard/random",
-    //   role: "ADMIN, MOD",
-    // },
+    {
+      name: "Quản lý Random",
+      icon: <InboxIcon />,
+      link: "/dashboard/random",
+      role: "ADMIN, MOD",
+    },
+    {
+      name: "Quản lý Reroll",
+      icon: <InboxIcon />,
+      link: "/dashboard/reroll",
+      role: "ADMIN, MOD",
+    },
     {
       name: "Quản lý Tags",
       icon: <InboxIcon />,
