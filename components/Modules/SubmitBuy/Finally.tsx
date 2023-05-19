@@ -345,7 +345,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
             handleStep(2);
           }}
         >{`< Quay lại `}</BackButton>
-        <NextButton type="submit">
+        <NextButton type="submit" disabled={loading}>
           {loading ? <CircularProgress sx={{ color: "#fff" }} /> : `Mua >`}
         </NextButton>
       </ButtonGroup>

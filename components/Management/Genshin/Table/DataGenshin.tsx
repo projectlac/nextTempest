@@ -43,6 +43,7 @@ function DataGenshin() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
+        type: "VIP,NEW",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -68,6 +69,7 @@ function DataGenshin() {
   function fetchDropdownOptions(key) {
     tagApi
       .getAccountByAdmin({
+        type: "VIP,NEW",
         limit: limitPage,
         offset: offsetPage,
         character: "",

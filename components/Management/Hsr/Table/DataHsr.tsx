@@ -43,6 +43,7 @@ function DataHrs() {
   useEffect(() => {
     tagApi
       .getAccountByAdmin({
+        type: "VIP,NEW",
         limit: limitPage,
         offset: offsetPage,
         character: "",
@@ -69,6 +70,7 @@ function DataHrs() {
   function fetchDropdownOptions(key) {
     tagApi
       .getAccountByAdmin({
+        type: "VIP,NEW",
         limit: limitPage,
         offset: offsetPage,
         character: "",
