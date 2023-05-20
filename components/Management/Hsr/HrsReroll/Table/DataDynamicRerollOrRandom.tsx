@@ -30,7 +30,9 @@ function DataDynamicRerollOrRandom() {
       router.pathname && router.pathname.split("/").at(-2) === "genshin"
         ? "genshin-impact"
         : router.pathname.split("/").at(-2),
-    type: router.pathname.split("/").at(-1).toUpperCase(),
+    type: router.pathname
+      ? router.pathname.split("/").at(-1).toUpperCase()
+      : "",
   };
 
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
