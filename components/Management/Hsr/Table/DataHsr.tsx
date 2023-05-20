@@ -50,7 +50,7 @@ function DataHrs() {
         server: "",
         weapon: "",
         sort: null,
-        queryString: "",
+        queryString: search,
         game: "honkai-star-rail",
         isSold: sold,
         createUser: yourSelf ? "admintp" : undefined,

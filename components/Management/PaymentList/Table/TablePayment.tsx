@@ -31,6 +31,7 @@ import {
   CryptoOrderStatus,
 } from "../../../../types/DashboardTypes/payment";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
+import { format } from "date-fns";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: CryptoOrderPaymentItem[];
@@ -233,6 +234,7 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
               <TableCell>Tổng tiền</TableCell>
 
               <TableCell align="right">Trạng thái</TableCell>
+              <TableCell align="right">Thời gian</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -329,6 +331,10 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
         </TableCell>
 
         <TableCell align="right">{getStatusLabel(row.status)}</TableCell>
+        <TableCell align="right">
+          {format(new Date(row.updatedAt), "dd/MM/yyyy hh:mm:ss")}
+        </TableCell>
+
         <TableCell align="right">
           {row.status !== "COMPLETED" ? (
             <Tooltip title="Hoàn thành" arrow>

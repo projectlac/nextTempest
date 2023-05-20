@@ -38,12 +38,13 @@ function DataHsr() {
   };
 
   useEffect(() => {
-    callApi("");
+    callApi(search);
   }, [update, limitPage, offsetPage, sold]);
 
   const callApi = (search: string) => {
     tagApi
-      .getRerollAccountForAdmin('REROLL',
+      .getRerollAccountForAdmin(
+        "REROLL",
         limitPage,
         offsetPage,
         sold,
