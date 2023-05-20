@@ -32,6 +32,7 @@ function DataPayment() {
   useEffect(() => {
     audit
       .showListPack({
+        type: "ACCOUNT",
         limit: limitPage,
         offset: offsetPage,
         status: statusPage,
@@ -47,6 +48,7 @@ function DataPayment() {
   function fetchDropdownOptions(key) {
     audit
       .showListPack({
+        type: "ACCOUNT",
         limit: limitPage,
         offset: offsetPage,
         status: statusPage,
