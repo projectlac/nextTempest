@@ -1,4 +1,11 @@
-import { Box, Card, TextField } from "@mui/material";
+import {
+  Box,
+  Card,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import audit from "../../../../api/audit";
 import { useAppContext } from "../../../../context/state";
@@ -17,7 +24,8 @@ function DataPaymentList() {
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [statusPage, setStatusPage] = useState<string>("");
   const [search, setSearch] = useState<string>("");
-
+  const [openHistorySamePrice, setOpenHistorySamePrice] =
+    useState<boolean>(false);
   const [total, setTotal] = useState<number>(0);
 
   const { update } = useAppContext();
@@ -36,21 +44,23 @@ function DataPaymentList() {
   useEffect(() => {
     audit
       .paymentListData({
+        type: openHistorySamePrice ? "ACCOUNT_SAME_PRICE" : "ACCOUNT",
         limit: limitPage,
         offset: offsetPage,
         status: statusPage,
-        queryString: "",
+        queryString: search,
       })
       .then((res) => {
         setCryptoOrders(res.data.data);
         let total = res.data.total;
         setTotal(total);
       });
-  }, [update, limitPage, offsetPage, statusPage]);
+  }, [update, limitPage, offsetPage, statusPage, openHistorySamePrice]);
 
   function fetchDropdownOptions(key) {
     audit
       .paymentListData({
+        type: openHistorySamePrice ? "ACCOUNT_SAME_PRICE" : "ACCOUNT",
         limit: limitPage,
         offset: offsetPage,
         status: statusPage,
@@ -73,7 +83,13 @@ function DataPaymentList() {
     setSearch(e.target.value);
     debounceDropDown(e.target.value);
   };
+  const handleChangeOpenHistorySamePrice = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    console.log(e.target.checked);
 
+    setOpenHistorySamePrice(e.target.checked);
+  };
   return (
     <Box mt={3}>
       <Box mb={3}>
@@ -85,6 +101,19 @@ function DataPaymentList() {
           onChange={handleChangeSearch}
         />
       </Box>
+      <Box mx={3}>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={openHistorySamePrice}
+                onChange={handleChangeOpenHistorySamePrice}
+              />
+            }
+            label="Hiện lịch sử reroll - random"
+          />
+        </FormGroup>
+      </Box>
       <Card>
         <TablePayment
           cryptoOrders={cryptoOrders}
@@ -92,6 +121,7 @@ function DataPaymentList() {
           handleChangePage={handleChangePage}
           total={total}
           handleChangeStatus={handleChangeStatus}
+          openHistorySamePrice={openHistorySamePrice}
         />
       </Card>
     </Box>

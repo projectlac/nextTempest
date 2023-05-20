@@ -83,10 +83,10 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
           url: "/dashboard/history",
           name: "Lịch sử",
         },
-        {
-          url: "/dashboard/payment-require",
-          name: "Đơn nạp",
-        },
+        // {
+        //   url: "/dashboard/payment-require",
+        //   name: "Đơn nạp",
+        // },
         {
           url: "/dashboard/payment-list",
           name: "Đơn mua",

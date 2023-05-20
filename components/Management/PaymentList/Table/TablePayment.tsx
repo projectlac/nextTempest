@@ -5,9 +5,12 @@ import {
   Box,
   Card,
   CardHeader,
+  Checkbox,
   Collapse,
   Divider,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   IconButton,
   InputLabel,
   MenuItem,
@@ -39,6 +42,7 @@ interface RecentOrdersTableProps {
   handleChangePage: (data: number) => void;
   handleChangeStatus: (data: string) => void;
   total: number;
+  openHistorySamePrice: boolean;
 }
 
 interface Filters {
@@ -70,43 +74,17 @@ const getStatusLabel = (cryptoOrderStatus: CryptoOrderStatus): JSX.Element => {
   );
 };
 
-const applyFilters = (
-  cryptoOrders: CryptoOrderPaymentItem[],
-  filters: Filters
-): CryptoOrderPaymentItem[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
-    let matches = true;
-
-    if (filters.status && cryptoOrder.status !== filters.status) {
-      matches = false;
-    }
-
-    return matches;
-  });
-};
-
-const applyPagination = (
-  cryptoOrders: CryptoOrderPaymentItem[],
-  page: number,
-  limit: number
-): CryptoOrderPaymentItem[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
-};
-
 const TablePayment: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,
   handleChangePage,
   handleChangeStatus,
   total,
+  openHistorySamePrice,
 }) => {
-  const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
-    []
-  );
-  const selectedBulkActions = selectedCryptoOrders.length > 0;
-  const [open, setOpen] = useState(false);
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
+
   const [filters, setFilters] = useState<Filters>({
     status: null,
   });
@@ -151,15 +129,6 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
     setLimit(parseInt(event.target.value));
     handleChangeLimit(parseInt(event.target.value));
   };
-
-  const filteredCryptoOrders = applyFilters(cryptoOrders, filters);
-  const paginatedCryptoOrders = applyPagination(
-    filteredCryptoOrders,
-    page,
-    limit
-  );
-
-  const theme = useTheme();
 
   return (
     <Card>
@@ -253,7 +222,11 @@ const TablePayment: FC<RecentOrdersTableProps> = ({
             })} */}
 
             {cryptoOrders.map((row, index) => (
-              <Row key={row.id} row={row} />
+              <Row
+                key={row.id}
+                row={row}
+                openHistorySamePrice={openHistorySamePrice}
+              />
             ))}
           </TableBody>
         </Table>
@@ -283,8 +256,11 @@ TablePayment.defaultProps = {
 
 export default TablePayment;
 
-function Row(props: { row: CryptoOrderPaymentItem }) {
-  const { row } = props;
+function Row(props: {
+  row: CryptoOrderPaymentItem;
+  openHistorySamePrice: boolean;
+}) {
+  const { row, openHistorySamePrice } = props;
   const [open, setOpen] = useState(false);
 
   const toMoney = (price: number) => {
@@ -372,40 +348,42 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
               >
                 Chi tiết
               </Typography>
-              <Box
-                mb={1}
-                sx={{
-                  display: "flex",
-                  "& > div": {
-                    width: "50%",
-                  },
-                }}
-              >
-                <Box>
-                  <Typography>
-                    <b>Loại bảo hành</b>:{" "}
-                    {row.information && row.information.gmail === "" ? 1 : 2}
-                  </Typography>
-
-                  {row.information?.gmail !== "" && (
+              {!openHistorySamePrice && (
+                <Box
+                  mb={1}
+                  sx={{
+                    display: "flex",
+                    "& > div": {
+                      width: "50%",
+                    },
+                  }}
+                >
+                  <Box>
                     <Typography>
-                      <b>Gmail</b>: {row.information?.gmail}
+                      <b>Loại bảo hành</b>:{" "}
+                      {row.information && row.information.gmail === "" ? 1 : 2}
                     </Typography>
-                  )}
 
-                  <Typography>
-                    <b>Phone</b>: {row.information?.phone}
-                  </Typography>
+                    {row.information?.gmail !== "" && (
+                      <Typography>
+                        <b>Gmail</b>: {row.information?.gmail}
+                      </Typography>
+                    )}
+
+                    <Typography>
+                      <b>Phone</b>: {row.information?.phone}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography>
+                      <b>Social</b>: {row.information?.social}
+                    </Typography>
+                    <Typography>
+                      <b>Khác</b>: {row.information?.others}
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box>
-                  <Typography>
-                    <b>Social</b>: {row.information?.social}
-                  </Typography>
-                  <Typography>
-                    <b>Khác</b>: {row.information?.others}
-                  </Typography>
-                </Box>
-              </Box>
+              )}
 
               <Divider></Divider>
               <Typography
@@ -432,9 +410,12 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
                     }}
                   >
                     <TableCell sx={{ fontWeight: "bold" }}>
-                      Mã account
+                      {openHistorySamePrice ? "Username" : "  Mã account "}
                     </TableCell>
-                    <TableCell sx={{ fontWeight: "bold" }}>Server</TableCell>
+                    <TableCell sx={{ fontWeight: "bold" }}>
+                      {" "}
+                      {openHistorySamePrice ? "Loại" : "Server "}{" "}
+                    </TableCell>
                     <TableCell sx={{ fontWeight: "bold" }}>Đơn giá</TableCell>
                   </TableRow>
                 </TableHead>
@@ -455,16 +436,27 @@ function Row(props: { row: CryptoOrderPaymentItem }) {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                          {historyRow.code}
+                          {openHistorySamePrice
+                            ? historyRow?.username
+                            : historyRow.code}
                         </TableCell>
 
                         <TableCell>
                           <Typography textTransform={"uppercase"}>
-                            {historyRow.server}
+                            {openHistorySamePrice
+                              ? historyRow?.description === null
+                                ? `${historyRow?.type} Genshin`
+                                : historyRow?.description
+                              : historyRow.server}
                           </Typography>
                         </TableCell>
                         <TableCell>
-                          {toMoney(+historyRow?.newPrice)} VND
+                          {toMoney(
+                            openHistorySamePrice
+                              ? +historyRow?.cost
+                              : +historyRow?.newPrice
+                          )}{" "}
+                          VND
                         </TableCell>
                       </TableRow>
                     ))}

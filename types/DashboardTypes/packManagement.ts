@@ -3,6 +3,7 @@ export interface PackFormManagement {
   offset: number;
   status: string;
   queryString: string;
+  type:"ACCOUNT_SAME_PRICE"| "ACCOUNT"
 }
 export interface PackHistoryOfAccount {
   limit: number;

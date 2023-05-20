@@ -23,6 +23,7 @@ export interface PackInfor {
 }
 export interface CryptoOrderPaymentItem extends CryptoOrder {
   information: PaymentItem;
+  
 }
 export interface PaymentItem {
   accounts: AccountInfor[];
@@ -30,9 +31,14 @@ export interface PaymentItem {
   others: string;
   social: string;
   phone: string;
+
 }
 export interface AccountInfor {
   code: string;
   newPrice: string;
   server: string;
+  username?:string;
+  cost?:string;
+  description?:string;
+  type?:string;
 }
