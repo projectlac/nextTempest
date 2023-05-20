@@ -158,6 +158,7 @@ function ListProduct() {
                     status={!d.isSold ? "AVAILABLE" : "SOLD"}
                     id={d.id}
                     name={d.name}
+                    type={type}
                   />
                 ) : (
                   <RerollItem
@@ -166,6 +167,7 @@ function ListProduct() {
                     status={d.status === "AVAILABLE" ? "AVAILABLE" : "SOLD"}
                     id={d.id}
                     name={d.name}
+                    type={type}
                   />
                 )}
               </Grid>

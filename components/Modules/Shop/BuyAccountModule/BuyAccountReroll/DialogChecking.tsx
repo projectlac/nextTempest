@@ -66,7 +66,12 @@ export default function DialogChecking({
               </Button>
             </Grid>
             <Grid item md={6} xs={6} textAlign="center">
-              <Button onClick={handleSubmitBuy} fullWidth variant="contained">
+              <Button
+                onClick={handleSubmitBuy}
+                fullWidth
+                variant="contained"
+                disabled={loading}
+              >
                 {loading ? <CircularProgress color="secondary" /> : "Đồng ý"}
               </Button>
             </Grid>
