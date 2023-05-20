@@ -25,14 +25,13 @@ interface AccountTable {
 
 function DataDynamicRerollOrRandom() {
   const router = useRouter();
+
   const param = {
     game:
-      router.pathname && router.pathname.split("/").at(-2) === "genshin"
+      router.pathname.split("/")[2] === "genshin"
         ? "genshin-impact"
-        : router.pathname.split("/").at(-2),
-    type: router.pathname
-      ? router.pathname.split("/").at(-1).toUpperCase()
-      : "",
+        : router.pathname.split("/")[2],
+    type: router.pathname.split("/")[3].toUpperCase(),
   };
 
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);

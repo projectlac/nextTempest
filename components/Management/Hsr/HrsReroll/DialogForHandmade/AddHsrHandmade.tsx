@@ -39,12 +39,12 @@ export default function AddHsrHandmade() {
 
   const param = {
     game:
-      router.pathname.split("/").at(-2) === "genshin"
+      router.pathname.split("/")[2] === "genshin"
         ? "genshin-impact"
-        : router.pathname.split("/").at(-2),
-    type: router.pathname.split("/").at(-1).toUpperCase(),
+        : router.pathname.split("/")[2],
+    type: router.pathname.split("/")[3].toUpperCase(),
     name:
-      router.pathname.split("/").at(-2) === "genshin"
+      router.pathname.split("/")[2] === "genshin"
         ? "Genshin Impact"
         : "Honkai star rail",
   };
