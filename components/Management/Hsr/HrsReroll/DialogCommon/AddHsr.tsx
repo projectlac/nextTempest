@@ -11,6 +11,7 @@ import * as React from "react";
 import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
+import AddHsrHandmade from "../DialogForHandmade/AddHsrHandmade";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -85,14 +86,20 @@ export default function AddHsr() {
   };
   return (
     <div>
-      <Button
-        onClick={handleClickOpen}
-        variant="contained"
-        sx={{ fontFamily: "Montserrat" }}
+      <Box
+        sx={{
+          display: "flex",
+        }}
       >
-        Thêm tài khoản bằng xlsx
-      </Button>
-
+        <Button
+          onClick={handleClickOpen}
+          variant="contained"
+          sx={{ fontFamily: "Montserrat", mr: 3 }}
+        >
+          Thêm tài khoản bằng xlsx
+        </Button>
+        <AddHsrHandmade />
+      </Box>
       <Dialog
         open={open}
         fullWidth={true}

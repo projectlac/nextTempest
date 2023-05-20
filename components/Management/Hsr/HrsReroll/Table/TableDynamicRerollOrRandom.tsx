@@ -19,6 +19,7 @@ import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
 import WarningSubmit from "../../DialogCommon/DialogReroll/WarningSubmit";
 import AddHsr from "../DialogCommon/AddHsr";
+import EditHsr from "../DialogCommon/EditHsr";
 
 interface AccountTable {
   name: string;
@@ -26,6 +27,7 @@ interface AccountTable {
   updatedAt: string;
   isSold: boolean;
   username: string;
+  slug: string;
 }
 
 interface RecentOrdersTableProps {
@@ -36,7 +38,7 @@ interface RecentOrdersTableProps {
   handleChangePage: (data: number) => void;
 }
 
-const TableHsr: FC<RecentOrdersTableProps> = ({
+const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,
   handleChangePage,
@@ -186,6 +188,23 @@ const TableHsr: FC<RecentOrdersTableProps> = ({
                     </Typography>
                   </TableCell>
                   <TableCell>
+                    {cryptoOrder.isSold === false && (
+                      <Tooltip title="Chỉnh sửa bài viết" arrow>
+                        <IconButton
+                          sx={{
+                            "&:hover": {
+                              background: "#b16c4d45",
+                            },
+                            color: "#333",
+                          }}
+                          color="inherit"
+                          size="small"
+                        >
+                          <EditHsr id={cryptoOrder.slug} />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+
                     <Tooltip title="Xóa bài viết" arrow>
                       <IconButton
                         sx={{
@@ -220,12 +239,12 @@ const TableHsr: FC<RecentOrdersTableProps> = ({
   );
 };
 
-TableHsr.propTypes = {
+TableDynamicRerollOrRandom.propTypes = {
   cryptoOrders: PropTypes.array.isRequired,
 };
 
-TableHsr.defaultProps = {
+TableDynamicRerollOrRandom.defaultProps = {
   cryptoOrders: [],
 };
 
-export default TableHsr;
+export default TableDynamicRerollOrRandom;

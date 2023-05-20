@@ -7,7 +7,7 @@ function index() {
   return (
     <DashboardLayout>
       <Head>
-        <title>Quản lý tài khoản Genshin - reroll</title>
+        <title>Quản lý tài khoản Honkaistarrail - Random</title>
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

@@ -308,7 +308,7 @@ function Row(props: {
 
         <TableCell align="right">{getStatusLabel(row.status)}</TableCell>
         <TableCell align="right">
-          {format(new Date(row.updatedAt), "dd/MM/yyyy hh:mm:ss")}
+          {format(new Date(row.updatedAt), "dd/MM/yyyy HH:mm:ss")}
         </TableCell>
 
         <TableCell align="right">

@@ -130,9 +130,22 @@ function DataGenshin() {
           />
         </FormGroup>
         <Box>
-          <Typography>
+          <Typography
+            sx={{
+              cursor: "pointer",
+            }}
+          >
             <Link href={"/dashboard/genshin/reroll"} passHref>
               <i>Quản lý tài khoản Reroll</i>
+            </Link>
+          </Typography>
+          <Typography
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            <Link href={"/dashboard/genshin/random"} passHref>
+              <i>Quản lý tài khoản Random</i>
             </Link>
           </Typography>
         </Box>

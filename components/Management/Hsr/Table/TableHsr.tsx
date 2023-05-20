@@ -41,21 +41,6 @@ interface RecentOrdersTableProps {
   handleChangePage: (data: number) => void;
 }
 
-const applyFilters = (cryptoOrders: AccountTable[]): AccountTable[] => {
-  return cryptoOrders.filter((cryptoOrder) => {
-    let matches = true;
-    return matches;
-  });
-};
-
-const applyPagination = (
-  cryptoOrders: AccountTable[],
-  page: number,
-  limit: number
-): AccountTable[] => {
-  return cryptoOrders.slice(page * limit, page * limit + limit);
-};
-
 const TableHsr: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,

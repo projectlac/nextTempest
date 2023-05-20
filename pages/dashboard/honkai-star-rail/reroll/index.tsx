@@ -1,19 +1,19 @@
 import { Box, Container } from "@mui/material";
 import Head from "next/head";
 import DashboardLayout from "../../../../components/Layout/DashboardLayout";
-import DataHsr from "../../../../components/Management/Hsr/HrsReroll/Table/DataHsr";
+import DataDynamicRerollOrRandom from "../../../../components/Management/Hsr/HrsReroll/Table/DataDynamicRerollOrRandom";
 
 function index() {
   return (
     <DashboardLayout>
       <Head>
-        <title>Quản lý tài khoản Genshin</title>
+        <title>Quản lý tài khoản Honkaistarrail - REROLL</title>
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Box mt={3}>
         <Container>
-          <DataHsr />
+          <DataDynamicRerollOrRandom />
         </Container>
       </Box>
     </DashboardLayout>

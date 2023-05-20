@@ -22,7 +22,7 @@ interface AccountTable {
   soldAt: string | null;
   id: string;
 }
-function DataHrs() {
+function DataHsr() {
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
@@ -145,9 +145,22 @@ function DataHrs() {
         )}
 
         <Box>
-          <Typography>
-            <Link href={"/dashboard/hsr/reroll"} passHref>
+          <Typography
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            <Link href={"/dashboard/honkai-star-rail/reroll"} passHref>
               <i>Quản lý tài khoản Reroll</i>
+            </Link>
+          </Typography>
+          <Typography
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            <Link href={"/dashboard/honkai-star-rail/random"} passHref>
+              <i>Quản lý tài khoản Random</i>
             </Link>
           </Typography>
         </Box>
@@ -163,4 +176,4 @@ function DataHrs() {
   );
 }
 
-export default DataHrs;
+export default DataHsr;

@@ -11,7 +11,8 @@ import _debounce from "lodash/debounce";
 import { useCallback, useEffect, useState } from "react";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
-import TableHsr from "./TableHsr";
+import TableDynamicRerollOrRandom from "./TableDynamicRerollOrRandom";
+import { useRouter } from "next/router";
 const _ = require("lodash");
 interface AccountTable {
   name: string;
@@ -19,10 +20,21 @@ interface AccountTable {
   updatedAt: string;
   isSold: boolean;
   username: string;
+  slug: string;
 }
 
-function DataHsr() {
+function DataDynamicRerollOrRandom() {
+  const router = useRouter();
+  const param = {
+    game:
+      router.pathname.split("/").at(-2) === "genshin"
+        ? "genshin-impact"
+        : router.pathname.split("/").at(-2),
+    type: router.pathname.split("/").at(-1).toUpperCase(),
+  };
+
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
+
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -44,17 +56,17 @@ function DataHsr() {
   const callApi = (search: string) => {
     tagApi
       .getRerollAccountForAdmin(
-        "REROLL",
+        param.type,
         limitPage,
         offsetPage,
         sold,
         search,
-        "honkai-star-rail"
+        param.game
       )
       .then((res) => {
         const data = res.data.data.map((d) => {
-          const { name, updatedAt, id, isSold, username } = d;
-          return { name, updatedAt, id, isSold, username };
+          const { name, updatedAt, id, isSold, username, slug } = d;
+          return { name, updatedAt, id, isSold, username, slug };
         });
 
         setCryptoOrders(data);
@@ -149,7 +161,7 @@ function DataHsr() {
         </FormGroup>
       </Box>
 
-      <TableHsr
+      <TableDynamicRerollOrRandom
         cryptoOrders={cryptoOrders}
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
@@ -159,4 +171,4 @@ function DataHsr() {
   );
 }
 
-export default DataHsr;
+export default DataDynamicRerollOrRandom;

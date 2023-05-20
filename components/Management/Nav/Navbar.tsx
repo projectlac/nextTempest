@@ -52,7 +52,7 @@ export default function Navbar() {
     {
       name: "Quản lý HSR",
       icon: <InboxIcon />,
-      link: "/dashboard/hsr",
+      link: "/dashboard/honkai-star-rail",
       role: "ADMIN, MOD",
     },
     {
