@@ -151,9 +151,10 @@ export default function AddHsr() {
       <Button
         onClick={handleClickOpen}
         variant="contained"
+        disabled={true}
         sx={{ fontFamily: "Montserrat" }}
       >
-        Thêm tài khoản
+        Tạm thời không đăng acc nha
       </Button>
 
       <Dialog
