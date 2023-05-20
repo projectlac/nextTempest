@@ -27,7 +27,7 @@ function DataDynamicRerollOrRandom() {
   const router = useRouter();
   const param = {
     game:
-      router.pathname.split("/").at(-2) === "genshin"
+      router.pathname && router.pathname.split("/").at(-2) === "genshin"
         ? "genshin-impact"
         : router.pathname.split("/").at(-2),
     type: router.pathname.split("/").at(-1).toUpperCase(),
