@@ -9,6 +9,7 @@ const nextConfig = {
       "imagedelivery.net",
       "upanh.tv",
       "img.upanh.tv",
+      "i.imgur.com",
     ],
   },
   i18n,
