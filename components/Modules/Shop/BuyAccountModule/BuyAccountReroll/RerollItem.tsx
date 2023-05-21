@@ -15,7 +15,6 @@ interface PropRerollItem {
   id: string;
   name: string;
   image: string;
-  type: string;
 }
 
 const ImageBox = styled(Box)(
@@ -97,14 +96,7 @@ const IdProduct = styled(Box)(
       `
 );
 
-function RerollItem({
-  image,
-  name,
-  newPrice,
-  status,
-  id,
-  type,
-}: PropRerollItem) {
+function RerollItem({ image, name, newPrice, status, id }: PropRerollItem) {
   enum STATUS_OF_PRODUCT {
     STOCKING = "#1E8813",
     OUT = "#B91C1C",
@@ -142,47 +134,8 @@ function RerollItem({
           handleChangeMessageToast(error.response.data.message);
         });
     };
-    const buyVip = async () => {
-      await tagApi
-        .buyAccount({
-          gmail: "muareroll@gmail.com",
-          others: "",
-          phone: "0999999999",
-          social: "",
-          ids: [id],
-        })
-        .then((res) => {
-          handleChangeStatusToast();
-          handleChangeMessageToast("Bạn đã mua thành công");
 
-          router.push(`/bill/${res.data[2] && res.data[2].id}`);
-        })
-        .catch((err) => {
-          handleChangeStatusToast();
-          handleChangeMessageToast(
-            err.response.data.message
-              ? err.response.data.message
-              : "Có lỗi xảy ra, vui lòng thử lại"
-          );
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
-
-    console.log(type);
-
-    switch (type) {
-      case "1":
-        buyReroll();
-        break;
-      case "2":
-        buyVip();
-        break;
-      default:
-        buyReroll();
-        break;
-    }
+    buyReroll();
   };
 
   const toMoney = (price: number) => {

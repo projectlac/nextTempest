@@ -14,7 +14,6 @@ function ListProduct() {
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [game, setGame] = React.useState<string>("honkai-star-rail");
-  const [type, setType] = React.useState<string>("1");
 
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
@@ -55,46 +54,11 @@ function ListProduct() {
           });
       } catch (error) {}
     };
-
-    const getAccountPro = async () => {
-      try {
-        const res = await tagApi.getAccount({
-          character: "",
-          limit: CONST_INFORMATION.LIMIT,
-          offset: pageCurrently,
-          server: "",
-          weapon: "",
-          sort: null,
-          queryString: "",
-          isSold: false,
-          game: game,
-          type: router.pathname.slice(1).toUpperCase(),
-        });
-
-        setProductList(res.data.data);
-        setTotal(res.data.total);
-      } catch (error) {}
-    };
-
-    switch (type) {
-      case "1":
-        getData();
-        break;
-      case "2":
-        getAccountPro();
-        break;
-      default:
-        getData();
-        break;
-    }
-  }, [update, pageCurrently, game, type]);
+    getData();
+  }, [update, pageCurrently, game]);
 
   const handleGame = (data: string) => {
     setGame(data);
-  };
-
-  const handleType = (data: string) => {
-    setType(data);
   };
 
   return (
@@ -118,7 +82,6 @@ function ListProduct() {
           position: "relative",
         }}
       >
-        <FilterByType handleGame={handleType} />
         <FilterByGame handleGame={handleGame} />
       </Box>
       <Box
@@ -151,25 +114,13 @@ function ListProduct() {
                   },
                 }}
               >
-                {type === "1" ? (
-                  <RerollItem
-                    image={d.image ? d.image : image.src}
-                    newPrice={d.cost}
-                    status={!d.isSold ? "AVAILABLE" : "SOLD"}
-                    id={d.id}
-                    name={d.name}
-                    type={type}
-                  />
-                ) : (
-                  <RerollItem
-                    image={d?.cloundinary ? d?.cloundinary[0] : image.src}
-                    newPrice={d.newPrice}
-                    status={d.status === "AVAILABLE" ? "AVAILABLE" : "SOLD"}
-                    id={d.id}
-                    name={d.name}
-                    type={type}
-                  />
-                )}
+                <RerollItem
+                  image={d.image ? d.image : image.src}
+                  newPrice={d.cost}
+                  status={!d.isSold ? "AVAILABLE" : "SOLD"}
+                  id={d.id}
+                  name={d.name}
+                />
               </Grid>
             ))
           ) : (
