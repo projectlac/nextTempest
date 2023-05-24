@@ -210,7 +210,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             )}
           </MenuTextBox>
 
-          <Box
+          {/* <Box
             sx={{
               border: "1px solid #fff",
               borderRadius: "30px",
@@ -253,7 +253,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 }}
               ></Box>
             </Box>
-          </Box>
+          </Box> */}
         </FrameBox>
       </MenuSWrapper>
       {activeMenu && <OverlayMenu />}

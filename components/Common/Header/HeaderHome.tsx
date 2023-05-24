@@ -348,7 +348,7 @@ function HeaderHome() {
                 </Typography>
               )}
             </Box>
-            <Hidden mdDown>
+            {/* <Hidden mdDown>
               <Box
                 sx={{
                   border: "1px solid #fff",
@@ -398,7 +398,7 @@ function HeaderHome() {
                   }}
                 ></Box>
               </Box>
-            </Hidden>
+            </Hidden> */}
             <Box
               sx={{
                 marginLeft: "auto",

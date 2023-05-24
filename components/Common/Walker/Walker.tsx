@@ -1,7 +1,7 @@
 import { Box, styled } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import image from "../../../styles/assets/images/Logo-tnf-2.png";
+import { useEffect, useState } from "react";
+import image from "../../../styles/assets/images/rimumu.png";
 const BoxRunning = styled(Box)({
   position: "fixed",
   top: "-500px",
