@@ -1,12 +1,11 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import banner from "../../api/banner";
-import SliderImage from "../../styles/assets/images/newsDes/Group1.png";
 import BG from "../../styles/assets/images/newsDes/Mask.png";
 import NavLeftArrow from "../../styles/assets/images/newsDes/NavLeftArrow.png";
 import NavRightArrow from "../../styles/assets/images/newsDes/NavRightArrow.png";
