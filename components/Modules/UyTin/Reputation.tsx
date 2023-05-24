@@ -967,6 +967,83 @@ function MainNews() {
                 </Box>
               </Box>
             </Grid>
+
+            <Grid
+              item
+              lg={3}
+              md={4}
+              xs={12}
+              sm={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <iframe
+                style={{ height: "725px" }}
+                src="https://www.tiktok.com/embed/7229948003593751813"
+                allowFullScreen
+                scrolling="no"
+                allow="encrypted-media;"
+              ></iframe>
+            </Grid>
+            <Grid
+              item
+              lg={3}
+              md={4}
+              xs={12}
+              sm={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <iframe
+                style={{ height: "725px" }}
+                src="https://www.tiktok.com/embed/7230501334330412294"
+                allowFullScreen
+                scrolling="no"
+                allow="encrypted-media;"
+              ></iframe>
+            </Grid>
+            <Grid
+              item
+              lg={3}
+              md={4}
+              xs={12}
+              sm={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <iframe
+                style={{ height: "725px" }}
+                src="https://www.tiktok.com/embed/7229266261807549701"
+                allowFullScreen
+                scrolling="no"
+                allow="encrypted-media;"
+              ></iframe>
+            </Grid>
+            <Grid
+              item
+              lg={3}
+              md={4}
+              xs={12}
+              sm={6}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <iframe
+                style={{ height: "725px" }}
+                src="https://www.tiktok.com/embed/7229686560055151877"
+                allowFullScreen
+                scrolling="no"
+                allow="encrypted-media;"
+              ></iframe>
+            </Grid>
           </Grid>
         </NewBox>
       </Box>
