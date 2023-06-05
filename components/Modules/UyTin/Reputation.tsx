@@ -190,7 +190,7 @@ function MainNews() {
                   <iframe
                     width="560"
                     height="315"
-                    src="https://www.youtube.com/embed/b0nrVS3Q0BU"
+                    src="https://www.youtube.com/embed/MJK9zel2HXA"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -242,7 +242,7 @@ function MainNews() {
                       >
                         Chunpomer
                       </Typography>
-                      @chunpomer <br /> 4,47 N người đăng ký
+                      @chunpomer <br /> 16,4 N người đăng ký
                     </Box>
                     <Box>
                       <a
@@ -424,7 +424,7 @@ function MainNews() {
                       >
                         Kitakara Tome Ch. 黄宝石 留【 Vtuber 】
                       </Typography>
-                      @KitakaraTome <br /> 12 N người đăng ký
+                      @KitakaraTome <br /> 15,1 N người đăng ký
                     </Box>
                     <Box>
                       <a
@@ -606,7 +606,7 @@ function MainNews() {
                       >
                         Vuisme
                       </Typography>
-                      @vuismee <br /> 1,42 N người đăng ký
+                      @vuismee <br /> 1,77 N người đăng ký
                     </Box>
                     <Box>
                       <a
