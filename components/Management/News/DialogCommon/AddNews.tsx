@@ -182,7 +182,7 @@ export default function AddNews() {
                 Upload File
                 <input
                   type="file"
-                  accept=".jpg, .png"
+                  accept="image/*"
                   name="file"
                   required
                   onChange={(e) => {

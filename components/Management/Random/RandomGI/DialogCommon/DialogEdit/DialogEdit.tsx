@@ -315,7 +315,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             <Button variant="contained" component="label">
               Upload File
               <input
-                accept=".jpg, .png"
+                accept="image/*"
                 name="fileSlide"
                 type="file"
                 multiple

@@ -602,7 +602,7 @@ export default function AddHsr() {
                 Upload File
                 <input
                   type="file"
-                  accept=".jpg, .png"
+                  accept="image/*"
                   name="file"
                   required
                   onChange={(e) => {
@@ -619,7 +619,8 @@ export default function AddHsr() {
               <Button variant="contained" component="label">
                 Upload File
                 <input
-                  accept=".jpg, .png"
+                  // accept="image/*"
+                  accept="image/*"
                   name="fileSlide"
                   required
                   type="file"

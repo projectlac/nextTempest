@@ -178,7 +178,7 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
               Upload File
               <input
                 type="file"
-                accept=".jpg, .png"
+                accept="image/*"
                 name="imageUrl"
                 onChange={(e) => {
                   formik.handleChange(e);

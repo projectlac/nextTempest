@@ -336,7 +336,7 @@ export default function AddHsr() {
               <Button variant="contained" component="label">
                 Upload File
                 <input
-                  accept=".jpg, .png"
+                  accept="image/*"
                   name="fileSlide"
                   required
                   type="file"

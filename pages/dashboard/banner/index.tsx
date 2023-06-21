@@ -93,7 +93,7 @@ function Banner() {
                   Upload banner
                   <input
                     type="file"
-                    accept=".jpg, .png"
+                    accept="image/*"
                     name="file"
                     required
                     hidden

@@ -500,7 +500,7 @@ export default function AddTof() {
                 Upload File
                 <input
                   type="file"
-                  accept=".jpg, .png"
+                  accept="image/*"
                   name="file"
                   required
                   onChange={(e) => {
@@ -517,7 +517,7 @@ export default function AddTof() {
               <Button variant="contained" component="label">
                 Upload File
                 <input
-                  accept=".jpg, .png"
+                  accept="image/*"
                   name="fileSlide"
                   required
                   type="file"
