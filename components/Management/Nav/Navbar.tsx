@@ -80,6 +80,12 @@ export default function Navbar() {
       role: "ADMIN",
     },
     {
+      name: "Quản lý Code",
+      icon: <InboxIcon />,
+      link: "/dashboard/code",
+      role: "ADMIN",
+    },
+    {
       name: "Cài đăt",
       icon: <InboxIcon />,
       link: "/dashboard/setting",

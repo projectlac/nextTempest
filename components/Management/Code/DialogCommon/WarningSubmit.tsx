@@ -1,15 +1,17 @@
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import * as React from "react";
-
-import tagApi from "../../../../../api/tag";
-import { useAppContext } from "../../../../../context/state";
-
+import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
+import { Box, TextField } from "@mui/material";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import newsApi from "../../../../api/newsApi";
+import { useAppContext } from "../../../../context/state";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -39,10 +41,10 @@ export default function WarningSubmit({
     setOpen(false);
   };
 
-  const deleteAccountById = async (id: string) => {
+  const deleteNewsById = async (id: string) => {
     try {
-      await tagApi.deleteRerollAccount({ accountIds: [id] }).then(() => {
-        handleChangeMessageToast("Xóa tài khoản thành công");
+      await newsApi.delete(id).then(() => {
+        handleChangeMessageToast("Xóa bài viết thành công");
         updated();
         handleChangeStatusToast();
       });
@@ -55,7 +57,7 @@ export default function WarningSubmit({
     setOpen(false);
     status !== 3 && cancelDialog();
     if (status === 3) {
-      deleteAccountById(id);
+      deleteNewsById(id);
     }
   };
   return (

@@ -1,13 +1,14 @@
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import { CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import * as React from "react";
-
-import tagApi from "../../../../../api/tag";
+import codeApi from "../../../../../api/codeApi";
 import { useAppContext } from "../../../../../context/state";
 
 const Transition = React.forwardRef(function Transition(
@@ -18,19 +19,16 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-interface PropsDialogWarning {
-  cancelDialog?: () => void;
-  status: number;
+interface IEditCodeProps {
   id: string;
 }
-export default function WarningSubmit({
-  cancelDialog,
-  status,
-  id,
-}: PropsDialogWarning) {
-  const [open, setOpen] = React.useState(false);
+export default function DeleteCode({ id }: IEditCodeProps) {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
+
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -39,41 +37,31 @@ export default function WarningSubmit({
     setOpen(false);
   };
 
-  const deleteAccountById = async (id: string) => {
-    try {
-      await tagApi.deleteRerollAccount({ accountIds: [id] }).then(() => {
-        handleChangeMessageToast("Xóa tài khoản thành công");
-        updated();
+  const submit = () => {
+    setLoading(true);
+    codeApi
+      .deleteCodeById(id)
+      .then((res) => {
+        handleChangeMessageToast("Xóa thành công");
         handleChangeStatusToast();
+        handleClose();
+        updated();
+      })
+      .catch(() => {
+        handleChangeMessageToast("Có lỗi xảy ra");
+        handleChangeStatusToast();
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    } catch (error) {
-      handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại!");
-      handleChangeStatusToast();
-    }
   };
-  const handleCloseAll = () => {
-    setOpen(false);
-    status !== 3 && cancelDialog();
-    if (status === 3) {
-      deleteAccountById(id);
-    }
-  };
+
   return (
     <div>
-      {status === 3 ? (
-        <DeleteTwoToneIcon fontSize="small" onClick={handleClickOpen} />
-      ) : (
-        <Button
-          onClick={handleClickOpen}
-          variant="contained"
-          sx={{ fontFamily: "Montserrat" }}
-        >
-          Xác nhận
-        </Button>
-      )}
-
+      <DeleteTwoToneIcon fontSize="small" onClick={handleClickOpen} />
       <Dialog
         open={open}
+        maxWidth="xs"
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
@@ -84,9 +72,13 @@ export default function WarningSubmit({
             fontFamily: "Montserrat",
           }}
         >
-          Bạn có chắc chắc muốn thực hiện thao tác này?
+          Xóa danh mục
         </DialogTitle>
 
+        <DialogContent>
+          Bạn có chắc muốn thực hiện thao tác này. Khi đã thức hiện sẽ không thể
+          hoàn tác!
+        </DialogContent>
         <DialogActions
           sx={{
             padding: "15px",
@@ -95,8 +87,17 @@ export default function WarningSubmit({
             },
           }}
         >
-          <Button onClick={handleCloseAll} variant="contained" color="primary">
-            Xác nhận
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={submit}
+          >
+            {loading ? (
+              <CircularProgress sx={{ color: "#fff" }} size={24} />
+            ) : (
+              "Xác nhận"
+            )}
           </Button>
           <Button onClick={handleClose} variant="contained" color="error">
             Đóng

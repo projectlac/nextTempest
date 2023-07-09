@@ -55,6 +55,10 @@ function DashboardIndex() {
     useState<string>("0 VND");
 
   const [inventory, setInventory] = useState<number>(0);
+  const [codeRemaining, setCodeRemaining] = useState<number>(0);
+  const [codeSold, setCodeSold] = useState<number>(0);
+  const [codeTotalMoney, setCodeTotalMoney] = useState<number>(0);
+
   const [sold, setSold] = useState<number>(0);
   const [dataTotal, setDataTotal] = useState<IData[]>([
     {
@@ -134,6 +138,9 @@ function DashboardIndex() {
           setInventory(res.data.remainingAccounts);
           setDataTotal(res.data.data);
           setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
+          setCodeRemaining(res.data.remainingGiftCode);
+          setCodeSold(res.data.soldGiftCode);
+          setCodeTotalMoney(res.data.totalPriceGiftCodeSold);
         });
       if (decodeToken()?.["role"] === "ADMIN") {
         audit
@@ -141,7 +148,9 @@ function DashboardIndex() {
             startDate: format(new Date(start), "yyyy/MM/dd"),
             endDate: format(addDays(new Date(end), 1), "yyyy/MM/dd"),
           })
-          .then((res) => setCtvData(res.data));
+          .then((res) => {
+            setCtvData(res.data);
+          });
       }
     }
   }, [start, end]);
@@ -196,6 +205,109 @@ function DashboardIndex() {
               </Box>
               <Bar options={options} data={data} />
             </Card>
+            <Grid container columnSpacing={2}>
+              <Grid item md={3}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    marginTop: "15px",
+                    padding: "15px",
+                    background: "#d0d0f5",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Tổng số code còn lại
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "50px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      mt: "15px",
+                    }}
+                  >
+                    <CountUp
+                      start={0}
+                      end={codeRemaining}
+                      duration={0.5}
+                      delay={0}
+                    />
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item md={3}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    marginTop: "15px",
+                    padding: "15px",
+                    background: "#c6c6c7",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Tổng số code đã bán
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "50px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      mt: "15px",
+                    }}
+                  >
+                    <CountUp
+                      start={0}
+                      end={codeSold}
+                      duration={0.5}
+                      delay={0}
+                    />
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid item md={6}>
+                <Card
+                  sx={{
+                    height: "150px",
+                    marginLeft: "auto",
+                    marginTop: "15px",
+                    padding: "15px",
+                    background: "#d0d0f5",
+                  }}
+                >
+                  {" "}
+                  <Typography
+                    sx={{
+                      fontSize: "12px",
+                    }}
+                  >
+                    Tổng số tiền nhận về từ bán code
+                  </Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "40px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      mt: "15px",
+                    }}
+                  >
+                    {codeTotalMoney}
+                  </Typography>
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item md={4}>
             <Grid container rowSpacing={3} columnSpacing={3}>
