@@ -57,6 +57,7 @@ function Profile() {
           fullWidth
           variant="outlined"
           value={info}
+          disabled={true}
           onChange={handleChange}
         />
         <Button variant="contained" onClick={submit} disabled={loading}>

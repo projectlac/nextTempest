@@ -40,10 +40,10 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
       url: "/dashboard/payment-list",
       name: "Đơn mua",
     },
-    {
-      url: "/dashboard/profile",
-      name: "Hồ sơ",
-    },
+    // {
+    //   url: "/dashboard/profile",
+    //   name: "Hồ sơ",
+    // },
   ]);
 
   React.useEffect(() => {
@@ -91,10 +91,10 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
           url: "/dashboard/payment-list",
           name: "Đơn mua",
         },
-        {
-          url: "/dashboard/profile",
-          name: "Hồ sơ",
-        },
+        // {
+        //   url: "/dashboard/profile",
+        //   name: "Hồ sơ",
+        // },
       ]);
     }
   }, []);
