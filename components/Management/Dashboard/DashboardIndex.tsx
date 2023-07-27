@@ -146,7 +146,7 @@ function DashboardIndex() {
         audit
           .getManagementWithUser({
             startDate: format(new Date(start), "yyyy/MM/dd"),
-            endDate: format(addDays(new Date(end), 1), "yyyy/MM/dd"),
+            endDate: format(new Date(end), "yyyy/MM/dd"),
           })
           .then((res) => {
             setCtvData(res.data);
