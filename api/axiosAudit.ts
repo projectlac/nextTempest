@@ -32,7 +32,8 @@ axiosAudit.interceptors.response.use(
     if (error.response.status === 401) {
       localStorage.removeItem("access_token");
       Router.push(`/`);
-      window.location.reload()
+      
+      setTimeout(()=>{window.location.reload()}, 1000)
       return Promise.reject(error);
     }
 

@@ -7,7 +7,7 @@ import Bill from "../../components/Modules/Bill/Bill";
 export default function IndexPage() {
   const router = useRouter();
   const { id } = router.query;
-
+  
   return (
     <Layout>
       <Head>

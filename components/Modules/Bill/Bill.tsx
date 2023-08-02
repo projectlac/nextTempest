@@ -20,6 +20,7 @@ import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
 import toMoney from "../../../utility/toMoney";
 import audit from "../../../api/audit";
 import { format } from "date-fns";
+import { useRouter } from "next/router";
 const ProductWrap = styled(Box)(
   ({ theme }) => `
     height:100vh;
@@ -52,14 +53,14 @@ const BillBox = styled(Box)(
       @media (min-width: 768px) {
         width: 100%;
         height: 819px;
-        padding: 45px 50px 45px 55px;
+        padding: 45px 50px 55px  55px;
         background-size: 100% auto;
       } 
     
       @media (min-width: 1024px) {
         height: 819px;
         width: 629px;
-        padding: 45px 50px 45px 55px;
+        padding: 45px 50px 55px  55px;
         background-size: contain;
     `
 );
@@ -71,20 +72,32 @@ interface IUserData {
   tofUsername: string;
 }
 function Bill({ id }: IBill) {
+  const router = useRouter()
   const [time, setTime] = useState("");
   const [account, setAccount] = useState([]);
   const [type, setType] = useState("");
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    audit.getAuditById(id).then((res) => {
-      setTime(res.data.updatedAt);
-      setAccount(res.data.information?.accounts);
-
-      setType(res.data.information?.gmail);
-      setCode(res.data.id?.split("-")[0]);
-    });
-  }, [id]);
+    const callApi = async() =>{
+      if(id){
+        try {
+         const res = await audit.getAuditById(id)
+         setTime(res.data.updatedAt);
+         setAccount(res.data.information?.accounts);
+   
+         setType(res.data.information?.gmail);
+         setCode(res.data.id?.split("-")[0]);
+        } catch (error) {   
+          console.log(error);
+              
+        }
+        
+       }
+       
+    }
+    callApi()
+  }, [id, router]);
   const totalMoney = () => {
     const money = account.reduce((a, v) => a + +v.newPrice, 0);
     return money;
@@ -267,7 +280,7 @@ function Bill({ id }: IBill) {
                     height: "125px",
                     margin: "0 auto",
                     marginTop: "auto",
-                    width: "75%",
+                    width: "80%",
                   }}
                 >
                   <Typography
@@ -281,9 +294,11 @@ function Bill({ id }: IBill) {
                         lg: 0,
                         xs: 2,
                       },
+                      "& a":{
+                        color:'#d33',
+                      },
                       "& a:before": {
                         content: '""',
-                        background: `url(${Arrow.src})`,
                         width: "50px",
                         height: "50px",
                         position: "absolute",
@@ -292,9 +307,17 @@ function Bill({ id }: IBill) {
                         backgroundRepeat: "no-repeat",
                         filter: "opacity(0.5)",
                       },
+                      "& a.no-image:before":{
+                        background: `transparent`,
+                      }
                     }}
                   >
-                    Lưu ý: Bạn vui lòng chụp lại hóa đơn để xác minh với{" "}
+                    Vì lý do bảo mật: Vui lòng hiện hệ Page <a className="no-image" href="https://www.facebook.com/Rimurushop128?mibextid=LQQJ4d" target="__blank"  style={{
+                        textDecoration: "underline",
+                        position: "relative",
+                      }}>Tempest Wibu</a> để được cấp tài khoản mật khẩu
+                    <br />
+                    Lưu ý: Bạn vui lòng chụp lại hóa đơn <br /> để xác minh với
                     <a
                       href="https://www.facebook.com/tranminhvu128/"
                       style={{
