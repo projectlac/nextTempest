@@ -7,28 +7,29 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import jwt_decode from "jwt-decode";
 import Link from "next/link";
 import * as React from "react";
+import audit from "../../../api/audit";
 import AppBarAdmin from "./AppBarAdmin";
 
 type Anchor = "left";
 
+export interface IUser {
+  name: string;
+  role: string;
+}
 export default function Navbar() {
   const [state, setState] = React.useState(false);
+  const [user, setUser] = React.useState<IUser>();
 
-  const decodeToken = () => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("access_token");
-
-      if (Boolean(token))
-        return {
-          name: jwt_decode<any>(token).username,
-          role: jwt_decode<any>(token).role,
-        };
-      return "";
-    }
-  };
+  React.useEffect(() => {
+    const fetch = async () => {
+      const getRole = await audit.getProfile();
+      if (getRole.data)
+        setUser({ name: getRole.data.username, role: getRole.data.role });
+    };
+    fetch();
+  }, []);
 
   const [menu, setMenu] = React.useState([
     {
@@ -134,7 +135,7 @@ export default function Navbar() {
             <Box>
               <Typography fontSize={13}>Xin chào:</Typography>
               <Typography fontSize={15} textTransform="capitalize">
-                {decodeToken()?.["name"]}
+                {user?.name}
               </Typography>
             </Box>
           </Box>
@@ -142,7 +143,7 @@ export default function Navbar() {
         <Divider />
         <List>
           {menu.map((text, index) => {
-            if (text.role.includes(decodeToken()?.["role"]))
+            if (text.role.includes(user?.role))
               return (
                 <ListItem button key={index}>
                   <Link href={text.link} passHref>

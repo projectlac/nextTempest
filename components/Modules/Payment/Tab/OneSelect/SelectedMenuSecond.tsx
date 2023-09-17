@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useEffect } from "react";
-import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.png";
-import Avatar from "../../../../../styles/assets/images/payment/avatar-cute-12.jpg";
-import jwt_decode from "jwt-decode";
-import DialogChangeAvatar from "../../../../Common/DialogChangeAvatar/DialogChangeAvatar";
-import DialogChangePassword from "../../../../Common/DialogChangePassword/DialogChangePassword";
+import React from "react";
 import audit from "../../../../../api/audit";
 import avatar from "../../../../../data/avatar";
+import Devider from "../../../../../styles/assets/images/payment/PaymentDevider.png";
+import DialogChangeAvatar from "../../../../Common/DialogChangeAvatar/DialogChangeAvatar";
+import DialogChangePassword from "../../../../Common/DialogChangePassword/DialogChangePassword";
 
 const ImageBox = styled(Box)({
   borderRadius: "50%",
@@ -83,9 +81,13 @@ const DashboardBox = styled(Box)(({ theme }) => ({
     height: "550px",
   },
 }));
-function SelectedMenuSecond() {
-  const token = localStorage.getItem("access_token");
+interface IUser {
+  email: string;
+  name: string;
+}
 
+function SelectedMenuSecond() {
+  const [user, setUser] = React.useState<IUser>();
   const [open, setOpen] = React.useState(false);
   const [password, setPassword] = React.useState(false);
   const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
@@ -93,25 +95,28 @@ function SelectedMenuSecond() {
   const avatarTemp = localStorage.getItem("avatar");
 
   const processEmail = (email: string) => {
-    const reEmail = email.split("@");
+    const reEmail = email ?? "".split("@") ?? [""];
     if (reEmail[0].length > 7) {
       return reEmail[0].slice(0, 4) + "***@" + reEmail[1];
     }
     return email;
   };
+
   React.useEffect(() => {
-    if (Boolean(avatarTemp)) {
-      setAvatarCurrency(+avatarTemp);
-    } else {
-      audit.getProfile().then((res) => {
-        if (res.data.avatar) {
+    const fetch = async () => {
+      const res = await audit.getProfile();
+      if (res) {
+        setUser({ name: res.data.username, email: res.data.email });
+        if (Boolean(avatarTemp)) {
+          setAvatarCurrency(+avatarTemp);
+        } else {
           localStorage.setItem("avatar", res.data.avatar);
           setAvatarCurrency(res.data.avatar);
         }
-      });
-    }
-  }, [avatarCurrency, avatarTemp]);
-
+      }
+    };
+    fetch();
+  }, [avatarTemp]);
   const convertIDtoIndex = (id: number) => {
     return avatar.indexOf(avatar.filter((d) => d.id === id)[0]);
   };
@@ -127,15 +132,6 @@ function SelectedMenuSecond() {
   };
   const handleClosePassword = () => {
     setPassword(false);
-  };
-  const decodeName = () => {
-    if (Boolean(token)) return jwt_decode<any>(token).username;
-    return "";
-  };
-
-  const decodeEmail = () => {
-    if (Boolean(token)) return jwt_decode<any>(token).email;
-    return "";
   };
 
   return (
@@ -191,10 +187,10 @@ function SelectedMenuSecond() {
           }}
         >
           <Text color="#726550">
-            <span> Tên người dùng:</span> {decodeName()}
+            <span> Tên người dùng:</span> {user.name}
           </Text>
           <Text color="#726550">
-            <span> Email liên kết:</span> {processEmail(decodeEmail())}
+            <span> Email liên kết:</span> {processEmail(user.email)}
           </Text>
           <Text color="#726550">
             <span>Đổi mật khẩu</span>

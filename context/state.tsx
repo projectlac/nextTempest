@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import audit from "../api/audit";
 import Toast from "../components/Common/Toast/Toast";
-import jwt_decode from "jwt-decode";
 
 interface SelectedFilterType {
   server: string;
@@ -33,12 +33,13 @@ export function AppWrapper({ children }) {
   const handleLoginTrue = () => {
     setIsLogin(true);
   };
-  const refreshLogin = () => {
+  const refreshLogin = async () => {
     setIsLogin(false);
-    const token = localStorage.getItem("access_token");
 
-    if (Boolean(token)) {
-      setRole(jwt_decode<any>(token).role);
+    const res = await audit.getProfile();
+
+    if (res) {
+      setRole(res.data.role);
     }
   };
   const handleCloseToast = (
@@ -70,23 +71,27 @@ export function AppWrapper({ children }) {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    const wishList = localStorage.getItem("wishList");
+    const fetch = async () => {
+      const res = await audit.getProfile();
+      const wishList = localStorage.getItem("wishList");
 
-    if (!Boolean(wishList))
-      localStorage.setItem("wishList", JSON.stringify([]));
+      if (!Boolean(wishList))
+        localStorage.setItem("wishList", JSON.stringify([]));
 
-    if (!isJsonString(wishList))
-      localStorage.setItem("wishList", JSON.stringify([]));
+      if (!isJsonString(wishList))
+        localStorage.setItem("wishList", JSON.stringify([]));
 
-    if (Boolean(token)) {
-      try {
-        setRole(jwt_decode<any>(token).role);
-      } catch (error) {
-        localStorage.removeItem("access_token");
+      if (res) {
+        try {
+          setRole(res.data.role);
+        } catch (error) {
+          localStorage.removeItem("access_token");
+        }
+        setIsLogin(true);
       }
-      setIsLogin(true);
-    }
+    };
+
+    fetch();
   }, []);
 
   useEffect(() => {

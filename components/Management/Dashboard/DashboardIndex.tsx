@@ -4,6 +4,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React, { useEffect, useState } from "react";
 
 import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers";
 import {
   BarElement,
   CategoryScale,
@@ -13,13 +14,11 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import jwt_decode from "jwt-decode";
-import { DatePicker } from "@mui/x-date-pickers";
-import { format, addDays } from "date-fns";
+import { format } from "date-fns";
 import { Bar } from "react-chartjs-2";
 import CountUp from "react-countup";
-import toMoney from "../../../utility/toMoney";
 import audit from "../../../api/audit";
+import toMoney from "../../../utility/toMoney";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -44,7 +43,7 @@ function DashboardIndex() {
     new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000),
     "MM/dd/yyyy"
   );
-
+  const [role, setRole] = useState<string>("");
   const [start, setStart] = React.useState<string | null>(date1);
   const [end, setEnd] = React.useState<string | null>(
     format(new Date(), "MM/dd/yyyy")
@@ -70,19 +69,6 @@ function DashboardIndex() {
       data: { countCreated: 2, countSold: 0, countRefund: 0 },
     },
   ]);
-
-  const decodeToken = () => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("access_token");
-
-      if (Boolean(token))
-        return {
-          name: jwt_decode<any>(token).username,
-          role: jwt_decode<any>(token).role,
-        };
-      return "";
-    }
-  };
 
   const options = {
     responsive: true,
@@ -124,36 +110,42 @@ function DashboardIndex() {
   };
 
   useEffect(() => {
-    let startDate = localStorage.getItem("startDate");
-    if (startDate) {
-      setStart(startDate);
-      audit
-        .getManagement({
-          startDate: format(new Date(startDate), "yyyy/MM/dd"),
-          endDate: format(new Date(end), "yyyy/MM/dd"),
-        })
-        .then((res) => {
-          setSold(res.data.soldAccounts);
-          setTotalRevenue(res.data.turnOver);
-          setInventory(res.data.remainingAccounts);
-          setDataTotal(res.data.data);
-          setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
-          setCodeRemaining(res.data.remainingGiftCode);
-          setCodeSold(res.data.soldGiftCode);
-          setCodeTotalMoney(res.data.totalPriceGiftCodeSold);
-        });
-      if (decodeToken()?.["role"] === "ADMIN") {
+    const fetch = async () => {
+      const getRole = await audit.getProfile();
+      setRole(getRole.data.role);
+      let startDate = localStorage.getItem("startDate");
+      if (startDate) {
+        setStart(startDate);
         audit
-          .getManagementWithUser({
-            startDate: format(new Date(start), "yyyy/MM/dd"),
+          .getManagement({
+            startDate: format(new Date(startDate), "yyyy/MM/dd"),
             endDate: format(new Date(end), "yyyy/MM/dd"),
           })
           .then((res) => {
-            setCtvData(res.data);
+            setSold(res.data.soldAccounts);
+            setTotalRevenue(res.data.turnOver);
+            setInventory(res.data.remainingAccounts);
+            setDataTotal(res.data.data);
+            setTotalRemainingPriceRevenue(res.data.totalRemainingPrice);
+            setCodeRemaining(res.data.remainingGiftCode);
+            setCodeSold(res.data.soldGiftCode);
+            setCodeTotalMoney(res.data.totalPriceGiftCodeSold);
           });
+
+        if ((await role) === "ADMIN") {
+          audit
+            .getManagementWithUser({
+              startDate: format(new Date(start), "yyyy/MM/dd"),
+              endDate: format(new Date(end), "yyyy/MM/dd"),
+            })
+            .then((res) => {
+              setCtvData(res.data);
+            });
+        }
       }
-    }
-  }, [start, end]);
+    };
+    fetch();
+  }, [start, end, role]);
   return (
     <Box mt={5}>
       <Container>
@@ -406,7 +398,7 @@ function DashboardIndex() {
                   </Typography>
                 </Card>
               </Grid>
-              {decodeToken()?.["role"] === "ADMIN" && (
+              {role === "ADMIN" && (
                 <Grid item md={12}>
                   <Card
                     sx={{

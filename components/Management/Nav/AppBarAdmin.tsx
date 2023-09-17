@@ -1,23 +1,21 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useAppContext } from "../../../context/state";
-import { useRouter } from "next/router";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import AvatarImg from "../../../styles/assets/images/payment/avatar-cute-12.jpg";
-import avatar from "../../../data/avatar";
-import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
+import * as React from "react";
+import audit from "../../../api/audit";
+import { useAppContext } from "../../../context/state";
 
 interface PropsMenu {
   activeMenu: () => void;
@@ -47,56 +45,52 @@ const AppBarAdmin = ({ activeMenu }: PropsMenu) => {
   ]);
 
   React.useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token && jwt_decode<any>(token).role === "CHECKED") {
-      setMenu([
-        {
-          url: "/dashboard/",
-          name: "Thống kê",
-        },
+    const fetch = async () => {
+      const res = await audit.getProfile();
+      if (res.data.role === "CHECKED") {
+        setMenu([
+          {
+            url: "/dashboard/",
+            name: "Thống kê",
+          },
 
-        {
-          url: "/dashboard/news",
-          name: "Tin tức",
-        },
-        {
-          url: "/dashboard/history",
-          name: "Lịch sử",
-        },
-      ]);
-    }
-    if (token && jwt_decode<any>(token).role === "ADMIN") {
-      setMenu([
-        {
-          url: "/dashboard/",
-          name: "Thống kê",
-        },
-        {
-          url: "/dashboard/account",
-          name: "Tài khoản",
-        },
-        {
-          url: "/dashboard/news",
-          name: "Tin tức",
-        },
-        {
-          url: "/dashboard/history",
-          name: "Lịch sử",
-        },
-        // {
-        //   url: "/dashboard/payment-require",
-        //   name: "Đơn nạp",
-        // },
-        {
-          url: "/dashboard/payment-list",
-          name: "Đơn mua",
-        },
-        // {
-        //   url: "/dashboard/profile",
-        //   name: "Hồ sơ",
-        // },
-      ]);
-    }
+          {
+            url: "/dashboard/news",
+            name: "Tin tức",
+          },
+          {
+            url: "/dashboard/history",
+            name: "Lịch sử",
+          },
+        ]);
+      }
+      if (res.data.role === "ADMIN") {
+        setMenu([
+          {
+            url: "/dashboard/",
+            name: "Thống kê",
+          },
+          {
+            url: "/dashboard/account",
+            name: "Tài khoản",
+          },
+          {
+            url: "/dashboard/news",
+            name: "Tin tức",
+          },
+          {
+            url: "/dashboard/history",
+            name: "Lịch sử",
+          },
+
+          {
+            url: "/dashboard/payment-list",
+            name: "Đơn mua",
+          },
+        ]);
+      }
+    };
+    fetch();
   }, []);
 
   const { refreshLogin } = useAppContext();

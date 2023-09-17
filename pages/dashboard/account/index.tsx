@@ -1,22 +1,25 @@
 import { Box, Container } from "@mui/material";
 import Head from "next/head";
 
+import { useRouter } from "next/router";
+import React from "react";
+import audit from "../../../api/audit";
 import DashboardLayout from "../../../components/Layout/DashboardLayout";
 import DataAccount from "../../../components/Management/Account/Table/DataAccount";
-import jwt_decode from "jwt-decode";
-import React from "react";
-import { useRouter } from "next/router";
 
 function AccountIndex() {
   const router = useRouter();
 
   React.useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if ((token && jwt_decode<any>(token).role !== "ADMIN") || !token) {
-      alert("Bạn không có quyền vào mục này");
-      router.push("/dashboard");
-    }
-  }, []);
+    const fetch = async () => {
+      const res = await audit.getProfile();
+      if (res && res.data.role !== "ADMIN") {
+        alert("Bạn không có quyền vào mục này");
+        router.push("/dashboard");
+      }
+    };
+    fetch();
+  }, [router]);
 
   return (
     <DashboardLayout>

@@ -136,16 +136,11 @@ function One() {
   const [selectionMenu, setSelectionMenu] = React.useState<number>(0);
   const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
   const [moneyCurrency, setMoneyCurrency] = React.useState<number>(0);
+  const [username, setUsername] = React.useState<string>("");
   const router = useRouter();
 
   const handleValue = (data: string) => {
     setValue(data);
-  };
-  const token = localStorage.getItem("access_token");
-
-  const decodeToken = () => {
-    if (Boolean(token)) return jwt_decode<any>(token).username;
-    return "";
   };
 
   const avatarTemp = localStorage.getItem("avatar");
@@ -153,6 +148,7 @@ function One() {
   React.useEffect(() => {
     audit.getProfile().then((res) => {
       if (res.data) {
+        setUsername(res.data.username);
         setMoneyCurrency(res.data.money);
       }
     });
@@ -238,7 +234,7 @@ function One() {
               }}
               textTransform="capitalize"
             >
-              {decodeToken()}
+              {username}
             </Typography>
           </NameBox>
           <Box>

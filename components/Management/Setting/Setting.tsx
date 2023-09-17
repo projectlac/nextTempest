@@ -7,12 +7,13 @@ import { useAppContext } from "../../../context/state";
 import TriggerShowProduct from "./TriggerShowProduct";
 import TokenMomo from "./TokenMomo";
 import Prioritize from "./Prioritize";
+import audit from "../../../api/audit";
 function Setting() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [numberOfImage, setNumberOfImage] = useState<number>(3);
   const [thisIsTokenMomo, setThisIsTokenMomo] = useState<string>("");
-
+  const [username, setUsername] = useState<string>("");
   // uu tien account cua ai len truoc
   const [prioritize, setPrioritize] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -92,6 +93,9 @@ function Setting() {
   };
 
   useEffect(() => {
+    audit.getProfile().then((res) => {
+      setUsername(res.data.username);
+    });
     banner.getInforAdmin().then((res) => {
       let index = res.data.indexOf(
         res.data.filter(
@@ -337,7 +341,9 @@ function Setting() {
       </Box>
 
       <TriggerShowProduct show={show}></TriggerShowProduct>
-      <Prioritize username={prioritize} />
+      {["admintp", "admintim"].includes(username) && (
+        <Prioritize username={prioritize} />
+      )}
       <TokenMomo show={thisIsTokenMomo}></TokenMomo>
     </Card>
   );
