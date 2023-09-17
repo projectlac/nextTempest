@@ -6,12 +6,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useAppContext } from "../../../context/state";
 import TriggerShowProduct from "./TriggerShowProduct";
 import TokenMomo from "./TokenMomo";
+import Prioritize from "./Prioritize";
 function Setting() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [numberOfImage, setNumberOfImage] = useState<number>(3);
   const [thisIsTokenMomo, setThisIsTokenMomo] = useState<string>("");
 
+  // uu tien account cua ai len truoc
+  const [prioritize, setPrioritize] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [defaultDataButton, setDefaultDataButton] = useState([
@@ -105,6 +108,7 @@ function Setting() {
       setThisIsTokenMomo(
         res.data.filter((d: any) => d.title === "api_momo")[0].value
       );
+      setPrioritize(res.data[index].value ?? "");
 
       let button = [];
       let image = [];
@@ -333,6 +337,7 @@ function Setting() {
       </Box>
 
       <TriggerShowProduct show={show}></TriggerShowProduct>
+      <Prioritize username={prioritize} />
       <TokenMomo show={thisIsTokenMomo}></TokenMomo>
     </Card>
   );

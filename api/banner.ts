@@ -33,5 +33,10 @@ const banner = {
     const url = `/information/update-api-bank`;
     return axiosAudit.put(url, {title:'api_momo', value:data});
   },
+
+  changePrioritizeAccount(str:string): Promise<PromiseApi> {
+    const url = `/information/set-sort-by-user-create-account`;
+    return axiosAudit.post(url, { value:str});
+  },
 };
 export default banner;
