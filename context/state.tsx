@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import audit from "../api/audit";
 import Toast from "../components/Common/Toast/Toast";
+import homeApi from "../api/profileHome/getHomeProfile";
 
 interface SelectedFilterType {
   server: string;
@@ -35,9 +36,7 @@ export function AppWrapper({ children }) {
   };
   const refreshLogin = async () => {
     setIsLogin(false);
-
-    const res = await audit.getProfile();
-
+    const res = await homeApi.getProfile();
     if (res) {
       setRole(res.data.role);
     }
@@ -72,7 +71,7 @@ export function AppWrapper({ children }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const res = await audit.getProfile();
+      const res = await homeApi.getProfile();
       const wishList = localStorage.getItem("wishList");
 
       if (!Boolean(wishList))

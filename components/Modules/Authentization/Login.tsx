@@ -2,15 +2,15 @@ import styled from "@emotion/styled";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import * as Yup from "yup";
+import audit from "../../../api/audit";
 import authApi from "../../../api/authApi";
 import { useAppContext } from "../../../context/state";
 import AuthDevider from "../../../styles/assets/images/Authen/AuthDevider.png";
 import AuthBG from "../../../styles/assets/images/Authen/Layer41.png";
 import Close from "../../../styles/assets/images/svg/close.svg";
-import jwt_decode from "jwt-decode";
-import { useRouter } from "next/router";
 const Auth = styled(Box)(
   ({ theme }) => `
         width: 1094px;
@@ -180,9 +180,12 @@ function Login({ handleLoginMode, closeAuthBox }: PropsLogin) {
             .then((res) => {
               setLoading(false);
               localStorage.setItem("access_token", res.data);
-              if (["ADMIN", "MOD"].includes(jwt_decode<any>(res.data).role)) {
-                router.push("/dashboard");
-              }
+              audit.getProfile().then((res) => {
+                if (["ADMIN", "MOD"].includes(res.data.role)) {
+                  router.push("/dashboard");
+                }
+              });
+
               closeAuthBox();
               handleLoginTrue();
             })
