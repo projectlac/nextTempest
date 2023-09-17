@@ -336,12 +336,12 @@ function HeaderHome() {
               >
                 <Link href="/lien-he">{trans[1][4]}</Link>
               </Typography>
-              <Typography
+              {/* <Typography
                 component="h2"
                 className={`${activeClass("/uy-tin")}`}
               >
                 <Link href="/uy-tin">Check UT</Link>
-              </Typography>
+              </Typography> */}
               {["ADMIN", "MOD", "CHECKED"].includes(role) && isLogin && (
                 <Typography component="h2">
                   <Link href="/dashboard">Quản lý</Link>
