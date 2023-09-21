@@ -36,13 +36,14 @@ interface RecentOrdersTableProps {
   total: number;
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
+  type:string
 }
 
 const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,
   handleChangePage,
-  total,
+  total,type
 }) => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
@@ -70,7 +71,7 @@ const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
             },
           },
         }}
-        title="Danh sách account reroll HSR"
+        title={`Danh sách account ${type}`}
         action={<AddHsr />}
       />
 

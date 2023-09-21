@@ -25,13 +25,13 @@ interface AccountTable {
 
 function DataDynamicRerollOrRandom() {
   const router = useRouter();
-
+  const type = router.pathname.split("/")[3].toUpperCase()
   const param = {
     game:
       router.pathname.split("/")[2] === "genshin"
         ? "genshin-impact"
         : router.pathname.split("/")[2],
-    type: router.pathname.split("/")[3].toUpperCase(),
+    type: type,
   };
 
   const [cryptoOrders, setCryptoOrders] = useState<AccountTable[]>([]);
@@ -167,6 +167,7 @@ function DataDynamicRerollOrRandom() {
         handleChangeLimit={handleChangeLimit}
         handleChangePage={handleChangePage}
         total={total}
+        type={type}
       />
     </Card>
   );
