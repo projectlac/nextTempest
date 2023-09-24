@@ -106,6 +106,8 @@ function SelectedMenuSecond() {
     const fetch = async () => {
       const res = await audit.getProfile();
       if (res) {
+        console.log(res);
+
         setUser({ name: res.data.username, email: res.data.email });
         if (Boolean(avatarTemp)) {
           setAvatarCurrency(+avatarTemp);
@@ -187,10 +189,10 @@ function SelectedMenuSecond() {
           }}
         >
           <Text color="#726550">
-            <span> Tên người dùng:</span> {user.name}
+            <span> Tên người dùng:</span> {user?.name}
           </Text>
           <Text color="#726550">
-            <span> Email liên kết:</span> {processEmail(user.email)}
+            <span> Email liên kết:</span> {processEmail(user?.email)}
           </Text>
           <Text color="#726550">
             <span>Đổi mật khẩu</span>
