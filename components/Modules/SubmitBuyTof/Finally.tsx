@@ -320,7 +320,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                   color="#9CABCC"
                   fontFamily="Montserrat"
                 >
-                  Khác:
+                     Bạn biết shop qua đâu
                 </Typography>
               </Grid>
               <Grid item md={6} xs={12}>
