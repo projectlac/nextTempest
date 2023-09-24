@@ -106,8 +106,6 @@ function SelectedMenuSecond() {
     const fetch = async () => {
       const res = await audit.getProfile();
       if (res) {
-        console.log(res);
-
         setUser({ name: res.data.username, email: res.data.email });
         if (Boolean(avatarTemp)) {
           setAvatarCurrency(+avatarTemp);
