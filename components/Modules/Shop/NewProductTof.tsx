@@ -91,6 +91,7 @@ function NewProductTof() {
     <Box
       sx={{
         position: "relative",
+        margin: "0 0 100px 0",
       }}
     >
       <BackgroundShopResponse>

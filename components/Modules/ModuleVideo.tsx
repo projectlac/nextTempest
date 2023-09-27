@@ -249,11 +249,9 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     display: "flex",
     alignItems: "center",
   },
-  // "&:hover": {
-  //   background: `url(${OnHover.src})`,
-  //   backgroundPosition: "bottom right",
-  //   backgroundSize: "cover",
-  // },
+  "&:hover": {
+    transform: "scale(1.05)",
+  },
 
   [theme.breakpoints.up("xs")]: {
     width: "50%",

@@ -30,7 +30,7 @@ function ModuleShop() {
         <NewProductLowAr></NewProductLowAr>
         <NewProductTof></NewProductTof>
 
-        <FlashSale></FlashSale>
+        {/* <FlashSale></FlashSale> */}
       </Container>
     </ProductWrap>
   );
