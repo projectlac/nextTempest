@@ -172,9 +172,9 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 </Link>
               </ChildMenu>
             </Box>
-            <Typography className={`${activeClass("/tin-tuc")}`}>
+            {/* <Typography className={`${activeClass("/tin-tuc")}`}>
               <Link href="/tin-tuc">{trans[1][2]}</Link>
-            </Typography>
+            </Typography> */}
             <Typography className={`${activeClass("/nap-tien")}`}>
               <Link href="/nap-tien">{trans[1][3]}</Link>
             </Typography>
