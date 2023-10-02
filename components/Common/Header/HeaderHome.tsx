@@ -1,27 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import MenuIcon from "@mui/icons-material/Menu";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { Box, Container, Hidden, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import tagApi from "../../../api/tag";
 import { useAppContext } from "../../../context/state";
 import logo from "../../../styles/assets/images/Logo/logoWithoutGame.png";
-import left from "../../../styles/assets/images/header-left.png";
-import right from "../../../styles/assets/images/header-right.png";
-import logoTempest from "../../../styles/assets/images/tempestlogo-2.png";
-import logoTips from "../../../styles/assets/images/Logo-tnf-2.png";
 
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import useTrans from "../../../pages/hook/useTrans";
 import Authentization from "../../Modules/Authentization";
 import MenuBox from "../Menu/MenuBox";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cart from "./Cart/Cart";
 import UserInformation from "./UserInformation";
-import useTrans from "../../../pages/hook/useTrans";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -164,30 +160,6 @@ function HeaderHome() {
   return (
     <div>
       <HeaderWrapper>
-        <Box
-          sx={{
-            background: `url(${left.src})`,
-            width: { md: "120px", xs: "80px" },
-            height: { md: "120px", xs: "80px" },
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            left: "0",
-            top: "0",
-            position: "absolute",
-          }}
-        ></Box>
-        <Box
-          sx={{
-            background: `url(${right.src})`,
-            width: { md: "277px", xs: "165px" },
-            height: { md: "205px", xs: "123px" },
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            right: "0",
-            top: "0",
-            position: "fixed",
-          }}
-        ></Box>
         <Box
           sx={{
             width: "100%",

@@ -300,21 +300,21 @@ body {
   button {
     position: absolute;
     border: none;
-    width: 85px;
-    height: 90px;
+        width: 44px;
+          height: 60px;
     z-index: 5;
     top: 50%;
     transform: translateY(-74%);
   }
   #next {
-    background: url("./assets/images/newsDes/NavRightArrow.png");
+    background: url("./assets/images/newsDes/next_Tempest.png");
     background-size: cover;
-    right: -55px;
+    right: 0px;
   }
   #prev {
-    background: url("./assets/images/newsDes/NavLeftArrow.png");
+    background: url("./assets/images/newsDes/prev_Tempest.png");
     background-size: cover;
-    left: -55px;
+    left: 0px;
   }
 }
 @keyframes mymove {

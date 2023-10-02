@@ -4,10 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import banner from "../../api/banner";
 import useTrans from "../../pages/hook/useTrans";
-import background from "../../styles/assets/images/Videos/Background_sumeru.jpg";
-import book from "../../styles/assets/images/Videos/Book.png";
-import Even from "../../styles/assets/images/Videos/button-group.png";
-import Frame from "../../styles/assets/images/Videos/Frame.png";
+import book from "../../styles/assets/images/Videos/Book_Tempest.png";
+import background from "../../styles/assets/images/Videos/HomeBg1_Tempest.webp";
+import Even from "../../styles/assets/images/Videos/Button_Group_Tempest.png";
 
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -22,7 +21,9 @@ const BgWrap = styled(Box)(
     align-items: center;
     background: url(${background.src});
     overflow:hidden;
-    background-size: cover;
+    position:relative;
+        background-size: cover;
+    background-position: bottom center;
     @media (min-width: 0px) {
       height: 600px;
     } 
@@ -39,50 +40,37 @@ const BgWrap = styled(Box)(
   `
 );
 const FrameTop = styled(Box)({
-  marginTop: "66px",
-  position: "relative",
-  width: "100%",
-  display: "flex",
-  alignItems: "self-end",
-  // "&::before": {
+  // marginTop: "66px",
+  // position: "relative",
+  // width: "100%",
+  // display: "flex",
+  // alignItems: "self-end",
+  // "&::after": {
   //   background: `url(${Frame.src})`,
   //   content: '""',
   //   position: "absolute",
-  //   top: 0,
+  //   bottom: "5px",
   //   left: 0,
   //   right: 0,
   //   width: "100%",
-  //   height: "150px",
+  //   height: "36px",
   //   backgroundSize: "contain",
   //   backgroundRepeat: "no-repeat",
-  //   filter: "drop-shadow(0 0 47px #69e0ff)",
+  //   backgroundPosition: "bottom",
+  //   filter: " drop-shadow(0 0 47px #69e0ff)",
   // },
-  "&::after": {
-    background: `url(${Frame.src})`,
-    content: '""',
-    position: "absolute",
-    bottom: "5px",
-    left: 0,
-    right: 0,
-    width: "100%",
-    height: "36px",
-    backgroundSize: "contain",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "bottom",
-    filter: " drop-shadow(0 0 47px #69e0ff)",
-  },
-  "@media (min-width: 0px)": {
-    height: "calc(600px - 56px)",
-  },
-  "@media (min-width:760px)": {
-    height: "calc(720px - 56px)",
-  },
-  "@media (min-width:1024px)": {
-    height: "calc(1000px - 56px)",
-  },
-  "@media (min-width:1400px)": {
-    height: "calc(1000px - 56px)",
-  },
+  // "@media (min-width: 0px)": {
+  //   height: "calc(600px - 56px)",
+  // },
+  // "@media (min-width:760px)": {
+  //   height: "calc(720px - 56px)",
+  // },
+  // "@media (min-width:1024px)": {
+  //   height: "calc(1000px - 56px)",
+  // },
+  // "@media (min-width:1400px)": {
+  //   height: "calc(1000px - 56px)",
+  // },
 });
 
 const BookWrap = styled(Box)(
@@ -99,7 +87,7 @@ const BookWrap = styled(Box)(
   background-repeat: no-repeat;
   background-size: contain;
   position:relative;
-  background-position:center;
+  background-position:45px;
   @media (min-width: 0px) {
     width: 320px;
     height: 189px;
@@ -125,7 +113,7 @@ const BookWrap = styled(Box)(
  @media (min-width: 1400px) {
   top: 50%;
   width:100%;
-height: 479px;
+height: 484px;
 } 
     `
 );
@@ -170,7 +158,7 @@ const VideoBox = styled(Box)(
   @media (min-width: 1650px) {
         width: 957px;
     height: 658px;
-     top: 50%;
+     top: 45%;
  } 
   
       `
@@ -207,8 +195,7 @@ const Title = styled(Typography)(
   text-align: center;
   padding-top: 80px;
   font-size: 25px;
-  color: #fff;
-  text-shadow: 0 0 10px #69e0ff, 0 0 20px #69e0ff, 0 0 40px #69e0ff;
+  color:#2B78BB;
   @media (min-width: 0px) {
     font-size: 14px;  
    padding-top: 20px;
@@ -224,7 +211,7 @@ const Title = styled(Typography)(
 
 } 
 @media (min-width: 1400px) {
-  padding-top: 80px;
+  padding-top: 65px;
   font-size: 27px;
 
 } 
@@ -232,7 +219,7 @@ const Title = styled(Typography)(
 );
 const ButtonEven = styled(Box)(({ theme }) => ({
   background: `url(${Even.src})`,
-  color: "#fff",
+  color: "#F2EAC4",
   fontSize: "20px",
   display: "flex",
   fontWeight: 600,
@@ -286,8 +273,8 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     height: "67px",
   },
   [theme.breakpoints.up("xl")]: {
-    height: "70px",
-    width: "220px",
+    height: "83px",
+    width: "300px",
   },
 }));
 
@@ -400,7 +387,7 @@ function ModuleVideo() {
     setTimeout(() => {
       lists[0].classList.remove("remove");
       document.getElementById("sliderBox").appendChild(lists[0]);
-    }, 1200);
+    }, 800);
     lists[1].classList.add("active");
   };
   const prev = () => {
@@ -410,7 +397,7 @@ function ModuleVideo() {
     setTimeout(() => {
       lists[lists.length - 1].classList.remove("add");
       document.getElementById("sliderBox").prepend(lists[lists.length - 1]);
-    }, 1200);
+    }, 800);
     lists[lists.length - 1].classList.add("active");
   };
 
@@ -422,51 +409,6 @@ function ModuleVideo() {
           <button id="prev" onClick={prev}></button>
           <button id="next" onClick={next}></button>
           <BookWrap id="sliderBox">
-            {/* <Box className="item">
-              <video
-                id="video"
-                width="825"
-                height="465"
-                onClick={pauseVideo}
-                poster={frame_video.src}
-              >
-                <source
-                  src="https://drive.google.com/uc?export=download&id=1gKNQZKReMVcUeh5udxumDgF12q9qxJAo"
-                  type="video/mp4"
-                />
-              </video>
-
-              {!isPlay && (
-                <BoxEntry>
-                  <PlayButton
-                    sx={{
-                      "&:before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        zIndex: "1",
-                        width: "28px",
-                        height: "28px",
-                        transform: "translate(-50%, -50%)",
-                        background: `url(${play.src})`,
-                        backgroundPosition: "center top",
-                      },
-                      "&:hover": {
-                        background: "transparent",
-                        "&:before": {
-                          backgroundPosition: "center bottom",
-                        },
-                      },
-                    }}
-                    onClick={playVideo}
-                  >
-                    play
-                  </PlayButton>
-                </BoxEntry>
-              )}
-            </Box> */}
             {image.length > 0 &&
               image.map((d, i) => (
                 <Item
@@ -479,100 +421,64 @@ function ModuleVideo() {
               ))}
           </BookWrap>
 
-          <Box
-            sx={{
-              position: {
-                lg: "absolute",
-                xs: "relative",
-              },
-              display: { lg: "inherit", xs: "flex" },
-              // flexWrap: "wrap",
-              justifyContent: "space-around",
-              width: { lg: "auto", md: "80%", sm: "100%", xs: "100%" },
-              margin: {
-                lg: "0 auto",
-                md: "177px auto 0",
-                sm: "100px auto 0",
-                xs: "-100px auto 0",
-              },
-              left: { xl: "-330px", lg: "-274px" },
-              top: { xl: "25.6%", lg: "29.6%" },
-              "& h2": {
-                fontSize: { md: "1rem", xs: "11px" },
-              },
-            }}
-          >
-            <ButtonEven>
-              <Link href={button[0].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[0].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-            <ButtonEven>
-              <Link href={button[1].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[1].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-
-            <ButtonEven>
-              <Link href={button[2].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[2].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-          </Box>
-          <Box
-            sx={{
-              position: {
-                lg: "absolute",
-                xs: "relative",
-              },
-              width: { lg: "auto", md: "80%", sm: "100%", xs: "100%" },
-              margin: { sm: "0 auto", xs: "0px auto 0" },
-              display: { lg: "inherit", xs: "flex" },
-              justifyContent: "space-around",
-
-              right: { xl: "-330px", lg: "-274px" },
-              top: { xl: "25.6%", lg: "29.6%" },
-              "& h2": {
-                fontSize: { md: "1rem", xs: "11px" },
-              },
-            }}
-          >
-            <ButtonEven>
-              <Link href={button[3].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[3].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-            <ButtonEven>
-              <Link href={button[4].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[4].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-
-            <ButtonEven>
-              <Link href={button[5].url} passHref>
-                <a rel="noopener noreferrer">
-                  <Typography component="h2">{button[5].title}</Typography>
-                </a>
-              </Link>
-            </ButtonEven>
-          </Box>
-
           <Title>
             <span>
               {trans[0][0]} <br /> {trans[0][1]}
             </span>
           </Title>
         </VideoBox>
+        <Box
+          sx={{
+            display: "flex",
+            // flexWrap: "wrap",
+            justifyContent: "space-around",
+            width: { lg: "75vw", md: "80%", sm: "100%", xs: "100%" },
+            margin: {
+              lg: "15px auto",
+              md: "177px auto 0",
+              sm: "100px auto 0",
+              xs: "-100px auto 0",
+            },
+            left: { xl: "0", lg: "0" },
+            right: 0,
+            position: "absolute",
+
+            bottom: { xl: "10%", lg: "13%" },
+            "& h2": {
+              fontSize: { md: "1rem", xs: "11px" },
+            },
+          }}
+        >
+          <ButtonEven>
+            <Link href={button[0].url} passHref>
+              <a rel="noopener noreferrer">
+                <Typography fontSize={18}>{button[0].title}</Typography>
+              </a>
+            </Link>
+          </ButtonEven>
+          <ButtonEven>
+            <Link href={button[1].url} passHref>
+              <a rel="noopener noreferrer">
+                <Typography fontSize={18}>{button[1].title}</Typography>
+              </a>
+            </Link>
+          </ButtonEven>
+
+          <ButtonEven>
+            <Link href={button[2].url} passHref>
+              <a rel="noopener noreferrer">
+                <Typography fontSize={18}>{button[2].title}</Typography>
+              </a>
+            </Link>
+          </ButtonEven>
+          <ButtonEven>
+            <Link href={button[2].url} passHref>
+              <a rel="noopener noreferrer">
+                <Typography fontSize={18}>{button[3].title}</Typography>
+              </a>
+            </Link>
+          </ButtonEven>
+        </Box>
         {/* </PostBox> */}
       </FrameTop>
     </BgWrap>

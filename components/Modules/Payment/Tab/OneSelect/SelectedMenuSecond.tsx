@@ -94,8 +94,9 @@ function SelectedMenuSecond() {
 
   const avatarTemp = localStorage.getItem("avatar");
 
-  const processEmail = (email: string) => {
-    const reEmail = email ?? "".split("@") ?? [""];
+  const processEmail = (email: string = "") => {
+    const reEmail = email.split("@") ?? [""];
+
     if (reEmail[0].length > 7) {
       return reEmail[0].slice(0, 4) + "***@" + reEmail[1];
     }

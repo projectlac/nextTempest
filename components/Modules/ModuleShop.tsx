@@ -1,13 +1,11 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
-import background from "../../styles/assets/images/Shop/Mask-Group-1.jpg";
-import FlashSale from "./Shop/FlashSale";
+import background from "../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import NewProduct from "./Shop/NewProduct";
-import NewProductLowAr from "./Shop/NewProductLowAr";
-import NewProductTof from "./Shop/NewProductTof";
 import NewProductHsr from "./Shop/NewProductHsr";
+import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
+import NewProductTof from "./Shop/NewProductTof";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
