@@ -7,6 +7,7 @@ import NewProduct from "./Shop/NewProduct";
 import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductTof from "./Shop/NewProductTof";
 import NewProductHsr from "./Shop/NewProductHsr";
+import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -28,6 +29,7 @@ function ModuleShop() {
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
         <NewProductLowAr></NewProductLowAr>
+        <NewProductLowArHSR />
         <NewProductTof></NewProductTof>
 
         {/* <FlashSale></FlashSale> */}

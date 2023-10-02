@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import tagApi from "../../../api/tag";
-import NewestProduct from "../../../styles/assets/images/Shop/acckhoidaugi.png";
+import NewestProduct from "../../../styles/assets/images/Shop/acckhoidauhsr.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/Layer-28.png";
 import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 import ShopItem from "./ShopItem";
@@ -67,7 +67,7 @@ const Title = styled(Box)({
   },
 });
 
-function NewProduct() {
+function NewProductLowArHSR() {
   const [productList, setProductList] = useState<any>([]);
 
   useEffect(() => {
@@ -82,6 +82,7 @@ function NewProduct() {
         queryString: "",
         isSold: false,
         type: "NEW",
+        game: "honkai-star-rail",
       })
       .then((res) => setProductList(res.data.data));
   }, []);
@@ -140,7 +141,7 @@ function NewProduct() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: "genshin-impact", search: "NEW" },
+              query: { id: "honkai-star-rail", search: "NEW" },
             }}
             passHref
           >
@@ -152,4 +153,4 @@ function NewProduct() {
   );
 }
 
-export default NewProduct;
+export default NewProductLowArHSR;
