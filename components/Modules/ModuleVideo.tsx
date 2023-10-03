@@ -220,7 +220,7 @@ const ButtonEven = styled(Box)(({ theme }) => ({
 
   [theme.breakpoints.up("md")]: {
     margin: "15px auto 5px",
-    width: "33%",
+    width: "50%",
     justifyContent: "center",
     paddingTop: "2px",
     height: "60px",
@@ -228,7 +228,7 @@ const ButtonEven = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.up("lg")]: {
-    width: "220px",
+    width: "300px",
     justifyContent: "center",
     paddingTop: "2px",
     marginBottom: "22px",
@@ -400,7 +400,7 @@ function ModuleVideo() {
             flexWrap: "wrap",
             // flexWrap: "wrap",
             justifyContent: "space-around",
-            width: { lg: "75vw", md: "80%", sm: "90%", xs: "90%" },
+            width: { lg: "1300px", md: "1000px", sm: "90%", xs: "90%" },
             margin: {
               lg: "15px auto",
               md: "177px auto 0",
