@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import banner from "../../api/banner";
 import useTrans from "../../pages/hook/useTrans";
 import book from "../../styles/assets/images/Videos/Book_Tempest.png";
-import background from "../../styles/assets/images/Videos/HomeBg1_Tempest.webp";
+import background from "../../styles/assets/images/Videos/HomeBg1_Tempest.jpg";
 import Even from "../../styles/assets/images/Videos/Button_Group_Tempest.png";
 
 const BgWrap = styled(Box)(
