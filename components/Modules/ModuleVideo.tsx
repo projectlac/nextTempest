@@ -234,10 +234,13 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     marginBottom: "22px",
     height: "67px",
   },
-  // [theme.breakpoints.up("xl")]: {
-  //   height: "83px",
-  //   width: "300px",
-  // },
+  [theme.breakpoints.up("xl")]: {
+    height: "83px",
+    width: "300px",
+    justifyContent: "center",
+    paddingTop: "2px",
+    marginBottom: "22px",
+  },
 }));
 
 const Item = styled("div")(
