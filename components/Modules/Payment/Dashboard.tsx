@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
-import { Box, Grid } from "@mui/material";
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import { useState } from "react";
 import backgroundAT from "../../../styles/assets/images/payment/backgroundAT.png";
 import backgroundBT from "../../../styles/assets/images/payment/buttonNormal.png";
-import background from "../../../styles/assets/images/payment/GroupPayment.png";
 
 import BGNews from "../../../styles/assets/images/newsDes/BGNews.png";
 import BGNewsBottom from "../../../styles/assets/images/newsDes/BGNewsBottom.png";
 import BGNewsTop from "../../../styles/assets/images/newsDes/BGNewsTop.png";
 
+import Four from "./Tab/Four";
 import One from "./Tab/One";
-import Three from "./Tab/Three";
 import Two from "./Tab/Two";
+import Three from "./Tab/Three";
+import Five from "./Tab/Five";
 
 const DashboardWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -129,7 +130,7 @@ const ListTab = styled(Box)({
       backgroundSize: "cover",
     },
     "@media (min-width: 1024px)": {
-      width: "300px",
+      width: "242px",
       fontSize: "20px",
       height: "50px",
       paddingTop: "13px",
@@ -155,14 +156,14 @@ const ListTab = styled(Box)({
       "@media (min-width: 768px)": {
         width: "33%",
         fontSize: "19px",
-        height: "64px",
+        height: "60px",
         paddingTop: "13px",
         backgroundSize: "cover",
       },
       "@media (min-width: 1024px)": {
-        width: "300px",
+        width: "242px",
         fontSize: "20px",
-        height: "64px",
+        height: "60px",
         paddingTop: "13px",
         backgroundSize: "cover",
       },
@@ -214,30 +215,44 @@ function Dashboard() {
           Nạp Slime Coin
         </Box>
         {/* <Box
+          className={`${active === 3 ? "active" : ""}`}
+          onClick={() => {
+            handleSetActive(3);
+          }}
+        >
+          Đổi thẻ cào
+        </Box> */}
+        <Box
           className={`${active === 2 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(2);
           }}
         >
-          Nạp đá sáng thế
-        </Box> */}
+          Thông tin cá nhân
+        </Box>
       </ListTab>
       {(() => {
         switch (active) {
           case 1:
             return (
               <Box width={"100%"}>
-                <One />
+                <One handleSetActive={handleSetActive} />
               </Box>
             );
-            break;
+
           case 2:
             return (
               <Box width={"100%"}>
-                <Two />
+                <Four />
               </Box>
             );
-            break;
+          // case 3:
+          //   return (
+          //     <Box width={"100%"}>
+          //       <Five />
+          //     </Box>
+          //   );
+
           default:
             return (
               <Box width={"100%"}>

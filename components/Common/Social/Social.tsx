@@ -126,7 +126,7 @@ function Social() {
 
         <Link href="https://zalo.me/0344723594" passHref>
           <a>
-            <Image src={zalo} width={25} height={25} /> Zalo
+            <Image src={zalo} width={25} height={25} alt="zalo" /> Zalo
           </a>
         </Link>
       </SocialList>

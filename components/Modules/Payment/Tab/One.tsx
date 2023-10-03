@@ -130,12 +130,14 @@ const Paimon = styled(Box)({
   margin: "0 auto",
 });
 
-function One() {
+interface IOneTabProps {
+  handleSetActive: (tab: number) => void;
+}
+
+function One({ handleSetActive }: IOneTabProps) {
   const [value, setValue] = React.useState<string>("momo");
-  const [selectionMenu, setSelectionMenu] = React.useState<number>(0);
   const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
-  const [moneyCurrency, setMoneyCurrency] = React.useState<number>(0);
-  const [username, setUsername] = React.useState<string>("");
+
   const router = useRouter();
 
   const handleValue = (data: string) => {
@@ -143,15 +145,6 @@ function One() {
   };
 
   const avatarTemp = localStorage.getItem("avatar");
-
-  React.useEffect(() => {
-    audit.getProfile().then((res) => {
-      if (res.data) {
-        setUsername(res.data.username);
-        setMoneyCurrency(res.data.money);
-      }
-    });
-  }, []);
 
   React.useEffect(() => {
     if (Boolean(avatarTemp)) {
@@ -166,175 +159,21 @@ function One() {
     }
   }, [avatarCurrency, avatarTemp]);
 
-  React.useEffect(() => {
-    if (router.query.tab === "user") setSelectionMenu(1);
-  }, [router]);
-  const convertIDtoIndex = (id: number) => {
-    return avatar.indexOf(avatar.filter((d) => d.id === id)[0]);
-  };
-
-  const toMoney = (price: number) => {
-    return price
-      ? price
-          .toString()
-          .split("")
-          .reverse()
-          .reduce((prev, next, index) => {
-            return (index % 3 ? next : next + ".") + prev;
-          })
-      : 0;
-  };
-
   return (
     <Grid container columnSpacing={{ xs: 1, sm: 2, md: 5 }}>
-      <Grid item md={3} xs={12}>
-        <DashboardBox
-          sx={{
-            padding: "40px 10px !important",
-          }}
-        >
-          <AvatarBox>
-            <ImageBox>
-              {avatar[convertIDtoIndex(avatarCurrency)] &&
-                avatar[convertIDtoIndex(avatarCurrency)].url && (
-                  <Image
-                    src={avatar[convertIDtoIndex(avatarCurrency)].url}
-                    width={125}
-                    height={125}
-                    alt="crys"
-                  />
-                )}
-            </ImageBox>
-            <CrystalBox>
-              <Image src={Crystal} width={49} height={45} alt="crys" />
-            </CrystalBox>
-          </AvatarBox>
-          <Typography
-            mt={2}
-            color="#D09B5F"
-            sx={{
-              fontSize: {
-                md: "22px",
-                xs: "17px",
-              },
-            }}
-          >
-            VIP 01
-          </Typography>
-          <NameBox>
-            <Typography
-              color={"#94674B"}
-              sx={{
-                fontSize: {
-                  md: 18,
-                  sm: 17,
-                  xs: 15,
-                },
-              }}
-              textTransform="capitalize"
-            >
-              {username}
-            </Typography>
-          </NameBox>
-          <Box>
-            <Hidden mdDown>
-              <Typography>Số tiền hiện có</Typography>
-            </Hidden>
-            <Box
-              sx={{
-                marginTop: {
-                  md: "35px",
-                  xs: "10px",
-                },
-                height: "50px",
-                background:
-                  "linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(255,255,255,1) 15%, rgba(255,255,255,1) 100%)",
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "15px",
-              }}
-            >
-              <Box width={55}>
-                <Image src={coin} alt="slime coin" width={55} height={55} />
-              </Box>
-              <Box width={"calc(100% - 55px)"}>
-                <Typography fontSize={19} color="#94674B">
-                  {toMoney(moneyCurrency)}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            mt={2}
-            sx={{
-              display: {
-                md: "block",
-                xs: "flex",
-              },
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <TextBox
-              className={`${selectionMenu === 0 ? "active" : ""}`}
-              sx={{
-                borderTop: {
-                  md: "1px solid #DCD0BF",
-                  xs: "none",
-                },
-              }}
-              onClick={() => {
-                setSelectionMenu(0);
-              }}
-            >
-              Nạp vào ví
-            </TextBox>
-            <TextBox
-              className={`${selectionMenu === 1 ? "active" : ""}`}
-              onClick={() => {
-                setSelectionMenu(1);
-              }}
-            >
-              Thông tin tài khoản
-            </TextBox>
-            <TextBox
-              className={`${selectionMenu === 2 ? "active" : ""}`}
-              onClick={() => {
-                setSelectionMenu(2);
-              }}
-            >
-              Ưu đãi VIP
-            </TextBox>
-          </Box>
-          <Hidden mdDown>
-            <Paimon width={225} height={174}>
-              <Image src={PaimonPayment} alt="Paimon" layout="responsive" />
-            </Paimon>
-          </Hidden>
-        </DashboardBox>
-      </Grid>
       <Grid
         item
-        md={9}
+        md={12}
         xs={12}
         sx={{
           mt: { md: 0, xs: 2 },
         }}
       >
-        {(() => {
-          switch (selectionMenu) {
-            case 0:
-              return (
-                <SelectedMenuFirst handleValue={handleValue} value={value} />
-              );
-              break;
-            case 1:
-              return <SelectedMenuSecond />;
-              break;
-            default:
-              return <SelectedMenuThird />;
-          }
-        })()}
+        <SelectedMenuFirst
+          handleValue={handleValue}
+          value={value}
+          handleSetActive={handleSetActive}
+        />
       </Grid>
     </Grid>
   );
