@@ -412,7 +412,7 @@ function ModuleVideo() {
             right: 0,
             position: "absolute",
 
-            bottom: { xl: "10%", lg: "13%", xs: "45px" },
+            bottom: { xl: "6%", lg: "8%", md: "10%", xs: "45px" },
             "& p": {
               fontSize: { md: "1rem", xs: "11px" },
             },
