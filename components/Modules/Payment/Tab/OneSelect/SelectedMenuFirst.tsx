@@ -98,7 +98,7 @@ function SelectedMenuFirst({
         </Typography>
         <Image src={Devider} alt="devider" width={440} height={14} />
         <Box textAlign={"left"}>
-          <CustomizedRadios handleValue={handleValue} />
+          <CustomizedRadios handleValue={handleValue} defaultValue={value} />
         </Box>
         <Box sx={{ margin: "0 auto", width: { md: 750, xs: "100%" } }}>
           {(() => {
@@ -265,10 +265,11 @@ function SelectedMenuFirst({
                     <Typography
                       sx={{
                         fontSize: {
-                          md: 28,
+                          md: 22,
                           xs: 13,
                         },
                         display: "flex",
+                        justifyContent: "center",
                       }}
                       color="#D09B5F"
                       mt={1}

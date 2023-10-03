@@ -414,21 +414,21 @@ function ModuleVideo() {
 
             bottom: { xl: "6%", lg: "8%", md: "10%", xs: "45px" },
             "& p": {
-              fontSize: { md: "1rem", xs: "11px" },
+              fontSize: { md: "1.25rem", xs: "11px" },
             },
           }}
         >
           <ButtonEven>
             <Link href={button[0].url} passHref>
               <a rel="noopener noreferrer">
-                <Typography fontSize={18}>{button[0].title}</Typography>
+                <Typography>{button[0].title}</Typography>
               </a>
             </Link>
           </ButtonEven>
           <ButtonEven>
             <Link href={button[1].url} passHref>
               <a rel="noopener noreferrer">
-                <Typography fontSize={18}>{button[1].title}</Typography>
+                <Typography>{button[1].title}</Typography>
               </a>
             </Link>
           </ButtonEven>
@@ -436,14 +436,14 @@ function ModuleVideo() {
           <ButtonEven>
             <Link href={button[2].url} passHref>
               <a rel="noopener noreferrer">
-                <Typography fontSize={18}>{button[2].title}</Typography>
+                <Typography>{button[2].title}</Typography>
               </a>
             </Link>
           </ButtonEven>
           <ButtonEven>
             <Link href={button[2].url} passHref>
               <a rel="noopener noreferrer">
-                <Typography fontSize={18}>{button[3].title}</Typography>
+                <Typography>{button[3].title}</Typography>
               </a>
             </Link>
           </ButtonEven>

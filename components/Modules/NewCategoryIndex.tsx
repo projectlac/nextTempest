@@ -16,7 +16,7 @@ function NewCategoryIndex() {
       <Box mt={4} mb={3}>
         <Grid container spacing={3}>
           <Grid item md={3} sm={3} xs={6}>
-            <Link href="/random" passHref>
+            <Link href="/reroll" passHref>
               <Box
                 sx={{
                   width: "100%",
@@ -36,7 +36,7 @@ function NewCategoryIndex() {
             </Link>
           </Grid>
           <Grid item md={3} sm={3} xs={6}>
-            <Link href="/404" passHref>
+            <Link href="/random" passHref>
               <Box
                 sx={{
                   width: "100%",

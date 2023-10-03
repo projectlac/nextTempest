@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Grid, Hidden, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import audit from "../../../../api/audit";
 import avatar from "../../../../data/avatar";
 import BGName from "../../../../styles/assets/images/payment/BGName.png";
@@ -12,6 +12,7 @@ import coin from "../../../../styles/assets/images/payment/coin.png";
 import SelectedMenuFirst from "./OneSelect/SelectedMenuFirst";
 import SelectedMenuSecond from "./OneSelect/SelectedMenuSecond";
 import SelectedMenuThird from "./OneSelect/SelectedMenuThird";
+import _ from "lodash";
 
 const DashboardBox = styled(Box)(({ theme }) => ({
   height: "555px",
@@ -136,28 +137,19 @@ interface IOneTabProps {
 
 function One({ handleSetActive }: IOneTabProps) {
   const [value, setValue] = React.useState<string>("momo");
-  const [avatarCurrency, setAvatarCurrency] = React.useState<number>(0);
-
-  const router = useRouter();
 
   const handleValue = (data: string) => {
     setValue(data);
   };
 
-  const avatarTemp = localStorage.getItem("avatar");
-
-  React.useEffect(() => {
-    if (Boolean(avatarTemp)) {
-      setAvatarCurrency(+avatarTemp);
+  const { query } = useRouter();
+  useEffect(() => {
+    if (_.isEmpty(query)) {
+      handleValue("momo");
     } else {
-      audit.getProfile().then((res) => {
-        if (res.data.avatar) {
-          localStorage.setItem("avatar", res.data.avatar);
-          setAvatarCurrency(res.data.avatar);
-        }
-      });
+      handleValue(query.action as string);
     }
-  }, [avatarCurrency, avatarTemp]);
+  }, [query]);
 
   return (
     <Grid container columnSpacing={{ xs: 1, sm: 2, md: 5 }}>

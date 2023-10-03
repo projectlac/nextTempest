@@ -296,12 +296,78 @@ function HeaderHome() {
                 <Link href="/tin-tuc">{trans[1][2]}</Link>
               </Typography> */}
 
-              <Typography
+              <ParentMenu className={`${activeClass("/nap-tien")}`}>
+                <Link href="/nap-tien">{trans[1][3]}</Link>
+                <ChildMenu
+                  sx={{
+                    opacity: 0,
+                    visibility: "hidden",
+                    background: "#fff",
+                    position: "absolute",
+                    left: "0",
+                    top: "40px",
+                    border: "4px solid #3b5898",
+                    width: "200px",
+                    display: "flex",
+                    flexDirection: "column",
+                    transition: "all 0.2s",
+                    "& a": {
+                      color: "#000",
+                      padding: "10px 10px 10px",
+                      margin: "0",
+                      borderBottom: "1px solid !important",
+                      transition: "all 0.2s",
+                      fontSize: "13px",
+                      "&:last-child": {
+                        borderBottom: "none",
+                      },
+                      "&:hover": {
+                        background: "#97c3ea",
+                        color: "#fff",
+                      },
+                    },
+                  }}
+                >
+                  <ArrowDropUpIcon
+                    sx={{
+                      color: "#fff",
+                      position: "absolute",
+                      top: "-14px",
+                      left: "15%",
+                    }}
+                  />
+                  {/* <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
+                      query: { id: "honkai-star-rail", search: "VIP,NEW" },
+                    }}
+                  >
+                    Nạp thẻ cào
+                  </Link> */}
+                  <Link
+                    href={{
+                      pathname: "/nap-tien",
+                      query: { action: "bank" },
+                    }}
+                  >
+                    Nạp ATM
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/nap-tien",
+                      query: { action: "momo" },
+                    }}
+                  >
+                    Nạp MOMO
+                  </Link>
+                </ChildMenu>
+              </ParentMenu>
+              {/* <Typography
                 component="h2"
                 className={`${activeClass("/nap-tien")}`}
               >
                 <Link href="/nap-tien">{trans[1][3]}</Link>
-              </Typography>
+              </Typography> */}
               <Typography
                 component="h2"
                 className={`${activeClass("/lien-he")}`}

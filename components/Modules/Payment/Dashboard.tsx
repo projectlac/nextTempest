@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import backgroundAT from "../../../styles/assets/images/payment/backgroundAT.png";
 import backgroundBT from "../../../styles/assets/images/payment/buttonNormal.png";
 
@@ -13,6 +13,8 @@ import One from "./Tab/One";
 import Two from "./Tab/Two";
 import Three from "./Tab/Three";
 import Five from "./Tab/Five";
+import { useRouter } from "next/router";
+import _ from "lodash";
 
 const DashboardWrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -188,6 +190,7 @@ function Dashboard() {
   const handleSetActive = (tab: number) => {
     setActive(tab);
   };
+
   return (
     <DashboardWrapper
       sx={{
