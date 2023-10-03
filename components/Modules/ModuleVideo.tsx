@@ -25,7 +25,7 @@ const BgWrap = styled(Box)(
         background-size: cover;
     background-position: bottom center;
     @media (min-width: 0px) {
-      height: 600px;
+      height: 700px;
     } 
     @media (min-width: 768px){
       height: 720px;
@@ -39,39 +39,7 @@ const BgWrap = styled(Box)(
 
   `
 );
-const FrameTop = styled(Box)({
-  // marginTop: "66px",
-  // position: "relative",
-  // width: "100%",
-  // display: "flex",
-  // alignItems: "self-end",
-  // "&::after": {
-  //   background: `url(${Frame.src})`,
-  //   content: '""',
-  //   position: "absolute",
-  //   bottom: "5px",
-  //   left: 0,
-  //   right: 0,
-  //   width: "100%",
-  //   height: "36px",
-  //   backgroundSize: "contain",
-  //   backgroundRepeat: "no-repeat",
-  //   backgroundPosition: "bottom",
-  //   filter: " drop-shadow(0 0 47px #69e0ff)",
-  // },
-  // "@media (min-width: 0px)": {
-  //   height: "calc(600px - 56px)",
-  // },
-  // "@media (min-width:760px)": {
-  //   height: "calc(720px - 56px)",
-  // },
-  // "@media (min-width:1024px)": {
-  //   height: "calc(1000px - 56px)",
-  // },
-  // "@media (min-width:1400px)": {
-  //   height: "calc(1000px - 56px)",
-  // },
-});
+const FrameTop = styled(Box)({});
 
 const BookWrap = styled(Box)(
   ({ theme }) => `
@@ -90,31 +58,38 @@ const BookWrap = styled(Box)(
   background-position:45px;
   @media (min-width: 0px) {
     width: 320px;
-    height: 189px;
+    height: 185px;
      top: 26%;
- 
+ background-position: -1px;
   } 
     @media (min-width: 450px) {
     width: 400px;
     height: 224px;
-     top: 40%;
+     top:40%;
  
   } 
   @media (min-width: 768px){
         width: 640px;
     height: 346px;
     top: 40%;
+  background-position:9px;
+
   }
   @media (min-width: 1024px) {
     top: 56%;
     width:100%;
+  background-position:-9px;
    height: 491px;
  } 
  @media (min-width: 1400px) {
   top: 50%;
   width:100%;
 height: 484px;
+background-position: -12px;
 } 
+@media (min-width: 1650px) {
+     background-position: 40px;
+ } 
     `
 );
 
@@ -163,32 +138,7 @@ const VideoBox = styled(Box)(
   
       `
 );
-const PlayButton = styled(Box)(
-  ({ theme }) => `
-    position: relative;
-    display: block;
-    margin: 14px auto 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 0;
-    background: #fff;
-    font-size: 0;
-    cursor: pointer;
-    outline: none;
-    transition: background 0.2s linear;
-    @media (min-width: 0px) {
-      margin: 11px auto 0;
-      width: 38px;
-      height: 38px;
-    }
-    @media (min-width: 768px) {
-      margin: 14px auto 0;
-      width: 48px;
-      height: 48px;
-    } 
-    `
-);
+
 const Title = styled(Typography)(
   ({ theme }) => `
   width: 100%;
@@ -199,21 +149,33 @@ const Title = styled(Typography)(
   @media (min-width: 0px) {
     font-size: 14px;  
    padding-top: 20px;
+     top:85%;
+    position: absolute;
+ }
+   @media (min-width: 450px) {
+    font-size: 14px;  
+   padding-top: 20px;
+     top:65%;
+    position: absolute;
  }
   @media (min-width: 768px) {
-     font-size: 15px;
- padding-top: 20px;
+    font-size: 15px;
+    top: 65%;
+    position: absolute;
  } 
 
  @media (min-width: 1024px) {
   font-size: 23px;
+   position: absolute;
   padding-top: 20px;
+  top: auto;
+    bottom: -4%;
 
 } 
 @media (min-width: 1400px) {
   padding-top: 65px;
-  font-size: 27px;
-
+  font-size: 22px;
+bottom: 4%;
 } 
       `
 );
@@ -241,7 +203,7 @@ const ButtonEven = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.up("xs")]: {
-    width: "50%",
+    width: "45%",
     height: "50px",
     justifyContent: "center",
     margin: "0px auto 5px",
@@ -249,7 +211,7 @@ const ButtonEven = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.up("sm")]: {
-    width: "50%",
+    width: "45%",
     height: "50px",
     justifyContent: "center",
     margin: "25px auto 5px",
@@ -272,10 +234,10 @@ const ButtonEven = styled(Box)(({ theme }) => ({
     marginBottom: "22px",
     height: "67px",
   },
-  [theme.breakpoints.up("xl")]: {
-    height: "83px",
-    width: "300px",
-  },
+  // [theme.breakpoints.up("xl")]: {
+  //   height: "83px",
+  //   width: "300px",
+  // },
 }));
 
 const Item = styled("div")(
@@ -298,6 +260,7 @@ const Item = styled("div")(
   @media (min-width: 0px) {
     width: 282px;
     height: 172px;
+    border:4px solid #fff7ed;
   }
   @media (min-width: 450px) {
     width: 356px; 
@@ -306,6 +269,7 @@ const Item = styled("div")(
   @media (min-width: 768px) {
     width: 504px;
     height: 279px;
+    border: 10px solid #fff7ed;
   } 
   @media (min-width: 1024px) {
     width: 700px; 
@@ -430,21 +394,23 @@ function ModuleVideo() {
         <Box
           sx={{
             display: "flex",
+            flexWrap: "wrap",
             // flexWrap: "wrap",
             justifyContent: "space-around",
-            width: { lg: "75vw", md: "80%", sm: "100%", xs: "100%" },
+            width: { lg: "75vw", md: "80%", sm: "90%", xs: "90%" },
             margin: {
               lg: "15px auto",
               md: "177px auto 0",
               sm: "100px auto 0",
               xs: "-100px auto 0",
             },
-            left: { xl: "0", lg: "0" },
+            left: { xl: "0", lg: "0", xs: "0" },
+
             right: 0,
             position: "absolute",
 
-            bottom: { xl: "10%", lg: "13%" },
-            "& h2": {
+            bottom: { xl: "10%", lg: "13%", xs: "45px" },
+            "& p": {
               fontSize: { md: "1rem", xs: "11px" },
             },
           }}

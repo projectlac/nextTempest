@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
 import { useEffect, useState } from "react";
 import FlashSate from "../../../styles/assets/images/Shop/FLASH-SALE.png";
-import BGButtonShowMore from "../../../styles/assets/images/Shop/Layer-28.png";
+import BGButtonShowMore from "../../../styles/assets/images/Shop/Button-Fornite_Tempest.png";
 
 import Link from "next/link";
 import tagApi from "../../../api/tag";
@@ -12,7 +12,7 @@ import ShopItem from "./ShopItem";
 const ButtonShowMore = styled(Box)({
   display: "flex",
   left: "0",
-  bottom: "-35px",
+  bottom: "-30px",
   right: "0",
   zIndex: "2",
   margin: "0 auto",
@@ -25,13 +25,13 @@ const ButtonShowMore = styled(Box)({
   color: "#fff",
 
   "@media (min-width: 0)": {
-    height: "47px",
+    height: "41px",
     width: "181px",
     padding: "0 36px",
     fontSize: "14px",
   },
   "@media (min-width: 768px)": {
-    height: "60px",
+    height: "54px",
     width: "237px",
     padding: "1px 60px",
     fontSize: "17px",

@@ -205,6 +205,23 @@ function BillReroll({ id }: IBill) {
                   >
                     <Grid
                       item
+                      md={12}
+                      xs={12}
+                      textAlign="left"
+                      fontFamily={"Montserrat"}
+                      fontWeight={700}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
+                      color={"#58576D"}
+                    >
+                      Mã tài khoản: {account[0]?.code ?? ""}
+                    </Grid>
+                    <Grid
+                      item
                       md={6}
                       xs={6}
                       textAlign="left"

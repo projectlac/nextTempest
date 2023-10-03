@@ -114,7 +114,7 @@ function Footer() {
               }}
             >
               <Link href={"/"}> Trang chủ</Link>
-              <Link href={"/mua-tai-khoan"}>Mua tài khoản</Link>
+              <Link href={"/#"}>Mua tài khoản</Link>
               {/* <Link href={"/tin-tuc"}>Tin Tức</Link> */}
               <Link href={"nap-tien"}>Nạp Tiền</Link>
               <Link href={"/lien-he"}>Liên hệ</Link>

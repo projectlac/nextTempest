@@ -72,31 +72,28 @@ interface IUserData {
   tofUsername: string;
 }
 function Bill({ id }: IBill) {
-  const router = useRouter()
+  const router = useRouter();
   const [time, setTime] = useState("");
   const [account, setAccount] = useState([]);
   const [type, setType] = useState("");
   const [code, setCode] = useState("");
 
   useEffect(() => {
-    const callApi = async() =>{
-      if(id){
+    const callApi = async () => {
+      if (id) {
         try {
-         const res = await audit.getAuditById(id)
-         setTime(res.data.updatedAt);
-         setAccount(res.data.information?.accounts);
-   
-         setType(res.data.information?.gmail);
-         setCode(res.data.id?.split("-")[0]);
-        } catch (error) {   
+          const res = await audit.getAuditById(id);
+          setTime(res.data.updatedAt);
+          setAccount(res.data.information?.accounts);
+
+          setType(res.data.information?.gmail);
+          setCode(res.data.id?.split("-")[0]);
+        } catch (error) {
           console.log(error);
-              
         }
-        
-       }
-       
-    }
-    callApi()
+      }
+    };
+    callApi();
   }, [id, router]);
   const totalMoney = () => {
     const money = account.reduce((a, v) => a + +v.newPrice, 0);
@@ -241,6 +238,23 @@ function Bill({ id }: IBill) {
                   >
                     <Grid
                       item
+                      md={12}
+                      xs={12}
+                      textAlign="left"
+                      fontFamily={"Montserrat"}
+                      fontWeight={700}
+                      sx={{
+                        fontSize: {
+                          md: 18,
+                          xs: 15,
+                        },
+                      }}
+                      color={"#58576D"}
+                    >
+                      Mã tài khoản: {account[0]?.code ?? ""}
+                    </Grid>
+                    <Grid
+                      item
                       md={6}
                       xs={6}
                       textAlign="left"
@@ -294,8 +308,8 @@ function Bill({ id }: IBill) {
                         lg: 0,
                         xs: 2,
                       },
-                      "& a":{
-                        color:'#d33',
+                      "& a": {
+                        color: "#d33",
                       },
                       "& a:before": {
                         content: '""',
@@ -307,15 +321,24 @@ function Bill({ id }: IBill) {
                         backgroundRepeat: "no-repeat",
                         filter: "opacity(0.5)",
                       },
-                      "& a.no-image:before":{
+                      "& a.no-image:before": {
                         background: `transparent`,
-                      }
+                      },
                     }}
                   >
-                    Vì lý do bảo mật: Vui lòng hiện hệ Page <a className="no-image" href="https://www.facebook.com/Rimurushop128?mibextid=LQQJ4d" target="__blank"  style={{
+                    Vì lý do bảo mật: Vui lòng hiện hệ Page{" "}
+                    <a
+                      className="no-image"
+                      href="https://www.facebook.com/Rimurushop128?mibextid=LQQJ4d"
+                      target="__blank"
+                      style={{
                         textDecoration: "underline",
                         position: "relative",
-                      }}>Tempest Wibu</a> để được cấp tài khoản mật khẩu
+                      }}
+                    >
+                      Tempest Wibu
+                    </a>{" "}
+                    để được cấp tài khoản mật khẩu
                     <br />
                     Lưu ý: Bạn vui lòng chụp lại hóa đơn <br /> để xác minh với
                     <a

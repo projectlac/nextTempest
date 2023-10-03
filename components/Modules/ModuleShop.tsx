@@ -6,6 +6,8 @@ import NewProductHsr from "./Shop/NewProductHsr";
 import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 import NewProductTof from "./Shop/NewProductTof";
+import TitleHighlightFornite from "../Common/Title/TitleHighlightFornite";
+import NewCategoryIndex from "./NewCategoryIndex";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -24,6 +26,8 @@ function ModuleShop() {
   return (
     <ProductWrap>
       <Container>
+        <NewCategoryIndex></NewCategoryIndex>
+        <TitleHighlightFornite>Danh sách tài khoản</TitleHighlightFornite>
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
         <NewProductLowArHSR />
