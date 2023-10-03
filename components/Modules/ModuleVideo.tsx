@@ -420,14 +420,14 @@ function ModuleVideo() {
         >
           <ButtonEven>
             <Link href={button[0].url} passHref>
-              <a rel="noopener noreferrer">
+              <a rel="noopener noreferrer" target="__blank">
                 <Typography>{button[0].title}</Typography>
               </a>
             </Link>
           </ButtonEven>
           <ButtonEven>
             <Link href={button[1].url} passHref>
-              <a rel="noopener noreferrer">
+              <a rel="noopener noreferrer" target="__blank">
                 <Typography>{button[1].title}</Typography>
               </a>
             </Link>
@@ -435,14 +435,14 @@ function ModuleVideo() {
 
           <ButtonEven>
             <Link href={button[2].url} passHref>
-              <a rel="noopener noreferrer">
+              <a rel="noopener noreferrer" target="__blank">
                 <Typography>{button[2].title}</Typography>
               </a>
             </Link>
           </ButtonEven>
           <ButtonEven>
             <Link href={button[2].url} passHref>
-              <a rel="noopener noreferrer">
+              <a rel="noopener noreferrer" target="__blank">
                 <Typography>{button[3].title}</Typography>
               </a>
             </Link>
