@@ -165,7 +165,7 @@ const Title = styled(Typography)(
  } 
 
  @media (min-width: 1024px) {
-  font-size: 23px;
+  font-size: 21px;
    position: absolute;
   padding-top: 20px;
   top: auto;
@@ -174,7 +174,7 @@ const Title = styled(Typography)(
 } 
 @media (min-width: 1400px) {
   padding-top: 65px;
-  font-size: 22px;
+  font-size: 21px;
 bottom: 4%;
 } 
       `
