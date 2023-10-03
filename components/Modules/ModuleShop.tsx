@@ -26,8 +26,8 @@ function ModuleShop() {
       <Container>
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
-        <NewProductLowAr></NewProductLowAr>
         <NewProductLowArHSR />
+        <NewProductLowAr></NewProductLowAr>
         <NewProductTof></NewProductTof>
 
         {/* <FlashSale></FlashSale> */}
