@@ -441,7 +441,7 @@ function ModuleVideo() {
             </Link>
           </ButtonEven>
           <ButtonEven>
-            <Link href={button[2].url} passHref>
+            <Link href={button[3].url} passHref>
               <a rel="noopener noreferrer" target="__blank">
                 <Typography>{button[3].title}</Typography>
               </a>
