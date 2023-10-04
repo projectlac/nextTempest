@@ -1,8 +1,6 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
-import background from "../../../../styles/assets/images/Background.png";
-import BGContainer from "../../../../styles/assets/images/Shop/BuyAccountBG.png";
+import background from "../../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import { TAG_TYPE } from "../../../../types/account";
 
 import TitleHighlight from "../../../Common/Title/TitleHighlight";
@@ -40,6 +38,7 @@ function DetailAccountModule({ data }: DataDetail) {
               lg: 8,
               xs: 6,
             },
+            textShadow: "0 0 5px #69e0ff, 0 0 10px #69e0ff, 0 0 15px #69e0ff",
           }}
           color="#fff"
         >

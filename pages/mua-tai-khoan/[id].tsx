@@ -8,7 +8,6 @@ import Meta from "../../styles/assets/images/homeImage.jpg";
 export default function IndexPage() {
   const router = useRouter();
   const { id, search } = router.query;
-  console.log(router.query);
 
   const renderSeo = (id) => {
     switch (id) {

@@ -145,7 +145,8 @@ const Title = styled(Typography)(
   text-align: center;
   padding-top: 80px;
   font-size: 25px;
-  color:#2B78BB;
+  color:#fff;
+   text-shadow: 0 0 5px #69e0ff, 0 0 10px #69e0ff, 0 0 15px #69e0ff;
   @media (min-width: 0px) {
     font-size: 14px;  
    padding-top: 20px;
@@ -333,19 +334,6 @@ function ModuleVideo() {
       setImage(image);
     });
   }, []);
-  // const [isPlay, setIsPlay] = useState<boolean>(false);
-
-  // const playVideo = () => {
-  //   setIsPlay(true);
-  //   const myVideo = document.getElementById("video") as HTMLVideoElement | null;
-  //   myVideo.volume = 0.75;
-  //   myVideo.play();
-  // };
-  // const pauseVideo = () => {
-  //   setIsPlay(false);
-  //   const myVideo = document.getElementById("video") as HTMLVideoElement | null;
-  //   myVideo.pause();
-  // };
 
   const next = () => {
     let lists = document.querySelectorAll(".item");

@@ -1,14 +1,7 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import {
   Box,
+  Button,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -16,9 +9,22 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import MuiAccordionSummary, {
+  AccordionSummaryProps,
+} from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+import * as React from "react";
 import tagApi from "../../../../../api/tag";
-import { TAG_TYPE } from "../../../../../types/account";
 import { useAppContext } from "../../../../../context/state";
+import { TAG_TYPE } from "../../../../../types/account";
+import FindByAr from "../FindByAr";
+import FindByCode from "../FindByCode";
+import PrireFilter from "../PrireFilter";
+import SortOption from "../SortOption";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface AccordionProp {
   title: string;
@@ -222,7 +228,12 @@ export default function CustomizedAccordions({ slug }: IBuy) {
     server: "",
     character: [],
     weapon: [],
+    ar: "",
+    code: "",
+    rangePrice: [],
+    orderPrice: 0,
   });
+
   const handleFilter = (data: string, active: boolean, title: string) => {
     const tempSelected = { ...selectedFilter };
     const key = title.toLowerCase();
@@ -236,21 +247,53 @@ export default function CustomizedAccordions({ slug }: IBuy) {
         setSelectedFilter(tempSelected);
       }
     }
-    handleSelectedFilter(selectedFilter);
-    updated();
   };
 
   const handleChangeServer = (data: string) => {
     const tempSelected = { ...selectedFilter };
     tempSelected.server = data;
     setSelectedFilter(tempSelected);
-    handleSelectedFilter(tempSelected);
+  };
+
+  const handleChangeAr = (data: string) => {
+    const tempSelected = { ...selectedFilter };
+    tempSelected.ar = data;
+    setSelectedFilter(tempSelected);
+  };
+  const handleChangeCode = (data: string) => {
+    const tempSelected = { ...selectedFilter };
+    tempSelected.code = data;
+    setSelectedFilter(tempSelected);
+  };
+  const handleSortByPrice = (data: string) => {
+    const tempSelected = { ...selectedFilter };
+
+    const newArr = data.split("-");
+    if (newArr[0] !== "all") {
+      tempSelected.rangePrice = newArr.map(Number);
+    } else {
+      tempSelected.rangePrice = [0];
+    }
+
+    // setSortByPrice(data);
+
+    setSelectedFilter(tempSelected);
+  };
+  const handleSortBy = (data: number) => {
+    const tempSelected = { ...selectedFilter };
+    tempSelected.orderPrice = data;
+    setSelectedFilter(tempSelected);
+  };
+
+  const submit = () => {
+    handleSelectedFilter(selectedFilter);
     updated();
   };
+
   return (
     <Box
       sx={{
-        height: { md: "1200px", xs: "400px" },
+        height: { md: "1200px", xs: "460px" },
         overflow: "hidden",
         overflowY: "auto",
         paddingRight: "20px",
@@ -260,14 +303,14 @@ export default function CustomizedAccordions({ slug }: IBuy) {
         title={"Server"}
         data={[...listData].filter((d) => d.type === TAG_TYPE.SERVER)}
         handleChangeServer={handleChangeServer}
-        open={true}
+        open={false}
       />
 
       <RenderItem
         title={"Character"}
         data={[...listData].filter((d) => d.type === TAG_TYPE.CHARACTER)}
         handleFilter={handleFilter}
-        open={true}
+        open={false}
       />
       {slug !== "tower-of-fantasy" && (
         <RenderItem
@@ -277,6 +320,14 @@ export default function CustomizedAccordions({ slug }: IBuy) {
           open={false}
         />
       )}
+      <FindByAr handleChangeCode={handleChangeAr} />
+      <FindByCode handleChangeCode={handleChangeCode} />
+      <PrireFilter handleSortByPrice={handleSortByPrice} />
+      <SortOption handleSortBy={handleSortBy} />
+
+      <Button variant="contained" fullWidth sx={{ mt: 1 }} onClick={submit}>
+        <SearchIcon /> Tìm kiếm
+      </Button>
     </Box>
   );
 }

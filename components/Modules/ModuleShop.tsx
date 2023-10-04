@@ -1,13 +1,13 @@
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import background from "../../styles/assets/images/Shop/BG_Product_Tempest.png";
+import TitleHighlight from "../Common/Title/TitleHighlight";
+import NewCategoryIndex from "./NewCategoryIndex";
 import NewProduct from "./Shop/NewProduct";
 import NewProductHsr from "./Shop/NewProductHsr";
 import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 import NewProductTof from "./Shop/NewProductTof";
-import TitleHighlightFornite from "../Common/Title/TitleHighlightFornite";
-import NewCategoryIndex from "./NewCategoryIndex";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -27,7 +27,7 @@ function ModuleShop() {
     <ProductWrap>
       <Container>
         <NewCategoryIndex></NewCategoryIndex>
-        <TitleHighlightFornite>Danh sách tài khoản</TitleHighlightFornite>
+        <TitleHighlight>Danh sách tài khoản</TitleHighlight>
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
         <NewProductLowArHSR />

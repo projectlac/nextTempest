@@ -264,7 +264,11 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
-                      query: { id: "honkai-star-rail", search: "VIP,NEW" },
+                      query: {
+                        id: "honkai-star-rail",
+                        search: "VIP,NEW",
+                        page: "1",
+                      },
                     }}
                   >
                     Honkai Star Rail
@@ -272,7 +276,11 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
-                      query: { id: "genshin-impact", search: "VIP,NEW" },
+                      query: {
+                        id: "genshin-impact",
+                        search: "VIP,NEW",
+                        page: "1",
+                      },
                     }}
                   >
                     Genshin impact
@@ -280,7 +288,7 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
-                      query: { id: "tower-of-fantasy" },
+                      query: { id: "tower-of-fantasy", page: "1" },
                     }}
                   >
                     Tower of fantasy

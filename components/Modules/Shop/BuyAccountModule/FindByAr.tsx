@@ -35,10 +35,7 @@ function FindByAr({ handleChangeCode }: IFindByAr) {
     debounceDropDown(event.target.value);
   };
   return (
-    <FormControl
-      sx={{ m: 1, width: { md: "150px", xs: "44%" } }}
-      variant="outlined"
-    >
+    <FormControl sx={{ my: 1.5 }} fullWidth variant="outlined">
       <InputLabel
         htmlFor="outlined-adornment-password"
         sx={{

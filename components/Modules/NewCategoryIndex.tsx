@@ -1,18 +1,15 @@
-import React from "react";
-import TitleHighlightFornite from "../Common/Title/TitleHighlightFornite";
 import { Box, Grid } from "@mui/material";
 import Image1 from "../../styles/assets/images/CategoryHome/category_reroll_tempest.png";
 import Image2 from "../../styles/assets/images/CategoryHome/category_reroll_vip_tempest.png";
-
 import Image3 from "../../styles/assets/images/CategoryHome/code_tempest.png";
-
-import Image4 from "../../styles/assets/images/CategoryHome/luckySpin_tempest.png";
 import Link from "next/link";
+import Image4 from "../../styles/assets/images/CategoryHome/luckySpin_tempest.png";
+import TitleHighlight from "../Common/Title/TitleHighlight";
 
 function NewCategoryIndex() {
   return (
     <div>
-      <TitleHighlightFornite>HoYoverse Game</TitleHighlightFornite>
+      <TitleHighlight>HoYoverse Game</TitleHighlight>
       <Box mt={4} mb={3}>
         <Grid container spacing={3}>
           <Grid item md={3} sm={3} xs={6}>

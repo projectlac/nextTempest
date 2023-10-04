@@ -10,7 +10,7 @@ const BoxRunning = styled(Box)({
   "@media (max-width: 1024px)": {
     display: "block",
   },
-  "@media (max-width: 435px)": {
+  "@media (max-width: 768px)": {
     display: "none",
   },
 });

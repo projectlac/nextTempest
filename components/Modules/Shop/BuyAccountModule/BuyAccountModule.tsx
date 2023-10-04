@@ -1,14 +1,22 @@
-import { Box, Container, Grid, Hidden } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Hidden,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 // import background from "../../../../styles/assets/images/Background.png";
-import background from "../../../../styles/assets/images/Shop/Mask-Group-1.jpg";
+import background from "../../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import BGContainerBot from "../../../../styles/assets/images/Shop/bot.png";
 import BGContainer from "../../../../styles/assets/images/Shop/mid.png";
 import BGContainerTop from "../../../../styles/assets/images/Shop/top.png";
 import TitleHighlight from "../../../Common/Title/TitleHighlight";
 import Filter from "./Filter";
 import ListProduct from "./ListProduct";
-
+import { useState } from "react";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 const ProductWrap = styled(Box)(
   ({ theme }) => `
   
@@ -71,6 +79,11 @@ interface IBuy {
   type: string;
 }
 function BuyAccountModule({ slug, type }: IBuy) {
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
   return (
     <ProductWrap>
       <Box
@@ -90,12 +103,63 @@ function BuyAccountModule({ slug, type }: IBuy) {
           </TitleHighlight>
         </Container>
         <BackgroundShop>
+          <Hidden mdUp>
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: "2",
+                display: "flex",
+                alignItems: "center",
+                mb: 2,
+                pt: 1,
+                pl: 1,
+              }}
+              onClick={() => {
+                setShow(true);
+              }}
+            >
+              <Button variant="outlined">
+                <TravelExploreIcon color="primary" />
+                <Typography color={"primary"} ml={1}>
+                  Bộ lọc
+                </Typography>
+              </Button>
+            </Box>
+          </Hidden>
+          <Hidden mdUp>
+            <Box
+              sx={{
+                position: "fixed",
+                top: "50%",
+                zIndex: "99",
+                left: "0",
+                right: "0",
+                transform: "translateY(-50%)",
+                display: show ? "block" : "none",
+              }}
+            >
+              <Filter slug={slug} handleClose={handleClose} />
+            </Box>
+            <Box
+              sx={{
+                position: "fixed",
+                top: "0",
+                left: "0",
+                width: "100vw",
+                height: "100vh",
+                background: "#3f3f3f47",
+                zIndex: "98",
+                display: show ? "block" : "none",
+              }}
+            ></Box>
+          </Hidden>
           <Grid container>
             <Hidden mdDown>
               <Grid item md={3}>
                 <Filter slug={slug} />
               </Grid>
             </Hidden>
+
             <Grid item md={9} sm={12} xs={12}>
               {/* {slug === "genshin-impact" ? <ListProduct /> : <ListProductTOF />} */}
               <ListProduct slug={slug} type={type} />

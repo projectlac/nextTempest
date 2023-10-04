@@ -1,28 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  Box,
-  Grid,
-  Hidden,
-  Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
 import ShopItem from "../ShopItem";
-import FilterMobile from "./FilterMobile/FilterMobile";
-import FindByAr from "./FindByAr";
-import FindByCode from "./FindByCode";
-import PrireFilter from "./PrireFilter";
-import SortOption from "./SortOption";
 interface IBuy {
   slug: string;
   type: string;
 }
 function ListProduct({ slug, type }: IBuy) {
   const { selectedFilter, update } = useAppContext();
-  const [pageCurrently, setPageCurrently] = useState<number>(0);
+  // const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
   const [sortBy, setSortBy] = useState<number>(null);
@@ -30,11 +19,16 @@ function ListProduct({ slug, type }: IBuy) {
   const [findCode, setFindCode] = useState<string>("");
   const [findAr, setFindAr] = useState<string>("");
 
+  const router = useRouter();
+  const { page: pageHistory } = router.query;
+
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setPageCurrently((page - 1) * 9);
+    const currentUrl = router.asPath;
+    let url = currentUrl.split("page=");
+    router.push(`${url[0]}page=${page}`);
     executeScroll();
   };
 
@@ -48,102 +42,41 @@ function ListProduct({ slug, type }: IBuy) {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  const handleSortBy = (data: number) => {
-    setSortBy(data);
-  };
-  const handleSortByPrice = (data: string) => {
-    const newArr = data.split("-");
-    if (newArr[0] !== "all") {
-      setSortByPrice(newArr.map(Number));
-      setPageCurrently(0);
-    } else {
-      setSortByPrice([0]);
-      setPageCurrently(0);
-    }
-
-    // setSortByPrice(data);
-  };
   enum CONST_INFORMATION {
     LIMIT = 9,
   }
 
-  const handleChangeCode = (code: string) => {
-    setFindCode(code);
-    setPageCurrently(0);
-  };
-
-  const handleChangeAr = (code: string) => {
-    setFindAr(code);
-
-    setPageCurrently(0);
-  };
-
   useEffect(() => {
     const getData = async () => {
-      try {
-        if (slug) {
-          await tagApi
-            .getAccountWithPage({
-              character: selectedFilter.character.toString(),
-              limit: CONST_INFORMATION.LIMIT,
-              offset: pageCurrently,
-              server: selectedFilter.server.toString(),
-              weapon: selectedFilter.weapon.toString(),
-              sort: sortBy,
-              queryString: findCode,
-              startPrice: sortByPrice[0],
-              endPrice: sortByPrice[1],
-              game: slug,
-              isSold: false,
-              arFrom: 0,
-              arTo: findAr,
-              type: type !== undefined ? type : "",
-            })
-            .then((res) => {
-
-              setProductList(res.data.data);
-              setTotal(res.data.total);
-            });
-        }
-      } catch (error) { }
-    };
-    getData();
-  }, [update, sortBy, pageCurrently, findCode, sortByPrice, findAr]);
-
-  useEffect(() => {
-    const getData = async () => {
-
-
+      let tempPage = pageHistory ? (+pageHistory - 1) * 9 : 0;
       try {
         if (slug) {
           await tagApi
             .getAccount({
-              character: "",
+              character: selectedFilter.character.toString(),
               limit: CONST_INFORMATION.LIMIT,
-              offset: 0,
-              server: "",
-              weapon: "",
-              sort: sortBy,
-              queryString: "",
-              startPrice: sortByPrice[0],
-              endPrice: sortByPrice[1],
+              offset: tempPage,
+              server: selectedFilter.server.toString(),
+              weapon: selectedFilter.weapon.toString(),
+              sort: selectedFilter.orderPrice,
+              queryString: selectedFilter.code,
+              startPrice: selectedFilter.rangePrice[0],
+              endPrice: selectedFilter.rangePrice[1],
               game: slug,
               isSold: false,
+              arFrom: 0,
+              arTo: selectedFilter.ar,
               type: type !== undefined ? type : "",
             })
             .then((res) => {
-              // const sold = res.data.data.filter(
-              //   (d) => d.status === "AVAILABLE"
-              // );
-
               setProductList(res.data.data);
               setTotal(res.data.total);
             });
         }
-      } catch (error) { }
+      } catch (error) {}
     };
     getData();
-  }, [slug]);
+  }, [slug, update, selectedFilter, pageHistory]);
 
   return (
     <Box
@@ -168,31 +101,6 @@ function ListProduct({ slug, type }: IBuy) {
         }}
         id="scrollTo"
       >
-        <Hidden mdDown>
-          <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
-            <FindByAr handleChangeCode={handleChangeAr} />
-
-            <FindByCode handleChangeCode={handleChangeCode} />
-            <PrireFilter handleSortByPrice={handleSortByPrice} />
-            <SortOption handleSortBy={handleSortBy} />
-          </Box>
-        </Hidden>
-        <Hidden mdUp>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              mb: 1,
-            }}
-          >
-            <FindByAr handleChangeCode={handleChangeAr} />
-            <FindByCode handleChangeCode={handleChangeCode} />
-            <PrireFilter handleSortByPrice={handleSortByPrice} />
-            <SortOption handleSortBy={handleSortBy} />
-          </Box>
-          <FilterMobile slug={slug}></FilterMobile>
-        </Hidden>
         <Grid container columnSpacing={3}>
           {productList.length > 0 ? (
             productList.map((d, i) => (
@@ -258,6 +166,7 @@ function ListProduct({ slug, type }: IBuy) {
                 variant="outlined"
                 shape="rounded"
                 onChange={handleChangePagination}
+                page={+pageHistory ?? 1}
               />
             )}
           </Stack>

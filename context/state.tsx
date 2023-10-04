@@ -13,6 +13,10 @@ interface SelectedFilterType {
   server: string;
   character: string[];
   weapon: string[];
+  ar: string;
+  code: string;
+  rangePrice: number[];
+  orderPrice: number | null;
 }
 
 const AppContext = createContext(null);
@@ -28,6 +32,10 @@ export function AppWrapper({ children }) {
     server: "",
     character: [],
     weapon: [],
+    ar: "",
+    code: "",
+    rangePrice: [],
+    orderPrice: null,
   });
 
   const handleSelectedFilter = (data: SelectedFilterType) => {
