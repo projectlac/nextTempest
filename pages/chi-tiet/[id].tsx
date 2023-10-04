@@ -38,8 +38,7 @@ DetailProduct.getLayout = function getLayout(page) {
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const res = await tagApi.getAccountBySlug(id as string);
-  console.log(res);
-  
+
   const post = await res.data;
 
   return { props: { post } };
