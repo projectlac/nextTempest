@@ -376,12 +376,12 @@ function HeaderHome() {
               >
                 <Link href="/nap-tien">{trans[1][3]}</Link>
               </Typography> */}
-              <Typography
+              {/* <Typography
                 component="h2"
                 className={`${activeClass("/lien-he")}`}
               >
                 <Link href="/lien-he">{trans[1][4]}</Link>
-              </Typography>
+              </Typography> */}
               {/* <Typography
                 component="h2"
                 className={`${activeClass("/uy-tin")}`}

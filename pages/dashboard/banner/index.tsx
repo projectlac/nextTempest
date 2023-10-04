@@ -86,8 +86,6 @@ function Banner() {
           <Card>
             <Box p={3} textAlign={"center"}>
               Vui lòng chọn ảnh theo thứ tự <br />
-              Banner nhân vật 1 - Banner nhân vật 2 (nếu có) - Banner vũ khí
-              <br /> Kích thước chuẩn : 2244 x 1146
               <Box mt={3}>
                 <Button variant="contained" component="label">
                   Upload banner
@@ -124,8 +122,7 @@ function Banner() {
             <Divider></Divider>
             <Box>
               <Typography textAlign={"center"} fontSize={20} my={3}>
-                {" "}
-                Thông báo
+                Danh sách ảnh
               </Typography>
               <Box
                 sx={{

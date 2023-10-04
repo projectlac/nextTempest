@@ -317,21 +317,19 @@ function ModuleVideo() {
         url: rawData.url.split(","),
       };
       let button = [];
-      let image = [];
       for (let index = 0; index < 6; index++) {
         button.push({
           title: data.title[index],
           url: data.url[index],
         });
       }
-      for (let index = 6; index < data.title.length; index++) {
-        image.push({
-          title: data.title[index],
-          url: data.url[index],
-        });
-      }
+
       setButton(button);
-      setImage(image);
+    });
+
+    banner.getBanner().then((res) => {
+      const imageList = res.data.map((d) => ({ url: d.url, title: "" }));
+      setImage(imageList);
     });
   }, []);
 
@@ -361,8 +359,9 @@ function ModuleVideo() {
       <FrameTop>
         {/* <PostBox> */}
         <VideoBox className="box-slider">
-          <button id="prev" onClick={prev}></button>
-          <button id="next" onClick={next}></button>
+          {image.length > 1 && <button id="prev" onClick={prev}></button>}
+          {image.length > 1 && <button id="next" onClick={next}></button>}
+
           <BookWrap id="sliderBox">
             {image.length > 0 &&
               image.map((d, i) => (

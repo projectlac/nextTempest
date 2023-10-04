@@ -11,12 +11,10 @@ import audit from "../../../api/audit";
 function Setting() {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
-  const [numberOfImage, setNumberOfImage] = useState<number>(3);
   const [thisIsTokenMomo, setThisIsTokenMomo] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   // uu tien account cua ai len truoc
   const [prioritize, setPrioritize] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [defaultDataButton, setDefaultDataButton] = useState([
     { title: "", url: "", poster: "" },
@@ -26,35 +24,6 @@ function Setting() {
     { title: "", url: "", poster: "" },
     { title: "", url: "", poster: "" },
   ]);
-  const [defaultData, setDefaultData] = useState([
-    { title: "image", url: "", poster: "" },
-    { title: "image", url: "", poster: "" },
-    { title: "image", url: "", poster: "" },
-  ]);
-  const defaultItem = { title: "image", url: "", poster: "" };
-
-  const addItem = () => {
-    setNumberOfImage((prev) => prev + 1);
-    let temp = [...defaultData, defaultItem];
-    setDefaultData(temp);
-  };
-  const removeItem = (index: number) => {
-    setNumberOfImage((prev) => prev - 1);
-    let temp = [...defaultData];
-    temp.splice(index, 1);
-    setDefaultData(temp);
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index) => {
-    let temp = [...defaultData];
-    temp[index].title = event.target.value;
-    setDefaultData(temp);
-  };
-  const changeUrl = (event: React.ChangeEvent<HTMLInputElement>, index) => {
-    let temp = [...defaultData];
-    temp[index].url = event.target.value;
-    setDefaultData(temp);
-  };
 
   const changeButtonUrl = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -71,25 +40,6 @@ function Setting() {
     let temp = [...defaultDataButton];
     temp[index].title = event.target.value;
     setDefaultDataButton(temp);
-  };
-
-  const submit = () => {
-    let rawData = [...defaultDataButton, ...defaultData];
-    let getTitle = rawData.map((d) => d.title).toString();
-    let geturl = rawData.map((d) => d.url).toString();
-    let getPoster = rawData.map((d) => d.poster).toString();
-    let finalData = { title: getTitle, url: geturl, poster: getPoster };
-    setLoading(true);
-    banner
-      .updateInforHomePage(finalData)
-      .then((res) => {
-        handleChangeMessageToast("Cập nhật thành công");
-        handleChangeStatusToast();
-        updated();
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   };
 
   useEffect(() => {
@@ -130,9 +80,8 @@ function Setting() {
           poster: rawData.poster[index],
         });
       }
-      setDefaultData(image);
+
       setDefaultDataButton(button);
-      setNumberOfImage(rawData.title.length - 6);
       setShow(res.data[index].show);
     });
   }, []);
@@ -270,74 +219,6 @@ function Setting() {
             />
           </Grid>
         </Grid>
-      </Box>
-      <Box
-        sx={{
-          p: 3,
-          "& .MuiTextField-root": {
-            marginBottom: "10px",
-          },
-        }}
-      >
-        <Box sx={{ mb: 2 }}>
-          Cụm ảnh{" "}
-          <Button variant="contained" onClick={addItem}>
-            Thêm
-          </Button>
-        </Box>
-        <Grid container columnSpacing={2} rowSpacing={2}>
-          {[...Array(numberOfImage)].map((d, i) => (
-            <Grid item md={4} key={i}>
-              <Box sx={{ display: "flex" }}>
-                <Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    {/* <TextField
-                            select
-                            value={defaultData[i]?.title}
-                            onChange={(e: any) => handleChange(e, i)}
-                          >
-                            <MenuItem value={"image"}>Ảnh</MenuItem>
-                            <MenuItem value={"video"}>Video</MenuItem>
-                          </TextField> */}
-                    <TextField
-                      fullWidth
-                      placeholder="Đường dẫn"
-                      value={defaultData[i]?.url}
-                      onChange={(e: any) => changeUrl(e, i)}
-                    />
-                    {i > 2 && (
-                      <Button
-                        variant="contained"
-                        color="error"
-                        sx={{ ml: 2 }}
-                        onClick={() => removeItem(i)}
-                      >
-                        Xóa
-                      </Button>
-                    )}
-                  </Box>
-
-                  {/* {defaultData[i]?.title === "video" && (
-                          <TextField
-                            fullWidth
-                            placeholder="Đường dẫn poster"
-                            value={defaultData[i]?.poster}
-                            onChange={(e: any) => changePoster(e, i)}
-                          />
-                        )} */}
-                </Box>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-        <Button variant="contained" onClick={submit}>
-          {loading ? <CircularProgress /> : "Lưu"}
-        </Button>
       </Box>
 
       <TriggerShowProduct show={show}></TriggerShowProduct>

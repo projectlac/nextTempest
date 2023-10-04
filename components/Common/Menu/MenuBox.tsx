@@ -178,9 +178,9 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
             <Typography className={`${activeClass("/nap-tien")}`}>
               <Link href="/nap-tien">{trans[1][3]}</Link>
             </Typography>
-            <Typography className={`${activeClass("/lien-he")}`}>
+            {/* <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">{trans[1][4]}</Link>
-            </Typography>
+            </Typography> */}
             {/* <Typography className={`${activeClass("/uy-tin")}`}>
               <Link href="/uy-tin">Check UT</Link>
             </Typography> */}
