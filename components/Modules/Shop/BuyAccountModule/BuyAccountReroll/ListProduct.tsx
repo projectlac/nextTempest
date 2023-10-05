@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import image from "../../../../../styles/assets/images/version25-genshinimpact-04-1643479276-51.jpg";
-import RerollItem from "./RerollItem";
 import FilterByGame from "../FilterByGame";
-import { useRouter } from "next/router";
-import FilterByType from "../FilterByType";
+import RerollItem from "./RerollItem";
 function ListProduct() {
   const { update } = useAppContext();
   const [pageCurrently, setPageCurrently] = useState<number>(0);

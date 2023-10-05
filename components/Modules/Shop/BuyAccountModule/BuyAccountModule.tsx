@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-// import background from "../../../../styles/assets/images/Background.png";
+// import background from "../../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import background from "../../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import BGContainerBot from "../../../../styles/assets/images/Shop/bot.png";
 import BGContainer from "../../../../styles/assets/images/Shop/mid.png";

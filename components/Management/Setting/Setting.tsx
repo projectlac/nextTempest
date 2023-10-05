@@ -48,15 +48,12 @@ function Setting() {
     let geturl = rawData.map((d) => d.url).toString();
     let getPoster = rawData.map((d) => d.poster).toString();
     let finalData = { title: getTitle, url: geturl, poster: getPoster };
-    
-    banner
-      .updateInforHomePage(finalData)
-      .then((res) => {
-        handleChangeMessageToast("Cập nhật thành công");
-        handleChangeStatusToast();
-        updated();
-      })
-      
+
+    banner.updateInforHomePage(finalData).then((res) => {
+      handleChangeMessageToast("Cập nhật thành công");
+      handleChangeStatusToast();
+      updated();
+    });
   };
 
   useEffect(() => {
@@ -127,7 +124,7 @@ function Setting() {
       >
         Cụm nút
         <Grid container columnSpacing={2} rowSpacing={2}>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <TextField
               fullWidth
               value={defaultDataButton[0].title}
@@ -145,7 +142,7 @@ function Setting() {
               }}
             />
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <TextField
               fullWidth
               value={defaultDataButton[1].title}
@@ -163,7 +160,7 @@ function Setting() {
               }}
             />
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <TextField
               fullWidth
               value={defaultDataButton[2].title}
@@ -181,7 +178,7 @@ function Setting() {
               }}
             />
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={3}>
             <TextField
               value={defaultDataButton[3].title}
               fullWidth
@@ -199,48 +196,11 @@ function Setting() {
               }}
             />
           </Grid>
-          <Grid item md={4}>
-            <TextField
-              fullWidth
-              value={defaultDataButton[4].title}
-              placeholder="Tiêu đề"
-              onChange={(e: any) => {
-                changeButtonTitle(e, 4);
-              }}
-            />
-            <TextField
-              fullWidth
-              value={defaultDataButton[4].url}
-              placeholder="Đường dẫn"
-              onChange={(e: any) => {
-                changeButtonUrl(e, 4);
-              }}
-            />
-          </Grid>
-          <Grid item md={4}>
-            <TextField
-              value={defaultDataButton[5].title}
-              fullWidth
-              placeholder="Tiêu đề"
-              onChange={(e: any) => {
-                changeButtonTitle(e, 5);
-              }}
-            />
-            <TextField
-              value={defaultDataButton[5].url}
-              fullWidth
-              placeholder="Đường dẫn"
-              onChange={(e: any) => {
-                changeButtonUrl(e, 5);
-              }}
-            />
-          </Grid>
         </Grid>
         <Button variant="contained" onClick={submit}>
-         Lưu
+          Lưu
         </Button>
       </Box>
-
 
       <TriggerShowProduct show={show}></TriggerShowProduct>
       {["admintp", "admintim"].includes(username) && (

@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import tagApi from "../../../api/tag";
-import background from "../../../styles/assets/images/Background.png";
+import background from "../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import BackBTN from "../../../styles/assets/images/Shop/BackButton.png";
 import FullRimumuBG from "../../../styles/assets/images/Shop/FullRimumu.png";
 import NextBTN from "../../../styles/assets/images/Shop/NextButton.png";

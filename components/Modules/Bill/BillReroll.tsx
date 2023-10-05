@@ -9,7 +9,7 @@ import {
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import background from "../../../styles/assets/images/Background.png";
+import background from "../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import Paper from "../../../styles/assets/images/Shop/BillPaper.png";
 import Thank from "../../../styles/assets/images/Shop/thank.png";
 import ThankMobile from "../../../styles/assets/images/Shop/thankMobile.png";

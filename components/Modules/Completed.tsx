@@ -1,7 +1,7 @@
 import { Box, Container, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import React from "react";
-import background from "../../styles/assets/images/Background.png";
+import background from "../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import BGContainer from "../../styles/assets/images/Shop/mid.png";
 import BGContainerTop from "../../styles/assets/images/Shop/top.png";
 import BGContainerBot from "../../styles/assets/images/Shop/bot.png";

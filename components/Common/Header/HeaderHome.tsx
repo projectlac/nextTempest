@@ -370,12 +370,14 @@ function HeaderHome() {
                   </Link>
                 </ChildMenu>
               </ParentMenu>
-              {/* <Typography
-                component="h2"
-                className={`${activeClass("/nap-tien")}`}
-              >
-                <Link href="/nap-tien">{trans[1][3]}</Link>
-              </Typography> */}
+              <Typography component="h2">
+                <a
+                  href="https://www.facebook.com/tempest.goods?locale=vi_VN"
+                  target="__blank"
+                >
+                  Order Goods & Doll
+                </a>
+              </Typography>
               {/* <Typography
                 component="h2"
                 className={`${activeClass("/lien-he")}`}

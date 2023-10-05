@@ -139,7 +139,11 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link
                   href={{
                     pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "honkai-star-rail", search: "VIP,NEW" , page: '1'},
+                    query: {
+                      id: "honkai-star-rail",
+                      search: "VIP,NEW",
+                      page: "1",
+                    },
                   }}
                 >
                   Honkai Star Rail
@@ -147,7 +151,11 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link
                   href={{
                     pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "genshin-impact", search: "VIP,NEW" ,  page: '1'},
+                    query: {
+                      id: "genshin-impact",
+                      search: "VIP,NEW",
+                      page: "1",
+                    },
                   }}
                 >
                   <a className={`${activeClass("/genshin-impact")}`}>
@@ -172,11 +180,20 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 </Link>
               </ChildMenu>
             </Box>
+
             {/* <Typography className={`${activeClass("/tin-tuc")}`}>
               <Link href="/tin-tuc">{trans[1][2]}</Link>
             </Typography> */}
             <Typography className={`${activeClass("/nap-tien")}`}>
               <Link href="/nap-tien">{trans[1][3]}</Link>
+            </Typography>
+            <Typography>
+              <a
+                href="https://www.facebook.com/tempest.goods?locale=vi_VN"
+                target="__blank"
+              >
+                Order Goods & Doll
+              </a>
             </Typography>
             {/* <Typography className={`${activeClass("/lien-he")}`}>
               <Link href="/lien-he">{trans[1][4]}</Link>
