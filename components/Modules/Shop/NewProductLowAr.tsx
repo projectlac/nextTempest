@@ -140,7 +140,7 @@ function NewProduct() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: "genshin-impact", search: "NEW" },
+              query: { id: "genshin-impact", search: "NEW" ,  page: '1'},
             }}
             passHref
           >

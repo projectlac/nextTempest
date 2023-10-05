@@ -139,7 +139,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link
                   href={{
                     pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "honkai-star-rail", search: "VIP,NEW" },
+                    query: { id: "honkai-star-rail", search: "VIP,NEW" , page: '1'},
                   }}
                 >
                   Honkai Star Rail
@@ -147,7 +147,7 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link
                   href={{
                     pathname: "/mua-tai-khoan/[id]",
-                    query: { id: "genshin-impact", search: "VIP,NEW" },
+                    query: { id: "genshin-impact", search: "VIP,NEW" ,  page: '1'},
                   }}
                 >
                   <a className={`${activeClass("/genshin-impact")}`}>

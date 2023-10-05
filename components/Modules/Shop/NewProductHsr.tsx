@@ -141,7 +141,7 @@ function NewProductHsr() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: "honkai-star-rail", search: "VIP" },
+              query: { id: "honkai-star-rail", search: "VIP", page: '1' },
             }}
             passHref
           >
