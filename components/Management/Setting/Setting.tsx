@@ -42,6 +42,23 @@ function Setting() {
     setDefaultDataButton(temp);
   };
 
+  const submit = () => {
+    let rawData = [...defaultDataButton];
+    let getTitle = rawData.map((d) => d.title).toString();
+    let geturl = rawData.map((d) => d.url).toString();
+    let getPoster = rawData.map((d) => d.poster).toString();
+    let finalData = { title: getTitle, url: geturl, poster: getPoster };
+    
+    banner
+      .updateInforHomePage(finalData)
+      .then((res) => {
+        handleChangeMessageToast("Cập nhật thành công");
+        handleChangeStatusToast();
+        updated();
+      })
+      
+  };
+
   useEffect(() => {
     audit.getProfile().then((res) => {
       setUsername(res.data.username);
@@ -219,7 +236,11 @@ function Setting() {
             />
           </Grid>
         </Grid>
+        <Button variant="contained" onClick={submit}>
+         Lưu
+        </Button>
       </Box>
+
 
       <TriggerShowProduct show={show}></TriggerShowProduct>
       {["admintp", "admintim"].includes(username) && (
