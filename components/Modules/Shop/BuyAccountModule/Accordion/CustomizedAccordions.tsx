@@ -209,8 +209,9 @@ const RadioItem = ({ title, data, handleChangeServer, open }: RadioProp) => {
 };
 interface IBuy {
   slug: string;
+  handleClose: () => void;
 }
-export default function CustomizedAccordions({ slug }: IBuy) {
+export default function CustomizedAccordions({ slug, handleClose }: IBuy) {
   const { updated, handleSelectedFilter } = useAppContext();
   const [listData, setListData] = React.useState([]);
   React.useEffect(() => {
@@ -288,6 +289,7 @@ export default function CustomizedAccordions({ slug }: IBuy) {
   const submit = () => {
     handleSelectedFilter(selectedFilter);
     updated();
+    handleClose?.();
   };
 
   return (

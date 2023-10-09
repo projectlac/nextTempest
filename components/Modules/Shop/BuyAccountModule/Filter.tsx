@@ -37,22 +37,12 @@ function Filter({ slug, handleClose }: IBuy) {
     >
       <Box sx={{ padding: "0 15px" }}>
         <FilterBox>
-          <Hidden mdUp>
-            <Box position={"absolute"} right={40}>
-              <CloseIcon
-                color="error"
-                onClick={() => {
-                  handleClose?.();
-                }}
-              />
-            </Box>
-          </Hidden>
           <Typography
             sx={{ fontSize: { md: "25px", xs: "17px" }, color: "#4B66A2" }}
           >
             Tìm theo:
           </Typography>
-          <CustomizedAccordions slug={slug} />
+          <CustomizedAccordions slug={slug} handleClose={handleClose} />
         </FilterBox>
       </Box>
     </Box>
