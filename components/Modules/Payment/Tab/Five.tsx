@@ -4,6 +4,9 @@ import { Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 import Devider from "../../../../styles/assets/images/payment/PaymentDevider.png";
+import { useState } from "react";
+import paymentApi from "../../../../api/paymentApi";
+import { useAppContext } from "../../../../context/state";
 
 interface PropsSelectedMenu {
   handleValue: (value: string) => void;
@@ -85,12 +88,35 @@ const CustomField = styled(Field)(
 );
 
 function Five() {
+  const [loading, setLoading] = useState<boolean>(false);
+  const { handleChangeStatusToast, handleChangeMessageToast } = useAppContext();
   const LoginSchema = Yup.object().shape({
     code: Yup.string().required("*Mã thẻ không được để trống "),
-    seri: Yup.string().required("*Số seri không được để trống "),
-    type: Yup.string().required("*Loại thẻ không được để trống "),
-    cost: Yup.string().required("*Giá trị thẻ không được để trống"),
+    serial: Yup.string().required("*Số seri không được để trống "),
+    telco: Yup.string().required("*Loại thẻ không được để trống "),
+    amount: Yup.string().required("*Giá trị thẻ không được để trống"),
   });
+
+  const telcoList = [
+    { value: "VIETTEL", title: "Viettel" },
+    { value: "MOBIFONE", title: "MobiPhone" },
+    { value: "VINAPHONE", title: "VinaPhone" },
+    { value: "VIETNAMOBILE", title: "VietnamMobile" },
+    { value: "ZING", title: "Zing" },
+  ];
+
+  const amountList = [
+    { value: "10000", title: "10.000 VND" },
+    { value: "20000", title: "20.000 VND" },
+    { value: "30000", title: "30.000 VND" },
+    { value: "50000", title: "50.000 VND" },
+    { value: "100000", title: "100.000 VND" },
+    { value: "200000", title: "200.000 VND" },
+    { value: "300000", title: "300.000 VND" },
+    { value: "500000", title: "500.000 VND" },
+    { value: "1000000", title: "1.000.000 VND" },
+  ];
+
   return (
     <DashboardBox>
       <Box>
@@ -110,13 +136,34 @@ function Five() {
           <Formik
             initialValues={{
               code: "",
-              seri: "",
-              type: "",
-              cost: "",
+              serial: "",
+              telco: "VIETTEL",
+              amount: "10000",
             }}
             validationSchema={LoginSchema}
-            onSubmit={(values) => {
-              const { code, seri } = values;
+            onSubmit={async (values, { resetForm }) => {
+              const { code, serial, telco, amount } = values;
+              try {
+                setLoading(true);
+                const res = await paymentApi.topUpWithCard(
+                  telco,
+                  +amount,
+                  serial,
+                  code
+                );
+                if (res.data.result) {
+                  handleChangeStatusToast();
+                  handleChangeMessageToast(
+                    res.data.result ?? "Đổi thẻ thành công"
+                  );
+                  resetForm();
+                }
+              } catch (error) {
+                handleChangeStatusToast();
+                handleChangeMessageToast(error.response.data.message);
+              } finally {
+                setLoading(false);
+              }
             }}
           >
             {({ errors, touched }) => (
@@ -124,15 +171,22 @@ function Five() {
                 <Box width={"90%"} sx={{ margin: "0 auto" }}>
                   <Box sx={{ position: "relative" }}>
                     <CustomField
-                      name="type"
+                      name="telco"
+                      as="select"
                       placeholder="Chọn loại thẻ"
                       style={{
                         borderColor:
-                          errors.type && touched.type
+                          errors.telco && touched.telco
                             ? "#e90000"
                             : "rgb(181, 110, 79)",
                       }}
-                    />
+                    >
+                      {telcoList.map((d) => (
+                        <option value={d.value} key={d.value}>
+                          {d.title}
+                        </option>
+                      ))}
+                    </CustomField>
                   </Box>
                   <Box sx={{ position: "relative" }}>
                     <CustomField
@@ -148,11 +202,11 @@ function Five() {
                   </Box>
                   <Box sx={{ position: "relative" }}>
                     <CustomField
-                      name="seri"
+                      name="serial"
                       placeholder="Seri thẻ"
                       style={{
                         borderColor:
-                          errors.seri && touched.seri
+                          errors.serial && touched.serial
                             ? "#e90000"
                             : "rgb(181, 110, 79)",
                       }}
@@ -161,19 +215,21 @@ function Five() {
 
                   <Box sx={{ position: "relative" }}>
                     <CustomField
-                      name="cost"
+                      name="amount"
                       as="select"
                       placeholder="Chọn giá trị thẻ"
                       style={{
                         borderColor:
-                          errors.cost && touched.cost
+                          errors.amount && touched.amount
                             ? "#e90000"
                             : "rgb(181, 110, 79)",
                       }}
                     >
-                      <option value="red">Red</option>
-                      <option value="green">Green</option>
-                      <option value="blue">Blue</option>
+                      {amountList.map((d) => (
+                        <option value={d.value} key={d.value}>
+                          {d.title}
+                        </option>
+                      ))}
                     </CustomField>
                   </Box>
                 </Box>
@@ -192,8 +248,8 @@ function Five() {
                   }}
                 ></Box>
 
-                <button id="buttonAuth" type="submit">
-                  Nạp ngay!
+                <button id="buttonAuth" type="submit" disabled={loading}>
+                  {loading ? "Đang xử lý..." : "Nạp ngay!"}
                 </button>
               </Form>
             )}

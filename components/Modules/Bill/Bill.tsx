@@ -8,27 +8,32 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import background from "../../../styles/assets/images/Shop/BG_Product_Tempest.png";
 import Paper from "../../../styles/assets/images/Shop/BillPaper.png";
 import Thank from "../../../styles/assets/images/Shop/thank.png";
-import Arrow from "../../../styles/assets/images/PackList/arrow.png";
 
 import ThankMobile from "../../../styles/assets/images/Shop/thankMobile.png";
 
-import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
-import toMoney from "../../../utility/toMoney";
-import audit from "../../../api/audit";
 import { format } from "date-fns";
 import { useRouter } from "next/router";
+import audit from "../../../api/audit";
+import PaiBill from "../../../styles/assets/images/Shop/PaiBill.png";
+import toMoney from "../../../utility/toMoney";
 const ProductWrap = styled(Box)(
   ({ theme }) => `
-    height:100vh;
+    height:1300px;
     width: 100vw;
     background: url(${background.src});
     overflow:hidden;
     background-size: cover;
     justify-content:center;
+    @media (min-width: 0px) {
+          height:800px;
+      } 
+      @media (min-width: 768px) {
+         height:1300px;
+      } 
   `
 );
 const BillBox = styled(Box)(
@@ -301,8 +306,9 @@ function Bill({ id }: IBill) {
                     color={"#144FB5"}
                     sx={{
                       fontSize: {
-                        md: 18,
-                        xs: 15,
+                        md: 16,
+                        sm: 15,
+                        xs: 10,
                       },
                       mt: {
                         lg: 0,

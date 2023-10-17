@@ -186,10 +186,21 @@ const ListTab = styled(Box)({
   },
 });
 function Dashboard() {
+  const router = useRouter();
   const [active, setActive] = useState<number>(1);
   const handleSetActive = (tab: number) => {
     setActive(tab);
   };
+
+  useEffect(() => {
+    const {
+      query: { action },
+    } = router;
+
+    if (action === "card") handleSetActive(3);
+    if (action === "user") handleSetActive(2);
+    if (action === "history") handleSetActive(0);
+  }, [router]);
 
   return (
     <DashboardWrapper
@@ -205,30 +216,34 @@ function Dashboard() {
           className={`${active === 0 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(0);
+            router.push("/nap-tien?action=history");
           }}
         >
-          Lịch sử nạp
+          Lịch sử mua
         </Box>
         <Box
           className={`${active === 1 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(1);
+            router.push("/nap-tien?action=momo");
           }}
         >
           Nạp Slime Coin
         </Box>
-        {/* <Box
+        <Box
           className={`${active === 3 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(3);
+            router.push("/nap-tien?action=card");
           }}
         >
           Đổi thẻ cào
-        </Box> */}
+        </Box>
         <Box
           className={`${active === 2 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(2);
+            router.push("/nap-tien?action=user");
           }}
         >
           Thông tin cá nhân
@@ -249,12 +264,12 @@ function Dashboard() {
                 <Four />
               </Box>
             );
-          // case 3:
-          //   return (
-          //     <Box width={"100%"}>
-          //       <Five />
-          //     </Box>
-          //   );
+          case 3:
+            return (
+              <Box width={"100%"}>
+                <Five />
+              </Box>
+            );
 
           default:
             return (

@@ -214,6 +214,19 @@ const FullRimumu = styled(Box)(
    background-size: contain;
    background-position: bottom;
    background-repeat: no-repeat;
+   @media (min-width: 0px) {
+      width: 450px;
+      height: 689px;   left: -100px
+    } 
+      @media (min-width: 1200px) {
+      width: 450px;
+      height: 689px;
+   
+    } 
+    @media (min-width: 1500) {
+      width: 566px;
+      height: 689px;
+    } 
  `
 );
 

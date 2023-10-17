@@ -368,6 +368,14 @@ function HeaderHome() {
                   >
                     Nạp MOMO
                   </Link>
+                  <Link
+                    href={{
+                      pathname: "/nap-tien",
+                      query: { action: "card" },
+                    }}
+                  >
+                    Đổi thẻ cào
+                  </Link>
                 </ChildMenu>
               </ParentMenu>
               <Typography component="h2">

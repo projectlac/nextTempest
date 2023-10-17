@@ -23,7 +23,7 @@ enum COLOR_BORDER {
 }
 const BodyHead = styled(Box)({
   height: "70px",
-  color: "#A25E42",
+  color: "#A33E42",
   display: "flex",
   background: "#f3e3ca",
 
@@ -113,8 +113,6 @@ function Three() {
     },
   ]);
 
-  const [history, setHistory] = useState([]);
-
   return (
     <Grid container sx={{ position: "relative", zIndex: 2 }}>
       <DashboardBox
@@ -146,11 +144,11 @@ function Three() {
           }}
         >
           <BodyHead>
-            <Box style={{ width: "7%" }}>STT</Box>
-            <Box style={{ width: "25%" }}>Loại tiền</Box>
-            <Box style={{ width: "24%" }}>Mệnh giá</Box>
-            <Box style={{ width: "22%" }}>Ghi chú</Box>
-            <Box style={{ width: "22%" }}>Trạng thái</Box>
+            <Box style={{ width: "10%" }}>STT</Box>
+            <Box style={{ width: "20%" }}>Mã tài khoản</Box>
+            <Box style={{ width: "20%" }}>User</Box>
+            <Box style={{ width: "20%" }}>Password</Box>
+            <Box style={{ width: "30%" }}>Game</Box>
           </BodyHead>
           <BoxBody>
             <InfinityListHistory />

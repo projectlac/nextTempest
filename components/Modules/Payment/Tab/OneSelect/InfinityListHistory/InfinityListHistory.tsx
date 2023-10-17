@@ -1,10 +1,8 @@
-import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import { Box, Card, Container, Divider, Typography } from "@mui/material";
-import { format } from "date-fns";
-import React, { useCallback, useState } from "react";
-import InfiniteScroll from "react-infinite-scroller";
-import audit from "../../../../../../api/audit";
 import styled from "@emotion/styled";
+import { Box } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
+import paymentApi from "../../../../../../api/paymentApi";
+import InfiniteCustom from "./InfiniteCustom";
 
 const BodyTable = styled(Box)({
   background: "#e4ddd2",
@@ -35,47 +33,34 @@ const BodyTable = styled(Box)({
 });
 
 async function fetchIssues(offset) {
-  const links = await audit.showHistoryOfAccount({ limit: 15, offset });
-  const issues = links.data.data;
-
+  const links = await paymentApi.getHistoryOfUser(offset);
+  const data = links.data.data;
+  const total = links.data.total;
   return {
-    links,
-    issues,
+    data,
+    total,
   };
 }
 
 function InfinityListHistory() {
   const [items, setItems] = useState([]);
+
   const [offset, setOffset] = useState<number>(0);
-  const [nextPageUrl, setNextPageUrl] = useState(
-    "https://api.github.com/repos/facebook/react/issues"
-  );
-  const [fetching, setFetching] = useState(false);
+  const [totalRows, setTotalRows] = useState(0);
 
-  const fetchItems = useCallback(async () => {
-    if (fetching) {
-      return;
-    }
-
-    setFetching(true);
-
-    try {
-      const { issues, links } = await fetchIssues(offset);
-      let newOffset = offset + 15;
-      setOffset(newOffset);
-      setItems([...items, ...issues]);
-
-      if (issues.length < 10) {
-        setNextPageUrl(null);
-      } else {
-        setNextPageUrl(links.data.data);
+  const fetchItems = useCallback(
+    async (offset: number) => {
+      try {
+        const { data, total } = await fetchIssues(offset);
+        let newOffset = offset + 9;
+        setOffset(newOffset);
+        setTotalRows(total);
+        setItems([...items, ...data]);
+      } finally {
       }
-    } finally {
-      setFetching(false);
-    }
-  }, [items, fetching, nextPageUrl]);
-
-  const hasMoreItems = !!nextPageUrl;
+    },
+    [items]
+  );
 
   const loader = (
     <div key="loader" className="loader">
@@ -83,33 +68,62 @@ function InfinityListHistory() {
     </div>
   );
 
+  const renderGame = useCallback((slug: string) => {
+    let game = "";
+    switch (slug) {
+      case "genshin-impact":
+        game = "Genshin Impact";
+        break;
+      case "honkai-star-rail":
+        game = "Honkai Star Rail";
+        break;
+
+      default:
+        game = "ToF";
+        break;
+    }
+    return game;
+  }, []);
+
+  useEffect(() => {
+    fetchItems(offset);
+  }, [offset]);
+
   return (
-    <InfiniteScroll
-      loadMore={fetchItems}
-      hasMore={hasMoreItems}
+    <InfiniteCustom
       loader={loader}
+      fetchMore={() => setOffset((prev) => prev + 9)}
+      hasMore={items.length < totalRows}
+      endMessage={<p>You have seen it all</p>}
     >
       <Box>
         {items.map((item, index) => (
           <BodyTable key={item.id}>
-            <Box width={"7%"}>{index + 1}</Box>
-            <Box width={"25%"}>
-              <Box>
-                {item.auditInformations.map((d) => (
-                  <span key={d.id}>{d.name} - </span>
-                ))}
-              </Box>
+            <Box width={"10%"}>{index + 1}</Box>
+            <Box width={"20%"}>
+              <Box>{item.code}</Box>
             </Box>
-            <Box width={"24%"}>{item.total}</Box>
+            <Box
+              width={"20%"}
+              sx={{
+                wordBreak: "break-all",
+              }}
+            >
+              {!item?.tofUsername?.trim() || item?.tofUsername === null
+                ? "Liên hệ Fanpage"
+                : item?.tofUsername}
+            </Box>
 
-            <Box width={"22%"}>{item?.note}</Box>
-            <Box width={"22%"} textTransform="capitalize">
-              {item.status.toLowerCase()}
+            <Box width={"20%"}>
+              {!item?.tofPassword?.trim() || item?.tofPassword === null
+                ? "Liên hệ Fanpage"
+                : item?.tofPassword}
             </Box>
+            <Box width={"30%"}>{renderGame(item?.game)}</Box>
           </BodyTable>
         ))}
       </Box>
-    </InfiniteScroll>
+    </InfiniteCustom>
   );
 }
 
