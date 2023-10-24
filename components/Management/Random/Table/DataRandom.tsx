@@ -32,7 +32,7 @@ function DataRandom() {
 
   const [sold, setSold] = useState<boolean>(false);
 
-  const { update, role } = useAppContext();
+  const { update, username, role } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
   };
@@ -53,7 +53,7 @@ function DataRandom() {
         queryString: "",
         game: "honkai-star-rail",
         isSold: sold,
-        createUser: yourSelf ? "admintp" : undefined,
+        createUser: yourSelf ? username : undefined,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {

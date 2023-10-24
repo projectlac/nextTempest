@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import paymentApi from "../../../../../../api/paymentApi";
 import InfiniteCustom from "./InfiniteCustom";
+import toMoney from "../../../../../../utility/toMoney";
 
 const BodyTable = styled(Box)({
   background: "#e4ddd2",
@@ -99,14 +100,15 @@ function InfinityListHistory() {
       <Box>
         {items.map((item, index) => (
           <BodyTable key={item.id}>
-            <Box width={"10%"}>{index + 1}</Box>
-            <Box width={"20%"}>
+            <Box width={"5%"}>{index + 1}</Box>
+            <Box width={"15%"}>
               <Box>{item.code}</Box>
             </Box>
             <Box
               width={"20%"}
               sx={{
-                wordBreak: "break-all",
+                wordBreak: "break-word",
+                padding: "0 7px",
               }}
             >
               {!item?.tofUsername?.trim() || item?.tofUsername === null
@@ -114,12 +116,19 @@ function InfinityListHistory() {
                 : item?.tofUsername}
             </Box>
 
-            <Box width={"20%"}>
+            <Box
+              width={"20%"}
+              sx={{
+                wordBreak: "break-word",
+                padding: "0 7px",
+              }}
+            >
               {!item?.tofPassword?.trim() || item?.tofPassword === null
                 ? "Liên hệ Fanpage"
                 : item?.tofPassword}
             </Box>
-            <Box width={"30%"}>{renderGame(item?.game)}</Box>
+            <Box width={"20%"}>{toMoney(item?.newPrice ?? 0)} VNĐ</Box>
+            <Box width={"20%"}>{renderGame(item?.game)}</Box>
           </BodyTable>
         ))}
       </Box>

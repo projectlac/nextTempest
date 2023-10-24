@@ -144,11 +144,13 @@ function Three() {
           }}
         >
           <BodyHead>
-            <Box style={{ width: "10%" }}>STT</Box>
-            <Box style={{ width: "20%" }}>Mã tài khoản</Box>
+            <Box style={{ width: "5%" }}>STT</Box>
+            <Box style={{ width: "15%" }}>Mã tài khoản</Box>
             <Box style={{ width: "20%" }}>User</Box>
             <Box style={{ width: "20%" }}>Password</Box>
-            <Box style={{ width: "30%" }}>Game</Box>
+            <Box style={{ width: "20%" }}>Giá tiền</Box>
+
+            <Box style={{ width: "20%" }}>Game</Box>
           </BodyHead>
           <BoxBody>
             <InfinityListHistory />

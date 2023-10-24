@@ -40,7 +40,7 @@ const DashboardWrapper = styled(Box)(({ theme }) => ({
     height: "55px",
     width: "100%",
     top: "0",
-    zIndex: 2,
+    zIndex: 1,
     left: 0,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100%",

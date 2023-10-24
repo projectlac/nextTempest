@@ -52,12 +52,12 @@ const SpanGetData = styled(Box)(({ theme }) => ({
 const CustomField = styled(Field)(
   ({ theme }) => `
     width: 100%;
-    height:80px;
+    height:50px;
     background: #F2EEE9;
     border: 2px solid rgb(181, 110, 79);
     border-radius: 20px;
-    margin-bottom:50px;
-    font-size: 18px;
+    margin-bottom:20px;
+    font-size: 15px;
     padding: 15px 25px;
     font-family: 'Signika';
     @media (max-width: 435px) {
@@ -73,8 +73,8 @@ const CustomField = styled(Field)(
    } 
   
    @media (min-width: 1024px) {
-    height:60px;
-    margin-bottom:30px;
+    height:50px;
+    margin-bottom:15px;
     font-size: 15px;
   
   } 
@@ -239,7 +239,7 @@ function Five() {
                     justifyContent: "space-between",
                     width: "90%",
                     margin: {
-                      md: "0 auto 40px",
+                      md: "0 auto 20px",
                       sm: "0 auto 33px",
                       lg: "0 auto 30px",
                       xs: "25px auto 25px",
@@ -271,11 +271,12 @@ function Five() {
               },
             }}
           >
-            <span>Lưu ý:</span> Vui lòng nạp đúng nội dung để được cộng tiền
-            nhanh nhất. Những tài khoản nạp sai nội dung của website sẽ bị trừ
-            <span>10% số tiền</span>. Sau khi nạp từ 10-15 phút chưa nhận được
-            tiền trong tài khoản vui lòng liên hệ <span>Admin</span> để được hỗ
-            trợ.
+            <span>Lưu ý:</span> <br /> - Cần điền đúng seri, điền sai khiếu nại
+            sẽ không xử lý.
+            <br /> - Nạp thẻ cào sẽ nhận được % theo giá trị đổi thẻ hiện tại.{" "}
+            <br />
+            Sau khi nạp từ 10-15 phút chưa nhận được tiền trong tài khoản vui
+            lòng liên hệ <span>Admin</span> để được hỗ trợ.
           </Typography>
         </Box>
       </Box>

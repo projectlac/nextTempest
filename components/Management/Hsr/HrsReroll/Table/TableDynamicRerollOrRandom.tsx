@@ -36,14 +36,15 @@ interface RecentOrdersTableProps {
   total: number;
   handleChangeLimit: (data: number) => void;
   handleChangePage: (data: number) => void;
-  type:string
+  type: string;
 }
 
 const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
   cryptoOrders,
   handleChangeLimit,
   handleChangePage,
-  total,type
+  total,
+  type,
 }) => {
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
@@ -90,6 +91,7 @@ const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
               <TableCell>STT</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Username</TableCell>
+              {/* <TableCell>Mã account</TableCell> */}
 
               <TableCell>Tình trạng</TableCell>
               <TableCell>Ngày cập nhật</TableCell>

@@ -31,8 +31,8 @@ function DataGenshin() {
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [sold, setSold] = useState<boolean>(false);
-
-  const { update } = useAppContext();
+  const [yourSelf, setYourSelf] = useState<boolean>(false);
+  const { update, username, role } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
   };
@@ -53,6 +53,7 @@ function DataGenshin() {
         queryString: "",
         isSold: sold,
         game: "genshin-impact",
+        createUser: yourSelf ? username : undefined,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -64,7 +65,7 @@ function DataGenshin() {
         let total = res.data.total;
         setTotal(total);
       });
-  }, [update, limitPage, offsetPage, sold]);
+  }, [update, limitPage, offsetPage, sold, yourSelf]);
 
   function fetchDropdownOptions(key) {
     tagApi
@@ -105,6 +106,10 @@ function DataGenshin() {
   const handleChangeSold = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSold(e.target.checked);
   };
+
+  const handleChangeYourSelf = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setYourSelf(e.target.checked);
+  };
   return (
     <Card>
       <Box mb={3}>
@@ -129,6 +134,16 @@ function DataGenshin() {
             label="Ưu tiên đã bán"
           />
         </FormGroup>
+        {["ADMIN"].includes(role) && (
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox checked={yourSelf} onChange={handleChangeYourSelf} />
+              }
+              label="Chỉ hiện tài khoản bản thân"
+            />
+          </FormGroup>
+        )}
         <Box>
           <Typography
             sx={{

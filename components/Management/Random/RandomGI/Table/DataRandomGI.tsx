@@ -33,7 +33,7 @@ function DataRandomGI() {
 
   const [sold, setSold] = useState<boolean>(false);
 
-  const { update, role } = useAppContext();
+  const { update, username, role } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
   };
@@ -54,7 +54,7 @@ function DataRandomGI() {
         queryString: "",
         game: "genshin-impact",
         isSold: sold,
-        createUser: yourSelf ? "admintp" : undefined,
+        createUser: yourSelf ? username : undefined,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {

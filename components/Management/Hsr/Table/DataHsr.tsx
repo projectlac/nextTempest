@@ -32,7 +32,7 @@ function DataHsr() {
 
   const [sold, setSold] = useState<boolean>(false);
 
-  const { update, role } = useAppContext();
+  const { update, username, role } = useAppContext();
   const handleChangeLimit = (data: number) => {
     setLimitPage(data);
   };
@@ -53,7 +53,7 @@ function DataHsr() {
         queryString: search,
         game: "honkai-star-rail",
         isSold: sold,
-        createUser: yourSelf ? "admintp" : undefined,
+        createUser: yourSelf ? username : undefined,
       })
       .then((res) => {
         const data = res.data.data.map((d) => {
@@ -94,7 +94,7 @@ function DataHsr() {
   }
 
   const debounceDropDown = useCallback(
-    _.debounce((nextValue: string) => fetchDropdownOptions(nextValue), 200),
+    _.debounce((nextValue: string) => fetchDropdownOptions(nextValue), 1000),
     []
   );
 
@@ -130,7 +130,7 @@ function DataHsr() {
         <FormGroup>
           <FormControlLabel
             control={<Checkbox checked={sold} onChange={handleChangeSold} />}
-            label="Ưu tiên đã bán"
+            label="Ưu tiên đã bán "
           />
         </FormGroup>
         {["ADMIN"].includes(role) && (

@@ -26,7 +26,9 @@ export function AppWrapper({ children }) {
   const [openDashboard, setOpenDashboard] = useState<boolean>(false);
   const [openToast, setOpenToast] = useState<boolean>(false);
   const [messageToast, setMessageToast] = useState<string>("");
-  const [role, setRole] = useState<string>("");
+  const [role, setRole] = useState<string>("unLoad");
+  const [username, setUsername] = useState<string>("");
+
   const [update, setUpdate] = useState<boolean>(false);
   const [selectedFilter, setSelectedFilter] = useState<SelectedFilterType>({
     server: "",
@@ -97,6 +99,7 @@ export function AppWrapper({ children }) {
       if (res) {
         try {
           setRole(res.data.role);
+          setUsername(res.data.username ?? "");
         } catch (error) {
           localStorage.removeItem("access_token");
         }
@@ -130,6 +133,7 @@ export function AppWrapper({ children }) {
     update,
     handleSelectedFilter,
     selectedFilter,
+    username,
     /* whatever you want */
   };
 
