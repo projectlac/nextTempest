@@ -356,7 +356,7 @@ function Bill({ id }: IBill) {
                     >
                       Admin
                     </a>{" "}
-                    nha.
+                    nếu không nhắn được cho page!
                   </Typography>
                 </Box>
               </BillBox>
