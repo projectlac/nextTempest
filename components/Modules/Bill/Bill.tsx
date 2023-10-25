@@ -346,7 +346,7 @@ function Bill({ id }: IBill) {
                     </a>{" "}
                     để được cấp tài khoản mật khẩu
                     <br />
-                    Lưu ý: Bạn vui lòng chụp lại hóa đơn <br /> để xác minh với
+                    Lưu ý: Bạn vui lòng chụp lại hóa đơn <br /> để xác minh với{" "}
                     <a
                       href="https://www.facebook.com/tranminhvu128/"
                       style={{
