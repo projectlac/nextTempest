@@ -36,7 +36,9 @@ const BgWrap = styled(Box)(
    @media (min-width: 1400px) {
     height:1000px;
   } 
-
+@media (min-width: 1650px) {
+    height:1200px;
+  } 
   `
 );
 const FrameTop = styled(Box)({});
@@ -89,6 +91,7 @@ background-position: -12px;
 } 
 @media (min-width: 1650px) {
      background-position: 40px;
+     height: 680px;
  } 
     `
 );
@@ -131,9 +134,9 @@ const VideoBox = styled(Box)(
 
  } 
   @media (min-width: 1650px) {
-        width: 957px;
-    height: 658px;
-     top: 45%;
+        width: 1300px;
+    height: 900px;
+     top: 48%;
  } 
   
       `
@@ -283,7 +286,10 @@ const Item = styled("div")(
     width: 700px;
      height: 400px; 
   } 
-  
+  @media (min-width: 1650px) {
+    width: 986px;
+     height: 577px; 
+  } 
  
       `
 );
