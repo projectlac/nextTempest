@@ -10,12 +10,22 @@ interface ITag {
   game: string;
 }
 
-interface FormCreateSamePrice{
-  name:string, title:string,cost:number,username:string, password:string, type:string,image:string, code:string
-  gameSlug: string
+interface FormCreateSamePrice {
+  name: string;
+  title: string;
+  cost: number;
+  username: string;
+  password: string;
+  type: string;
+  image: string;
+  code: string;
+  gameSlug: string;
 }
-interface FormEditSamePrice{
-  name:string, cost:number,image:string, code:string
+interface FormEditSamePrice {
+  name: string;
+  cost: number;
+  image: string;
+  code: string;
 }
 const tagApi = {
   getTag(params: ITag): Promise<PromiseApi> {
@@ -62,11 +72,15 @@ const tagApi = {
         return `game=${params.game}`;
       }
     };
-    const url = `/account-get?limit=${params.limit}&offset=${params.offset
-      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
-      }&sort=${params.sort}&queryString=${params.queryString
-      }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type
-      }&vipToNew=true&arForm=${params.arFrom}&arTo=${params.arTo}`;
+    const url = `/account-get?limit=${params.limit}&offset=${
+      params.offset
+    }&weapon=${params.weapon}&character=${params.character}&server=${
+      params.server
+    }&sort=${params.sort}&queryString=${
+      params.queryString
+    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${
+      params.type
+    }&vipToNew=true&arForm=${params.arFrom}&arTo=${params.arTo}`;
     return axiosClient.get(url);
   },
   getAccount(params: AccountForm): Promise<PromiseApi> {
@@ -92,10 +106,13 @@ const tagApi = {
         return `game=${params.game}`;
       }
     };
-    const url = `/account-get?limit=${params.limit}&offset=${params.offset
-      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
-      }&sort=${params.sort}&queryString=${params.queryString
-      }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
+    const url = `/account-get?limit=${params.limit}&offset=${
+      params.offset
+    }&weapon=${params.weapon}&character=${params.character}&server=${
+      params.server
+    }&sort=${params.sort}&queryString=${
+      params.queryString
+    }&${handleLimitPrice()}&${isSold()}&${game()}&type=${params.type}`;
 
     return axiosClient.get(url);
   },
@@ -140,19 +157,42 @@ const tagApi = {
     const url = `/account-same-price/import`;
     return axiosAudit.post(url, file);
   },
-  addOneRerollAccount(data:FormCreateSamePrice): Promise<PromiseApi> {
+  addOneRerollAccount(data: FormCreateSamePrice): Promise<PromiseApi> {
     const url = `/account-same-price/create`;
-    return axiosAudit.post(url, {name:data.name, title:data.title, username:data.username, password:data.password, cost:data.cost, code:data.code, type:data.type, image:data.image, gameSlug:data.gameSlug});
+    return axiosAudit.post(url, {
+      name: data.name,
+      title: data.title,
+      username: data.username,
+      password: data.password,
+      cost: data.cost,
+      code: data.code,
+      type: data.type,
+      image: data.image,
+      gameSlug: data.gameSlug,
+    });
   },
-  getOneRerollAccountById(slug:string): Promise<PromiseApi> {
+  getOneRerollAccountById(slug: string): Promise<PromiseApi> {
     const url = `/account-same-price/get-one/${slug}`;
     return axiosAudit.get(url);
   },
-  editOneRerollAccount(slug:string, data:FormEditSamePrice): Promise<PromiseApi> {
+  editOneRerollAccount(
+    slug: string,
+    data: FormEditSamePrice
+  ): Promise<PromiseApi> {
     const url = `/account-same-price/update/${slug}`;
-    return axiosAudit.put(url, {name:data.name, cost:data.cost, code:data.code, image:data.image});
+    return axiosAudit.put(url, {
+      name: data.name,
+      cost: data.cost,
+      code: data.code,
+      image: data.image,
+    });
   },
-  getRerollAccount(type: string, limit: number, offset: number, game: string): Promise<PromiseApi> {
+  getRerollAccount(
+    type: string,
+    limit: number,
+    offset: number,
+    game: string
+  ): Promise<PromiseApi> {
     const url = `/account-same-price/get-all?limit=${limit}&offset=${offset}&type=${type}&isSold=false&game=${game}`;
     return axiosAudit.get(url);
   },
@@ -162,10 +202,8 @@ const tagApi = {
     offset: number,
     sold: boolean,
     search: string,
-    game?: string,
-
+    game?: string
   ): Promise<PromiseApi> {
-
     const gameParams = () => {
       if (!game) {
         return `game=genshin-impact`;
@@ -173,7 +211,6 @@ const tagApi = {
         return `game=${game}`;
       }
     };
-
 
     const url = `/account-same-price/get-all-by-admin?limit=${limit}&offset=${offset}&type=${type}&isSold=${sold}&search=${search}&${gameParams()}`;
     return axiosAudit.get(url);
@@ -226,11 +263,18 @@ const tagApi = {
       }
     };
 
-    const url = `/account-get/by-admin?limit=${params.limit}&offset=${params.offset
-      }&weapon=${params.weapon}&character=${params.character}&server=${params.server
-      }&sort=${params.sort}&queryString=${params.queryString
-      }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}${typeParams()}`;
+    const url = `/account-get/by-admin?limit=${params.limit}&offset=${
+      params.offset
+    }&weapon=${params.weapon}&character=${params.character}&server=${
+      params.server
+    }&sort=${params.sort}&queryString=${
+      params.queryString
+    }&${handleLimitPrice()}&${isSold()}&${game()}${userParams()}${typeParams()}`;
     return axiosAuthClient.get(url);
+  },
+  updateDayMultiAccount(param: string[]): Promise<PromiseApi> {
+    const url = `/account/update-list-acc`;
+    return axiosAudit.post(url, {ids:param});
   },
 };
 export default tagApi;

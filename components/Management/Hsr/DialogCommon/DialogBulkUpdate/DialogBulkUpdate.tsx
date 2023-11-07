@@ -9,10 +9,10 @@ import {
 import { styled } from "@mui/material/styles";
 
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
-import tagApi from "../../../../api/tag";
 import { useState } from "react";
-import { useAppContext } from "../../../../context/state";
-
+import UpdateIcon from "@mui/icons-material/Update";
+import { useAppContext } from "../../../../../context/state";
+import tagApi from "../../../../../api/tag";
 const ButtonError = styled(Button)(
   ({ theme }) => `
      background: red;
@@ -23,25 +23,38 @@ const ButtonError = styled(Button)(
      }
     `
 );
+
+const ButtonUpdate = styled(Button)(
+  ({ theme }) => `
+     background: green;
+     color: #fff;
+
+     &:hover {
+        background: green;
+     }
+    `
+);
+
 interface IBulk {
   selectedCryptoOrders: string[];
   resetSelected: () => void;
 }
-function BulkActions({ selectedCryptoOrders, resetSelected }: IBulk) {
+function DialogBulkUpdate({ selectedCryptoOrders, resetSelected }: IBulk) {
   const { handleChangeStatusToast, updated, handleChangeMessageToast } =
     useAppContext();
   const [open, setOpen] = useState<boolean>(false);
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseAll = () => {
+
+  const handleUpdate = () => {
     tagApi
-      .deleteMultiAccount({ ids: selectedCryptoOrders })
+      .updateDayMultiAccount(selectedCryptoOrders)
       .then(() => {
         resetSelected();
         handleChangeStatusToast();
         updated();
-        handleChangeMessageToast("Xóa thành công");
+        handleChangeMessageToast("Cập nhật thành công");
         setOpen(false);
       })
       .catch(() => {
@@ -50,24 +63,25 @@ function BulkActions({ selectedCryptoOrders, resetSelected }: IBulk) {
         handleChangeMessageToast("Có lỗi xảy ra, vui lòng thử lại");
       });
   };
+
   const deleteAll = () => {
     setOpen(true);
   };
   return (
     <>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box display="flex" alignItems="center" justifyContent="flex-end">
         <Box display="flex" alignItems="center">
           <Typography color="text.secondary">
-            Xóa {selectedCryptoOrders.length} tài khoản
+            Cập nhật {selectedCryptoOrders.length} tài khoản
           </Typography>
-          <ButtonError
+          <ButtonUpdate
             sx={{ ml: 1 }}
-            startIcon={<DeleteTwoToneIcon />}
+            startIcon={<UpdateIcon />}
             variant="contained"
             onClick={deleteAll}
           >
-            Delete
-          </ButtonError>
+            Cập nhật
+          </ButtonUpdate>
         </Box>
       </Box>
       <Dialog
@@ -92,7 +106,37 @@ function BulkActions({ selectedCryptoOrders, resetSelected }: IBulk) {
             },
           }}
         >
-          <Button onClick={handleCloseAll} variant="contained" color="primary">
+          <Button onClick={handleUpdate} variant="contained" color="primary">
+            Xác nhận
+          </Button>
+          <Button onClick={handleClose} variant="contained" color="error">
+            Đóng
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle
+          sx={{
+            fontFamily: "Montserrat",
+          }}
+        >
+          Bạn có chắc chắc muốn thực hiện thao tác này?
+        </DialogTitle>
+
+        <DialogActions
+          sx={{
+            padding: "15px",
+            "& button": {
+              fontFamily: "Montserrat",
+            },
+          }}
+        >
+          <Button onClick={handleUpdate} variant="contained" color="primary">
             Xác nhận
           </Button>
           <Button onClick={handleClose} variant="contained" color="error">
@@ -104,4 +148,4 @@ function BulkActions({ selectedCryptoOrders, resetSelected }: IBulk) {
   );
 }
 
-export default BulkActions;
+export default DialogBulkUpdate;

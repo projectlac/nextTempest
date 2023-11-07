@@ -24,6 +24,8 @@ import EditHsr from "../DialogCommon/EditHsr";
 import Refund from "../DialogCommon/Refund";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 import BulkActions from "./BulkActions";
+import DialogBulkUpdate from "../DialogCommon/DialogBulkUpdate/DialogBulkUpdate";
+import { useAppContext } from "../../../../context/state";
 interface AccountTable {
   name: string;
   code: string;
@@ -47,6 +49,7 @@ const TableHsr: FC<RecentOrdersTableProps> = ({
   handleChangePage,
   total,
 }) => {
+  const { role } = useAppContext();
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -121,14 +124,24 @@ const TableHsr: FC<RecentOrdersTableProps> = ({
 
   return (
     <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions
-            selectedCryptoOrders={selectedCryptoOrders}
-            resetSelected={resetSelected}
-          />
-        </Box>
-      )}
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        {selectedBulkActions && (
+          <Box flex={1} p={2}>
+            <BulkActions
+              selectedCryptoOrders={selectedCryptoOrders}
+              resetSelected={resetSelected}
+            />
+          </Box>
+        )}
+        {selectedBulkActions && role === "ADMIN" && (
+          <Box flex={1} p={2}>
+            <DialogBulkUpdate
+              selectedCryptoOrders={selectedCryptoOrders}
+              resetSelected={resetSelected}
+            />
+          </Box>
+        )}
+      </Box>
       <CardHeader
         sx={{
           "& .MuiCardHeader-content": {

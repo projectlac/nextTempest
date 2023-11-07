@@ -25,6 +25,8 @@ import WarningSubmit from "../DialogCommon/WarningSubmit";
 import CachedIcon from "@mui/icons-material/Cached";
 import Refund from "../DialogCommon/Refund";
 import BulkActions from "./BulkActions";
+import DialogBulkUpdate from "../DialogCommon/DialogBulkUpdate/DialogBulkUpdate";
+import { useAppContext } from "../../../../context/state";
 interface AccountTable {
   name: string;
   code: string;
@@ -63,6 +65,7 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
   handleChangePage,
   total,
 }) => {
+  const { role } = useAppContext();
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -137,14 +140,24 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
 
   return (
     <Card>
-      {selectedBulkActions && (
-        <Box flex={1} p={2}>
-          <BulkActions
-            selectedCryptoOrders={selectedCryptoOrders}
-            resetSelected={resetSelected}
-          />
-        </Box>
-      )}
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        {selectedBulkActions && (
+          <Box flex={1} p={2}>
+            <BulkActions
+              selectedCryptoOrders={selectedCryptoOrders}
+              resetSelected={resetSelected}
+            />
+          </Box>
+        )}
+        {selectedBulkActions && role === "ADMIN" && (
+          <Box flex={1} p={2}>
+            <DialogBulkUpdate
+              selectedCryptoOrders={selectedCryptoOrders}
+              resetSelected={resetSelected}
+            />
+          </Box>
+        )}
+      </Box>
       <CardHeader
         sx={{
           "& .MuiCardHeader-content": {
