@@ -2,8 +2,11 @@ import {
   Box,
   Button,
   FormControl,
+  FormControlLabel,
   Grid,
   OutlinedInput,
+  Radio,
+  RadioGroup,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/system";
@@ -111,7 +114,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
     enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      setLoading(true);
+      // setLoading(true);
       const { gmail, phone, social, others } = values;
       let i = [];
       if (ids.includes(",")) {
@@ -325,14 +328,67 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
               </Grid>
               <Grid item md={6} xs={12}>
                 <FormControl sx={{ width: { md: "25ch", xs: "90%" } }}>
-                  <OutlinedInput
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="others"
+                    onChange={formik.handleChange}
+                  >
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
+                      value="Damper"
+                      control={<Radio />}
+                      label="Damper"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
+                      value="Kwan"
+                      control={<Radio />}
+                      label="Kwan"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
+                      value="Game Lab
+"
+                      control={<Radio />}
+                      label="Game Lab
+"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
+                      value="Khác"
+                      control={<Radio />}
+                      label="Khác"
+                    />
+                  </RadioGroup>
+                  {/* <OutlinedInput
                     name="others"
                     value={formik.values.others}
                     onChange={formik.handleChange}
                     error={
                       formik.touched.others && Boolean(formik.errors.others)
                     }
-                  />
+                  /> */}
                 </FormControl>
               </Grid>
             </Grid>
