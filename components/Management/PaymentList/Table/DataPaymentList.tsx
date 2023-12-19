@@ -16,10 +16,16 @@ import {
 import TablePayment from "./TablePayment";
 const _ = require("lodash");
 
+interface IInviteProps {
+  invite_type: string;
+  total: string;
+}
+
 function DataPaymentList() {
   const [cryptoOrders, setCryptoOrders] = useState<CryptoOrderPaymentItem[]>(
     []
   );
+  const [inviteList, setInviteList] = useState<IInviteProps[]>([]);
   const [limitPage, setLimitPage] = useState<number>(10);
   const [offsetPage, setOffsetPage] = useState<number>(0);
   const [statusPage, setStatusPage] = useState<string>("");
@@ -41,6 +47,10 @@ function DataPaymentList() {
     setStatusPage(data);
   };
 
+  const fetchInvite = useCallback(async () => {
+    const res = await audit.getInviteSocial();
+    setInviteList(res.data);
+  }, []);
   useEffect(() => {
     audit
       .paymentListData({
@@ -90,6 +100,11 @@ function DataPaymentList() {
 
     setOpenHistorySamePrice(e.target.checked);
   };
+
+  useEffect(() => {
+    fetchInvite();
+  }, [fetchInvite]);
+
   return (
     <Box mt={3}>
       <Box mb={3}>
@@ -113,6 +128,13 @@ function DataPaymentList() {
             label="Hiện lịch sử reroll - random"
           />
         </FormGroup>
+      </Box>
+      <Box sx={{ px: 2, mb: 2, display: "flex" }}>
+        {inviteList.map((ivt, i) => (
+          <Box key={i} sx={{ mr: 2 }}>
+            {ivt.invite_type} : {ivt.total}
+          </Box>
+        ))}
       </Box>
       <Card>
         <TablePayment

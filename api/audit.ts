@@ -76,5 +76,9 @@ const audit = {
       end: params.endDate,
     });
   },
+  getInviteSocial(): Promise<PromiseApi> {
+    const url = `/management/invite-link`;
+    return axiosAudit.get(url);
+  },
 };
 export default audit;
