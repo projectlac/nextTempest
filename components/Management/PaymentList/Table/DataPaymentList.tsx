@@ -22,6 +22,7 @@ interface IInviteProps {
 }
 
 function DataPaymentList() {
+  const { role } = useAppContext();
   const [cryptoOrders, setCryptoOrders] = useState<CryptoOrderPaymentItem[]>(
     []
   );
@@ -51,6 +52,7 @@ function DataPaymentList() {
     const res = await audit.getInviteSocial();
     setInviteList(res.data);
   }, []);
+
   useEffect(() => {
     audit
       .paymentListData({
@@ -65,7 +67,7 @@ function DataPaymentList() {
         let total = res.data.total;
         setTotal(total);
       });
-  }, [update, limitPage, offsetPage, statusPage, openHistorySamePrice]);
+  }, [update, limitPage, offsetPage, statusPage, openHistorySamePrice, search]);
 
   function fetchDropdownOptions(key) {
     audit
@@ -102,8 +104,8 @@ function DataPaymentList() {
   };
 
   useEffect(() => {
-    fetchInvite();
-  }, [fetchInvite]);
+    if (role === "ADMIN") fetchInvite();
+  }, [fetchInvite, role]);
 
   return (
     <Box mt={3}>
@@ -129,13 +131,16 @@ function DataPaymentList() {
           />
         </FormGroup>
       </Box>
-      <Box sx={{ px: 2, mb: 2, display: "flex" }}>
-        {inviteList.map((ivt, i) => (
-          <Box key={i} sx={{ mr: 2 }}>
-            {ivt.invite_type} : {ivt.total}
-          </Box>
-        ))}
-      </Box>
+      {role === "ADMIN" && (
+        <Box sx={{ px: 2, mb: 2, display: "flex" }}>
+          {inviteList.map((ivt, i) => (
+            <Box key={i} sx={{ mr: 2 }}>
+              {ivt.invite_type} : {ivt.total}
+            </Box>
+          ))}
+        </Box>
+      )}
+
       <Card>
         <TablePayment
           cryptoOrders={cryptoOrders}
