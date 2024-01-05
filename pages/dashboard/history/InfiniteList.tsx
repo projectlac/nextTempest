@@ -1,59 +1,63 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import { Box, Card, Container, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TablePagination,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { format } from "date-fns";
-import React, { useCallback, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import audit from "../../../api/audit";
-
-async function fetchIssues(offset) {
-  const links = await audit.getHistory({ limit: 15, offset });
-  const issues = links.data.data;
-
-  return {
-    links,
-    issues,
-  };
-}
+import { HISTORY_FILTER } from "../../../utility/enum";
 
 function InfiniteList() {
   const [items, setItems] = useState([]);
+  const [total, setTotal] = useState<number>(0);
+  const [userIdFilterTemp, setUserIdFilterTemp] = useState<string>("");
+  const [userIdFilter, setUserIdFilter] = useState<string>("");
+
+  const [type, setType] = useState<string>("All");
+  const [limit, setLimit] = useState<number>(50);
   const [offset, setOffset] = useState<number>(0);
-  const [nextPageUrl, setNextPageUrl] = useState(
-    "https://api.github.com/repos/facebook/react/issues"
-  );
-  const [fetching, setFetching] = useState(false);
 
-  const fetchItems = useCallback(async () => {
-    if (fetching) {
-      return;
-    }
+  const fetchAPIHistory = useCallback(async () => {
+    const links = await audit.getHistory({
+      limit,
+      offset: offset * limit,
+      type: type === "All" ? "" : type,
+      userIdFilter,
+    });
+    setItems(links.data.data);
+    setTotal(links.data.total);
+  }, [limit, offset, type, userIdFilter]);
 
-    setFetching(true);
+  const handleChangeType = (e: ChangeEvent<HTMLInputElement>): void => {
+    setType(e.target.value);
+    setOffset(0);
+  };
 
-    try {
-      const { issues, links } = await fetchIssues(offset);
-      let newOffset = offset + 15;
-      setOffset(newOffset);
-      setItems([...items, ...issues]);
+  const handlePageChange = (event: any, newPage: number): void => {
+    setOffset(newPage);
+  };
 
-      if (issues.length > 0) {
-        setNextPageUrl(links.data.data);
-      } else {
-        setNextPageUrl(null);
-      }
-    } finally {
-      setFetching(false);
-    }
-  }, [items, fetching, nextPageUrl]);
+  const handleLimitChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setLimit(parseInt(event.target.value));
+  };
 
-  const hasMoreItems = !!nextPageUrl;
-
-  const loader = (
-    <div key="loader" className="loader">
-      Loading ...
-    </div>
-  );
+  useEffect(() => {
+    fetchAPIHistory();
+  }, [fetchAPIHistory]);
 
   return (
     <Box>
@@ -64,54 +68,110 @@ function InfiniteList() {
             mt: 3,
           }}
         >
-          <Box>Lịch sử thao tác</Box>
+          <Stack
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignContent={"center"}
+          >
+            <Box>Lịch sử thao tác</Box>
+            <Box>
+              <TextField
+                label="Lọc theo userId"
+                onChange={(e) => {
+                  setUserIdFilterTemp(e.target.value);
+                }}
+              ></TextField>
+              <Button
+                variant="contained"
+                sx={{ ml: 1, height: "56px" }}
+                onClick={() => {
+                  setUserIdFilter(userIdFilterTemp);
+                }}
+              >
+                Lọc
+              </Button>
+            </Box>
+            <FormControl fullWidth variant="outlined" sx={{ width: 300 }}>
+              <InputLabel
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
+                }}
+              >
+                Phân loại
+              </InputLabel>
+              <Select
+                value={type}
+                sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}
+                onChange={handleChangeType}
+                label="Phân loại"
+                autoWidth
+                displayEmpty
+              >
+                <MenuItem value={"All"} sx={{ fontFamily: "Montserrat" }}>
+                  Tất cả
+                </MenuItem>
+                {HISTORY_FILTER.map((statusOption) => (
+                  <MenuItem
+                    key={statusOption.id}
+                    value={statusOption.value}
+                    sx={{ fontFamily: "Montserrat" }}
+                  >
+                    {statusOption.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Stack>
           <Divider
             sx={{
               margin: "24px 0",
             }}
           ></Divider>
           <Box>
-            <InfiniteScroll
-              loadMore={fetchItems}
-              hasMore={hasMoreItems}
-              loader={loader}
-            >
-              <Box>
-                {items.map((item) => (
-                  <Box
-                    key={item.id}
-                    height={70}
-                    sx={{
-                      display: "flex",
-                    }}
-                  >
-                    <Box width={`calc(100% - 250px)`}>
-                      <Typography
-                        fontFamily={"Montserrat,sans-serif"}
-                        sx={{
-                          display: "flex",
-                        }}
-                      >
-                        <DoubleArrowIcon sx={{ marginRight: "10px" }} />
-                        {item.historyMessage}
-                      </Typography>
-                    </Box>
-                    <Box
-                      width={250}
+            <Box>
+              {items.map((item) => (
+                <Box
+                  key={item.id}
+                  height={70}
+                  sx={{
+                    display: "flex",
+                  }}
+                >
+                  <Box width={`calc(100% - 250px)`}>
+                    <Typography
+                      fontFamily={"Montserrat,sans-serif"}
                       sx={{
-                        fontFamily: "Montserrat,sans-serif",
-                        textAlign: "right",
+                        display: "flex",
                       }}
                     >
-                      {format(
-                        new Date(item.createdAt),
-                        "yyyy-MM-dd / hh:ss:mm"
-                      )}
-                    </Box>
+                      <DoubleArrowIcon sx={{ marginRight: "10px" }} />
+                      {item.historyMessage}
+                    </Typography>
                   </Box>
-                ))}
-              </Box>
-            </InfiniteScroll>
+                  <Box
+                    width={250}
+                    sx={{
+                      fontFamily: "Montserrat,sans-serif",
+                      textAlign: "right",
+                    }}
+                  >
+                    {format(new Date(item.createdAt), "yyyy-MM-dd / hh:ss:mm")}
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+            <Box p={2}>
+              <TablePagination
+                component="div"
+                count={total}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleLimitChange}
+                page={offset}
+                rowsPerPage={limit}
+                rowsPerPageOptions={[50, 100, 200]}
+              />
+            </Box>
           </Box>
         </Card>
       </Container>

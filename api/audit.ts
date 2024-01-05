@@ -6,14 +6,15 @@ import {
   PackForm,
   PromiseApi,
 } from "../types";
-import { GetNews } from "../types/DashboardTypes/news";
+import { GetNews, HistoryFilter } from "../types/DashboardTypes/news";
 import {
   PackFormManagement,
   PackHistoryOfAccount,
 } from "../types/DashboardTypes/packManagement";
 import axiosAudit from "./axiosAudit";
-
+import queryString from "query-string";
 import axiosAuthClient from "./axiosAuthClient";
+
 const audit = {
   updateCoin(params: AuditForm): Promise<PromiseApi> {
     const url = "/audit/create";
@@ -23,8 +24,11 @@ const audit = {
     const url = "/auth/update-role";
     return axiosAudit.patch(url, params);
   },
-  getHistory(params: GetNews): Promise<PromiseApi> {
-    const url = `/history?limit=${params.limit}&offset=${params.offset}`;
+  getHistory(params: HistoryFilter): Promise<PromiseApi> {
+    const qs = queryString.stringify(params, {
+      skipEmptyString: true,
+    });
+    const url = `/history?${qs}`;
     return axiosAuthClient.get(url);
   },
 

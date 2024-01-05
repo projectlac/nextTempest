@@ -27,6 +27,7 @@ import {
 import toMoney from "../../../../utility/toMoney";
 import EditRole from "../DialogCommon/EditRole";
 import EditSmileCoin from "../DialogCommon/EditSmileCoin";
+import { useAppContext } from "../../../../context/state";
 
 interface RecentOrdersTableProps {
   className?: string;
@@ -96,6 +97,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
   handleChangePage,
   total,
 }) => {
+  const { role } = useAppContext();
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<string[]>(
     []
   );
@@ -271,6 +273,15 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
                     >
                       {cryptoOrder.email}
                     </Typography>
+                    {["ADMIN"].includes(role) && (
+                      <Typography
+                        variant="caption"
+                        fontStyle={"italic"}
+                        color="text.primary"
+                      >
+                        UserID: {cryptoOrder.id}
+                      </Typography>
+                    )}
                   </TableCell>
                   <TableCell>
                     <Typography
