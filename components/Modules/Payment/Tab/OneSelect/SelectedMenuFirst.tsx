@@ -261,7 +261,6 @@ function SelectedMenuFirst({
                     >
                       Số tài khoản:
                     </Typography>
-
                     <Typography
                       sx={{
                         fontSize: {
@@ -299,8 +298,8 @@ function SelectedMenuFirst({
                     <Typography
                       sx={{
                         fontSize: {
-                          md: 28,
-                          xs: 13,
+                          md: 25,
+                          xs: 12,
                         },
                         textAlign: "center",
                       }}
@@ -308,7 +307,7 @@ function SelectedMenuFirst({
                       mt={1}
                     >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
                     <Box
-                      mt={3}
+                      mt={2}
                       sx={{
                         "#buttonAuth": {
                           width: 250,
@@ -327,6 +326,10 @@ function SelectedMenuFirst({
                         Xem số dư
                       </button>
                     </Box>
+                    <Typography mt={1} textAlign={"center"} color="#9C6546">
+                      Gửi bill cho page để được cộng tiền nhanh hơn
+                    </Typography>
+
                     {/* <Typography
                       sx={{
                         fontSize: {
