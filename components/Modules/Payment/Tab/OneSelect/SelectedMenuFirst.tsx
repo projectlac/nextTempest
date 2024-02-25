@@ -275,12 +275,13 @@ function SelectedMenuFirst({
                       mt={1}
                       textAlign={"center"}
                     >
-                      VietComBank - 1035300889
+                      VietComBank - 1033088566
+                      {/* 1035300889 */}
                       <Hidden smDown> - </Hidden>
                       <Hidden smUp>
                         <br />
                       </Hidden>
-                      Lê Nguyễn Thùy Phương
+                      Trần Minh Vũ
                       <Tooltip
                         title={notification}
                         arrow
@@ -295,17 +296,38 @@ function SelectedMenuFirst({
                         />
                       </Tooltip>
                     </Typography>
-                    {/* <Typography
-                    sx={{
-                      fontSize: {
-                        md: 28,
-                        xs: 13,
-                      },
-                    }}
-                    color="#9C6546"
-                    mt={1}
-                  >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography> */}
                     <Typography
+                      sx={{
+                        fontSize: {
+                          md: 28,
+                          xs: 13,
+                        },
+                        textAlign: "center",
+                      }}
+                      color="#9C6546"
+                      mt={1}
+                    >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                    <Box
+                      mt={3}
+                      sx={{
+                        "#buttonAuth": {
+                          width: 250,
+                          height: 57,
+                          fontSize: "17px",
+                        },
+                        textAlign: "center",
+                      }}
+                    >
+                      <button
+                        id="buttonAuth"
+                        onClick={() => {
+                          handleSetActive(2);
+                        }}
+                      >
+                        Xem số dư
+                      </button>
+                    </Box>
+                    {/* <Typography
                       sx={{
                         fontSize: {
                           md: 18,
@@ -368,7 +390,7 @@ function SelectedMenuFirst({
                       <br />
                       Vui lòng sử dụng trước khi mã hết hạn! Bạn có thế click{" "}
                       <span>lấy mã</span> để làm mới mã.
-                    </Typography>
+                    </Typography> */}
                   </Box>
                 );
                 break;
