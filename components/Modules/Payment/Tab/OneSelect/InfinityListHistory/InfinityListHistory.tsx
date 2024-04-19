@@ -33,8 +33,8 @@ const BodyTable = styled(Box)({
   },
 });
 
-async function fetchIssues(offset) {
-  const links = await paymentApi.getHistoryOfUser(offset);
+async function fetchIssues() {
+  const links = await paymentApi.getHistoryOfUser(0, 200);
   const data = links.data.data;
   const total = links.data.total;
   return {
@@ -49,19 +49,13 @@ function InfinityListHistory() {
   const [offset, setOffset] = useState<number>(0);
   const [totalRows, setTotalRows] = useState(0);
 
-  const fetchItems = useCallback(
-    async (offset: number) => {
-      try {
-        const { data, total } = await fetchIssues(offset);
-        let newOffset = offset + 9;
-        setOffset(newOffset);
-        setTotalRows(total);
-        setItems([...items, ...data]);
-      } finally {
-      }
-    },
-    [items]
-  );
+  const fetchItems = useCallback(async (offset: number) => {
+    try {
+      const { data, total } = await fetchIssues();
+      setItems(data);
+    } finally {
+    }
+  }, []);
 
   const loader = (
     <div key="loader" className="loader">
@@ -88,51 +82,51 @@ function InfinityListHistory() {
 
   useEffect(() => {
     fetchItems(offset);
-  }, [offset]);
+  }, [offset, fetchItems]);
 
   return (
-    <InfiniteCustom
-      loader={loader}
-      fetchMore={() => setOffset((prev) => prev + 9)}
-      hasMore={items.length < totalRows}
-      endMessage={<p>You have seen it all</p>}
-    >
-      <Box>
-        {items.map((item, index) => (
-          <BodyTable key={item.id}>
-            <Box width={"5%"}>{index + 1}</Box>
-            <Box width={"15%"}>
-              <Box>{item.code}</Box>
-            </Box>
-            <Box
-              width={"20%"}
-              sx={{
-                wordBreak: "break-word",
-                padding: "0 7px",
-              }}
-            >
-              {!item?.tofUsername?.trim() || item?.tofUsername === null
-                ? "Liên hệ Fanpage"
-                : item?.tofUsername}
-            </Box>
+    // <InfiniteCustom
+    //   loader={loader}
+    //   fetchMore={() => setOffset((prev) => prev + 9)}
+    //   hasMore={items.length < totalRows}
+    //   endMessage={<p>You have seen it all</p>}
+    // >
+    <Box>
+      {items.map((item, index) => (
+        <BodyTable key={item.id}>
+          <Box width={"5%"}>{index + 1}</Box>
+          <Box width={"15%"}>
+            <Box>{item.code}</Box>
+          </Box>
+          <Box
+            width={"20%"}
+            sx={{
+              wordBreak: "break-word",
+              padding: "0 7px",
+            }}
+          >
+            {!item?.tofUsername?.trim() || item?.tofUsername === null
+              ? "Liên hệ Fanpage"
+              : item?.tofUsername}
+          </Box>
 
-            <Box
-              width={"20%"}
-              sx={{
-                wordBreak: "break-word",
-                padding: "0 7px",
-              }}
-            >
-              {!item?.tofPassword?.trim() || item?.tofPassword === null
-                ? "Liên hệ Fanpage"
-                : item?.tofPassword}
-            </Box>
-            <Box width={"20%"}>{toMoney(item?.newPrice ?? 0)} VNĐ</Box>
-            <Box width={"20%"}>{renderGame(item?.game)}</Box>
-          </BodyTable>
-        ))}
-      </Box>
-    </InfiniteCustom>
+          <Box
+            width={"20%"}
+            sx={{
+              wordBreak: "break-word",
+              padding: "0 7px",
+            }}
+          >
+            {!item?.tofPassword?.trim() || item?.tofPassword === null
+              ? "Liên hệ Fanpage"
+              : item?.tofPassword}
+          </Box>
+          <Box width={"20%"}>{toMoney(item?.newPrice ?? 0)} VNĐ</Box>
+          <Box width={"20%"}>{renderGame(item?.game)}</Box>
+        </BodyTable>
+      ))}
+    </Box>
+    // </InfiniteCustom>
   );
 }
 

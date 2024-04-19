@@ -27,9 +27,9 @@ const paymentApi = {
     });
   },
 
-  getHistoryOfUser(offset: number): Promise<any> {
+  getHistoryOfUser(offset: number, limit: number): Promise<any> {
     const url = `/account/bought-by-user`;
-    return axiosAudit.get(`${url}?offset=${offset}`);
+    return axiosAudit.get(`${url}?offset=${offset}&limit=${limit}`);
   },
 };
 
