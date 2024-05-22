@@ -50,10 +50,17 @@ export default function Navbar() {
       link: "/dashboard/genshin",
       role: "ADMIN, MOD",
     },
+
     {
       name: "Quản lý HSR",
       icon: <InboxIcon />,
       link: "/dashboard/honkai-star-rail",
+      role: "ADMIN, MOD",
+    },
+    {
+      name: "Quản lý WW",
+      icon: <InboxIcon />,
+      link: "/dashboard/wuthering-waves",
       role: "ADMIN, MOD",
     },
     {

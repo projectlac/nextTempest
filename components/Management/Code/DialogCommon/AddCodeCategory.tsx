@@ -210,6 +210,7 @@ export default function AddCodeCategory() {
                       Honkai Star Rail
                     </MenuItem>
                     <MenuItem value="genshin-impact">Genshin Impact</MenuItem>
+                    <MenuItem value="wuthering-waves">Wuthering Waves</MenuItem>
                   </TextField>
                 </Box>
               </Grid>

@@ -288,6 +288,18 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
+                      query: {
+                        id: "wuthering-waves",
+                        search: "VIP,NEW",
+                        page: "1",
+                      },
+                    }}
+                  >
+                    Wuthering Waves
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
                       query: { id: "tower-of-fantasy", page: "1" },
                     }}
                   >

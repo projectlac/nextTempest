@@ -8,7 +8,7 @@ interface FilterByGame {
   handleGame: (data: string) => void;
 }
 export default function FilterByGame({ handleGame }: FilterByGame) {
-  const [age, setAge] = React.useState<string>("honkai-star-rail");
+  const [age, setAge] = React.useState<string>("genshin-impact");
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -52,6 +52,7 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
         >
           Genshin Impact
         </MenuItem>
+
         <MenuItem
           sx={{
             fontFamily: "Montserrat",
@@ -63,6 +64,18 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
           value={"honkai-star-rail"}
         >
           Honkai star rail
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={"wuthering-waves"}
+        >
+          Wuthering Waves
         </MenuItem>
       </Select>
     </FormControl>
