@@ -165,6 +165,20 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 <Link
                   href={{
                     pathname: "/mua-tai-khoan/[id]",
+                    query: {
+                      id: "wuthering-waves",
+                      search: "VIP,NEW",
+                      page: "1",
+                    },
+                  }}
+                >
+                  <a className={`${activeClass("/wuthering-waves")}`}>
+                    Wuthering Waves
+                  </a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
                     query: { id: "tower-of-fantasy" },
                   }}
                 >

@@ -8,6 +8,7 @@ import NewProductHsr from "./Shop/NewProductHsr";
 import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 import NewProductTof from "./Shop/NewProductTof";
+import NewProductWw from "./Shop/NewProductWw";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -28,8 +29,11 @@ function ModuleShop() {
       <Container>
         <NewCategoryIndex></NewCategoryIndex>
         <TitleHighlight>Danh sách tài khoản</TitleHighlight>
+
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
+        <NewProductWw></NewProductWw>
+
         <NewProductLowArHSR />
         <NewProductLowAr></NewProductLowAr>
         <NewProductTof></NewProductTof>
