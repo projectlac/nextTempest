@@ -17,7 +17,7 @@ export default function TinyEditor({ changeBody, defaultValue }: TinyProps) {
   return (
     <>
       <Editor
-        apiKey="emgygjypm2r3tb6xai53i81sxch9efypc87da5sr867w4mne"
+        apiKey="jiqmqkua4lvvcdairkc8c1zt4pfyv1bvidsn53qvcu2ltami"
         onInit={(evt, editor) => (editorRef.current = editor)}
         onEditorChange={(e) => {
           changeBody(e);
