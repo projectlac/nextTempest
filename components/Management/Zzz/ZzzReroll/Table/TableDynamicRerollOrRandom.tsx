@@ -18,8 +18,8 @@ import { format } from "date-fns";
 import PropTypes from "prop-types";
 import { ChangeEvent, FC, useState } from "react";
 import WarningSubmit from "../../DialogCommon/DialogReroll/WarningSubmit";
-import AddHsr from "../DialogCommon/AddHsr";
-import EditHsr from "../DialogCommon/EditHsr";
+import AddZzz from "../DialogCommon/AddZzz";
+import EditZzz from "../DialogCommon/EditZzz";
 
 interface AccountTable {
   name: string;
@@ -73,7 +73,7 @@ const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
           },
         }}
         title={`Danh sách account ${type}`}
-        action={<AddHsr />}
+        action={<AddZzz />}
       />
 
       <Divider />
@@ -203,7 +203,7 @@ const TableDynamicRerollOrRandom: FC<RecentOrdersTableProps> = ({
                           color="inherit"
                           size="small"
                         >
-                          <EditHsr id={cryptoOrder.slug} />
+                          <EditZzz id={cryptoOrder.slug} />
                         </IconButton>
                       </Tooltip>
                     )}
