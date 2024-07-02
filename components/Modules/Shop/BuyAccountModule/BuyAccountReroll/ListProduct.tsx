@@ -12,7 +12,7 @@ function ListProduct() {
   const [pageCurrently, setPageCurrently] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [productList, setProductList] = useState<any>([]);
-  const [game, setGame] = React.useState<string>("honkai-star-rail");
+  const [game, setGame] = React.useState<string>("genshin-impact");
 
   const handleChangePagination = (
     event: React.ChangeEvent<unknown>,
