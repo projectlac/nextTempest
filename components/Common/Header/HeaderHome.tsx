@@ -300,6 +300,18 @@ function HeaderHome() {
                   <Link
                     href={{
                       pathname: "/mua-tai-khoan/[id]",
+                      query: {
+                        id: "zenless-zone-zero",
+                        search: "VIP,NEW",
+                        page: "1",
+                      },
+                    }}
+                  >
+                    Zenless Zone Zero
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
                       query: { id: "tower-of-fantasy", page: "1" },
                     }}
                   >

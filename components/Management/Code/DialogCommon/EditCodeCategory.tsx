@@ -19,6 +19,7 @@ import * as React from "react";
 import * as yup from "yup";
 import codeApi from "../../../../api/codeApi";
 import { useAppContext } from "../../../../context/state";
+import { GAME } from "../../../../utility/constain";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -210,6 +211,7 @@ export default function EditCodeCategory({ slug }: IEditCodeProps) {
                     </MenuItem>
                     <MenuItem value="genshin-impact">Genshin Impact</MenuItem>
                     <MenuItem value="wuthering-waves">Wuthering Waves</MenuItem>
+                    <MenuItem value={GAME.ZZZ}>Zenless Zone Zero</MenuItem>
                   </TextField>
                 </Box>
               </Grid>

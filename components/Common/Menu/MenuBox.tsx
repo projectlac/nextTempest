@@ -11,6 +11,7 @@ import Close from "../../../styles/assets/images/svg/close.svg";
 import { useAppContext } from "../../../context/state";
 import useTrans from "../../../pages/hook/useTrans";
 import { log } from "console";
+import { GAME } from "../../../utility/constain";
 interface PropsMenu {
   activeMenu: boolean;
   closeMenu: () => void;
@@ -174,6 +175,20 @@ function MenuBox({ activeMenu, closeMenu, login, logout }: PropsMenu) {
                 >
                   <a className={`${activeClass("/wuthering-waves")}`}>
                     Wuthering Waves
+                  </a>
+                </Link>
+                <Link
+                  href={{
+                    pathname: "/mua-tai-khoan/[id]",
+                    query: {
+                      id: GAME.ZZZ,
+                      search: "VIP,NEW",
+                      page: "1",
+                    },
+                  }}
+                >
+                  <a className={`${activeClass("/zenless-zone-zero")}`}>
+                    Zenless Zone Zero
                   </a>
                 </Link>
                 <Link

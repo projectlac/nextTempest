@@ -64,6 +64,12 @@ export default function Navbar() {
       role: "ADMIN, MOD",
     },
     {
+      name: "Quản lý ZZZ",
+      icon: <InboxIcon />,
+      link: "/dashboard/zenless-zone-zero",
+      role: "ADMIN, MOD",
+    },
+    {
       name: "Quản lý TOF",
       icon: <InboxIcon />,
       link: "/dashboard/tof",
