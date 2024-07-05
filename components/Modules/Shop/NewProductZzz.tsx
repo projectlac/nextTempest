@@ -3,8 +3,8 @@ import { styled } from "@mui/system";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import tagApi from "../../../api/tag";
+import NewestProduct from "../../../styles/assets/images/Shop/logo-zzz.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/Button-Fornite_Tempest.png";
-import NewestProduct from "../../../styles/assets/images/Shop/acckhoidauzzz.png";
 import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 import ShopItem from "./ShopItem";
 import { GAME } from "../../../utility/constain";
@@ -68,7 +68,7 @@ const Title = styled(Box)({
   },
 });
 
-function NewProductTof() {
+function NewProductWw() {
   const [productList, setProductList] = useState<any>([]);
 
   useEffect(() => {
@@ -82,8 +82,8 @@ function NewProductTof() {
         sort: null,
         queryString: "",
         isSold: false,
+        type: "VIP,NEW",
         game: GAME.ZZZ,
-        type: "NEW",
       })
       .then((res) => setProductList(res.data.data));
   }, []);
@@ -92,16 +92,15 @@ function NewProductTof() {
     <Box
       sx={{
         position: "relative",
-        margin: "0 0 100px 0",
       }}
     >
-      <BackgroundShopResponse>
+      <BackgroundShopResponse sx={{ mt: { md: 20, xs: 10 } }}>
         <Title />
         <Box
           pt={4}
           pb={8}
           sx={{
-            mt: { lg: 18, xs: 12 },
+            mt: { lg: 10, xs: 12 },
           }}
         >
           <Grid
@@ -143,7 +142,7 @@ function NewProductTof() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: GAME.ZZZ },
+              query: { id: GAME.ZZZ, search: "VIP,NEW", page: "1" },
             }}
             passHref
           >
@@ -155,4 +154,4 @@ function NewProductTof() {
   );
 }
 
-export default NewProductTof;
+export default NewProductWw;

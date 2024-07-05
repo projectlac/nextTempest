@@ -9,6 +9,7 @@ import NewProductLowAr from "./Shop/NewProductLowAr";
 import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 import NewProductTof from "./Shop/NewProductTof";
 import NewProductWw from "./Shop/NewProductWw";
+import NewProductZzz from "./Shop/NewProductZzz";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -32,6 +33,8 @@ function ModuleShop() {
 
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
+        <NewProductZzz></NewProductZzz>
+
         <NewProductWw></NewProductWw>
 
         <NewProductLowArHSR />

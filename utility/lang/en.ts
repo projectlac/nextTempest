@@ -17,7 +17,7 @@
 // export default home;
 const home = [
   [
-    `Tempest Shop nơi cung cấp tài khoản Genshin, Tower of Fantasy, Honkai Star Rail`, // home
+    `Tempest Shop nơi cung cấp tài khoản Genshin, Zenless Zone Zero, Honkai Star Rail`, // home
     "an toàn nhất Việt Nam",
   ],
 

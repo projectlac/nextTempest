@@ -3,6 +3,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { GAME } from "../../../../utility/constain";
 
 interface FilterByGame {
   handleGame: (data: string) => void;
@@ -76,6 +77,18 @@ export default function FilterByGame({ handleGame }: FilterByGame) {
           value={"wuthering-waves"}
         >
           Wuthering Waves
+        </MenuItem>
+        <MenuItem
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: {
+              md: "16px",
+              xs: "13px",
+            },
+          }}
+          value={GAME.ZZZ}
+        >
+          Zenless Zone Zero
         </MenuItem>
       </Select>
     </FormControl>
