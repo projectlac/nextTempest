@@ -2,7 +2,6 @@ import {
   Box,
   CircularProgress,
   Grid,
-  MenuItem,
   Slide,
   TextField,
   Typography,
@@ -20,9 +19,6 @@ import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import { TAG_TYPE } from "../../../../../types/account";
-import AutoCompleteHarderForEdit from "../../../../Common/AutoCompleteHarderForEdit";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
-import ServerList from "../Feature/ServerList";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -151,21 +147,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         });
     },
   });
-
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "body", value: data } });
-  };
-
-  const handleSelectedCharacter = (data: string[]) => {
-    formik.handleChange({ target: { name: "character", value: data } });
-  };
-
-  const handleSelectedWeapon = (data: string[]) => {
-    formik.handleChange({ target: { name: "weapon", value: data } });
-  };
-  const handleSelectedServer = (data: string) => {
-    formik.handleChange({ target: { name: "server", value: data } });
-  };
 
   const uploadMultiFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     let fileObj = [];

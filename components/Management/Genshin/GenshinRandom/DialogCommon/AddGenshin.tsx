@@ -1,10 +1,4 @@
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -13,13 +7,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { useFormik } from "formik";
-import Image from "next/image";
 import * as React from "react";
 import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
-import { TAG_TYPE } from "../../../../../types/account";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {

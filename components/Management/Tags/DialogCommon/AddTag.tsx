@@ -18,10 +18,8 @@ import { TransitionProps } from "@mui/material/transitions";
 import { useFormik } from "formik";
 import * as React from "react";
 import * as yup from "yup";
-import newsApi from "../../../../api/newsApi";
 import tagApi from "../../../../api/tag";
 import { useAppContext } from "../../../../context/state";
-import TinyEditor from "../../../Common/Editor/TinyEditor";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -85,9 +83,6 @@ export default function AddTag({ gameSelected }: ITagProp) {
     },
   });
 
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "body", value: data } });
-  };
   return (
     <div>
       <Button

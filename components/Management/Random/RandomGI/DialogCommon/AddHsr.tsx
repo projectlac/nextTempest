@@ -2,7 +2,6 @@ import {
   Box,
   CircularProgress,
   Grid,
-  MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
@@ -19,12 +18,6 @@ import * as React from "react";
 import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
-import { TAG_TYPE } from "../../../../../types/account";
-import AutoCompleteHarder from "../../../../Common/AutoCompleteHarder";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
-import CharacterList from "./Feature/CharacterList";
-import ServerList from "./Feature/ServerList";
-import WeaponList from "./Feature/WeaponList";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -131,10 +124,6 @@ export default function AddHsr() {
         });
     },
   });
-
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "body", value: data } });
-  };
 
   const uploadMultiFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     let fileObj = [];

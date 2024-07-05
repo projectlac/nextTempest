@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Box,
   CircularProgress,
@@ -8,22 +7,19 @@ import {
   RadioGroup,
   Slide,
   TextField,
-  Typography,
 } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
+import React from "react";
 import * as yup from "yup";
 
-import { useAppContext } from "../../../../../context/state";
-import { Formik, useFormik } from "formik";
-import newsApi from "../../../../../api/newsApi";
 import { TransitionProps } from "@mui/material/transitions";
-import Image from "next/image";
+import { useFormik } from "formik";
 import tagApi from "../../../../../api/tag";
+import { useAppContext } from "../../../../../context/state";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -81,10 +77,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         });
     },
   });
-
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "content", value: data } });
-  };
 
   return (
     <Dialog

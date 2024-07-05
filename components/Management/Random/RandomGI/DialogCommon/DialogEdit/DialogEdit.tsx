@@ -2,7 +2,6 @@ import {
   Box,
   CircularProgress,
   Grid,
-  MenuItem,
   Slide,
   TextField,
   Typography,
@@ -17,12 +16,9 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import React from "react";
 import * as yup from "yup";
-import ServerList from "../Feature/ServerList";
+import tagApi from "../../../../../../api/tag";
 import { useAppContext } from "../../../../../../context/state";
 import { TAG_TYPE } from "../../../../../../types/account";
-import tagApi from "../../../../../../api/tag";
-import AutoCompleteHarderForEdit from "../../../../../Common/AutoCompleteHarderForEdit";
-import TinyEditor from "../../../../../Common/Editor/TinyEditor";
 
 interface PropsDialogEdit {
   handleClose: () => void;

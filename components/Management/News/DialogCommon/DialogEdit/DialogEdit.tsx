@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Box,
   CircularProgress,
@@ -11,14 +10,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
+import React from "react";
 import * as yup from "yup";
 
-import { useAppContext } from "../../../../../context/state";
-import { Formik, useFormik } from "formik";
-import newsApi from "../../../../../api/newsApi";
 import { TransitionProps } from "@mui/material/transitions";
+import { useFormik } from "formik";
 import Image from "next/image";
+import newsApi from "../../../../../api/newsApi";
+import { useAppContext } from "../../../../../context/state";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -97,10 +96,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
     },
   });
 
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "content", value: data } });
-  };
-
   return (
     <Dialog
       open={open}
@@ -166,9 +161,31 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
             />
           </Box>
 
-          <TinyEditor
-            changeBody={onEditorChange}
-            defaultValue={defaultData.content}
+          <TextField
+            fullWidth
+            id="content"
+            label="Mô tả"
+            name="content"
+            type="text"
+            variant="outlined"
+            sx={{
+              mt: 1,
+              "& label": {
+                fontFamily: "Montserrat",
+                fontWeight: "bold",
+              },
+              "& input": {
+                fontFamily: "Montserrat",
+              },
+            }}
+            multiline
+            rows={4}
+            value={formik.values.content}
+            onChange={formik.handleChange}
+            error={formik.touched.content && Boolean(formik.errors.content)}
+            helperText={
+              formik.touched.content && (formik.errors.content as string)
+            }
           />
           <Box mt={3}>
             <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>

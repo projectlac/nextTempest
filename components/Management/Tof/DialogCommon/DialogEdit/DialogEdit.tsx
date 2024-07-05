@@ -19,10 +19,8 @@ import * as yup from "yup";
 import tagApi from "../../../../../api/tag";
 import { useAppContext } from "../../../../../context/state";
 import { TAG_TYPE } from "../../../../../types/account";
-import TinyEditor from "../../../../Common/Editor/TinyEditor";
 import CharacterList from "../Feature/CharacterList";
 import ServerList from "../Feature/ServerList";
-import WeaponList from "../Feature/WeaponList";
 
 interface PropsDialogEdit {
   handleClose: () => void;
@@ -152,10 +150,6 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
         });
     },
   });
-
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "body", value: data } });
-  };
 
   const handleSelectedCharacter = (data: string[]) => {
     formik.handleChange({ target: { name: "character", value: data } });
@@ -503,9 +497,29 @@ function DialogEdit({ handleClose, open, defaultData }: PropsDialogEdit) {
           <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
             Chi tiết account
           </Typography>
-          <TinyEditor
-            changeBody={onEditorChange}
-            defaultValue={defaultData.description}
+          <TextField
+            fullWidth
+            id="body"
+            label="Mô tả"
+            name="body"
+            type="text"
+            variant="outlined"
+            sx={{
+              mt: 1,
+              "& label": {
+                fontFamily: "Montserrat",
+                fontWeight: "bold",
+              },
+              "& input": {
+                fontFamily: "Montserrat",
+              },
+            }}
+            multiline
+            rows={4}
+            value={formik.values.body}
+            onChange={formik.handleChange}
+            error={formik.touched.body && Boolean(formik.errors.body)}
+            helperText={formik.touched.body && (formik.errors.body as string)}
           />
 
           {/* <Box mt={3}>

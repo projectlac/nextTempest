@@ -11,7 +11,6 @@ import * as React from "react";
 import * as yup from "yup";
 import newsApi from "../../../../api/newsApi";
 import { useAppContext } from "../../../../context/state";
-import TinyEditor from "../../../Common/Editor/TinyEditor";
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -91,9 +90,6 @@ export default function AddNews() {
     },
   });
 
-  const onEditorChange = (data: string) => {
-    formik.handleChange({ target: { name: "body", value: data } });
-  };
   return (
     <div>
       <Button
@@ -172,7 +168,30 @@ export default function AddNews() {
               />
             </Box>
 
-            <TinyEditor changeBody={onEditorChange} defaultValue="" />
+            <TextField
+              fullWidth
+              id="body"
+              label="Mô tả"
+              name="body"
+              type="text"
+              variant="outlined"
+              sx={{
+                mt: 1,
+                "& label": {
+                  fontFamily: "Montserrat",
+                  fontWeight: "bold",
+                },
+                "& input": {
+                  fontFamily: "Montserrat",
+                },
+              }}
+              multiline
+              rows={4}
+              value={formik.values.body}
+              onChange={formik.handleChange}
+              error={formik.touched.body && Boolean(formik.errors.body)}
+              helperText={formik.touched.body && (formik.errors.body as string)}
+            />
 
             <Box mt={3}>
               <Typography sx={{ fontFamily: "Montserrat", fontWeight: "bold" }}>
