@@ -15,7 +15,7 @@ export default function IndexPage() {
         return {
           title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
         of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
         };
       case "honkai-star-rail":
         return {
@@ -26,19 +26,19 @@ export default function IndexPage() {
         return {
           title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
           of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
         };
       case "wuthering-waves":
         return {
           title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
           of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
         };
       default:
         return {
           title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
         of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
         };
     }
   };

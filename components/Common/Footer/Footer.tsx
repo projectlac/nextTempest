@@ -84,7 +84,8 @@ function Footer() {
             }}
             component={"h1"}
           >
-            Mua bán tài khoản Genshin Impact, Tower of fantasy, Honkai Star Rail
+            Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star
+            Rail
           </Typography>
           <Typography
             sx={{

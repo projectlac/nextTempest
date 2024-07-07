@@ -17,6 +17,7 @@ interface PropShopItem {
   id: string;
   image: string;
   slug: string;
+  alt?: string;
 }
 
 const ImageBox = styled(Box)(
@@ -108,6 +109,7 @@ function ShopItem({
   oldPrice,
   newPrice,
   status,
+  alt,
 }: PropShopItem) {
   enum STATUS_OF_PRODUCT {
     STOCKING = "#1E8813",
@@ -206,7 +208,7 @@ function ShopItem({
             {image && (
               <Image
                 src={image}
-                alt={item}
+                alt={item + "-" + alt}
                 width={320}
                 height={182}
                 objectFit="cover"
