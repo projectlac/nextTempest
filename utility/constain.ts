@@ -3,3 +3,7 @@ export const GAME = {
     WW:'wuthering-waves',
     ZZZ:'zenless-zone-zero'
 }
+
+export const GAME_NAME = {
+    ZZZ:'Zenless Zone Zero'
+}

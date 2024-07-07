@@ -7,7 +7,7 @@ import NewestProduct from "../../../styles/assets/images/Shop/logo-zzz.png";
 import BGButtonShowMore from "../../../styles/assets/images/Shop/Button-Fornite_Tempest.png";
 import BackgroundShopResponse from "../../Common/BackgroundShop/BackgroundShopResponse";
 import ShopItem from "./ShopItem";
-import { GAME } from "../../../utility/constain";
+import { GAME, GAME_NAME } from "../../../utility/constain";
 
 const ButtonShowMore = styled(Box)({
   display: "flex",
@@ -133,6 +133,7 @@ function NewProductWw() {
                     status={d.status}
                     slug={d.slug}
                     id={d.id}
+                    alt={GAME_NAME.ZZZ}
                   />
                 </Grid>
               ))}

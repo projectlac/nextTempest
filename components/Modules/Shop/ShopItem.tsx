@@ -109,7 +109,7 @@ function ShopItem({
   oldPrice,
   newPrice,
   status,
-  alt,
+  alt = "Tempest",
 }: PropShopItem) {
   enum STATUS_OF_PRODUCT {
     STOCKING = "#1E8813",
