@@ -56,7 +56,7 @@ export default class MyDocument extends Document {
           <link rel="alternate" hrefLang="vi" href="https://www.tempest.vn/" />
           <meta
             name="description"
-            content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Honkai Star Rail VIP, Reroll uy tín hàng đầu Việt Namm"
+            content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Reroll uy tín hàng đầu Việt Nam, zzz"
           />
         </Head>
         <body>
