@@ -274,13 +274,12 @@ function SelectedMenuFirst({
                       mt={1}
                       textAlign={"center"}
                     >
-                      VietComBank - 1033088566
-                      {/* 1035300889 */}
+                      VietComBank - 1035300889
                       <Hidden smDown> - </Hidden>
                       <Hidden smUp>
                         <br />
                       </Hidden>
-                      Trần Minh Vũ
+                      Lê Nguyễn Thuỳ Phương
                       <Tooltip
                         title={notification}
                         arrow
