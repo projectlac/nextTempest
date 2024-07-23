@@ -12,8 +12,8 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
-          of fantasy uy tín hàng đầu Việt Nam
+          Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin
+          Impact,Zenless Zone Zero uy tín hàng đầu Việt Nam
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
