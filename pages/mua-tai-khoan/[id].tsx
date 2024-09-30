@@ -13,32 +13,28 @@ export default function IndexPage() {
     switch (id) {
       case "genshin-impact":
         return {
-          title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
-        of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          title: `Mua tài khoản - Tempest Shop - Mua bán, Nạp thẻ tháng, Nạp đá HRS, Genshin`,
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin",
         };
       case "honkai-star-rail":
         return {
           title: `Mua tài khoản - Tempest Shop - Shop Acc Mua bán tài khoản Honkai star rail uy tín, chất lương`,
-          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Reroll uy tín hàng đầu Việt Namm",
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin",
         };
       case "tower-of-fantasy":
         return {
-          title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
-          of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          title: `Mua tài khoản - Tempest Shop - Mua bán, Nạp thẻ tháng, Nạp đá HRS, Genshin`,
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin",
         };
       case "wuthering-waves":
         return {
-          title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
-          of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          title: `Mua tài khoản - Tempest Shop - Mua bán, Nạp thẻ tháng, Nạp đá HRS, Genshin`,
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin",
         };
       default:
         return {
-          title: `Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower
-        of fantasy uy tín hàng đầu Việt Nam`,
-          desc: "Tempest Shop - Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star Rail uy tín hàng đầu Việt Nam",
+          title: `Mua tài khoản - Tempest Shop - Mua bán, Nạp thẻ tháng, Nạp đá HRS, Genshin`,
+          desc: "Tempest Shop - Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin",
         };
     }
   };

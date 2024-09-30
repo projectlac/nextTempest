@@ -12,14 +12,14 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Mua tài khoản - Tempest Shop - Mua bán tài khoản Genshin
-          Impact,Zenless Zone Zero uy tín hàng đầu Việt Nam
+          Mua tài khoản - Tempest Shop - Mua bán tài khoản Honkai Star Rail,
+          Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Reroll uy tín hàng đầu Việt Namm"
+          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

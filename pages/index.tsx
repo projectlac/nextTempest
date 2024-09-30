@@ -16,7 +16,7 @@ export default function IndexPage() {
         <meta property="og:image" content={Meta.src} />
         <meta
           property="og:description"
-          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Reroll uy tín hàng đầu Việt Nam"
+          content="Tempest Shop - Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />

@@ -11,8 +11,8 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Thanh toán - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of
-          fantasy uy tín hàng đầu Việt Nam
+          Thanh toán - Tempest Shop - Nạp thẻ tháng Honkai - Mộng ước - Nạp thẻ
+          uy tín, BP, shop HSR
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
