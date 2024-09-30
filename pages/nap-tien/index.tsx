@@ -9,8 +9,8 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Nạp tiền - Tempest Shop - Mua bán tài khoản Genshin Impact, Tower of
-          fantasy uy tín hàng đầu Việt Nam
+          Nạp tiền - Tempest Shop - Mua bán tài khoản Honkai Star Rail, Zenless
+          Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin
         </title>
 
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />

@@ -84,8 +84,8 @@ function Footer() {
             }}
             component={"h1"}
           >
-            Mua bán tài khoản Genshin Impact, Zenless Zone Zero, Honkai Star
-            Rail
+            Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp thẻ
+            tháng, Nạp đá HRS, Genshin
           </Typography>
           <Typography
             sx={{

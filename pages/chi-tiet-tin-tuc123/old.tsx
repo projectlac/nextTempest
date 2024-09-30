@@ -11,8 +11,8 @@ function DetailNewsPage({ post, id }) {
       <>
         <Head>
           <title>
-            {post?.title || "Tempest"} - Tempest Shop - Mua bán tài khoản
-            Genshin Impact, Tower of fantasy uy tín hàng đầu Việt Nam
+            {post?.title || "Tempest"} - Tempest Shop - Mua bán tài khoản Honkai
+            Star Rail, Zenless Zone Zero, Nạp thẻ tháng, Nạp đá HRS, Genshin
           </title>
           <meta
             name="viewport"

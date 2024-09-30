@@ -9,8 +9,8 @@ export default function IndexPage() {
     <Layout>
       <Head>
         <title>
-          Tempest - Shop acc mua bán Honkai Star Rail VIP, Reroll uy tín hàng
-          đầu
+          Tempest - Mua bán tài khoản Honkai Star Rail, Zenless Zone Zero, Nạp
+          thẻ tháng, Nạp đá HRS, Genshin
         </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:image" content={Meta.src} />
