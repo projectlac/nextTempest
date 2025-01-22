@@ -162,7 +162,7 @@ function SelectedMenuFirst({
                       }}
                       color="#9C6546"
                       mt={1}
-                    >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                    >{`Nội dung: “Tên tài khoản"`}</Typography>
                     <Box
                       mt={3}
                       sx={{
@@ -304,7 +304,7 @@ function SelectedMenuFirst({
                       }}
                       color="#9C6546"
                       mt={1}
-                    >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                    >{`Nội dung: “Tên tài khoản"`}</Typography>
                     <Box
                       mt={2}
                       sx={{
@@ -454,7 +454,7 @@ function SelectedMenuFirst({
                       }}
                       color="#9C6546"
                       mt={1}
-                    >{`Nội dung: NAPTIEN + “Tên tài khoản"`}</Typography>
+                    >{`Nội dung: “Tên tài khoản"`}</Typography>
                     <Box
                       mt={3}
                       sx={{
