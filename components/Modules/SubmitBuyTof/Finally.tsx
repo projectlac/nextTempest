@@ -352,6 +352,17 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                           fontWeight: "bold",
                         },
                       }}
+                      value="Nino"
+                      control={<Radio />}
+                      label="Nino"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
                       value="Kwan"
                       control={<Radio />}
                       label="Kwan"

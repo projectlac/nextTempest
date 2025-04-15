@@ -187,6 +187,9 @@ function Register({ handleLoginMode, closeAuthBox }: PropsRegister) {
               Bạn đã đăng ký tài khoản thành công <br /> vui lòng xác nhận email
               để kích hoạt tài khoản!
             </Typography>
+            <Typography variant="h5" color="#C69E72">
+              Nếu không thấy hãy kiểm tra mục thư rác
+            </Typography>
             <Typography
               fontSize={15}
               mt={15}
