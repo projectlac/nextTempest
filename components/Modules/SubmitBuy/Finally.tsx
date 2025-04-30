@@ -311,7 +311,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                   />
                 </FormControl>
               </Grid>
-              <Grid item md={6} xs={12}>
+              <Grid item md={4} xs={12}>
                 <Typography
                   sx={{
                     fontSize: { md: 17, xs: 13 },
@@ -326,7 +326,7 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                   Bạn biết shop qua đâu
                 </Typography>
               </Grid>
-              <Grid item md={6} xs={12}>
+              <Grid item md={8} xs={12}>
                 <FormControl sx={{ width: { md: "25ch", xs: "90%" } }}>
                   <RadioGroup
                     row
@@ -378,6 +378,19 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
 "
                       control={<Radio />}
                       label="Game Lab
+"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
+                      value="Page HSR Việt Nam
+"
+                      control={<Radio />}
+                      label="Page HSR Việt Nam
 "
                     />
                     <FormControlLabel
