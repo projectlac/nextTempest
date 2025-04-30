@@ -387,6 +387,19 @@ function Finally({ ids, hadSelected, handleStep }: GuaranteeProps) {
                           fontWeight: "bold",
                         },
                       }}
+                      value="Page HSR Việt Nam
+"
+                      control={<Radio />}
+                      label="Page HSR Việt Nam
+"
+                    />
+                    <FormControlLabel
+                      sx={{
+                        ".MuiFormControlLabel-label": {
+                          fontFamily: "Montserrat",
+                          fontWeight: "bold",
+                        },
+                      }}
                       value="Khác"
                       control={<Radio />}
                       label="Khác"
