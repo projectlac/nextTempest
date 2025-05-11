@@ -35,6 +35,7 @@ import {
 } from "../../../../types/DashboardTypes/payment";
 import WarningSubmit from "../DialogCommon/WarningSubmit";
 import { format } from "date-fns";
+import Refund from "../../Genshin/DialogCommon/Refund";
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: CryptoOrderPaymentItem[];
@@ -312,28 +313,38 @@ function Row(props: {
         </TableCell>
 
         <TableCell align="right">
-          {row.status !== "COMPLETED" ? (
-            <Tooltip title="Hoàn thành" arrow>
-              <IconButton
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+              justifyContent: "end",
+            }}
+          >
+            <Refund id={row.id} />
+            {row.status !== "COMPLETED" ? (
+              <Tooltip title="Hoàn thành" arrow>
+                <IconButton
+                  sx={{
+                    "&:hover": {
+                      background: "#b16c4d45",
+                    },
+                    color: "#333",
+                  }}
+                  color="inherit"
+                  size="small"
+                >
+                  <WarningSubmit id={row.id} />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <CheckCircleOutlineIcon
                 sx={{
-                  "&:hover": {
-                    background: "#b16c4d45",
-                  },
-                  color: "#333",
+                  color: "#00bd0f",
                 }}
-                color="inherit"
-                size="small"
-              >
-                <WarningSubmit id={row.id} />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <CheckCircleOutlineIcon
-              sx={{
-                color: "#00bd0f",
-              }}
-            />
-          )}
+              />
+            )}
+          </Box>
         </TableCell>
       </TableRow>
       <TableRow>

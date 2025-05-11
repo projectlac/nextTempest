@@ -117,13 +117,6 @@ const TableGenshin: FC<RecentOrdersTableProps> = ({
     }
   };
 
-  // const filteredCryptoOrders = applyFilters(cryptoOrders);
-  // const paginatedCryptoOrders = applyPagination(
-  //   filteredCryptoOrders,
-  //   page,
-  //   limit
-  // );
-
   const theme = useTheme();
 
   const toMoney = (price: number) => {
