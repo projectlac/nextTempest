@@ -91,7 +91,7 @@ export default function Navbar() {
       name: "Quản lý Tags",
       icon: <InboxIcon />,
       link: "/dashboard/tags",
-      role: "ADMIN",
+      role: "ADMIN, MOD",
     },
     {
       name: "Quản lý Code",
