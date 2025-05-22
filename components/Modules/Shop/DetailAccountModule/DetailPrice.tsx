@@ -202,7 +202,7 @@ function DetailPrice({
   const buyAccount = () => {
     if (+price > wallet) {
       handleChangeMessageToast(
-        "Bạn không đủ Smile Coin để mua tài khoản này, vui lòng nạp thêm"
+        "Bạn không đủ Smile để mua tài khoản này, vui lòng nạp thêm"
       );
 
       handleChangeStatusToast();

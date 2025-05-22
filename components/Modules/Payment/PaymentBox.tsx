@@ -66,7 +66,7 @@ function PaymentBox() {
             <Box width={532} height={653}>
               <Image
                 src={coin}
-                alt="nap smlie coin"
+                alt="Thêm smile"
                 layout="responsive"
                 onClick={() => {
                   handleOpen(1);

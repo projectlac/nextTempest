@@ -10,7 +10,7 @@ const home = [
     "Trang chủ",
     "Mua tài khoản",
     "Tin tức",
-    "Nạp coin",
+    "Thêm Smile",
     "Liên hệ",
     "Đăng nhập",
     "Đăng xuất",

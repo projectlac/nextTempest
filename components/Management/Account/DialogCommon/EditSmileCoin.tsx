@@ -61,10 +61,10 @@ export default function EditSmileCoin({ username, money }: PropsEditSmileCoin) {
     let msg: string;
     if (mode) {
       typeTransfer = "PLUS";
-      msg = "Thêm coin thành công";
+      msg = "Thêm thành công";
     } else {
       typeTransfer = "MINUS";
-      msg = "Giảm coin thành công";
+      msg = "Giảm thành công";
     }
     try {
       await audit
@@ -97,7 +97,7 @@ export default function EditSmileCoin({ username, money }: PropsEditSmileCoin) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>Chỉnh sửa số Smile Coin hiện tại</DialogTitle>
+        <DialogTitle>Chỉnh sửa số Smile hiện tại</DialogTitle>
         <DialogContent>
           <Box textAlign={"center"}>
             <Box mt={2} mb={2}>

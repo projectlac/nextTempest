@@ -214,7 +214,7 @@ const TableAccount: FC<RecentOrdersTableProps> = ({
               <TableCell>STT</TableCell>
               <TableCell>Username</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Smile Coin</TableCell>
+              <TableCell>Smile</TableCell>
               <TableCell>Role</TableCell>
               <TableCell align="center">Actions</TableCell>
             </TableRow>

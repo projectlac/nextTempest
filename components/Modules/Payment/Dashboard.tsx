@@ -228,9 +228,9 @@ function Dashboard() {
             router.push("/nap-tien?action=momo");
           }}
         >
-          Nạp Slime Coin
+          Thêm Slime
         </Box>
-        <Box
+        {/* <Box
           className={`${active === 3 ? "active" : ""}`}
           onClick={() => {
             handleSetActive(3);
@@ -238,7 +238,7 @@ function Dashboard() {
           }}
         >
           Đổi thẻ cào
-        </Box>
+        </Box> */}
         <Box
           className={`${active === 2 ? "active" : ""}`}
           onClick={() => {
@@ -264,12 +264,12 @@ function Dashboard() {
                 <Four />
               </Box>
             );
-          case 3:
-            return (
-              <Box width={"100%"}>
-                <Five />
-              </Box>
-            );
+          // case 3:
+          //   return (
+          //     <Box width={"100%"}>
+          //       <Five />
+          //     </Box>
+          //   );
 
           default:
             return (

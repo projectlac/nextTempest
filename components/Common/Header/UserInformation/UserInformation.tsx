@@ -168,7 +168,7 @@ function UserInfo({ openCart, wrapperRef }: ICart) {
             fontWeight: 600,
           }}
         >
-          Smile Coin: {toMoney(+user.money)}
+          Smile: {toMoney(+user.money)}
         </Typography>
       </Box>
       <Divider sx={{ my: 1 }} />
