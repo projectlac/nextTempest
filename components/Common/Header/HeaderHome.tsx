@@ -32,7 +32,7 @@ const HeaderWrapper = styled(Box)(
   box-shadow: 0 3px 7px 0 rgb(0 0 0 / 35%);
   align-items:center;
   font-size: 14px;
-  `
+  `,
 );
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -51,7 +51,7 @@ const BgWrap = styled(Box)(
       background: transparent;
       overflow:hidden;
       background-size: cover;    
-    `
+    `,
 );
 
 const ParentMenu = styled(Box)({
@@ -308,6 +308,18 @@ function HeaderHome() {
                     }}
                   >
                     Zenless Zone Zero
+                  </Link>
+                  <Link
+                    href={{
+                      pathname: "/mua-tai-khoan/[id]",
+                      query: {
+                        id: "arknights-endfield",
+                        search: "VIP,NEW",
+                        page: "1",
+                      },
+                    }}
+                  >
+                    Arknights Endfield
                   </Link>
                   <Link
                     href={{

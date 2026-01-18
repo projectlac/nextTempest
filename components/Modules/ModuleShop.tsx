@@ -10,6 +10,7 @@ import NewProductLowArHSR from "./Shop/NewProductLowArHSR";
 import NewProductTof from "./Shop/NewProductTof";
 import NewProductWw from "./Shop/NewProductWw";
 import NewProductZzz from "./Shop/NewProductZzz";
+import NewProductA9 from "./Shop/NewProductA9";
 
 const ProductWrap = styled(Box)(
   ({ theme }) => `
@@ -21,7 +22,7 @@ const ProductWrap = styled(Box)(
     background-size: cover;
     background-position:bottom;
     justify-content:center;
-  `
+  `,
 );
 
 function ModuleShop() {
@@ -30,7 +31,7 @@ function ModuleShop() {
       <Container>
         <NewCategoryIndex></NewCategoryIndex>
         <TitleHighlight>Danh sách tài khoản</TitleHighlight>
-
+        <NewProductA9 />
         <NewProductHsr></NewProductHsr>
         <NewProduct></NewProduct>
         <NewProductZzz></NewProductZzz>

@@ -93,7 +93,7 @@ function NewProductHsr() {
         position: "relative",
       }}
     >
-      <BackgroundShopResponse>
+      <BackgroundShopResponse sx={{ mt: { md: 20, xs: 10 } }}>
         <Title />
         <Box
           pt={4}
@@ -141,7 +141,7 @@ function NewProductHsr() {
           <Link
             href={{
               pathname: "/mua-tai-khoan/[id]",
-              query: { id: "honkai-star-rail", search: "VIP", page: '1' },
+              query: { id: "honkai-star-rail", search: "VIP", page: "1" },
             }}
             passHref
           >

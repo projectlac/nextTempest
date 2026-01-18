@@ -63,6 +63,7 @@ export default function Navbar() {
       link: "/dashboard/wuthering-waves",
       role: "ADMIN, MOD",
     },
+
     {
       name: "Quản lý ZZZ",
       icon: <InboxIcon />,
@@ -73,6 +74,12 @@ export default function Navbar() {
       name: "Quản lý TOF",
       icon: <InboxIcon />,
       link: "/dashboard/tof",
+      role: "ADMIN, MOD",
+    },
+    {
+      name: "Quản lý A9",
+      icon: <InboxIcon />,
+      link: "/dashboard/arknights-endfield",
       role: "ADMIN, MOD",
     },
     // {
