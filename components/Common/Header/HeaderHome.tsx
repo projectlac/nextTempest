@@ -491,7 +491,7 @@ function HeaderHome() {
                 ></Box>
               </Box>
             </Hidden> */}
-            <Box
+            {/* <Box
               sx={{
                 marginLeft: "auto",
                 marginRight: "15px",
@@ -537,7 +537,7 @@ function HeaderHome() {
                   {ids && ids?.length}
                 </Typography>
               )}
-            </Box>
+            </Box> */}
 
             <UserInformation />
             <Box
