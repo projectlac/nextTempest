@@ -73,7 +73,7 @@ const BoxBorder = styled(Box)(
       font-size: 20px;
 
     },
-`
+`,
 );
 
 const TextSpecial = styled(Typography)(
@@ -88,17 +88,23 @@ const TextSpecial = styled(Typography)(
   @media (min-width: 0px) {
     font-size: 15px;
   },
-`
+`,
 );
 const ButtonBuy = styled(Box)(
   (theme) => `
-    background: url(${ButtonBG.src});
+    background: #437cbb;
     width:180px;
     height: 40px;
     background-size: contain;
     background-repeat: no-repeat;
+    border-radius: 50px;
     margin: 15px auto 0;
     cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:18px;
     @media (min-width: 1024px) {
       height: 56px;
       width: 250px;
@@ -108,7 +114,7 @@ const ButtonBuy = styled(Box)(
      
     //   width: 179px;
     // },
-`
+`,
 );
 const BgWrap = styled(Box)(
   ({ theme }) => `
@@ -127,7 +133,7 @@ const BgWrap = styled(Box)(
       background: transparent;
       overflow:hidden;
       background-size: cover;    
-    `
+    `,
 );
 interface DetailProps {
   accountId: string;
@@ -172,7 +178,7 @@ function DetailPrice({
         })
         .catch((res) => {
           handleChangeMessageToast(
-            "Phiên đăng nhập đã kết thúc, vui lòng đăng nhập lại!"
+            "Phiên đăng nhập đã kết thúc, vui lòng đăng nhập lại!",
           );
           handleChangeStatusToast();
           refreshLogin();
@@ -202,7 +208,7 @@ function DetailPrice({
   const buyAccount = () => {
     if (+price > wallet) {
       handleChangeMessageToast(
-        "Bạn không đủ Smile để mua tài khoản này, vui lòng nạp thêm"
+        "Bạn không đủ Smile để mua tài khoản này, vui lòng nạp thêm",
       );
 
       handleChangeStatusToast();
@@ -286,10 +292,10 @@ function DetailPrice({
         )}
 
         {isLogin ? (
-          <ButtonBuy onClick={buyAccount}> </ButtonBuy>
+          <ButtonBuy onClick={buyAccount}> Triển thôi! </ButtonBuy>
         ) : (
           // </Link>
-          <ButtonBuy onClick={login}> </ButtonBuy>
+          <ButtonBuy onClick={login}> Triển thôi! </ButtonBuy>
         )}
         {openAuth && (
           <BgWrap>
