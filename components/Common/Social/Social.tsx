@@ -24,7 +24,7 @@ const SocialWrapper = styled(Box)(
   top: 50%;
   transform: translateY(-50%);
   z-index: 3;
-    `
+    `,
 );
 const ButtonToggle = styled(Box)(
   ({ theme }) => `
@@ -40,7 +40,7 @@ const ButtonToggle = styled(Box)(
     justify-content: center;
     align-items: center;
    
-      `
+      `,
 );
 const SocialList = styled(Box)({
   display: "flex",
@@ -73,7 +73,7 @@ const SmileBox = styled(Box)(
       top: -40px;
       left: -31px;
       transition:0.3s all;
-        `
+        `,
 );
 function Social() {
   const [open, setOpen] = useState<boolean>(false);
@@ -112,7 +112,7 @@ function Social() {
           </a>
         </Link>
 
-        <Link href="https://www.instagram.com/tempest.vn/" passHref>
+        <Link href="https://www.instagram.com/tempestvn.com/" passHref>
           <a target="_blank" rel="noopener noreferrer">
             <FaInstagram /> Instagram
           </a>

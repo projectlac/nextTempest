@@ -1,4 +1,4 @@
-const siteUrl = "https://www.tempest.vn";
+const siteUrl = "https://www.tempestvn.com";
 
 module.exports = {
   siteUrl,

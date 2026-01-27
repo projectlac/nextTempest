@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /dashboard/
-Sitemap: https://www.tempest.vn/serversite.xml
+Sitemap: https://www.tempestvn.com/serversite.xml

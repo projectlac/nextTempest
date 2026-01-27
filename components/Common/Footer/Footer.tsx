@@ -175,7 +175,7 @@ function Footer() {
         </Box>
       </Container>
       <TopFooter>
-        © Copyright 2022. All rights reserved. Design by Tempest.vn
+        © Copyright 2022. All rights reserved. Design by tempestvn.com
       </TopFooter>
     </FooterWrapper>
   );

@@ -27,7 +27,7 @@ export const GetPost = async () => {
   return data.data.data;
 };
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const siteUrl = "https://www.tempest.vn";
+  const siteUrl = "https://www.tempestvn.com";
   const data: any = await GetProduct();
   const news: any = await GetPost();
   const fieldHome: ISitemapField[] = [

@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=GTM-T6BB6MV`}
           />
-          <link rel="canonical" href="https://www.tempest.vn" />
+          <link rel="canonical" href="https://www.tempestvn.com" />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -53,7 +53,11 @@ export default class MyDocument extends Document {
           `,
             }}
           />
-          <link rel="alternate" hrefLang="vi" href="https://www.tempest.vn/" />
+          <link
+            rel="alternate"
+            hrefLang="vi"
+            href="https://www.tempestvn.com/"
+          />
           <meta
             name="description"
             content="Tempest Shop -  Nạp thẻ tháng Honkai - Mộng ước -  Mua bán tài khoản Honkai Star Rail, Shop acc Zenless Zone Zero, Reroll uy tín, HRS, ZZZ"
@@ -104,8 +108,9 @@ MyDocument.getInitialProps = async (ctx) => {
   /* eslint-disable */
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App: any) => (props) =>
-        <App emotionCache={cache} {...props} />,
+      enhanceApp: (App: any) => (props) => (
+        <App emotionCache={cache} {...props} />
+      ),
     });
   /* eslint-enable */
 

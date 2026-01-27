@@ -27,7 +27,7 @@ const BgWrap = styled(Box)(
     background: url(${BGW.src});
     overflow:hidden;
     background-size: cover;
-  `
+  `,
 );
 const ContactBox = styled(Box)(
   ({ theme }) => `
@@ -70,7 +70,7 @@ const ContactBox = styled(Box)(
       height: 573px;
     } 
 
-  `
+  `,
 );
 
 const ButtonContact = styled(Box)(
@@ -107,7 +107,7 @@ const ButtonContact = styled(Box)(
       height: 55px;
     } 
     
-  `
+  `,
 );
 
 const Paimon = styled(Box)(
@@ -132,7 +132,7 @@ const Paimon = styled(Box)(
     width: 250px;
     } 
 
-  `
+  `,
 );
 
 function Contact() {
@@ -229,12 +229,12 @@ function Contact() {
                   },
                 }}
               >
-                <Link href="https://www.instagram.com/tempest.vn/">
+                <Link href="https://www.instagram.com/tempestvn.com/">
                   <a target="_blank" rel="noopener noreferrer">
                     <Box width={30} height={30} sx={{ mr: 2 }}>
                       <Image src={INS} alt="facebook" layout="responsive" />
                     </Box>
-                    tempest.vn
+                    tempestvn.com
                   </a>
                 </Link>
               </ButtonContact>

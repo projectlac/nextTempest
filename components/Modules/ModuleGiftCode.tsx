@@ -35,7 +35,7 @@ const BgWrap = styled(Box)(
     height:1000px;
   } 
 
-  `
+  `,
 );
 
 const BookWrap = styled(Box)(
@@ -89,7 +89,7 @@ const BookWrap = styled(Box)(
 height: 479px;
 padding:20px 170px;
 } 
-    `
+    `,
 );
 
 const VideoBox = styled(Box)(
@@ -137,7 +137,7 @@ const VideoBox = styled(Box)(
 
  } 
   
-      `
+      `,
 );
 
 const Item = styled("div")(
@@ -179,7 +179,7 @@ const Item = styled("div")(
   } 
   
  
-      `
+      `,
 );
 const CustomField = styled(Field)(
   ({ theme }) => `
@@ -221,7 +221,7 @@ const CustomField = styled(Field)(
     margin-bottom:50px;
 
   } 
-          `
+          `,
 );
 
 function ModuleGiftCode() {
@@ -312,7 +312,8 @@ function ModuleGiftCode() {
                       Mong bạn ủng hộ Page cũng như Shop để phát triển và phát
                       những code chất lượng hơn nhé
                       <br />
-                      Mua account an toàn tại <Link href="/">Tempest.vn</Link>
+                      Mua account an toàn tại{" "}
+                      <Link href="/">tempestvn.com</Link>
                     </Typography>
                   </>
                 ) : (
@@ -377,7 +378,7 @@ function ModuleGiftCode() {
                     setError(true);
                   } else {
                     setMessage(
-                      `<p>Tài khoản Amazone mới của bạn là <br/> <span style="color:#d33">${res.data[0].token}</span></p>`
+                      `<p>Tài khoản Amazone mới của bạn là <br/> <span style="color:#d33">${res.data[0].token}</span></p>`,
                     );
                     setError(false);
                   }
